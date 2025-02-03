@@ -18,6 +18,7 @@ import OrderInfoPage from "./pages/OrderInfoPage";
 import PaymentPage from "./pages/PaymentPage";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import Policy from "./pages/Policy";
+import EditProfile from "./pages/EditProfile";
 
 export default function App() {
   return (
@@ -73,6 +74,7 @@ export default function App() {
               <Route path="/about/privacy-policy" element={<About />} />
 
               <Route path="/sign-up" element={<SignUp />}></Route>
+              <Route path="/edit-profile" element={<EditProfile />}></Route>
             </Routes>
           </main>
 
