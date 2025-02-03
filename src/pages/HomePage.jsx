@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import axios from "axios";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -58,6 +59,10 @@ import SlideText from "../components/SlideText";
 
 export default function HomePage() {
   const navigate = useNavigate();
+
+  const [postObject, setPostObject] = useState(null);
+  const [postComment, setPostComment] = useState(null);
+  const [postProfile, setPostProfile] = useState(null);
 
   const handleCardClick = (id) => {
     navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
@@ -466,12 +471,72 @@ export default function HomePage() {
     console.log(popupPosition);
   };
 
+
+
+
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
-  }, []);
+    // axios.get("http://localhost:3000/posts").then(function (JsonRes) {
+    //   console.log(JsonRes);
+    //   setPostObject(JsonRes.data[0]);
+    // }, []);
+  },[]);
+
+  // useEffect(() => {
+  //   axios.get("http://localhost:3000/comments").then(function (CommentsRes) {
+  //     console.log(CommentsRes);
+  //     setPostComment(CommentsRes.data[0]);
+  //   }, []);
+  // });
+
+  // useEffect(() => {
+  //   axios.get("http://localhost:3000/posts").then(function (ProfilesRes) {
+  //     console.log(ProfilesRes);
+  //     setPostProfile(ProfilesRes.data[0]);
+  //   });
+  // }, []);
 
   return (
     <>
+      <div>
+        {/* {postObject ? (
+          // 渲染對象的內容
+          <div>
+            <h1>{postObject.title}</h1>
+            <p>{postObject.body}</p>
+          </div>
+        ) : (
+          // 當數據尚未加載時顯示提示
+          <p>加載中...</p>
+        )} */}
+      </div>
+
+      <div>
+        {/* {postComment ? (
+          // 渲染對象的內容
+          <div>
+            <h1>{postComment.id}</h1>
+            <p>{postComment.text}</p>
+          </div>
+        ) : (
+          // 當數據尚未加載時顯示提示
+          <p>加載中...</p>
+        )} */}
+      </div>
+
+      <div>
+        {/* {postProfile ? (
+          // 渲染對象的內容
+          <div>
+            <h1>{postProfile.name}</h1>
+  
+          </div>
+        ) : (
+          // 當數據尚未加載時顯示提示
+          <p>加載中...</p>
+        )} */}
+      </div>
+
       {/* trip themes */}
       <ul className="container hidden items-center justify-between text-base leading-[22.4px] text-grey-400 lg:flex lg:px-4 lg:py-2 xl:w-10/12 xl:justify-evenly xl:py-7">
         <li className="lg:border-r-1 xl:border-r-1 lg:border-grey-100 lg:pr-6 xl:border xl:border-y-0 xl:border-l-0 xl:px-8 xl:pr-8">
@@ -545,6 +610,7 @@ export default function HomePage() {
             <p className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
               尋找你的完美巴黎旅程
             </p>
+
             <p className="text-shadow hidden font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-6 md:text-lg 2xl:pt-20 2xl:text-2xl">
               輕盈漫步在巴黎的街巷。
             </p>
@@ -955,7 +1021,6 @@ export default function HomePage() {
       {/* background settings */}
 
       <div className="bg-popular_sites relative">
-        
         <div className="hidden lg:block">
           <img
             src="https://i.imgur.com/MzjNbOk.png"
@@ -1243,11 +1308,11 @@ export default function HomePage() {
       {/* Clouds decorations */}
 
       <div className="lg:relative lg:mb-[15%]">
-        <div className="hidden lg:absolute lg:-top-6 lg:left-[1%] lg:-rotate-12 lg:block">
+        <div className="hidden lg:absolute lg:-top-6 lg:left-[1%] lg:block lg:-rotate-12">
           <img src="https://i.imgur.com/dn5n8ac.png" alt="" />
         </div>
 
-        <div className="hidden lg:rotate-10 lg:absolute lg:top-0 lg:right-[1%] 2xl:-top-40 lg:block">
+        <div className="lg:rotate-10 hidden lg:absolute lg:right-[1%] lg:top-0 lg:block 2xl:-top-40">
           <img src="https://i.imgur.com/dn5n8ac.png" alt="" />
         </div>
 
@@ -1260,7 +1325,7 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="hidden 2xl:absolute 2xl:right-[7%] 2xl:top-[190px] 2xl:-rotate-3 2xl:block">
+        <div className="hidden 2xl:absolute 2xl:right-[7%] 2xl:top-[190px] 2xl:block 2xl:-rotate-3">
           <img
             src="https://i.imgur.com/0q6kIet.png"
             alt=""

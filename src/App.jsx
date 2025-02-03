@@ -12,7 +12,7 @@ import TripsPage from "./pages/TripsPage";
 import SitesInfoPage from "./pages/SitesInfoPage";
 import TravelInfoPage from "./pages/TravelInfoPage";
 import About from "./pages/About";
-import SignUp from "./pages/SingUp";
+import SignUp from "./pages/SignUp";
 import BookPrivateTripsPage from "./pages/BookPrivateTripsPage";
 import OrderInfoPage from "./pages/OrderInfoPage";
 import PaymentPage from "./pages/PaymentPage";
