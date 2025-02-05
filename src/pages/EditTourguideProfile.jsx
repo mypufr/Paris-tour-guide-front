@@ -1,12 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-function EditProfile() {
-  const Navigate = useNavigate;
-  const handleSubmit = () => {
-    Navigate("/edit-tourguide-profile");
-  };
-
+function EditTourguideProfile() {
   return (
     <>
       <div className="text-primary">
@@ -43,7 +37,7 @@ function EditProfile() {
 
         {/* 右側主內容區 */}
         <main className="bg-gray-100 p-6 md:col-span-2">
-          <h1 className="mb-4 text-3xl font-bold">編輯個人資料</h1>
+          <h1 className="mb-4 text-3xl font-bold">編輯導遊個人資歷</h1>
           <p className="text-gray-700">
             這裡是主要的內容區域，可以放置文章、圖片或其他資訊。
           </p>
@@ -109,7 +103,6 @@ function EditProfile() {
             <button
               type="submit"
               className="w-full rounded-md bg-primary-600 py-2 text-white transition hover:bg-primary-700"
-              onClick={handleSubmit}
             >
               同時成為導遊
             </button>
@@ -128,4 +121,4 @@ function EditProfile() {
   );
 }
 
-export default EditProfile;
+export default EditTourguideProfile;

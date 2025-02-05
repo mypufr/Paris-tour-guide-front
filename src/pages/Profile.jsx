@@ -1,12 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 function EditProfile() {
-  const Navigate = useNavigate;
-  const handleSubmit = () => {
-    Navigate("/edit-tourguide-profile");
-  };
-
   return (
     <>
       <div className="text-primary">
@@ -109,7 +103,6 @@ function EditProfile() {
             <button
               type="submit"
               className="w-full rounded-md bg-primary-600 py-2 text-white transition hover:bg-primary-700"
-              onClick={handleSubmit}
             >
               同時成為導遊
             </button>
