@@ -7,6 +7,9 @@ function EditProfile() {
     Navigate("/edit-tourguide-profile");
   };
 
+
+
+  
   return (
     <>
       <div className="text-primary">
@@ -56,10 +59,10 @@ function EditProfile() {
                     使用者名稱
                   </label>
                   <input
-                    type="email"
-                    name="email"
+                    type="text"
+                    name="username"
                     className="border-primary w-full rounded-md border p-2"
-                    placeholder="請輸入電子郵件地址"
+                    placeholder="請輸入使用者名稱"
                   />
                 </div>
 
@@ -100,7 +103,7 @@ function EditProfile() {
               </div>
             </div>
 
-            <button
+            {/* <button
               type="submit"
               className="w-full rounded-md bg-primary-300 py-2 text-white transition hover:bg-primary-700"
             >
@@ -112,15 +115,41 @@ function EditProfile() {
               onClick={handleSubmit}
             >
               同時成為導遊
-            </button>
+            </button> */}
 
-            <p className="text-center text-sm">
-              已有帳號?
-              {/* <Link to="/login" className="text-primary-600 hover:underline">
-                {" "}
-                按此登入
-              </Link> */}
-            </p>
+            <div>
+              <label className="block text-sm font-medium">角色選擇 ( 可複選 )</label>
+              <div className="mt-2 flex items-center gap-4">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    name="isTourist"
+                    // checked={account.isTourist}
+                    // onChange={handleInputChange}
+                    className="mr-2"
+                  />
+                  遊客
+                </label>
+
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    name="isGuide"
+                    // checked={account.isGuide}
+                    // onChange={handleInputChange}
+                    className="mr-2"
+                  />
+                  導遊
+                </label>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full rounded-md bg-primary-600 py-2 text-white transition hover:bg-primary-700"
+            >
+              送出
+            </button>
           </form>
         </main>
       </div>

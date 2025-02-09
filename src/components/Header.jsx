@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { SlArrowRight } from "react-icons/sl";
 import { FiMenu } from "react-icons/fi";
 import { BsPersonCircle } from "react-icons/bs";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
+import { toast } from "react-hot-toast";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, setUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,6 +21,17 @@ function Header() {
   const handleItemClick = (item) => {
     setSelectedItem(item);
     toggleMenu(); // This closes the menu after clicking the item
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("/logout", {}, { withCredentials: true });
+      setUser(null);
+      navigate("/");
+      toast.success("已成功登出");
+    } catch (error) {
+      console.error("登出失敗", error);
+    }
   };
 
   return (
@@ -70,16 +88,34 @@ function Header() {
                 旅行指南
               </Link>
             </li>
-            <li className="ps-[180px] lg:ps-0">
-              <button className="rounded-2xl bg-primary-600 text-base font-normal transition-colors duration-200 hover:bg-primary-300">
-                <Link
-                  to="/sign-up"
-                  className="my-2 inline-block px-5 text-base text-white"
-                >
-                  註冊/登入
-                </Link>
-              </button>
-            </li>
+
+            {user ? (
+              <>
+                <li>
+                  {" "}
+                  <p>Hi {user.username}!</p>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="text-red-600 hover:font-bold"
+                  >
+                    登出
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li className="ps-[180px] lg:ps-0">
+                <button className="rounded-2xl bg-primary-600 text-base font-normal transition-colors duration-200 hover:bg-primary-300">
+                  <Link
+                    to="/login"
+                    className="my-2 inline-block px-5 text-base text-white"
+                  >
+                    登入 / 註冊
+                  </Link>
+                </button>
+              </li>
+            )}
           </ul>
 
           {/* Hamburger Icon - visible on smaller screens */}
@@ -150,22 +186,48 @@ function Header() {
                   <SlArrowRight className="text-[8px]" />
                 </li>
 
-                <li className="">
+                {/* <li className="">
                   <Link to="/sign-up">
                     <button
                       className="flex w-full items-center bg-primary-600 px-2 py-2 pl-4 text-base text-white"
                       onClick={toggleMenu}
                     >
-                      {/* <img
-                        src="images/login_icon.svg"
-                        alt=""
-                        className="inline-block"
-                      /> */}
+    
                       <BsPersonCircle />
                       <span className="p-2">登入 / 註冊</span>
                     </button>
                   </Link>
-                </li>
+                </li> */}
+
+                {user ? (
+                  <>
+                    {/* <BsPersonCircle /> */}
+                    <li>
+                      {" "}
+                      <p>Hi {user.username} </p>
+                    </li>
+                    <li>
+                      <button
+                        onClick={handleLogout}
+                        className="text-primary-500 hover:font-bold"
+                      >
+                        登出
+                      </button>
+                    </li>
+                  </>
+                ) : (
+                  <li className="">
+                    <button className="flex w-full items-center bg-primary-600 px-2 py-2 pl-4 text-base text-white">
+                      <BsPersonCircle />
+                      <Link
+                        to="/sign-up"
+                        className="my-2 inline-block px-5 text-base text-white"
+                      >
+                        註冊/登入
+                      </Link>
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
