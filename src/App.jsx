@@ -38,7 +38,7 @@ export default function App() {
           <BrowserRouter>
             <Header />
             <Toaster
-              position="bottom-right"
+              position="Top-right"
               toastOptions={{ duration: 2000 }}
             />
 

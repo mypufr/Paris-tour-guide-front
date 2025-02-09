@@ -79,29 +79,29 @@ function Login() {
         <div className="absolute inset-0 flex items-center justify-center p-6 md:relative md:w-1/2">
           <form
             onSubmit={handleLogin}
-            className="-z-100 border-primary flex w-full max-w-[90%] flex-col gap-6 border-2 bg-white/80 p-6 backdrop-blur-md md:rounded-lg md:bg-white md:shadow-md"
+            className="-z-100 border-primary flex w-full max-w-[90%] flex-col gap-6 border-2 bg-white/80 p-6 backdrop-blur-md rounded-lg md:bg-white md:shadow-md"
           >
             <h1 className="text-center text-xl font-bold">會員登入</h1>
 
             <div>
-              <label className="block text-sm font-medium">帳號</label>
+              <label className="block font-medium">帳號</label>
               <input
                 type="email"
                 name="email"
                 value={account.email}
-                className="border-primary w-full rounded-md border p-2"
+                className="border-primary-100 w-full rounded-md border p-2"
                 placeholder="請輸入電子郵件地址"
                 onChange={handleInputChange}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium">密碼</label>
+              <label className="block font-medium">密碼</label>
               <input
                 type="password"
                 name="password"
                 value={account.password}
-                className="border-primary w-full rounded-md border p-2"
+                className="border-primary-100 w-full rounded-md border p-2"
                 placeholder="請設定密碼"
                 onChange={handleInputChange}
               />
