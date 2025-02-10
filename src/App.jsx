@@ -22,10 +22,11 @@ import Policy from "./pages/Policy";
 import EditProfile from "./pages/EditProfile";
 import EditTourguideProfile from "./pages/EditTourguideProfile";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import UserProfile from "./pages/UserProfile";
 
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "../context/userContext";
+
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -90,7 +91,7 @@ export default function App() {
 
                 <Route path="/sign-up" element={<SignUp />}></Route>
                 <Route path="/login" element={<Login />}></Route>
-                <Route path="/dashboard" element={<Dashboard />}></Route>
+                <Route path="/profile" element={<UserProfile />}></Route>
                 <Route path="/edit-profile" element={<EditProfile />}></Route>
                 <Route
                   path="/edit-tourguide-profile"

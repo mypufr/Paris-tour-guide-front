@@ -1,11 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import axios from "axios";
 
 function EditProfile() {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+
+  useEffect(() => {
+    if (user) {
+      localStorage.getItem("user", JSON.stringify(user));
+    }
+  }, [user]);
+
 
   const [inputAccount, setInputAccount] = useState({
     username: "",
@@ -16,24 +24,56 @@ function EditProfile() {
     isGuide: false,
   });
 
+
+  useEffect(() => {
+    if (user) {
+      setInputAccount({
+        username: user.username || "",
+        name: user.name || "",
+        email: user.email || "",
+        tel: user.tel || "",
+        isTourist: user.isTourist || false,
+        isGuide: user.isGuide || false,
+      });
+    }
+  }, [user]); //
+
+
   const handleInputChange = (e) => {
-    console.log(e.target.value);
-    const { value, name } = e.target;
-    console.log(value, name);
+    // console.log(e.target.value);
+    const { name, value, type, checked } = e.target;
+    // console.log(value, name);
 
     setInputAccount((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!inputAccount.name) {
+      alert("請輸入姓名");
+      return;
+    }
     try {
-      await axios.post("/profile/edit", inputAccount,{
-        headers: { "Content-Type": "application/json" },
+      console.log("送出的資料:", inputAccount);
+      await axios.post(
+        "/profile/edit",
 
-      });
+        {
+          email: inputAccount.email,
+          username: inputAccount.username,
+          name: inputAccount.name,
+          tel: inputAccount.tel,
+          isTourist: inputAccount.isTourist === "on", // ✅ 如果是 "on"，轉為 true
+          isGuide: inputAccount.isGuide === "on", // ✅ 同樣轉換 isGuide
+        },
+
+        {
+          headers: { "Content-Type": "application/json" },
+        },
+      );
       alert("更新成功!");
       navigate("/profile");
     } catch (error) {
@@ -143,7 +183,7 @@ function EditProfile() {
                     角色選擇 ( 可複選 )
                   </label>
                   <div className="mt-2 flex items-center gap-4">
-                    <label className="flex items-center">
+                    {/* <label className="flex items-center">
                       <input
                         type="checkbox"
                         name="isTourist"
@@ -152,9 +192,15 @@ function EditProfile() {
                         className="mr-2"
                       />
                       遊客
-                    </label>
+                    </label> */}
 
-                    <label className="flex items-center">
+
+                    <label><input type="checkbox" name="isTourist" checked={inputAccount.isTourist} onChange={handleInputChange} className="mr-2" /> 遊客</label>
+
+
+
+
+                    {/* <label className="flex items-center">
                       <input
                         type="checkbox"
                         name="isGuide"
@@ -163,7 +209,12 @@ function EditProfile() {
                         className="mr-2"
                       />
                       導遊
-                    </label>
+                    </label> */}
+
+                    <label><input type="checkbox" name="isGuide" checked={inputAccount.isGuide} onChange={handleInputChange} className="mr-2" /> 導遊</label>
+
+
+
                   </div>
                 </div>
               </div>

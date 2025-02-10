@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { SlArrowRight } from "react-icons/sl";
@@ -17,6 +17,13 @@ function Header() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+   useEffect(() => {
+      if (user) {
+        localStorage.getItem("user", JSON.stringify(user));
+      }
+    }, [user]);
+
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -92,13 +99,16 @@ function Header() {
             {user ? (
               <>
                 <li>
-                  {" "}
-                  <p>Hi {user.username}!</p>
+                  <Link to="/edit-profile" className="text-primary-600 hover:font-bold hover:shadow-md">
+                  
+                  <p>我是{user.username}</p>
+                  
+                  </Link>
                 </li>
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="text-red-600 hover:font-bold"
+                    className="bg-secondary-400 rounded-2xl text-white py-1 px-4 hover:font-bold"
                   >
                     登出
                   </button>
@@ -186,30 +196,20 @@ function Header() {
                   <SlArrowRight className="text-[8px]" />
                 </li>
 
-                {/* <li className="">
-                  <Link to="/sign-up">
-                    <button
-                      className="flex w-full items-center bg-primary-600 px-2 py-2 pl-4 text-base text-white"
-                      onClick={toggleMenu}
-                    >
-    
-                      <BsPersonCircle />
-                      <span className="p-2">登入 / 註冊</span>
-                    </button>
-                  </Link>
-                </li> */}
-
                 {user ? (
                   <>
                     {/* <BsPersonCircle /> */}
                     <li>
-                      {" "}
-                      <p>Hi {user.username} </p>
+                    <Link to="/profile" className="text-primary-600 hover:font-bold hover:shadow-md">
+                  
+                  <p>我是{user.username}</p>
+                  
+                  </Link>
                     </li>
                     <li>
                       <button
                         onClick={handleLogout}
-                        className="text-primary-500 hover:font-bold"
+                        className="bg-secondary-400 rounded-2xl text-white py-1 px-4 hover:font-bold"
                       >
                         登出
                       </button>
@@ -220,7 +220,7 @@ function Header() {
                     <button className="flex w-full items-center bg-primary-600 px-2 py-2 pl-4 text-base text-white">
                       <BsPersonCircle />
                       <Link
-                        to="/sign-up"
+                        to="/login"
                         className="my-2 inline-block px-5 text-base text-white"
                       >
                         註冊/登入

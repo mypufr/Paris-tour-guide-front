@@ -36,7 +36,9 @@ function Login() {
 
       if (data) {
         setUser(data);
+        localStorage.setItem("user", JSON.stringify(data.user));
         navigate("/");
+        console.log(data.user)
       }
 
       if (data.error) {
@@ -79,7 +81,7 @@ function Login() {
         <div className="absolute inset-0 flex items-center justify-center p-6 md:relative md:w-1/2">
           <form
             onSubmit={handleLogin}
-            className="-z-100 border-primary flex w-full max-w-[90%] flex-col gap-6 border-2 bg-white/80 p-6 backdrop-blur-md rounded-lg md:bg-white md:shadow-md"
+            className="-z-100 border-primary flex w-full max-w-[90%] flex-col gap-6 rounded-lg border-2 bg-white/80 p-6 backdrop-blur-md md:bg-white md:shadow-md"
           >
             <h1 className="text-center text-xl font-bold">會員登入</h1>
 
@@ -89,7 +91,7 @@ function Login() {
                 type="email"
                 name="email"
                 value={account.email}
-                className="border-primary-100 w-full rounded-md border p-2"
+                className="w-full rounded-md border border-primary-100 p-2"
                 placeholder="請輸入電子郵件地址"
                 onChange={handleInputChange}
               />
@@ -101,14 +103,13 @@ function Login() {
                 type="password"
                 name="password"
                 value={account.password}
-                className="border-primary-100 w-full rounded-md border p-2"
+                className="w-full rounded-md border border-primary-100 p-2"
                 placeholder="請設定密碼"
                 onChange={handleInputChange}
               />
             </div>
 
             <p className="text-center text-sm">
-           
               <Link to="/login" className="text-primary-600 hover:underline">
                 {" "}
                 忘記密碼?
@@ -127,15 +128,13 @@ function Login() {
               Google 登入
             </button>
 
-
             <p className="text-center text-sm">
-               沒有帳號?
+              沒有帳號?
               <Link to="/sign-up" className="text-primary-600 hover:underline">
                 {" "}
                 按此註冊
               </Link>
             </p>
-
           </form>
         </div>
       </div>

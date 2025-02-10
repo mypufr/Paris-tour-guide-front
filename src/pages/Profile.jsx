@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { UserContext } from "../../context/userContext";
 
 function EditProfile() {
+  const { user, setUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
+
+  if (!user) {
+    return <div>載入中...</div>; // 或顯示一個 loading 畫面
+  }
+
+  if (loading) return <div>載入中...</div>;
+  if (!user) return <div>找不到使用者資料</div>;
+
+  useEffect(() => {
+    if (user) {
+      localStorage.getItem("user", JSON.stringify(user));
+    }
+  }, [user]);
+
   return (
     <>
       <div className="text-primary">
