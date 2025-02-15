@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   /* Primary Colors */
   --primary-100: #e2edfc;
@@ -87,9 +88,6 @@
 }
 
 
-
-
-
 .overflow-clip {
 
   overflow-x: clip;
@@ -120,7 +118,6 @@
   line-height: 77px;
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
-
 
 
 .noto-sans-tc-bold-mobile {
