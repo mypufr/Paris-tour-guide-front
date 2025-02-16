@@ -78,9 +78,11 @@ function TripsPage() {
   };
   return (
     <>
-      {/* <div className="h-[200px] bg-green-800 text-center text-3xl font-bold text-white">
-        Trips Page
-      </div> */}
+
+
+<div className="text-center font-bold"><h1>Under construction</h1></div>
+
+
       <div role="tablist" className="tabs tabs-lifted mx-auto mt-5 w-3/4">
         <input
           type="radio"

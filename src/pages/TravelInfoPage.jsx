@@ -121,10 +121,6 @@ function TravelInfoPage() {
 
       <br />
 
-      {/* <button className="border border-t-cyan-600" onClick={deleteComments}>
-        delete comments
-      </button> */}
-
       <br />
       <br />
       <hr />
