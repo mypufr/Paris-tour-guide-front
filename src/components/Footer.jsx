@@ -10,7 +10,7 @@ function Footer() {
           {/* 背景圖片 */}
           <div className="hidden lg:block">
             <img
-              src="images/footer_background.png"
+              src="/images/footer_background.png"
               alt=""
               className="w-full"
             />
@@ -39,7 +39,7 @@ function Footer() {
                   <Link to="/" className="inline-flex cursor-pointer">
                     <div className="">
                       <img
-                        src="images/website_logo.png"
+                        src="/images/website_logo.png"
                         alt="logo"
                         className="h-14"
                       />
@@ -75,7 +75,7 @@ function Footer() {
                 <li>
                   <Link to="tel:+37653421" className="flex items-center">
                     <img
-                      src="images/call.svg"
+                      src="/images/call.svg"
                       alt="call icon"
                       className="inline-block h-6 w-6"
                     />
@@ -87,7 +87,7 @@ function Footer() {
                 <li className="flex items-center">
                   <Link to="mailto:info@hexschool.com">
                     <img
-                      src="images/location_on.svg"
+                      src="/images/location_on.svg"
                       alt=""
                       className="inline-block h-6 w-6"
                     />
@@ -101,21 +101,21 @@ function Footer() {
                 <li className="flex space-x-4">
                   <Link to="/">
                     <img
-                      src="images/facebook.svg"
+                      src="/images/facebook.svg"
                       alt="facebook-link"
                       className="inline-block h-8 w-8"
                     />
                   </Link>
                   <Link to="/" className="border-1 inline-block rounded-full">
                     <img
-                      src="images/ig-new.svg"
+                      src="/images/ig-new.svg"
                       alt="facebook-link"
                       className="inline-block h-8 w-8"
                     />
                   </Link>
                   <Link to="/">
                     <img
-                      src="images/twitter_logo.svg"
+                      src="/images/twitter_logo.svg"
                       alt="line-link"
                       className="inline-block h-8 w-8 rounded-full"
                     />
