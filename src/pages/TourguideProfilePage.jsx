@@ -48,7 +48,7 @@ function TourguideProfilePage() {
   if (!CardData) {
     return <div>Results not found</div>;
   }
-
+  const [activeTab, setActiveTab] = useState("tab-1");
   const [currentTab, setCurrentTab] = useState("group");
   const [currentSlide, setCurrentSlide] = useState(1);
   const [date, setDate] = useState(null);
@@ -125,11 +125,14 @@ function TourguideProfilePage() {
 
   return (
     <>
-      <div className="flex flex-col justify-center py-[5vh] text-3xl font-bold text-grey-950">
-        <div className="flex justify-evenly">
+      <div className="flex justify-center py-[5vh] text-3xl font-bold text-grey-950">
 
+        <div className="bg-primary-100">
+
+
+        <div className="flex justify-evenly">
           {/* Tourguide profile */}
-          <div className="w-3/4">
+          <div className="">
             {/* title */}
             <div
               className="m-10 flex justify-center space-x-4 hover:cursor-pointer"
@@ -149,69 +152,73 @@ function TourguideProfilePage() {
                 className="inline-block h-[40px]"
               />
             </div>
-            <img
-              src={CardData.img}
-              alt=""
-              className="object-center-30 inline-block max-h-[640.31px] w-full rounded-3xl object-cover"
-            />
-            <div className="py-10">
-              <div className="my-4 flex justify-between">
-                <div className="flex space-x-2">
-                  <button className="inline-block rounded-full border border-secondary-300 px-5">
-                    <p className="text-xl text-secondary-600">
-                      {CardData.speciality1}
-                    </p>
-                  </button>
-                  <button className="inline-block rounded-full border border-secondary-300 px-5">
-                    <p className="text-xl text-secondary-600">
-                      {CardData.speciality2}
-                    </p>
-                  </button>
-                  <button className="inline-block rounded-full border border-secondary-300 px-5">
-                    <p className="text-xl text-secondary-600">
-                      {CardData.speciality3}
-                    </p>
+
+            <div className="flex">
+              <div className="w-50">
+                <img
+                  src={CardData.img}
+                  alt=""
+                  className="object-center-30 inline-block w-full rounded-3xl object-cover"
+                />
+              </div>
+              <div className="py-10">
+                <div className="my-4 justify-between">
+                  <div className="flex space-x-2">
+                    <button className="inline-block rounded-full border border-secondary-300 px-5">
+                      <p className="text-xl text-secondary-600">
+                        {CardData.speciality1}
+                      </p>
+                    </button>
+                    <button className="inline-block rounded-full border border-secondary-300 px-5">
+                      <p className="text-xl text-secondary-600">
+                        {CardData.speciality2}
+                      </p>
+                    </button>
+                    <button className="inline-block rounded-full border border-secondary-300 px-5">
+                      <p className="text-xl text-secondary-600">
+                        {CardData.speciality3}
+                      </p>
+                    </button>
+                  </div>
+
+                  <div className="flex items-center space-x-6">
+                    <span className="flex">
+                      <img
+                        src="/images/star.svg"
+                        alt=""
+                        className="inline-block h-20 max-w-6"
+                      />
+                      <img src="/images/star.svg" alt="" className="max-w-6" />
+                      <img src="/images/star.svg" alt="" className="max-w-6" />
+                      <img src="/images/star.svg" alt="" className="max-w-6" />
+                      <img
+                        src="/images/empty-star.svg"
+                        alt=""
+                        className="max-w-6"
+                      />
+                    </span>
+                    <p>80人已評價</p>
+                  </div>
+
+                  <p>中文、英文</p>
+
+                  <div className="flex flex-col">
+                    <span>大人 {CardData.price}€ /小時</span>
+                    <span>兒童 {CardData.price - 3}€ /小時</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between space-x-6">
+                  <button
+                    className="flex max-w-full justify-center space-x-20 rounded-lg border border-gray-300 bg-primary-700 px-4 py-4 text-white"
+                    onClick={handleSendMessageClick}
+                  >
+                    <p>留言給{CardData.name}</p>
                   </button>
                 </div>
 
-                <div className="flex flex-col">
-                  <span>大人 {CardData.price}€ /小時</span>
-                  <span>兒童 {CardData.price - 3}€ /小時</span>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-6">
-                <span className="flex">
-                  <img
-                    src="/images/star.svg"
-                    alt=""
-                    className="inline-block h-20 max-w-6"
-                  />
-                  <img src="/images/star.svg" alt="" className="max-w-6" />
-                  <img src="/images/star.svg" alt="" className="max-w-6" />
-                  <img src="/images/star.svg" alt="" className="max-w-6" />
-                  <img
-                    src="/images/empty-star.svg"
-                    alt=""
-                    className="max-w-6"
-                  />
-                </span>
-                <p>80人已評價</p>
-              </div>
-
-              <div className="flex items-center justify-between space-x-6">
-                <p>語言：中文、英文</p>
-
-                <button
-                  className="flex max-w-full justify-center space-x-20 rounded-lg border border-gray-300 bg-primary-700 px-4 py-4 text-white"
-                  onClick={handleSendMessageClick}
-                >
-                  <p>留言給{CardData.name}</p>
-                </button>
-              </div>
-
-              {/* Profile description */}
-              {/* <div className="mt-6 border-spacing-2 space-y-4 rounded-2xl border border-primary-200 px-4 py-6">
+                {/* Profile description */}
+                {/* <div className="mt-6 border-spacing-2 space-y-4 rounded-2xl border border-primary-200 px-4 py-6">
                 <div className="my-6 flex justify-center space-x-6">
                   <img
                     src="/images/website_logo.png"
@@ -269,8 +276,11 @@ function TourguideProfilePage() {
                   </li>
                 </ul>
               </div> */}
+              </div>
             </div>
           </div>
+        </div>
+
         </div>
         {/* single trip title */}
         {/* <div className="mt-10 flex justify-center space-x-4 hover:cursor-pointer">
@@ -357,211 +367,280 @@ function TourguideProfilePage() {
             </div>
           ))}
         </div> */}
-
       </div>
 
-      <div role="tablist" className="tabs tabs-lifted mx-auto mt-10 w-3/4">
-        <input
-          type="radio"
-          name="my_tabs_2"
-          role="tab"
-          className="tab"
-          aria-label="關於我"
-        />
-        <div
-          role="tabpanel"
-          className="tab-content rounded-box border-base-300 bg-base-100 p-6"
-        >
-          <div className="">
-            <div className="py-10">
-              {/* Profile description */}
-              <div className="mt-6 grid border-spacing-2 grid-cols-3 space-y-4 rounded-2xl border border-primary-200 px-4 py-6">
-                <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full col-span-2 h-[60vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
-                  <div className="my-6 flex space-x-6">
-                    <img
-                      src="/images/website_logo.png"
-                      alt=""
-                      className="h-3xl inline-block"
-                    />
-                    <h3 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
-                      關於{CardData.name}
-                    </h3>
-                  </div>
 
-                  <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full h-[60vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
-                    <p className="bg-primary-100 p-4 text-2xl">
-                      大家好，我是{CardData.name}，您的專屬巴黎導遊！
-                      <br />
-                      <br />
-                      我已經在巴黎生活了七年，並且有超過五年的導遊經驗。這些年來，我有幸帶領來自世界各地的遊客深入探索這座充滿魅力的城市。
-                      <br />
-                      <br />
-                      我對巴黎的熱愛源於她豐富的歷史、迷人的文化以及多姿多彩的生活方式。無論是漫步在塞納河畔、欣賞盧浮宮的藝術珍寶，還是探索隱藏在小巷中的法式咖啡館，我都希望能將巴黎的每一個角落最真實、最動人的一面展現在您的面前。
-                      <br />
-                      <br />
-                      在這五年多的導遊生涯中，我帶領過各種不同需求和背景的團隊，包括家庭旅遊、小型私人團體、商務考察團等。我擅長根據每位客人的興趣和喜好，設計出個性化的旅遊行程。不管您是藝術愛好者、美食饕客，還是歷史迷，我都能為您量身定制一個完美的巴黎之旅。
-                      <br />
-                      <br />
-                      除了帶團之外，我也積極參與當地文化活動和導覽培訓，這讓我不僅擁有豐富的知識，更能為您提供最新、最有趣的巴黎資訊。我的目標是讓每一位客人都能在輕鬆愉快的氛圍中，感受巴黎的獨特魅力，並帶著滿滿的美好回憶離開。
-                      <br />
-                      <br />
-                      希望能在巴黎與您相遇，一起走過這座充滿故事的城市，留下屬於您的巴黎篇章！
-                    </p>
-                  </div>
-                </div>
-
-                <div className="col-span-1">
-                  <div className="flex justify-center space-x-6 pt-4">
-                    <img
-                      src="/images/website_logo.png"
-                      alt=""
-                      className="h-3xl inline-block"
-                    />
-                    <h4 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
-                      {CardData.name}的連結
-                    </h4>
-                  </div>
-
-                  <ul>
-                    <li className="flex items-center justify-center space-x-4">
-                      <Link to="/">
-                        <FaFacebook className="text-[40px]" />
-                      </Link>
-                      <Link
-                        to="/"
-                        className="inline-block rounded-full border-2 border-white p-2"
-                      >
-                        <RiInstagramFill className="text-[48px]" />
-                      </Link>
-                      <Link to="/">
-                        <AiFillTwitterCircle className="text-[48px]" />
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <input
-          type="radio"
-          name="my_tabs_2"
-          role="tab"
-          className="tab"
-          aria-label="可預約時段"
-          defaultChecked
-        />
-        <div
-          role="tabpanel"
-          className="tab-content rounded-box border-base-300 bg-base-100 p-6"
-        >
-          <div className="flex">
+      {/* 測試tab */}
+      <div className="mx-auto flex w-3/4 pb-10">
+        <div className="mx-auto px-8 sm:px-4">
+          <div className="sm:w-full">
+            {/* Tab 列表 */}
             <div
-              popover="auto"
-              id="rdp-popover"
-              className="dropdown"
-              style={{ positionAnchor: "--rdp" }}
+              role="tablist"
+              aria-label="tabs"
+              className="relative mx-auto flex h-12 w-full items-center justify-start px-1"
             >
-              <DayPicker
-                className="react-day-picker rounded-xl border border-primary-200 bg-white p-6 shadow-lg"
-                numberOfMonths={2}
-                classNames={{
-                  day: "items-center justify-center text-lg hover:bg-gray-200 rounded-full",
+              {/* 動態背景，移動到選擇的 Tab */}
+              <div
+                className={`absolute top-0 h-12 w-28 border-b-2 bg-primary-100 shadow-md transition-all duration-300`}
+                style={{
+                  left:
+                    activeTab === "tab-1"
+                      ? "0px"
+                      : activeTab === "tab-2"
+                        ? "108px"
+                        : "230px",
                 }}
-                mode="single"
-                selected={date}
-                onSelect={setDate}
-              />
-            </div>
-            <div
-              // popoverTarget="rdp-popover"
-              className="input-border input text-xl font-bold text-primary-300"
-              style={{ anchorName: "--rdp" }}
-            >
-              {date
-                ? `${date.toLocaleDateString()}還有這些空檔:`
-                : "請選擇日期"}
-            </div>
-          </div>
-        </div>
+              ></div>
 
-        <input
-          type="radio"
-          name="my_tabs_2"
-          role="tab"
-          className="tab"
-          aria-label="導遊評價"
-        />
-        <div
-          role="tabpanel"
-          className="tab-content rounded-box border-base-300 bg-base-100 p-6"
-        >
-          <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full h-64 overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
-            <div className="flex justify-center space-x-4 hover:cursor-pointer">
-              <img
-                src="/images/vector_title.png"
-                alt=""
-                className="inline-block h-[40px]"
-              />
-              <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
-                {CardData.name} 15位客人的評價
-              </h2>
-              <img
-                src="/images/vector_title.png"
-                alt=""
-                className="inline-block h-[40px]"
-              />
+              {/* 第一個 Tab */}
+              <button
+                role="tab"
+                aria-selected={activeTab === "tab-1"}
+                id="tab-1"
+                className={`relative z-10 block h-12 px-6 text-left transition-all${
+                  activeTab === "tab-1"
+                    ? "bg-primary-100 font-bold text-primary-600"
+                    : "text-gray-950"
+                }`}
+                onClick={() => setActiveTab("tab-1")}
+              >
+                關於我
+              </button>
+
+              {/* 第二個 Tab */}
+              <button
+                role="tab"
+                aria-selected={activeTab === "tab-2"}
+                id="tab-2"
+                className={`relative z-10 block h-10 rounded-full px-6 text-left transition-all ${
+                  activeTab === "tab-2"
+                    ? "font-bold text-primary-600"
+                    : "text-gray-950"
+                }`}
+                onClick={() => setActiveTab("tab-2")}
+              >
+                可預約時段
+              </button>
+
+              {/* 第三個 Tab */}
+              <button
+                role="tab"
+                aria-selected={activeTab === "tab-3"}
+                id="tab-3"
+                className={`relative z-10 block h-10 rounded-full px-6 text-left transition-all ${
+                  activeTab === "tab-3"
+                    ? "font-bold text-primary-600"
+                    : "text-gray-950"
+                }`}
+                onClick={() => setActiveTab("tab-3")}
+              >
+                導遊評價
+              </button>
             </div>
 
-            <div className="w-full">
-              <div className="">
-                {CommentaryData.map((data, index) => (
+            {/* Tab Panel 區域 */}
+            <div className="relative rounded-3xl">
+              {activeTab === "tab-1" && (
+                <div role="tabpanel" id="panel-1">
+                  <div className="">
+                    <div className="py-2">
+                      {/* Profile description */}
+                      <div className="grid border-spacing-1 grid-cols-3 space-y-4 border border-primary-200 px-4 pt-6">
+                        <div className="col-span-2 h-[50vh]">
+                          <div className="my-6 flex space-x-6">
+                            <img
+                              src="/images/website_logo.png"
+                              alt=""
+                              className="h-3xl inline-block"
+                            />
+                            <h3 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
+                              關於{CardData.name}
+                            </h3>
+                          </div>
+
+                          <div className="h-[35vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
+                            <p className="bg-white p-4 text-xl">
+                              大家好，我是{CardData.name}，您的專屬巴黎導遊！
+                              <br />
+                              <br />
+                              我已經在巴黎生活了七年，並且有超過五年的導遊經驗。這些年來，我有幸帶領來自世界各地的遊客深入探索這座充滿魅力的城市。
+                              <br />
+                              <br />
+                              我對巴黎的熱愛源於她豐富的歷史、迷人的文化以及多姿多彩的生活方式。無論是漫步在塞納河畔、欣賞盧浮宮的藝術珍寶，還是探索隱藏在小巷中的法式咖啡館，我都希望能將巴黎的每一個角落最真實、最動人的一面展現在您的面前。
+                              <br />
+                              <br />
+                              在這五年多的導遊生涯中，我帶領過各種不同需求和背景的團隊，包括家庭旅遊、小型私人團體、商務考察團等。我擅長根據每位客人的興趣和喜好，設計出個性化的旅遊行程。不管您是藝術愛好者、美食饕客，還是歷史迷，我都能為您量身定制一個完美的巴黎之旅。
+                              <br />
+                              <br />
+                              除了帶團之外，我也積極參與當地文化活動和導覽培訓，這讓我不僅擁有豐富的知識，更能為您提供最新、最有趣的巴黎資訊。我的目標是讓每一位客人都能在輕鬆愉快的氛圍中，感受巴黎的獨特魅力，並帶著滿滿的美好回憶離開。
+                              <br />
+                              <br />
+                              希望能在巴黎與您相遇，一起走過這座充滿故事的城市，留下屬於您的巴黎篇章！
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="col-span-1">
+                          <div className="flex justify-center space-x-6 pt-4">
+                            <img
+                              src="/images/website_logo.png"
+                              alt=""
+                              className="h-3xl inline-block"
+                            />
+                            <h4 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
+                              {CardData.name}的連結
+                            </h4>
+                          </div>
+
+                          <ul>
+                            <li className="flex items-center justify-center space-x-4">
+                              <Link to="/">
+                                <FaFacebook className="text-[40px]" />
+                              </Link>
+                              <Link
+                                to="/"
+                                className="inline-block rounded-full border-2 border-white p-2"
+                              >
+                                <RiInstagramFill className="text-[48px]" />
+                              </Link>
+                              <Link to="/">
+                                <AiFillTwitterCircle className="text-[48px]" />
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === "tab-2" && (
+                <div role="tabpanel" id="panel-2">
+                  <h2 className="text-xl font-semibold text-gray-800">
+                    Second tab panel
+                  </h2>
+                  <p className="mt-4 text-gray-600">
+                    這是第二個 Tab 的內容。Lorem ipsum dolor sit, amet
+                    consectetur adipisicing elit. Assumenda voluptatum harum
+                    tempore porro iure veniam, facere rem nemo architecto illum
+                    tempora pariatur quis? Quas autem, accusamus atque
+                    perferendis distinctio corporis.
+                  </p>
+
                   <div
-                    key={index}
-                    // onClick={() => handleCardClick(data.id)}
-                    className="p-3"
+                    // popoverTarget="rdp-popover"
+                    className="input-border input my-10 text-xl font-bold text-primary-300"
+                    style={{ anchorName: "--rdp" }}
                   >
-                    <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
-                      <CommentaryList
-                        userImg={data.userImg}
-                        name={data.name}
-                        commentaryText={data.commentaryText}
-                        date={data.date}
+                    {date
+                      ? `${date.toLocaleDateString()}還有這些空檔:`
+                      : "請選擇日期"}
+                    這是第二個 Tab 的內容。Lorem ipsum dolor sit, amet
+                    consectetur adipisicing elit. Assumenda voluptatum harum
+                    tempore porro iure veniam, facere rem nemo architecto illum
+                    tempora pariatur quis? Quas autem, accusamus atque
+                    perferendis distinctio corporis.
+                  </div>
+
+                  <div className="flex">
+                    <div
+                      popover="auto"
+                      id="rdp-popover"
+                      className="dropdown"
+                      style={{ positionAnchor: "--rdp" }}
+                    >
+                      <DayPicker
+                        className="react-day-picker rounded-xl border border-primary-200 bg-white p-6 shadow-lg"
+                        numberOfMonths={2}
+                        classNames={{
+                          day: "items-center justify-center text-lg hover:bg-gray-200 rounded-full",
+                        }}
+                        mode="single"
+                        selected={date}
+                        onSelect={setDate}
                       />
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              )}
+
+              {activeTab === "tab-3" && (
+                <div role="tabpanel" id="panel-3">
+                
+
+                  <div className=" grid  grid-cols-3 gap-x-60">
+                    
+                      {/* 第一欄：標題與圖片 */}
+                    <div className="col-span-1 space-y-6 flex flex-col justify-center items-center">
+                
+                        <h2 className="text-normal leading-[3rem] tracking-4 text-primary-500">
+                          {CardData.name} 15位客人的評價
+                        </h2>
+                        <p className="text-grey-950 ">
+                          <span className="font-bold text-red-500">5</span> /5
+                          (80人已評價)
+                        </p>
+               
+
+                      <div className="flex justify-evenly gap-4">
+                        <img src="/images/Frame 1000004544.png" alt="" className="inline-block"/>
+                        <img src="/images/Frame 1000004546.png" alt="" className="inline-block"/>
+                      </div>
+                    </div>
+
+                    <div className="col-span-2 scrollbar-thumb-rounded-full scrollbar-track-rounded-full  h-[40vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
+                      <div className="flex flex-col justify-center items-center gap-2">
+                        {CommentaryData.map((data, index) => (
+                          <div
+                            key={index}
+                            // onClick={() => handleCardClick(data.id)}
+                            className="p-3"
+                          >
+                            <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
+                              <CommentaryList
+                                userImg={data.userImg}
+                                name={data.name}
+                                commentaryText={data.commentaryText}
+                                date={data.date}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
-      <br />
-      <br />
-      <div className="mx-auto mt-5 w-3/4">
-        {/* 選單 (Tab) */}
+
+      {/* 第二選單 (Tab) */}
+      <div className="mx-auto mt-10 w-3/4">
         <div
           role="tablist"
           className="min-h-[40px} tabs-boxed tabs flex items-center justify-start gap-4 bg-transparent"
         >
           <a
             role="tab"
-            className={`tab ${currentTab === "group" ? "tab-active" : ""}`}
+            className={`tab ${currentTab === "group" ? "tab-active" : ""} border border-primary-700 text-primary-700`}
             onClick={() => setCurrentTab("group")}
           >
             團體行程開團中
           </a>
           <a
             role="tab"
-            className={`tab ${currentTab === "private" ? "tab-active" : ""}`}
+            className={`tab ${currentTab === "private" ? "tab-active" : ""} border border-primary-700 text-primary-700`}
             onClick={() => setCurrentTab("private")}
           >
             預定私人行程
           </a>
           <a
             role="tab"
-            className={`tab ${currentTab === "recommend" ? "tab-active" : ""}`}
+            className={`tab ${currentTab === "recommend" ? "tab-active" : ""} border border-primary-700 text-primary-700`}
             onClick={() => setCurrentTab("recommend")}
           >
             導演推薦景點
@@ -576,8 +655,16 @@ function TourguideProfilePage() {
                 case "group":
                   return (
                     <>
-                      <div className="text-center">
-                        <p>等你加入，現在就出發!</p>
+                      <div className="flex flex-col text-primary-700">
+                        <p className="flex-start text-xl">
+                          等你加入，現在就出發!
+                        </p>
+
+                        <img
+                          src="/images/Image Group.png"
+                          alt=""
+                          className="inline-block p-[5vh]"
+                        />
 
                         <div className="flex items-center justify-center space-x-8 2xl:mt-6">
                           <button
@@ -886,7 +973,8 @@ function TourguideProfilePage() {
               <p className="py-5 text-2xl font-bold tracking-4 text-primary-700">
                 行程規畫建議
               </p>
-              <MdFlight className="text-[48px]" />
+              {/* <MdFlight className="text-[48px]" /> */}
+              <img src="/images/organize-trips.png" alt="" />
               <p className="mt-2 text-justify text-xl tracking-1.5 text-primary-950">
                 針對個人或小團體的專屬導覽行程,根據客戶需求量身定制
               </p>
@@ -895,7 +983,8 @@ function TourguideProfilePage() {
               <p className="py-5 text-2xl font-bold tracking-4 text-primary-700">
                 語言翻譯
               </p>
-              <MdGTranslate className="text-[48px]" />
+              {/* <MdGTranslate className="text-[48px]" /> */}
+              <img src="/images/photographer.png" alt="" />
               <p className="mt-2 text-xl tracking-1.5 text-primary-950">
                 提供雙語或多語導覽,並在必要時進行語言翻譯
               </p>
@@ -905,7 +994,8 @@ function TourguideProfilePage() {
               <p className="py-5 text-2xl font-bold tracking-4 text-primary-700">
                 交通協助
               </p>
-              <MdOutlineEmojiTransportation className="text-[48px]" />
+              {/* <MdOutlineEmojiTransportation className="text-[48px]" /> */}
+              <img src="/images/chauffeur-service.png" alt="" />
               <p className="mt-2 text-xl tracking-1.5 text-primary-950">
                 協助安排機場接送、地鐵指導、出租車預訂等交通需求
               </p>
@@ -915,7 +1005,8 @@ function TourguideProfilePage() {
               <p className="py-5 text-2xl font-bold tracking-4 text-primary-700">
                 美食餐廳推薦和預訂
               </p>
-              <MdRestaurant className="text-[48px]" />
+              {/* <MdRestaurant className="text-[48px]" /> */}
+              <img src="/images/reservation-restaurants.png" alt="" />
               <p className="mt-2 text-xl tracking-1.5 text-primary-950">
                 根據遊客口味推薦當地特色餐廳,並協助預訂座位
               </p>
@@ -925,7 +1016,8 @@ function TourguideProfilePage() {
               <p className="py-5 text-2xl font-bold tracking-4 text-primary-700">
                 購物導覽
               </p>
-              <FaShoppingBag className="text-[48px]" />
+              {/* <FaShoppingBag className="text-[48px]" /> */}
+              <img src="/images/Group.png" alt="" />
               <p className="mt-2 text-xl tracking-1.5 text-primary-950">
                 透過我們的專家帶領，發掘旅遊指南中找不到的熱點
               </p>
@@ -935,7 +1027,8 @@ function TourguideProfilePage() {
               <p className="py-5 text-2xl font-bold tracking-4 text-primary-700">
                 攝影服務
               </p>
-              <MdAddAPhoto className="text-[48px]" />
+              {/* <MdAddAPhoto className="text-[48px]" /> */}
+              <img src="/images/pro Photographer.png" alt="" />
               <p className="mt-2 text-xl tracking-1.5 text-primary-950">
                 透提供旅途中的攝影服務,幫助遊客記錄美好瞬間
               </p>
@@ -945,7 +1038,8 @@ function TourguideProfilePage() {
               <p className="py-5 text-2xl font-bold tracking-4 text-primary-700">
                 24/小時緊急支援
               </p>
-              <LuHelpingHand className="text-[48px]" />
+              {/* <LuHelpingHand className="text-[48px]" /> */}
+              <img src="/images/24-hours.png" alt="" />
               <p className="mt-2 text-xl tracking-1.5 text-primary-950">
                 在旅遊期間提供全天候的緊急支援服務,確保客人安全無憂
               </p>
@@ -955,7 +1049,8 @@ function TourguideProfilePage() {
               <p className="py-5 text-2xl font-bold tracking-4 text-primary-700">
                 夜間導覽
               </p>
-              <MdNightlight className="text-[48px]" />
+              {/* <MdNightlight className="text-[48px]" /> */}
+              <img src="/images/10005403_4344131 4.png" alt="" />
               <p className="mt-2 text-xl tracking-1.5 text-primary-950">
                 提供巴黎夜景導覽,如塞納河遊船、夜間燈光秀、夜市探訪等
               </p>

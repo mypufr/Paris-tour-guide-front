@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const CommentaryList = ({ name, date, userImg, commentaryText }) => {
   return (
     <>
-      <div className="max-w-sm  rounded-2xl border-red-900 shadow-lg">
+      <div className="max-w-[30vw] rounded-2xl border-red-900 shadow-lg">
         <Link to="/">
           <div className="flex flex-col p-6">
             <div className="flex py-4">

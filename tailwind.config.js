@@ -57,7 +57,14 @@ export default {
         blue: {
           50: "var(--blue-50)",
         },
+
+        tab: {
+          default: "var(--tab-default, #ffffff)", // 預設顏色
+          active: "var(--tab-active, #fbbf24)", // 點擊後顏色
+        },
+
       },
+
       fontFamily: {
         sans: ["Noto Sans TC", "sans-serif"],
       },
@@ -77,9 +84,34 @@ export default {
         120: "120%",
         240: "240%",
       },
+      
+      spacing: {
+        tab: "10px",
+      },
+      borderRadius: {
+        tab: "12px",
+      }
+ 
     },
   },
   plugins: [
     daisyui, scrollbar
   ],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "primary": "#0D4A97",
+          "secondary": "#2563eb",
+          "accent": "#14b8a6",
+          "neutral": "#1e293b",
+          "base-100": "#ffffff",
+          "tab": {
+            "default": "var(--primary-500)",
+            "active": "#fbbf24"
+          }
+        },
+      },
+    ],
+  },
 };
