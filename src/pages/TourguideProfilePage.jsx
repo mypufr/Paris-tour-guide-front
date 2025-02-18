@@ -126,99 +126,128 @@ function TourguideProfilePage() {
   return (
     <>
       <div className="flex justify-center py-[5vh] text-3xl font-bold text-grey-950">
+        <div className=" w-full bg-primary-100 py-10">
+          <div className="mx-auto w-3/4">
+            <div className="flex justify-evenly">
+              {/* Tourguide profile */}
+              <div className="">
+                {/* title */}
+                <div
+                  className="mb-[60px] flex justify-center space-x-2 hover:cursor-pointer"
+                  id="target-section"
+                >
+                  <img
+                    src="/images/vector_title.png"
+                    alt=""
+                    className="inline-block h-[30px]"
+                  />
+                  <h2 className="text-[28px] font-bold  text-primary-600">
+                    您的專屬導遊 : {CardData.name}
+                  </h2>
+                  <img
+                    src="/images/vector_title.png"
+                    alt=""
+                    className="inline-block h-[30px]"
+                  />
+                </div>
 
-        <div className="bg-primary-100">
-
-
-        <div className="flex justify-evenly">
-          {/* Tourguide profile */}
-          <div className="">
-            {/* title */}
-            <div
-              className="m-10 flex justify-center space-x-4 hover:cursor-pointer"
-              id="target-section"
-            >
-              <img
-                src="/images/vector_title.png"
-                alt=""
-                className="inline-block h-[40px]"
-              />
-              <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
-                您的專屬導遊 : {CardData.name}
-              </h2>
-              <img
-                src="/images/vector_title.png"
-                alt=""
-                className="inline-block h-[40px]"
-              />
-            </div>
-
-            <div className="flex">
-              <div className="w-50">
-                <img
-                  src={CardData.img}
-                  alt=""
-                  className="object-center-30 inline-block w-full rounded-3xl object-cover"
-                />
-              </div>
-              <div className="py-10">
-                <div className="my-4 justify-between">
-                  <div className="flex space-x-2">
-                    <button className="inline-block rounded-full border border-secondary-300 px-5">
-                      <p className="text-xl text-secondary-600">
+                <div className="grid grid-cols-2 gap-[2vw] px-11">
+                  <div className="col-span-1">
+                    <img
+                      src={CardData.img}
+                      alt=""
+                      className="object-center-30 inline-block w-full min-h-[421px] rounded-3xl object-cover"
+                    />
+                  </div>
+                  <div className="col-span-1 flex flex-col justify-around">
+                    <div className="flex space-x-2">
+                      <p className="text-xl text-[#324561]">
                         {CardData.speciality1}
                       </p>
-                    </button>
-                    <button className="inline-block rounded-full border border-secondary-300 px-5">
-                      <p className="text-xl text-secondary-600">
+
+                      <p className="text-xl text-[#324561]">
                         {CardData.speciality2}
                       </p>
-                    </button>
-                    <button className="inline-block rounded-full border border-secondary-300 px-5">
-                      <p className="text-xl text-secondary-600">
+
+                      <p className="text-xl text-[#324561]">
                         {CardData.speciality3}
                       </p>
-                    </button>
+                    </div>
+
+                    <div className="flex items-center space-x-6">
+                      <span className="flex">
+                        <img
+                          src="/images/star.svg"
+                          alt=""
+                          className="inline-block h-4 max-w-6"
+                        />
+                        <img
+                          src="/images/star.svg"
+                          alt=""
+                          className="inline-block h-4 max-w-6"
+                        />
+                        <img
+                          src="/images/star.svg"
+                          alt=""
+                          className="inline-block h-4 max-w-6"
+                        />
+                        <img
+                          src="/images/star.svg"
+                          alt=""
+                          className="inline-block h-4 max-w-6"
+                        />
+                        <img
+                          src="/images/empty-star.svg"
+                          alt=""
+                          className="inline-block h-4 max-w-6"
+                        />
+                      </span>
+                      <p className="text-sm text-grey-400">80人已評價</p>
+                    </div>
+
+                    <div className="space-x-2">
+                      <button className="inline-block rounded-full bg-background-2 px-5">
+                        <p className="text-[13px] text-grey-600">
+                          {/* {CardData.speciality1} */}
+                          中文
+                        </p>
+                      </button>
+
+                      <button className="inline-block rounded-full bg-background-2 px-5">
+                        <p className="text-[13px] text-grey-600">
+                          {/* {CardData.speciality1} */}
+                          英文
+                        </p>
+                      </button>
+                    </div>
+
+                    <div className="flex flex-col">
+                      <span className="text-xl text-primary-800">大人 </span>
+                      <span className="text-grey-650 text-base">
+                        {CardData.price}€ /小時
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col">
+                      <span className="text-xl text-primary-800">兒童 </span>
+                      <span className="text-grey-650 text-base">
+                        {" "}
+                        {CardData.price - 3}€ /小時
+                      </span>
+                    </div>
+
+                    <div className=" ">
+                      <button
+                        className="w-full rounded-lg  bg-primary-600 px-4 py-4 text-base text-white"
+                        onClick={handleSendMessageClick}
+                      >
+                        <p>留言給{CardData.name}</p>
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="flex items-center space-x-6">
-                    <span className="flex">
-                      <img
-                        src="/images/star.svg"
-                        alt=""
-                        className="inline-block h-20 max-w-6"
-                      />
-                      <img src="/images/star.svg" alt="" className="max-w-6" />
-                      <img src="/images/star.svg" alt="" className="max-w-6" />
-                      <img src="/images/star.svg" alt="" className="max-w-6" />
-                      <img
-                        src="/images/empty-star.svg"
-                        alt=""
-                        className="max-w-6"
-                      />
-                    </span>
-                    <p>80人已評價</p>
-                  </div>
-
-                  <p>中文、英文</p>
-
-                  <div className="flex flex-col">
-                    <span>大人 {CardData.price}€ /小時</span>
-                    <span>兒童 {CardData.price - 3}€ /小時</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between space-x-6">
-                  <button
-                    className="flex max-w-full justify-center space-x-20 rounded-lg border border-gray-300 bg-primary-700 px-4 py-4 text-white"
-                    onClick={handleSendMessageClick}
-                  >
-                    <p>留言給{CardData.name}</p>
-                  </button>
-                </div>
-
-                {/* Profile description */}
-                {/* <div className="mt-6 border-spacing-2 space-y-4 rounded-2xl border border-primary-200 px-4 py-6">
+                  {/* Profile description */}
+                  {/* <div className="mt-6 border-spacing-2 space-y-4 rounded-2xl border border-primary-200 px-4 py-6">
                 <div className="my-6 flex justify-center space-x-6">
                   <img
                     src="/images/website_logo.png"
@@ -276,11 +305,10 @@ function TourguideProfilePage() {
                   </li>
                 </ul>
               </div> */}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
         </div>
         {/* single trip title */}
         {/* <div className="mt-10 flex justify-center space-x-4 hover:cursor-pointer">
@@ -368,7 +396,6 @@ function TourguideProfilePage() {
           ))}
         </div> */}
       </div>
-
 
       {/* 測試tab */}
       <div className="mx-auto flex w-3/4 pb-10">
@@ -568,30 +595,33 @@ function TourguideProfilePage() {
 
               {activeTab === "tab-3" && (
                 <div role="tabpanel" id="panel-3">
-                
-
-                  <div className=" grid  grid-cols-3 gap-x-60">
-                    
-                      {/* 第一欄：標題與圖片 */}
-                    <div className="col-span-1 space-y-6 flex flex-col justify-center items-center">
-                
-                        <h2 className="text-normal leading-[3rem] tracking-4 text-primary-500">
-                          {CardData.name} 15位客人的評價
-                        </h2>
-                        <p className="text-grey-950 ">
-                          <span className="font-bold text-red-500">5</span> /5
-                          (80人已評價)
-                        </p>
-               
+                  <div className="grid grid-cols-3 gap-x-60">
+                    {/* 第一欄：標題與圖片 */}
+                    <div className="col-span-1 flex flex-col items-center justify-center space-y-6">
+                      <h2 className="text-normal leading-[3rem] tracking-4 text-primary-500">
+                        {CardData.name} 15位客人的評價
+                      </h2>
+                      <p className="text-grey-950">
+                        <span className="font-bold text-red-500">5</span> /5
+                        (80人已評價)
+                      </p>
 
                       <div className="flex justify-evenly gap-4">
-                        <img src="/images/Frame 1000004544.png" alt="" className="inline-block"/>
-                        <img src="/images/Frame 1000004546.png" alt="" className="inline-block"/>
+                        <img
+                          src="/images/Frame 1000004544.png"
+                          alt=""
+                          className="inline-block"
+                        />
+                        <img
+                          src="/images/Frame 1000004546.png"
+                          alt=""
+                          className="inline-block"
+                        />
                       </div>
                     </div>
 
-                    <div className="col-span-2 scrollbar-thumb-rounded-full scrollbar-track-rounded-full  h-[40vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
-                      <div className="flex flex-col justify-center items-center gap-2">
+                    <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full col-span-2 h-[40vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
+                      <div className="flex flex-col items-center justify-center gap-2">
                         {CommentaryData.map((data, index) => (
                           <div
                             key={index}
@@ -985,6 +1015,7 @@ function TourguideProfilePage() {
               </p>
               {/* <MdGTranslate className="text-[48px]" /> */}
               <img src="/images/photographer.png" alt="" />
+
               <p className="mt-2 text-xl tracking-1.5 text-primary-950">
                 提供雙語或多語導覽,並在必要時進行語言翻譯
               </p>
