@@ -37,6 +37,7 @@ function Login() {
       if (data) {
         setUser(data);
         localStorage.setItem("user", JSON.stringify(data.user));
+        toast.success("成功登入!");
         navigate("/");
         console.log(data.user)
       }

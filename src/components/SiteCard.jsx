@@ -115,68 +115,73 @@ const SiteCard = ({
         <Link to="/">
           <div className="rounded-xl">
             <img
-              className="inline-block h-[200px] rounded-t-3xl object-cover"
+              className="inline-block h-[200px] w-auto rounded-t-3xl object-cover"
               src={imageUrl}
               alt={tripName}
             />
 
-            <div className="p-">
+            <div className="">
               {/* title */}
-              <div className="flex items-center gap-1">
-                <img src="/images/red-balon.png" alt="" className="h-5" />
+              <div className="flex justify-center items-center space-x-1 py-3">
+                <img src="/images/red-balon.png" alt="" className="h-4 inline-block" />
 
                 <h6 className="text-base text-gray-500">{tripName}</h6>
-                <span className="flex">
+                <span className="inline-flex">
                   <img
                     src="/images/star.svg"
                     alt=""
-                    className="inline-block h-20 max-w-4"
+                    className="inline-block h-20 max-h-4"
                   />
-                  <img src="/images/star.svg" alt="" className="max-w-4" />
-                  <img src="/images/star.svg" alt="" className="max-w-4" />
-                  <img src="/images/star.svg" alt="" className="max-w-4" />
+                  <img src="/images/star.svg" alt="" className="max-h-4" />
+                  <img src="/images/star.svg" alt="" className="max-h-4" />
+                  <img src="/images/star.svg" alt="" className="max-h-4" />
                   <img
                     src="/images/empty-star.svg"
                     alt=""
-                    className="max-w-4"
+                    className="max-h-4"
                   />
                 </span>
               </div>
 
               {/* duration+intro */}
 
-              <div className="grid grid-cols-3 space-y-2">
-                <div className="flex flex-col col-span-1">
-                  <div className="flex flex-col">
-                    <p className="text-grey-500 text-[12px]">{duration}</p>
-                    <span className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[13px] leading-[18px] text-grey-600">
-                      {/* {specialities1} */}site 1
+              <div className="grid grid-cols-3 gap-1">
+                <div className="flex  col-span-1 justify-center">
+                  <div className="flex flex-col justify-between items-center scrollbar-active">
+                    <p className="text-grey-500 text-[12px] ">{duration}</p>
+                    <span className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[12px] leading-[18px] text-grey-600 ">
+                      {/* {specialities1} */}奧賽美術館
                     </span>
-                    <span className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[13px] leading-[18px] text-grey-600">
-                      {/* {specialities2} */}site 2
+                    <span className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[12px] leading-[18px] text-grey-600">
+                      {/* {specialities2} */}羅丹博物館
                     </span>
-                    <span className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[13px] leading-[18px] text-grey-600">
-                      {/* {specialities3} */}site 3
+                    <span className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[12px] leading-[18px] text-grey-600">
+                      {/* {specialities3} */}橘園美術館
                     </span>
                   </div>
+
+
+
+
+                  
                 </div>
 
-                <p className="col-span-2 text-[14px] leading-[19.6px] tracking-1.5 text-gray-400">
+                <p className="col-span-2 text-[14px] leading-[19.6px] tracking-1.5 text-grey-400 max-h-[100px] overflow-y-scroll line-clamp-5">
                   {description}
                 </p>
               </div>
             </div>
 
-            <div className="flex justify-end space-x-2">
+            <div className="flex justify-end space-x-2 mt-4 px-2">
               <img src="image/Group.svg" alt="" />
-              <p className="text-sm leading-[15.4px] tracking-1.5 text-grey-600">
+              <p className="text-sm font-bold leading-[15.4px] tracking-1.5 text-grey-600">
                 {price} €/人
               </p>
             </div>
           </div>
         </Link>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center p-2">
           <button className="w-full rounded-xl bg-primary-600">
             <p className="p-1 text-base text-white">搶先報名</p>
           </button>

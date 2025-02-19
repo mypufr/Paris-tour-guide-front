@@ -55,7 +55,7 @@ export const settings5 = {
   slideseToScroll: 2,
   arrows: true,
   rows: 1,
-  afterChange: (index) => setCurrentSlide(index + 1),
+  // afterChange: (index) => setCurrentSlide(index + 1),
   responsive: [
     {
       breakpoint: 768,

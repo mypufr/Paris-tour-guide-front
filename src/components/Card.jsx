@@ -11,32 +11,32 @@ const Card = ({
   specialities3,
 }) => {
   return (
-    <div className="rounded-2xl border-0 border-secondary-300 min-[375px]:p-8 md:max-w-sm md:border md:p-2 md:shadow-lg">
+    <div className="rounded-2xl border-0 border-primary-200 min-[375px]:p-8 md:max-w-sm ">
       <Link to="/search-results/:id">
-        <div className="broder-grey-100 border-1 rounded-2xl border border-b-0 p-0 md:border-0 2xl:px-6 2xl:py-6">
+        <div className="border-primary-200 border border-1 rounded-2xl ">
           <img
-            className="h-[257px] w-full rounded-2xl object-cover md:h-[150px] xl:h-[360px]"
+            className="h-[257px] w-full rounded-t-xl object-cover md:max-h-[150px] xl:max-h-[240px]"
             src={imgSrc}
             alt={title}
           />
 
-          <div className="space-y-1 pt-6">
+          <div className="space-y-1 p-6">
             <div className="flex justify-between">
-              <h6 className="mb-2 text-base font-bold text-blue-50 2xl:text-xl">
+              <h6 className="mb-2 text-base font-bold text-gray-500 2xl:text-xl">
                 {title}
               </h6>
-              <span className="hidden lg:inline-block lg:text-base lg:font-bold lg:text-secondary-700">
-                {price}€ /小時
+              <span className="hidden lg:inline-block lg:text-base lg:font-bold lg:text-gray-600">
+                {price} € / 小時
               </span>
             </div>
             <div className="space-x-2 md:flex md:flex-col md:items-start md:justify-center md:space-x-0 md:space-y-1 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-start min-[1440px]:space-x-1 min-[1440px]:space-y-0 min-[1920px]:items-start min-[1920px]:justify-start">
-              <span className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[13px] leading-[18px] text-grey-600">
+              <span className="inline-block   text-[13px] leading-[18px] text-gray-600">
                 {specialities1}
               </span>
-              <span className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[13px] leading-[18px] text-grey-600">
+              <span className="inline-block  px-2 text-[13px] leading-[18px] text-gray-600">
                 {specialities2}
               </span>
-              <span className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[13px] leading-[18px] text-grey-600">
+              <span className="inline-block px-2 text-[13px] leading-[18px] text-gray-600">
                 {specialities3}
               </span>
             </div>
