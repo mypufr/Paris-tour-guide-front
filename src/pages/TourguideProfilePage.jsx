@@ -157,7 +157,7 @@ function TourguideProfilePage() {
                     <img
                       src={CardData.img}
                       alt=""
-                      className="object-center-30 inline-block min-h-[421px] w-full rounded-xl object-cover"
+                      className="object-center-30 inline-block max-h-[421px] w-full rounded-xl object-cover"
                     />
                   </div>
                   <div className="col-span-1 flex flex-col justify-around">
