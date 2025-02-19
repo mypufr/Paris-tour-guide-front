@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-
-
-
 function TravelInfoPage() {
   const [input, setInput] = useState("");
   const [todoList, setTodoList] = useState([]);
@@ -28,7 +25,9 @@ function TravelInfoPage() {
 
   const getComments = async () => {
     try {
-      const dataRes = await axios.get("http://localhost:3000/posts?_embed=user");
+      const dataRes = await axios.get(
+        "http://localhost:3000/posts?_embed=user",
+      );
       // const dataRes = await axios.get(
       //   // "http://localhost:3000/products?_start=7&_end=9",
       // );
@@ -89,8 +88,21 @@ function TravelInfoPage() {
   //   }
   // };
 
+  const getTourguides = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/tourguides");
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
+
   return (
     <>
+      <button className="border border-t-cyan-600" onClick={getTourguides}>
+        取得導遊資料
+      </button>
+
       <button className="border border-t-cyan-600" onClick={getComments}>
         get all comments
       </button>
