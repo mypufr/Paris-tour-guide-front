@@ -24,6 +24,7 @@ import "aos/dist/aos.css";
 import { FaFacebook } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import { AiFillTwitterCircle } from "react-icons/ai";
+import { TfiHandPointRight } from "react-icons/tfi";
 import { MdOutlineEmojiTransportation } from "react-icons/md";
 import { MdRestaurant } from "react-icons/md";
 import { FaShoppingBag } from "react-icons/fa";
@@ -125,15 +126,15 @@ function TourguideProfilePage() {
 
   return (
     <>
-      <div className="flex justify-center py-[5vh] text-3xl font-bold text-grey-950">
-        <div className=" w-full bg-primary-100 py-10">
+      <div className="flex max-h-[640px] justify-center py-[2vh] text-3xl font-bold text-grey-950">
+        <div className="w-full bg-primary-50 py-11">
           <div className="mx-auto w-3/4">
             <div className="flex justify-evenly">
               {/* Tourguide profile */}
               <div className="">
                 {/* title */}
                 <div
-                  className="mb-[60px] flex justify-center space-x-2 hover:cursor-pointer"
+                  className="mb-[60px] flex items-center justify-center space-x-2 hover:cursor-pointer"
                   id="target-section"
                 >
                   <img
@@ -141,7 +142,7 @@ function TourguideProfilePage() {
                     alt=""
                     className="inline-block h-[30px]"
                   />
-                  <h2 className="text-[28px] font-bold  text-primary-600">
+                  <h2 className="text-[28px] font-bold text-primary-600">
                     您的專屬導遊 : {CardData.name}
                   </h2>
                   <img
@@ -156,7 +157,7 @@ function TourguideProfilePage() {
                     <img
                       src={CardData.img}
                       alt=""
-                      className="object-center-30 inline-block w-full min-h-[421px] rounded-3xl object-cover"
+                      className="object-center-30 inline-block min-h-[421px] w-full rounded-xl object-cover"
                     />
                   </div>
                   <div className="col-span-1 flex flex-col justify-around">
@@ -223,89 +224,41 @@ function TourguideProfilePage() {
 
                     <div className="flex flex-col">
                       <span className="text-xl text-primary-800">大人 </span>
-                      <span className="text-grey-650 text-base">
+                      <span className="text-base text-grey-650">
                         {CardData.price}€ /小時
                       </span>
                     </div>
 
                     <div className="flex flex-col">
                       <span className="text-xl text-primary-800">兒童 </span>
-                      <span className="text-grey-650 text-base">
+                      <span className="text-base text-grey-650">
                         {" "}
                         {CardData.price - 3}€ /小時
                       </span>
                     </div>
 
-                    <div className=" ">
-                      <button
-                        className="w-full rounded-lg  bg-primary-600 px-4 py-4 text-base text-white"
-                        onClick={handleSendMessageClick}
-                      >
-                        <p>留言給{CardData.name}</p>
-                      </button>
-                    </div>
+                    <button className="mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
+                      {/* <img
+                                    src="images/BsHandIndex.svg"
+                                    alt=""
+                                    className="inline-block"
+                                  /> */}
+                      <TfiHandPointRight className="text-2xl text-white" />
+                      <span className="ml-2 text-base text-white">
+                        留言給{CardData.name}
+                      </span>
+                    </button>
                   </div>
-
-                  {/* Profile description */}
-                  {/* <div className="mt-6 border-spacing-2 space-y-4 rounded-2xl border border-primary-200 px-4 py-6">
-                <div className="my-6 flex justify-center space-x-6">
-                  <img
-                    src="/images/website_logo.png"
-                    alt=""
-                    className="h-3xl inline-block"
-                  />
-                  <h3 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
-                    關於{CardData.name}
-                  </h3>
                 </div>
-                <p className="text-2xl">
-                  大家好，我是{CardData.name}，您的專屬巴黎導遊！
-                  <br />
-                  <br />
-                  我已經在巴黎生活了七年，並且有超過五年的導遊經驗。這些年來，我有幸帶領來自世界各地的遊客深入探索這座充滿魅力的城市。
-                  <br />
-                  <br />
-                  我對巴黎的熱愛源於她豐富的歷史、迷人的文化以及多姿多彩的生活方式。無論是漫步在塞納河畔、欣賞盧浮宮的藝術珍寶，還是探索隱藏在小巷中的法式咖啡館，我都希望能將巴黎的每一個角落最真實、最動人的一面展現在您的面前。
-                  <br />
-                  <br />
-                  在這五年多的導遊生涯中，我帶領過各種不同需求和背景的團隊，包括家庭旅遊、小型私人團體、商務考察團等。我擅長根據每位客人的興趣和喜好，設計出個性化的旅遊行程。不管您是藝術愛好者、美食饕客，還是歷史迷，我都能為您量身定制一個完美的巴黎之旅。
-                  <br />
-                  <br />
-                  除了帶團之外，我也積極參與當地文化活動和導覽培訓，這讓我不僅擁有豐富的知識，更能為您提供最新、最有趣的巴黎資訊。我的目標是讓每一位客人都能在輕鬆愉快的氛圍中，感受巴黎的獨特魅力，並帶著滿滿的美好回憶離開。
-                  <br />
-                  <br />
-                  希望能在巴黎與您相遇，一起走過這座充滿故事的城市，留下屬於您的巴黎篇章！
-                </p>
+              </div>
+            </div>
+            <div className="relative lg:mb-[15%]">
+              <div className="hidden md:absolute md:-bottom-[6rem] md:left-[-15%] md:block md:-rotate-12">
+                <img src="https://i.imgur.com/dn5n8ac.png" alt="" />
+              </div>
 
-                <div className="flex justify-center space-x-6 pt-4">
-                  <img
-                    src="/images/website_logo.png"
-                    alt=""
-                    className="h-3xl inline-block"
-                  />
-                  <h4 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
-                    關於{CardData.name}的連結
-                  </h4>
-                </div>
-
-                <ul>
-                  <li className="flex items-center justify-center space-x-4">
-                    <Link to="/">
-                      <FaFacebook className="text-[40px]" />
-                    </Link>
-                    <Link
-                      to="/"
-                      className="inline-block rounded-full border-2 border-white p-2"
-                    >
-                      <RiInstagramFill className="text-[48px]" />
-                    </Link>
-                    <Link to="/">
-                      <AiFillTwitterCircle className="text-[48px]" />
-                    </Link>
-                  </li>
-                </ul>
-              </div> */}
-                </div>
+              <div className="rotate-10 absolute hidden md:-top-[26rem] md:right-[-10%] md:block">
+                <img src="https://i.imgur.com/dn5n8ac.png" alt="" />
               </div>
             </div>
           </div>
@@ -397,8 +350,8 @@ function TourguideProfilePage() {
         </div> */}
       </div>
 
-      {/* 測試tab */}
-      <div className="mx-auto flex w-3/4 pb-10">
+      {/* tab */}
+      <div className="mx-auto flex w-3/4 py-20">
         <div className="mx-auto px-8 sm:px-4">
           <div className="sm:w-full">
             {/* Tab 列表 */}
@@ -467,7 +420,7 @@ function TourguideProfilePage() {
             </div>
 
             {/* Tab Panel 區域 */}
-            <div className="relative rounded-3xl">
+            <div className="relative mt-4 rounded-3xl">
               {activeTab === "tab-1" && (
                 <div role="tabpanel" id="panel-1">
                   <div className="">
@@ -475,20 +428,24 @@ function TourguideProfilePage() {
                       {/* Profile description */}
                       <div className="grid border-spacing-1 grid-cols-3 space-y-4 border border-primary-200 px-4 pt-6">
                         <div className="col-span-2 h-[50vh]">
-                          <div className="my-6 flex space-x-6">
+                          <div className="my-6 flex items-center space-x-6">
                             <img
                               src="/images/website_logo.png"
                               alt=""
-                              className="h-3xl inline-block"
+                              className="inline-block h-[30px]"
                             />
-                            <h3 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
+                            <h3 className="text-xl font-bold leading-[3rem] tracking-4 text-primary-600">
                               關於{CardData.name}
                             </h3>
                           </div>
 
-                          <div className="h-[35vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
-                            <p className="bg-white p-4 text-xl">
-                              大家好，我是{CardData.name}，您的專屬巴黎導遊！
+                          <div className="h-[35vh] overflow-y-scroll p-1 scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
+                            <p className="bg-white text-xl">
+                              大家好，我是
+                              <span className="text-red-500">
+                                {CardData.name}
+                              </span>
+                              ，您的專屬巴黎導遊！
                               <br />
                               <br />
                               我已經在巴黎生活了七年，並且有超過五年的導遊經驗。這些年來，我有幸帶領來自世界各地的遊客深入探索這座充滿魅力的城市。
@@ -509,13 +466,13 @@ function TourguideProfilePage() {
                         </div>
 
                         <div className="col-span-1">
-                          <div className="flex justify-center space-x-6 pt-4">
+                          <div className="flex items-center justify-center space-x-6 pt-4">
                             <img
                               src="/images/website_logo.png"
                               alt=""
-                              className="h-3xl inline-block"
+                              className="inline-block h-[30px]"
                             />
-                            <h4 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
+                            <h4 className="text-xl font-bold leading-[3rem] tracking-4 text-primary-600">
                               {CardData.name}的連結
                             </h4>
                           </div>
@@ -544,7 +501,7 @@ function TourguideProfilePage() {
               )}
 
               {activeTab === "tab-2" && (
-                <div role="tabpanel" id="panel-2">
+                <div role="tabpanel" id="panel-2" className="border-t-2">
                   <h2 className="text-xl font-semibold text-gray-800">
                     Second tab panel
                   </h2>
@@ -594,41 +551,92 @@ function TourguideProfilePage() {
               )}
 
               {activeTab === "tab-3" && (
-                <div role="tabpanel" id="panel-3">
-                  <div className="grid grid-cols-3 gap-x-60">
+                // <div role="tabpanel" id="panel-3">
+                //   <div className="grid grid-cols-3 gap-x-60">
+                //     {/* 第一欄：標題與圖片 */}
+                //     <div className="col-span-1 flex flex-col items-center justify-center">
+                //       <h2 className="text-normal leading-[3rem] tracking-4 text-primary-500">
+                //         {CardData.name} 15位客人的評價
+                //       </h2>
+                //       <p className="text-grey-950">
+                //         <span className="font-bold text-red-500">5</span> /5
+                //         (80人已評價)
+                //       </p>
+
+                //       <div className="flex justify-center gap-4">
+                //         <img
+                //           src="/images/Frame 1000004544.png"
+                //           alt=""
+                //           className="inline-block"
+                //         />
+                //         <img
+                //           src="/images/Frame 1000004546.png"
+                //           alt=""
+                //           className="inline-block"
+                //         />
+                //       </div>
+                //     </div>
+
+                //     <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full col-span-2 h-[40vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
+                //       <div className="flex flex-col items-center justify-center gap-2">
+                //         {CommentaryData.map((data, index) => (
+                //           <div
+                //             key={index}
+                //             // onClick={() => handleCardClick(data.id)}
+                //             className="p-3"
+                //           >
+                //             <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
+                //               <CommentaryList
+                //                 userImg={data.userImg}
+                //                 name={data.name}
+                //                 commentaryText={data.commentaryText}
+                //                 date={data.date}
+                //               />
+                //             </div>
+                //           </div>
+                //         ))}
+                //       </div>
+                //     </div>
+                //   </div>
+                // </div>
+                <div
+                  role="tabpanel"
+                  id="panel-3"
+                  className="overflow-hidden border-t-2"
+                >
+                  <div className="flex max-w-full gap-10">
                     {/* 第一欄：標題與圖片 */}
-                    <div className="col-span-1 flex flex-col items-center justify-center space-y-6">
-                      <h2 className="text-normal leading-[3rem] tracking-4 text-primary-500">
+                    <div className="flex w-full flex-col items-center justify-center">
+                      <h2 className="text-base leading-[3rem] tracking-4 text-primary-600">
                         {CardData.name} 15位客人的評價
                       </h2>
-                      <p className="text-grey-950">
-                        <span className="font-bold text-red-500">5</span> /5
-                        (80人已評價)
+                      <p className="text-grey-400">
+                        <span className="pr-2 text-xl font-bold text-red-500">
+                          5
+                        </span>
+                        / 5 (80人已評價)
                       </p>
 
-                      <div className="flex justify-evenly gap-4">
+                      <div className="flex justify-center gap-4 p-4">
                         <img
                           src="/images/Frame 1000004544.png"
                           alt=""
-                          className="inline-block"
+                          className="h-auto max-w-full object-contain"
                         />
                         <img
                           src="/images/Frame 1000004546.png"
                           alt=""
-                          className="inline-block"
+                          className="h-auto max-w-full object-contain"
                         />
                       </div>
                     </div>
 
-                    <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full col-span-2 h-[40vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
+                    {/* 第二欄：評論列表 */}
+                    <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full h-[520px] w-3/4 overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
                       <div className="flex flex-col items-center justify-center gap-2">
                         {CommentaryData.map((data, index) => (
-                          <div
-                            key={index}
-                            // onClick={() => handleCardClick(data.id)}
-                            className="p-3"
-                          >
-                            <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
+                          <div key={index} className="p-3">
+                            <div className="transform transition-transform duration-300 hover:scale-105">
                               <CommentaryList
                                 userImg={data.userImg}
                                 name={data.name}
@@ -649,7 +657,7 @@ function TourguideProfilePage() {
       </div>
 
       {/* 第二選單 (Tab) */}
-      <div className="mx-auto mt-10 w-3/4">
+      <div className="mx-auto w-3/4">
         <div
           role="tablist"
           className="min-h-[40px} tabs-boxed tabs flex items-center justify-start gap-4 bg-transparent"
@@ -728,6 +736,12 @@ function TourguideProfilePage() {
                     <>
                       <div className="text-center">
                         <p>玩樂巴黎必打卡之地!</p>
+
+                        <img
+                          src="/images/Paris_by_dist.png"
+                          alt=""
+                          className="inline-block p-[5vh]"
+                        />
 
                         <div className="flex items-center justify-center space-x-8 2xl:mt-6">
                           <button
