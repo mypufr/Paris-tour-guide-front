@@ -11,6 +11,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import DatePicker from "react-datepicker";
+import { zhTW } from "date-fns/locale";
+import "react-datepicker/dist/react-datepicker.css";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -41,6 +45,10 @@ function TourguidesPage() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
+  // const [showCalendar, setShowCalendar] = useState(false);
+
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
@@ -69,7 +77,7 @@ function TourguidesPage() {
           style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
           className="relative h-full w-full bg-cover bg-center duration-500"
         >
-          <div className="absolute left-[15%] top-[20%] md:top-[15%] md:left-[25%] lg:top-[20%] lg:left-[33%]">
+          <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[33%] lg:top-[20%]">
             <h1 className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
               尋找你的專屬在地導遊
             </h1>
@@ -79,7 +87,12 @@ function TourguidesPage() {
                 <div className="relative w-full max-w-lg space-y-3 lg:space-y-8">
                   <div className="flex justify-center">
                     <Link>
-                      <button className="flex w-full space-x-4 rounded-lg border border-gray-300 bg-background-2 p-1 lg:space-x-20 lg:px-4 lg:py-4">
+                      <button
+                        className="flex w-full space-x-4 rounded-lg border border-gray-300 bg-background-2 p-1 lg:space-x-20 lg:px-4 lg:py-4"
+                        onClick={() =>
+                          document.getElementById("my_modal").showModal()
+                        }
+                      >
                         <svg
                           className="h-8 w-8"
                           width="24"
@@ -99,8 +112,20 @@ function TourguidesPage() {
                           <line x1="4" y1="11" x2="20" y2="11" />{" "}
                           <rect x="8" y="15" width="2" height="2" />
                         </svg>
+
                         <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
-                          需求日期
+                          {startDate && endDate ? (
+                            <p className="text-gray-600">
+                              <span className="font-bold">
+                                {startDate.toLocaleDateString()} -{" "}
+                                {endDate.toLocaleDateString()}
+                              </span>
+                            </p>
+                          ) : (
+                            <p className="text-gray-400">
+                              日期範圍
+                            </p>
+                          )}
                         </span>
                         <svg
                           className="h-8 text-red-500"
@@ -119,7 +144,54 @@ function TourguidesPage() {
                     </Link>
                   </div>
 
-                  <div className="mt-4 flex justify-center lg:mt-0">
+                  {/* 日期選擇器 */}
+
+                  <dialog
+                    id="my_modal"
+                    className="modal modal-bottom sm:modal-middle"
+                  >
+                    <div className="modal-box bg-white">
+                      <h3 className="text-lg font-bold text-primary-700"> 請選擇日期範圍</h3>
+                      <div className="flex justify-center py-4">
+                        <DatePicker
+                          className=""
+                          locale={zhTW} 
+                          selected={startDate}
+                          onChange={(update) => {
+                            setDateRange(update);
+                          }}
+                          startDate={startDate}
+                          endDate={endDate}
+                          selectsRange
+                          monthsShown={2}
+                          inline
+                          calendarClassName="flex gap-6 bg-background-2 rounded-lg  border-none"
+                        />
+                      </div>
+
+                      {/* 已選日期顯示 */}
+                      <div className="text-center">
+                        {startDate && endDate ? (
+                          <p className="text-grey-600">
+                            選擇的日期範圍：
+                            <span className="font-bold text-primary-600">
+                              {startDate.toLocaleDateString()} -{" "}
+                              {endDate.toLocaleDateString()}
+                            </span>
+                          </p>
+                        ) : (
+                          <p className="text-gray-400">請選擇開始和結束日期</p>
+                        )}
+                      </div>
+                      <div className="modal-action">
+                        <form method="dialog">
+                          <button className="btn">關閉</button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
+
+                  {/* <div className="mt-4 flex justify-center lg:mt-0">
                     <Link>
                       <button className="flex w-full space-x-4 rounded-lg border border-gray-300 bg-background-2 p-1 lg:space-x-20 lg:px-4 lg:py-4">
                         <svg
@@ -153,7 +225,7 @@ function TourguidesPage() {
                         </svg>
                       </button>
                     </Link>
-                  </div>
+                  </div> */}
 
                   <div className="mt-4 flex justify-center lg:mt-0">
                     <Link>
@@ -197,15 +269,15 @@ function TourguidesPage() {
             <div className="mt-2 lg:mt-8">
               {/* <Link to="/search-tourguides/search-results"> */}
               <button
-                className="absolute left-[25%] lg:bottom-[-10%] lg:left-[32%] flex min-w-[50%] lg:min-w-[40%] rounded-3xl bg-primary-500 py-3"
+                className="absolute left-[25%] flex min-w-[50%] rounded-3xl bg-primary-500 py-3 lg:bottom-[-10%] lg:left-[32%] lg:min-w-[40%]"
                 onClick={handleSearchClick}
               >
                 <div className="relative flex-grow">
-                  <span className="text-[13px] font-bold text-white lg:text-xl pr-2 lg:pr-4">
+                  <span className="pr-2 text-[13px] font-bold text-white lg:pr-4 lg:text-xl">
                     立即搜尋
                   </span>
                   <svg
-                    className="absolute right-3 top-1 inline-block h-6 w-6 text-white pl-1"
+                    className="absolute right-3 top-1 inline-block h-6 w-6 pl-1 text-white"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -243,27 +315,27 @@ function TourguidesPage() {
         </div>
       </div>
 
-      <div className="my-4 lg:my-10 flex justify-center space-x-2 hover:cursor-pointer">
+      <div className="my-4 flex justify-center space-x-2 hover:cursor-pointer lg:my-10">
         <img
           src="https://i.imgur.com/zoB5vaQ.png"
           alt=""
           className="inline-block h-6 lg:h-[40px]"
         />
-        <h2 className="text-2xl lg:text-[40px] font-bold  tracking-4 text-primary-600">
+        <h2 className="text-2xl font-bold tracking-4 text-primary-600 lg:text-[40px]">
           特色服務
         </h2>
         <img
           src="https://i.imgur.com/zoB5vaQ.png"
           alt=""
-          className="inline-block h-6 lg:h-[40px] "
+          className="inline-block h-6 lg:h-[40px]"
         />
       </div>
 
       <div className="flex items-center justify-center">
         <div className="m-auto mb-[5%] max-w-[1296px]">
-          <ul className="grid gap-6 md:grid-cols-2 md:gap-20 lg:grid-cols-3 lg: xl:flex xl:justify-between">
+          <ul className="lg: grid gap-6 md:grid-cols-2 md:gap-20 lg:grid-cols-3 xl:flex xl:justify-between">
             <li className="flex h-full max-w-[240px] flex-col items-center justify-center">
-              <p className="py-5 text-xl lg:text-2xl font-bold tracking-4 text-grey-950">
+              <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 100%私人導覽
               </p>
               <img
@@ -271,12 +343,12 @@ function TourguidesPage() {
                 alt=""
                 className="block h-[200px] rounded-xl object-cover"
               />
-              <p className="mt-2 flex-grow py-3 text-justify text-sm lg:text-xl tracking-1.5 text-primary-950">
+              <p className="mt-2 flex-grow py-3 text-justify text-sm tracking-1.5 text-primary-950 lg:text-xl">
                 享受完全專屬於您的私人導遊體驗，不會與其他遊客分享導遊。
               </p>
             </li>
             <li className="flex h-full max-w-[240px] flex-col items-center justify-center">
-              <p className="py-5 text-xl lg:text-2xl font-bold tracking-4 text-grey-950">
+              <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 客製化行程
               </p>
               <img
@@ -284,12 +356,12 @@ function TourguidesPage() {
                 alt=""
                 className="block h-[200px] rounded-xl object-cover"
               />
-              <p className="mt-2 flex-grow py-3 text-justify text-sm lg:text-xl tracking-1.5 text-primary-950">
+              <p className="mt-2 flex-grow py-3 text-justify text-sm tracking-1.5 text-primary-950 lg:text-xl">
                 根據您的興趣和需求，設計出 完全符合您個人偏好的獨特行程
               </p>
             </li>
             <li className="flex h-full max-w-[240px] flex-col items-center justify-center">
-              <p className="py-5 text-xl lg:text-2xl font-bold tracking-4 text-grey-950">
+              <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 獲取當地視角
               </p>
               <img
@@ -297,12 +369,12 @@ function TourguidesPage() {
                 alt=""
                 className="block h-[200px] rounded-xl object-cover"
               />
-              <p className="mt-2 flex-grow py-3 text-justify text-sm lg:text-xl tracking-1.5 text-primary-950">
+              <p className="mt-2 flex-grow py-3 text-justify text-sm tracking-1.5 text-primary-950 lg:text-xl">
                 透過我們的專家帶領，發掘旅遊指南中找不到的熱點
               </p>
             </li>
             <li className="flex h-full max-w-[240px] flex-col items-center justify-center">
-              <p className="py-5 text-xl lg:text-2xl font-bold tracking-4 text-grey-950">
+              <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 彈性取消政策
               </p>
               <img
@@ -310,7 +382,7 @@ function TourguidesPage() {
                 alt=""
                 className="block h-[200px] rounded-xl object-cover"
               />
-              <p className="mt-2 flex-grow py-3 text-justify text-sm lg:text-xl tracking-1.5 text-primary-950">
+              <p className="mt-2 flex-grow py-3 text-justify text-sm tracking-1.5 text-primary-950 lg:text-xl">
                 無論是計劃有變,還是臨時有事，您都可以輕鬆取消或更改預訂，而不會產生任何額外費用
               </p>
             </li>
