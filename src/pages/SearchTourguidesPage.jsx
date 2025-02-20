@@ -47,7 +47,8 @@ function TourguidesPage() {
 
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  // const [showCalendar, setShowCalendar] = useState(false);
+  const [adultCount, setAdultCount] = useState(1);
+  const [childCount, setChildCount] = useState(1);
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -63,6 +64,32 @@ function TourguidesPage() {
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
   };
+
+  const increaseAdultCount = () => {
+    if (adultCount < 10) {
+      setAdultCount(adultCount + 1);
+    }
+  };
+
+  const increaseChildCount = () => {
+    if (childCount < 10) {
+      setChildCount(childCount + 1);
+    }
+  };
+
+  // 減少人數
+  const decreaseAdultCount = () => {
+    if (adultCount > 1) {
+      setAdultCount(adultCount - 1);
+    }
+  };
+
+  const decreaseChildCount = () => {
+    if (childCount > 1) {
+      setChildCount(childCount - 1);
+    }
+  };
+
 
   const navigate = useNavigate();
 
@@ -90,7 +117,7 @@ function TourguidesPage() {
                       <button
                         className="flex w-full space-x-4 rounded-lg border border-gray-300 bg-background-2 p-1 lg:space-x-20 lg:px-4 lg:py-4"
                         onClick={() =>
-                          document.getElementById("my_modal").showModal()
+                          document.getElementById("calendar_modal").showModal()
                         }
                       >
                         <svg
@@ -122,9 +149,7 @@ function TourguidesPage() {
                               </span>
                             </p>
                           ) : (
-                            <p className="text-gray-400">
-                              日期範圍
-                            </p>
+                            <p className="text-gray-400">日期範圍</p>
                           )}
                         </span>
                         <svg
@@ -147,15 +172,18 @@ function TourguidesPage() {
                   {/* 日期選擇器 */}
 
                   <dialog
-                    id="my_modal"
+                    id="calendar_modal"
                     className="modal modal-bottom sm:modal-middle"
                   >
                     <div className="modal-box bg-white">
-                      <h3 className="text-lg font-bold text-primary-700"> 請選擇日期範圍</h3>
+                      <h3 className="text-lg font-bold text-primary-700">
+                        {" "}
+                        請選擇日期範圍
+                      </h3>
                       <div className="flex justify-center py-4">
                         <DatePicker
                           className=""
-                          locale={zhTW} 
+                          locale={zhTW}
                           selected={startDate}
                           onChange={(update) => {
                             setDateRange(update);
@@ -165,7 +193,7 @@ function TourguidesPage() {
                           selectsRange
                           monthsShown={2}
                           inline
-                          calendarClassName="flex gap-6 bg-background-2 rounded-lg  border-none"
+                          calendarClassName="flex gap-6 bg-primary-50 rounded-lg  border-none"
                         />
                       </div>
 
@@ -191,9 +219,16 @@ function TourguidesPage() {
                     </div>
                   </dialog>
 
-                  {/* <div className="mt-4 flex justify-center lg:mt-0">
+                  <div className="mt-4 flex justify-center lg:mt-0">
                     <Link>
-                      <button className="flex w-full space-x-4 rounded-lg border border-gray-300 bg-background-2 p-1 lg:space-x-20 lg:px-4 lg:py-4">
+                      <button
+                        className="flex w-full space-x-4 rounded-lg border border-gray-300 bg-background-2 p-1 lg:space-x-20 lg:px-4 lg:py-4"
+                        onClick={() =>
+                          document
+                            .getElementById("touristNum_modal")
+                            .showModal()
+                        }
+                      >
                         <svg
                           className="h-8"
                           fill="none"
@@ -225,7 +260,75 @@ function TourguidesPage() {
                         </svg>
                       </button>
                     </Link>
-                  </div> */}
+                  </div>
+
+                  {/* 人數選擇器 */}
+                  <dialog
+                    id="touristNum_modal"
+                    className="modal modal-bottom sm:modal-middle"
+                  >
+                    <div className="flex flex-col items-center space-y-4 p-4 bg-white rounded-lg">
+                      <h2 className="text-xl font-bold text-gray-700">
+                        選擇人數
+                      </h2>
+
+                      {/* 人數選擇區塊 */}
+                      <div className="flex items-center space-x-4 rounded-lg border bg-white p-2 shadow-md">
+                        {/* 減少人數按鈕 */}
+                        <button
+                          onClick={decreaseAdultCount}
+                          className="rounded-lg bg-gray-200 px-3 py-2 text-lg font-bold hover:bg-gray-300"
+                        >
+                          −
+                        </button>
+
+                        {/* 顯示人數 */}
+                        <span className="text-xl font-semibold text-gray-800">
+                          {adultCount}位大人
+                        </span>
+
+                        {/* 增加人數按鈕 */}
+                        <button
+                          onClick={increaseAdultCount}
+                          className="rounded-lg bg-blue-500 px-3 py-2 text-lg font-bold text-white hover:bg-blue-600"
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <div className="flex items-center space-x-4 rounded-lg border bg-white p-2 shadow-md">
+                        {/* 減少人數按鈕 */}
+                        <button
+                          onClick={decreaseChildCount}
+                          className="rounded-lg bg-gray-200 px-3 py-2 text-lg font-bold hover:bg-gray-300"
+                        >
+                          −
+                        </button>
+
+                        {/* 顯示人數 */}
+                        <span className="text-xl font-semibold text-gray-800">
+                          {childCount}位小孩
+                        </span>
+
+                        {/* 增加人數按鈕 */}
+                        <button
+                          onClick={increaseChildCount}
+                          className="rounded-lg bg-blue-500 px-3 py-2 text-lg font-bold text-white hover:bg-blue-600"
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      {/* 顯示當前選擇的人數 */}
+                      <p className="text-gray-600 m-2 p-2">目前選擇 <span className="text-primary-600 font-bold">{adultCount}位大人、 {childCount}位小孩
+                        </span>  </p>
+                    <div className="modal-action">
+                        <form method="dialog">
+                          <button className="btn">關閉</button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
 
                   <div className="mt-4 flex justify-center lg:mt-0">
                     <Link>
