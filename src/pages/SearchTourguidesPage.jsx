@@ -47,8 +47,10 @@ function TourguidesPage() {
 
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  const [adultCount, setAdultCount] = useState(1);
-  const [childCount, setChildCount] = useState(1);
+  const [adultCount, setAdultCount] = useState(0);
+  const [childCount, setChildCount] = useState(0);
+
+  const [selectedTheme, setSelectedTheme] = useState("行程主題");
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -79,22 +81,25 @@ function TourguidesPage() {
 
   // 減少人數
   const decreaseAdultCount = () => {
-    if (adultCount > 1) {
+    if (adultCount >= 1) {
       setAdultCount(adultCount - 1);
     }
   };
 
   const decreaseChildCount = () => {
-    if (childCount > 1) {
+    if (childCount >= 1) {
       setChildCount(childCount - 1);
     }
   };
-
 
   const navigate = useNavigate();
 
   const handleSearchClick = () => {
     navigate("/search-tourguides/search-results");
+  };
+
+  const handleThemeChange = (event) => {
+    setSelectedTheme(event.target.value);
   };
 
   return (
@@ -109,13 +114,14 @@ function TourguidesPage() {
               尋找你的專屬在地導遊
             </h1>
             {/* Search options */}
-            <div className="mt-2 flex justify-center lg:mt-10">
+            <div className="mt-2 lg:mt-10">
               <div className="my-6 flex flex-col justify-center lg:mt-10 lg:flex-row lg:space-x-8">
                 <div className="relative w-full max-w-lg space-y-3 lg:space-y-8">
-                  <div className="flex justify-center">
+                  {/* 日期範圍 */}
+                  <div className="mt-4 flex min-w-[400px] justify-center px-4 lg:mt-0">
                     <Link>
                       <button
-                        className="flex w-full space-x-4 rounded-lg border border-gray-300 bg-background-2 p-1 lg:space-x-20 lg:px-4 lg:py-4"
+                        className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
                         onClick={() =>
                           document.getElementById("calendar_modal").showModal()
                         }
@@ -142,10 +148,13 @@ function TourguidesPage() {
 
                         <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
                           {startDate && endDate ? (
-                            <p className="text-gray-600">
-                              <span className="font-bold">
-                                {startDate.toLocaleDateString()} -{" "}
-                                {endDate.toLocaleDateString()}
+                            <p className="flex flex-col justify-center text-primary-700">
+                              <span className="text-base">
+                                {startDate.toLocaleDateString()} 出發
+                              </span>
+
+                              <span className="text-base">
+                                {endDate.toLocaleDateString()} 離開
                               </span>
                             </p>
                           ) : (
@@ -168,8 +177,6 @@ function TourguidesPage() {
                       </button>
                     </Link>
                   </div>
-
-                  {/* 日期選擇器 */}
 
                   <dialog
                     id="calendar_modal"
@@ -219,10 +226,12 @@ function TourguidesPage() {
                     </div>
                   </dialog>
 
-                  <div className="mt-4 flex justify-center lg:mt-0">
+                  {/* 人數選擇 */}
+
+                  <div className="mt-4 flex justify-center px-4 lg:mt-0">
                     <Link>
                       <button
-                        className="flex w-full space-x-4 rounded-lg border border-gray-300 bg-background-2 p-1 lg:space-x-20 lg:px-4 lg:py-4"
+                        className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
                         onClick={() =>
                           document
                             .getElementById("touristNum_modal")
@@ -243,7 +252,17 @@ function TourguidesPage() {
                           />
                         </svg>
                         <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
-                          參加人數
+                          {adultCount || childCount ? (
+                            <p className="text-primary-700">
+                              <span className="text-base">
+                                {adultCount}位大人
+                                {"、"}
+                                {childCount}位小孩
+                              </span>
+                            </p>
+                          ) : (
+                            <p className="text-gray-400">參加人數</p>
+                          )}
                         </span>
                         <svg
                           className="h-8"
@@ -262,19 +281,16 @@ function TourguidesPage() {
                     </Link>
                   </div>
 
-                  {/* 人數選擇器 */}
                   <dialog
                     id="touristNum_modal"
                     className="modal modal-bottom sm:modal-middle"
                   >
-                    <div className="flex flex-col items-center space-y-4 p-4 bg-white rounded-lg">
-                      <h2 className="text-xl font-bold text-gray-700">
+                    <div className="flex flex-col items-center space-y-8 rounded-lg bg-white p-20">
+                      <h2 className="text-xl font-bold text-primary-700">
                         選擇人數
                       </h2>
 
-                      {/* 人數選擇區塊 */}
                       <div className="flex items-center space-x-4 rounded-lg border bg-white p-2 shadow-md">
-                        {/* 減少人數按鈕 */}
                         <button
                           onClick={decreaseAdultCount}
                           className="rounded-lg bg-gray-200 px-3 py-2 text-lg font-bold hover:bg-gray-300"
@@ -282,12 +298,10 @@ function TourguidesPage() {
                           −
                         </button>
 
-                        {/* 顯示人數 */}
                         <span className="text-xl font-semibold text-gray-800">
                           {adultCount}位大人
                         </span>
 
-                        {/* 增加人數按鈕 */}
                         <button
                           onClick={increaseAdultCount}
                           className="rounded-lg bg-blue-500 px-3 py-2 text-lg font-bold text-white hover:bg-blue-600"
@@ -297,7 +311,6 @@ function TourguidesPage() {
                       </div>
 
                       <div className="flex items-center space-x-4 rounded-lg border bg-white p-2 shadow-md">
-                        {/* 減少人數按鈕 */}
                         <button
                           onClick={decreaseChildCount}
                           className="rounded-lg bg-gray-200 px-3 py-2 text-lg font-bold hover:bg-gray-300"
@@ -305,12 +318,10 @@ function TourguidesPage() {
                           −
                         </button>
 
-                        {/* 顯示人數 */}
                         <span className="text-xl font-semibold text-gray-800">
                           {childCount}位小孩
                         </span>
 
-                        {/* 增加人數按鈕 */}
                         <button
                           onClick={increaseChildCount}
                           className="rounded-lg bg-blue-500 px-3 py-2 text-lg font-bold text-white hover:bg-blue-600"
@@ -319,10 +330,13 @@ function TourguidesPage() {
                         </button>
                       </div>
 
-                      {/* 顯示當前選擇的人數 */}
-                      <p className="text-gray-600 m-2 p-2">目前選擇 <span className="text-primary-600 font-bold">{adultCount}位大人、 {childCount}位小孩
-                        </span>  </p>
-                    <div className="modal-action">
+                      <p className="m-2 p-2 text-gray-600">
+                        目前選擇{" "}
+                        <span className="font-bold text-primary-600">
+                          {adultCount}位大人、 {childCount}位小孩
+                        </span>{" "}
+                      </p>
+                      <div className="modal-action">
                         <form method="dialog">
                           <button className="btn">關閉</button>
                         </form>
@@ -330,9 +344,16 @@ function TourguidesPage() {
                     </div>
                   </dialog>
 
-                  <div className="mt-4 flex justify-center lg:mt-0">
+                  {/* 行程主題 */}
+
+                  <div className="mt-4 flex justify-center px-4 lg:mt-0">
                     <Link>
-                      <button className="flex w-full space-x-4 rounded-lg border border-gray-300 bg-background-2 p-1 lg:space-x-20 lg:px-4 lg:py-4">
+                      <button
+                        className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
+                        onClick={() =>
+                          document.getElementById("theme_modal").showModal()
+                        }
+                      >
                         <svg
                           className="inline-block h-8"
                           fill="none"
@@ -347,7 +368,13 @@ function TourguidesPage() {
                           />
                         </svg>
                         <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
-                          參觀主題
+                          {selectedTheme ? (
+                            <p className="text-gray-600">
+                              <span className="text-base">{selectedTheme}</span>
+                            </p>
+                          ) : (
+                            <p className="text-gray-400">行程主題</p>
+                          )}
                         </span>
                         <svg
                           className="h-8 w-8"
@@ -365,14 +392,73 @@ function TourguidesPage() {
                       </button>
                     </Link>
                   </div>
+
+                  <dialog
+                    id="theme_modal"
+                    className="modal modal-bottom sm:modal-middle"
+                  >
+                    <div className="grid grid-cols-2 rounded-lg bg-white p-10">
+                      <h2 className="col-span-2 mb-4 text-lg font-bold text-primary-600">
+                        選擇行程主題
+                      </h2>
+
+                      {/* 選擇主題的選項 */}
+
+                      {[
+                        "法式美食",
+                        "浪漫蜜月行",
+                        "親子家庭遊",
+                        "時尚購物",
+                        "歷史建築",
+                        "藝術博物館",
+                        "文哲學巡禮",
+                        "自然風光",
+                      ].map((theme, index) => (
+                        <div key={index} className="form-control">
+                          <label className="label flex cursor-pointer items-center space-x-2">
+                            <input
+                              type="radio"
+                              name="theme-radio"
+                              className="radio checked:bg-primary-500"
+                              value={theme}
+                              checked={selectedTheme === theme}
+                              onChange={handleThemeChange}
+                            />
+                            <span className="label-text w-full text-left">
+                              {theme}
+                            </span>
+                          </label>
+                        </div>
+                      ))}
+
+                      <div className="modal-action">
+                        <form method="dialog">
+                          <div className="mx-auto flex gap-4">
+                            <button
+                              type="button"
+                              className="btn btn-outline"
+                              onClick={() => setSelectedTheme("")}
+                            >
+                              取消
+                            </button>
+
+                            <button className="btn bg-primary-200 text-primary-600">
+                              關閉
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
                 </div>
               </div>
             </div>
+
             {/* Search Button */}
             <div className="mt-2 lg:mt-8">
               {/* <Link to="/search-tourguides/search-results"> */}
               <button
-                className="absolute left-[25%] flex min-w-[50%] rounded-3xl bg-primary-500 py-3 lg:bottom-[-10%] lg:left-[32%] lg:min-w-[40%]"
+                className="absolute left-[25%] flex min-w-[50%] rounded-3xl bg-primary-500 py-3 lg:bottom-[-15%] lg:left-[32%] lg:min-w-[40%]"
                 onClick={handleSearchClick}
               >
                 <div className="relative flex-grow">

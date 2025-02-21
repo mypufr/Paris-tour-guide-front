@@ -247,7 +247,10 @@ function TourguideProfilePage() {
                       </span>
                     </div>
 
-                    <button className="mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
+                    <button className="mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent"
+                    
+                    onClick={()=>navigate("/")}
+                    >
                       {/* <img
                                     src="images/BsHandIndex.svg"
                                     alt=""
