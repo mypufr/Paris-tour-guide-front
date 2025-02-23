@@ -95,7 +95,15 @@ function TourguidesPage() {
   const navigate = useNavigate();
 
   const handleSearchClick = () => {
-    navigate("/search-tourguides/search-results");
+    const queryParams = new URLSearchParams({
+      startDate: startDate ? startDate.toISOString().split("T")[0] : "",
+      endDate: endDate ? endDate.toISOString().split("T")[0] : "",
+      adultCount,
+      childCount,
+      theme: selectedTheme,
+    }).toString();
+
+    navigate(`/search-tourguides/search-results?${queryParams}`);
   };
 
   const handleThemeChange = (event) => {
@@ -220,7 +228,7 @@ function TourguidesPage() {
                       </div>
                       <div className="modal-action">
                         <form method="dialog">
-                          <button className="btn">關閉</button>
+                          <button className="btn">確認</button>
                         </form>
                       </div>
                     </div>
@@ -338,7 +346,7 @@ function TourguidesPage() {
                       </p>
                       <div className="modal-action">
                         <form method="dialog">
-                          <button className="btn">關閉</button>
+                          <button className="btn">確認</button>
                         </form>
                       </div>
                     </div>
@@ -443,7 +451,7 @@ function TourguidesPage() {
                             </button>
 
                             <button className="btn bg-primary-200 text-primary-600">
-                              關閉
+                              確認
                             </button>
                           </div>
                         </form>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate
+  // , useLocation 
+} from "react-router-dom";
 
 import data from "../data/data.json";
 import TripsData from "../data/trips.json";
@@ -129,6 +131,18 @@ function TourguideProfilePage() {
   const handleCardClick = (id) => {
     navigate(`/search-tourguides/tourguide-profile/${id}`);
   };
+
+  // const { search } = useLocation();
+  // const queryParams = new URLSearchParams(search);
+
+  // const startDate = queryParams.get("startDate");
+  // const endDate = queryParams.get("endDate");
+  // const adultCount = queryParams.get("adultCount");
+  // const childCount = queryParams.get("childCount");
+  // const theme = queryParams.get("theme");
+
+
+
 
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
@@ -881,7 +895,12 @@ function TourguideProfilePage() {
                                     <rect x="8" y="15" width="2" height="2" />
                                   </svg>
                                   <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    需求日期
+                                  出發日期: 
+                                  {/* {startDate} */}
+                                  </span>
+                                  <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                  出發日期: 
+                                  {/* {endDate} */}
                                   </span>
                                   <svg
                                     className="h-8 text-red-500"
@@ -917,7 +936,8 @@ function TourguideProfilePage() {
                                     />
                                   </svg>
                                   <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    參加人數
+                                    參加人數: 
+                                    {/* {adultCount}位大人、{childCount}位小孩 */}
                                   </span>
                                   <svg
                                     className="h-8"
@@ -953,7 +973,8 @@ function TourguideProfilePage() {
                                     />
                                   </svg>
                                   <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    參觀主題
+                                    行程主題:
+                                    {/* {theme} */}
                                   </span>
                                   <svg
                                     className="h-8"

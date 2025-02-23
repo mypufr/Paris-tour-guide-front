@@ -97,12 +97,38 @@ function TravelInfoPage() {
     }
   };
 
+
+
+
+const getCommentaries = async() => {
+  try {
+    const res = await axios.get("http://localhost:8000/commentaries");
+    console.log(res.data);
+  } catch (error) {
+    console.error("Error fetching tour guides:", error);
+  }
+}
+
+
+
+
+
   return (
     <>
       <button className="border border-t-cyan-600" onClick={getTourguides}>
         取得導遊資料
       </button>
 
+<br />
+<br />
+<br />
+
+      <button className="border border-t-cyan-600" onClick={getCommentaries}>
+        取得評論資料
+      </button>
+      <br />
+<br />
+<br />
       <button className="border border-t-cyan-600" onClick={getComments}>
         get all comments
       </button>

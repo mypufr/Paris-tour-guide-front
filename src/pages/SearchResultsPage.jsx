@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -22,50 +22,70 @@ function SearchResultsPage() {
     navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
   };
 
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+
+  const startDate = queryParams.get("startDate");
+  const endDate = queryParams.get("endDate");
+  const adultCount = queryParams.get("adultCount");
+  const childCount = queryParams.get("childCount");
+  const theme = queryParams.get("theme");
+
   return (
     <>
-
-<div className="flex justify-center space-x-4 mt-10">
+      <div className="mt-10 flex items-center justify-center space-x-4">
         <img
-          src="images/vector_title.png"
+          src="/images/vector_title.png"
           alt=""
-          className="inline-block h-[40px]"
+          className="inline-block h-[30px]"
         />
-        <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
-        您選定的搜尋條件
+        <h2 className="text-[28px] font-bold leading-[3rem] tracking-4 text-primary-600">
+          您選定的搜尋條件
         </h2>
         <img
-          src="images/vector_title.png"
+          src="/images/vector_title.png"
           alt=""
-          className="inline-block h-[40px]"
+          className="inline-block h-[30px]"
         />
       </div>
 
-<div className="relative flex items-center justify-center h-[25vh] mt-[10px] ">
-  {/* Background Icon */}
-  <LuSearchCheck className="absolute h-[20vh] w-[20vh] opacity-10 z-0" />
+      <div className="relative my-[10px] flex h-[25vh] items-center justify-center">
+        {/* Background Icon */}
+        <LuSearchCheck className="absolute z-0 h-[20vh] w-[20vh] opacity-10" />
 
-  {/* Overlay content */}
-  <div className="relative z-10 text">
-    <h2 className="text-2xl font-bold text-secondary-400 mb-4">需求日期： <span className="text-primary-700"> 2024年10月19日 </span> </h2>
-    <h2 className="text-2xl font-bold text-secondary-400 mb-4">參加人數： <span className="text-primary-700"> 4位成人，4位兒童</span> </h2>
-    <h2 className="text-2xl font-bold text-secondary-400">參觀主題： <span className="text-primary-700"> 博物館導覽 </span></h2>
-  </div>
-</div>
+        {/* Overlay content */}
+        <div className="text relative z-10">
+          <h2 className="mb-4 text-xl text-secondary-400">
+            出發日期： <span className="text-primary-700">{startDate} </span>{" "}
+          </h2>
+          <h2 className="mb-4 text-xl text-secondary-400">
+            離開日期： <span className="text-primary-700"> {endDate}</span>{" "}
+          </h2>
+          <h2 className="mb-4 text-xl text-secondary-400">
+            參加人數：{" "}
+            <span className="text-primary-700">
+              {adultCount}位大人、{childCount}位小孩
+            </span>{" "}
+          </h2>
+          <h2 className="text-xl  text-secondary-400">
+            行程主題： <span className="text-primary-700"> {theme} </span>
+          </h2>
+        </div>
+      </div>
 
-      <div className="flex justify-center space-x-4 mt-[-20px]">
+      <div className="mt-[20px] flex items-center justify-center space-x-4">
         <img
-          src="images/website_logo.png"
+          src="/images/website_logo.png"
           alt=""
-          className="inline-block h-[40px]"
+          className="inline-block h-[30px]"
         />
-        <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
+        <h2 className="text-[28px] font-bold leading-[3rem] tracking-4 text-primary-600">
           搜尋您的專屬導遊區，有10位導遊可為您服務
         </h2>
         <img
-          src="images/website_logo.png"
+          src="/images/website_logo.png"
           alt=""
-          className="inline-block h-[40px]"
+          className="inline-block h-[30px]"
         />
       </div>
 
@@ -95,39 +115,32 @@ function SearchResultsPage() {
         </div>
       </div>
 
+      <div className="mb-4 mt-auto flex justify-center pb-10">
+        <button className="mt-2 flex w-[10%] justify-center rounded-2xl bg-secondary-400 p-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
+          <img src="images/BsHandIndex.svg" alt="" className="inline-block" />
 
-
-
-      <div className="flex justify-center mb-4 mt-auto pb-10">
-              <button className="mt-2 flex w-[10%] justify-center rounded-2xl bg-secondary-400  p-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
-                <img
-                  src="images/BsHandIndex.svg"
-                  alt=""
-                  className="inline-block"
-                />
-
-                <span className="ml-2 font-bold tracking-1.5 text-white">
-                  查看更多
-                </span>
-              </button>
-            </div>
+          <span className="ml-2 font-bold tracking-1.5 text-white">
+            查看更多
+          </span>
+        </button>
+      </div>
       {/* slides show 2: other recommandations */}
 
       <div className="mt-10 flex justify-center space-x-4 hover:cursor-pointer">
-          <img
-            src="images/website_logo.png"
-            alt=""
-            className="inline-block h-[40px]"
-          />
-          <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
-            還有其他導遊正等你隨時預約!
-          </h2>
-          <img
-            src="images/website_logo.png"
-            alt=""
-            className="inline-block h-[40px]"
-          />
-        </div>
+        <img
+          src="images/website_logo.png"
+          alt=""
+          className="inline-block h-[40px]"
+        />
+        <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
+          還有其他導遊正等你隨時預約!
+        </h2>
+        <img
+          src="images/website_logo.png"
+          alt=""
+          className="inline-block h-[40px]"
+        />
+      </div>
 
       <div className="m-auto max-w-[67.5%] py-10">
         <div className="mb-20">
