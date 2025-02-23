@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useNavigate
-  // , useLocation 
+import {
+  useNavigate,
+  // , useLocation
 } from "react-router-dom";
 
 import data from "../data/data.json";
@@ -27,14 +29,7 @@ import { FaFacebook } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { TfiHandPointRight } from "react-icons/tfi";
-import { MdOutlineEmojiTransportation } from "react-icons/md";
-import { MdRestaurant } from "react-icons/md";
-import { FaShoppingBag } from "react-icons/fa";
-import { MdAddAPhoto } from "react-icons/md";
-import { LuHelpingHand } from "react-icons/lu";
-import { MdNightlight } from "react-icons/md";
-import { MdFlight } from "react-icons/md";
-import { MdGTranslate } from "react-icons/md";
+
 import { DayPicker } from "react-day-picker";
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
@@ -46,7 +41,7 @@ import { settings4 } from "../components/helpers/sliderSettings";
 function TourguideProfilePage() {
   const { id } = useParams();
   const CardData = data.find((item) => item.id === parseInt(id));
-  console.log(CardData);
+  // console.log(CardData);
 
   if (!CardData) {
     return <div>Results not found</div>;
@@ -55,8 +50,9 @@ function TourguideProfilePage() {
   const [currentTab, setCurrentTab] = useState("group");
   const [currentSlide, setCurrentSlide] = useState(1);
   const [date, setDate] = useState(null);
+  const [commentary, setCommentary] = useState("");
+  const [tourguideInfo, setTourguideInfo] = useState("");
 
-  const myDatepicker = useRef(null);
 
   const settings1 = {
     dots: true,
@@ -141,11 +137,28 @@ function TourguideProfilePage() {
   // const childCount = queryParams.get("childCount");
   // const theme = queryParams.get("theme");
 
+  const getCommentaries = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/commentaries");
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
 
-
+  const getTourguideInfo = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/tourguideInfo");
+      console.log(res.data);
+      setTourguideInfo(res.data.data);
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
 
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
+    getTourguideInfo();
   }, []);
 
   return (
@@ -167,7 +180,7 @@ function TourguideProfilePage() {
                     className="inline-block h-[30px]"
                   />
                   <h2 className="text-[28px] font-bold text-primary-600">
-                    您的專屬導遊 : {CardData.name}
+                    您的專屬導遊 : {tourguideInfo.name}
                   </h2>
                   <img
                     src="/images/vector_title.png"
@@ -179,24 +192,20 @@ function TourguideProfilePage() {
                 <div className="grid grid-cols-2 gap-[2vw] px-11">
                   <div className="col-span-1">
                     <img
-                      src={CardData.img}
+                      src={tourguideInfo.imgUrl}
                       alt=""
                       className="object-center-30 inline-block max-h-[421px] w-full rounded-xl object-cover"
                     />
                   </div>
                   <div className="col-span-1 flex flex-col justify-around">
+       
+
                     <div className="flex space-x-2">
-                      <p className="text-xl text-[#324561]">
-                        {CardData.speciality1}
-                      </p>
-
-                      <p className="text-xl text-[#324561]">
-                        {CardData.speciality2}
-                      </p>
-
-                      <p className="text-xl text-[#324561]">
-                        {CardData.speciality3}
-                      </p>
+                      {tourguideInfo?.themes?.map((theme, index) => (
+                        <p key={index} className="text-xl text-[#324561]">
+                          {theme}
+                        </p>
+                      ))}
                     </div>
 
                     <div className="flex items-center space-x-6">
@@ -227,29 +236,26 @@ function TourguideProfilePage() {
                           className="inline-block h-4 max-w-6"
                         />
                       </span>
-                      <p className="text-sm text-grey-400">80人已評價</p>
+                      <p className="text-sm text-grey-400">80人已評價{}</p>
                     </div>
 
-                    <div className="space-x-2">
-                      <button className="inline-block rounded-full bg-background-2 px-5">
-                        <p className="text-[13px] text-grey-600">
-                          {/* {CardData.speciality1} */}
-                          中文
-                        </p>
-                      </button>
+           
 
-                      <button className="inline-block rounded-full bg-background-2 px-5">
-                        <p className="text-[13px] text-grey-600">
-                          {/* {CardData.speciality1} */}
-                          英文
-                        </p>
-                      </button>
+
+                    <div className="flex space-x-2">
+                      {tourguideInfo?.languages?.map((language, index) => (
+                        <button key={index} className="inline-block rounded-full bg-background-2 px-5">
+                          <p className="text-[13px] text-grey-600">
+                          {language}
+                            </p>
+                        </button>
+                      ))}
                     </div>
 
                     <div className="flex flex-col">
                       <span className="text-xl text-primary-800">大人 </span>
                       <span className="text-base text-grey-650">
-                        {CardData.price}€ /小時
+                        {tourguideInfo.price_adult}€ /小時
                       </span>
                     </div>
 
@@ -257,13 +263,13 @@ function TourguideProfilePage() {
                       <span className="text-xl text-primary-800">兒童 </span>
                       <span className="text-base text-grey-650">
                         {" "}
-                        {CardData.price - 3}€ /小時
+                        {tourguideInfo.price_child}€ /小時
                       </span>
                     </div>
 
-                    <button className="mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent"
-                    
-                    onClick={()=>navigate("/")}
+                    <button
+                      className="mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent"
+                      onClick={() => navigate("/")}
                     >
                       {/* <img
                                     src="images/BsHandIndex.svg"
@@ -272,12 +278,14 @@ function TourguideProfilePage() {
                                   /> */}
                       <TfiHandPointRight className="text-2xl text-white" />
                       <span className="ml-2 text-base text-white">
-                        留言給{CardData.name}
+                        留言給{tourguideInfo.name}
                       </span>
                     </button>
                   </div>
                 </div>
               </div>
+
+              <div></div>
             </div>
             <div className="relative lg:mb-[15%]">
               <div className="hidden md:absolute md:-bottom-[6rem] md:left-[-15%] md:block md:-rotate-12">
@@ -412,7 +420,7 @@ function TourguideProfilePage() {
                 }`}
                 onClick={() => setActiveTab("tab-1")}
               >
-                關於我
+                導遊簡介
               </button>
 
               {/* 第二個 Tab */}
@@ -462,32 +470,16 @@ function TourguideProfilePage() {
                               className="inline-block h-[30px]"
                             />
                             <h3 className="text-xl font-bold leading-[3rem] tracking-4 text-primary-600">
-                              關於{CardData.name}
+                              關於{tourguideInfo.name}
                             </h3>
                           </div>
 
                           <div className="h-[35vh] overflow-y-scroll p-1 scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
+                      
+
                             <p className="bg-white text-xl">
-                              大家好，我是
-                              <span className="text-red-500">
-                                {CardData.name}
-                              </span>
-                              ，您的專屬巴黎導遊！
-                              <br />
-                              <br />
-                              我已經在巴黎生活了七年，並且有超過五年的導遊經驗。這些年來，我有幸帶領來自世界各地的遊客深入探索這座充滿魅力的城市。
-                              <br />
-                              <br />
-                              我對巴黎的熱愛源於她豐富的歷史、迷人的文化以及多姿多彩的生活方式。無論是漫步在塞納河畔、欣賞盧浮宮的藝術珍寶，還是探索隱藏在小巷中的法式咖啡館，我都希望能將巴黎的每一個角落最真實、最動人的一面展現在您的面前。
-                              <br />
-                              <br />
-                              在這五年多的導遊生涯中，我帶領過各種不同需求和背景的團隊，包括家庭旅遊、小型私人團體、商務考察團等。我擅長根據每位客人的興趣和喜好，設計出個性化的旅遊行程。不管您是藝術愛好者、美食饕客，還是歷史迷，我都能為您量身定制一個完美的巴黎之旅。
-                              <br />
-                              <br />
-                              除了帶團之外，我也積極參與當地文化活動和導覽培訓，這讓我不僅擁有豐富的知識，更能為您提供最新、最有趣的巴黎資訊。我的目標是讓每一位客人都能在輕鬆愉快的氛圍中，感受巴黎的獨特魅力，並帶著滿滿的美好回憶離開。
-                              <br />
-                              <br />
-                              希望能在巴黎與您相遇，一起走過這座充滿故事的城市，留下屬於您的巴黎篇章！
+                              {" "}
+                              {tourguideInfo.profile}
                             </p>
                           </div>
                         </div>
@@ -500,7 +492,7 @@ function TourguideProfilePage() {
                               className="inline-block h-[30px]"
                             />
                             <h4 className="text-xl font-bold leading-[3rem] tracking-4 text-primary-600">
-                              {CardData.name}的連結
+                              {tourguideInfo.name}的連結
                             </h4>
                           </div>
 
@@ -635,7 +627,7 @@ function TourguideProfilePage() {
                     {/* 第一欄：標題與圖片 */}
                     <div className="flex w-full flex-col items-center justify-center">
                       <h2 className="text-base leading-[3rem] tracking-4 text-primary-600">
-                        {CardData.name} 15位客人的評價
+                        {tourguideInfo.name} 10位客人的評價
                       </h2>
                       <p className="text-grey-400">
                         <span className="pr-2 text-xl font-bold text-red-500">
@@ -661,7 +653,7 @@ function TourguideProfilePage() {
                     {/* 第二欄：評論列表 */}
                     <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full h-[520px] w-3/4 overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
                       <div className="flex flex-col items-center justify-center gap-2">
-                        {CommentaryData.map((data, index) => (
+                        {/* {CommentaryData.map((data, index) => (
                           <div key={index} className="p-3">
                             <div className="transform transition-transform duration-300 hover:scale-105">
                               <CommentaryList
@@ -672,8 +664,21 @@ function TourguideProfilePage() {
                               />
                             </div>
                           </div>
+                        ))} */}
+                                       {tourguideInfo.commentaries.map((comment, index) => (
+                          <div key={index} className="p-3">
+                            <div className="transform transition-transform duration-300 hover:scale-105">
+                              <CommentaryList
+                                userImg={data.userImg}
+                                name={comment.user}
+                                commentaryText={comment.comment}
+                                date={comment.date}
+                              />
+                            </div>
+                          </div>
                         ))}
                       </div>
+                      {commentary}
                     </div>
                   </div>
                 </div>
@@ -762,7 +767,9 @@ function TourguideProfilePage() {
                   return (
                     <>
                       <div className="flex flex-col text-primary-600">
-                        <p className="flex-start text-xl">玩樂巴黎必打卡之地!</p>
+                        <p className="flex-start text-xl">
+                          玩樂巴黎必打卡之地!
+                        </p>
 
                         <img
                           src="/images/Paris_by_dist.png"
@@ -832,8 +839,6 @@ function TourguideProfilePage() {
                           </Slider>
                         </div> */}
 
-
-                    
                         <div className="w-full">
                           <Slider {...settings1} arrows={false} ref={sliderRef}>
                             {SingleTripData.slice(0, 6).map((data, index) => (
@@ -851,8 +856,6 @@ function TourguideProfilePage() {
                             ))}
                           </Slider>
                         </div>
-                   
-
                       </>
                     );
                   case "private":
@@ -895,12 +898,12 @@ function TourguideProfilePage() {
                                     <rect x="8" y="15" width="2" height="2" />
                                   </svg>
                                   <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                  出發日期: 
-                                  {/* {startDate} */}
+                                    出發日期:
+                                    {/* {startDate} */}
                                   </span>
                                   <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                  出發日期: 
-                                  {/* {endDate} */}
+                                    出發日期:
+                                    {/* {endDate} */}
                                   </span>
                                   <svg
                                     className="h-8 text-red-500"
@@ -936,7 +939,7 @@ function TourguideProfilePage() {
                                     />
                                   </svg>
                                   <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    參加人數: 
+                                    參加人數:
                                     {/* {adultCount}位大人、{childCount}位小孩 */}
                                   </span>
                                   <svg
@@ -998,11 +1001,11 @@ function TourguideProfilePage() {
 
                               <div className="flex items-center justify-center space-x-6">
                                 <img
-                                  src={CardData.img}
+                                  src={tourguideInfo.imgUrl}
                                   alt=""
                                   className="inline-block h-20 w-20 rounded-full"
                                 />
-                                <p className="text-xl">{CardData.name}</p>
+                                <p className="text-xl">{tourguideInfo.name}</p>
                               </div>
 
                               <button
@@ -1190,12 +1193,10 @@ function TourguideProfilePage() {
 
       <div className="m-auto my-4 w-3/4">
         <div className="">
-          
           <Slider ref={secondSliderRef} {...settings5}>
             {data.map((data, index) => (
               <div key={index} onClick={() => handleCardClick(data.id)}>
                 <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
-                  
                   <Card
                     imgSrc={data.img}
                     title={data.name}

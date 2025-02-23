@@ -5,6 +5,7 @@ function TravelInfoPage() {
   const [input, setInput] = useState("");
   const [todoList, setTodoList] = useState([]);
   const [comments, setComments] = useState([]);
+  const [commentary, setCommentary] = useState([]);
 
   const handleOnChange = (e) => {
     setInput(e.target.value);
@@ -104,12 +105,33 @@ const getCommentaries = async() => {
   try {
     const res = await axios.get("http://localhost:8000/commentaries");
     console.log(res.data);
+    setCommentary(res.data[0].commentaryText)
   } catch (error) {
     console.error("Error fetching tour guides:", error);
   }
 }
 
 
+const getTourguideInfo = async()=> {
+  try {                                             
+    const res = await axios.get("http://localhost:8000/tourguideInfo");
+    console.log(res.data);
+  } catch (error) {
+    console.error("Error fetching tour guides:", error);
+    
+  }
+}
+
+
+const getTrips = async()=> {
+  try {                                             
+    const res = await axios.get("http://localhost:8000/trips");
+    console.log(res.data);
+  } catch (error) {
+    console.error("Error fetching tour guides:", error);
+    
+  }
+}
 
 
 
@@ -129,6 +151,30 @@ const getCommentaries = async() => {
       <br />
 <br />
 <br />
+
+{ commentary}
+
+{/* <div>
+      {tourguideInfo ? (
+        <pre>{JSON.stringify(tourguideInfo, null, 2)}</pre>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div> */}
+
+
+
+<button className="border border-t-cyan-600" onClick={getTourguideInfo}>
+        取得導遊完整資料
+      </button>
+      <br />
+
+
+      <button className="border border-t-cyan-600" onClick={getTrips}>
+        取得trips
+      </button>
+
+
       <button className="border border-t-cyan-600" onClick={getComments}>
         get all comments
       </button>

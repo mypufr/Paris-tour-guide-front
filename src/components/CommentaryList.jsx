@@ -18,11 +18,11 @@ const CommentaryList = ({ name, date, userImg, commentaryText }) => {
             />
           </div>
           <div className="flex">
-            <div className="flex items-center gap-2 p-2 justify-between">
+            <div className="flex  gap-2 p-2 justify-between">
               <div className="flex flex-col items-center p-1">
                 <img
                   className="h-8 w-8 rounded-full object-cover md:h-8 md:w-8 lg:h-8 lg:w-8"
-                  src={userImg}
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                   alt={name}
                 />
 
