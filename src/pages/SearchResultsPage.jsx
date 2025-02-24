@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -16,12 +17,29 @@ import { settings3 } from "../components/helpers/sliderSettings";
 import { settings4 } from "../components/helpers/sliderSettings";
 
 function SearchResultsPage() {
+  const [tourguideInfo, setTourguideInfo] = useState([]);
+
   const navigate = useNavigate();
 
   const handleCardClick = (id) => {
     navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
     // navigate(`/search-tourguides/tourguide-profile/${id}`);
   };
+
+  const getTourguideInfo = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8000/api/tourguideInfo`);
+      console.log(res.data);
+
+      setTourguideInfo(res.data.data); // 確保是陣列
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
+
+  useEffect(() => {
+    getTourguideInfo();
+  }, []);
 
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
@@ -68,7 +86,7 @@ function SearchResultsPage() {
               {adultCount}位大人、{childCount}位小孩
             </span>{" "}
           </h2>
-          <h2 className="text-xl  text-secondary-400">
+          <h2 className="text-xl text-secondary-400">
             行程主題： <span className="text-primary-700"> {theme} </span>
           </h2>
         </div>
@@ -91,7 +109,7 @@ function SearchResultsPage() {
       </div>
 
       {/* slides show 1: search results */}
-      <div className="m-auto my-20 max-w-[67.5%]">
+      {/* <div className="m-auto my-20 max-w-[67.5%]">
         <div className="mt-8">
           <Slider {...settings4} className="overflow-clip">
             {data.map((tourguide, index) => (
@@ -112,6 +130,32 @@ function SearchResultsPage() {
               </div>
             ))}
           </Slider>
+        </div>
+      </div> */}
+
+      <div className="m-auto my-2 max-w-[67.5%]">
+        <div className="">
+          <Slider {...settings3} className="overflow-clip">
+            {tourguideInfo.map((item, index) => (
+                <div
+                key={index}
+                onClick={() => handleCardClick(item.id)}
+                className=""
+              >
+                <Card
+                  key={index}
+                  id={item.id}
+                  imgSrc={item.imgUrl}
+                  title={item.name}
+                  price={item.price_adult}
+                  themes={item.themes}
+                  onClick={() => handleCardClick(item.id)}
+                  className="cursor-pointer"
+                  />
+                   </div>
+                ))
+               }
+              </Slider>
         </div>
       </div>
 

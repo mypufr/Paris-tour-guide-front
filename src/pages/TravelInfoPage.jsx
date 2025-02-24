@@ -302,8 +302,6 @@ function TravelInfoPage() {
       )} */}
 
       <div className="m-auto my-1">
- 
-
         <div className="mt-8">
         {tourguideInfo && Array.isArray(tourguideInfo) && tourguideInfo.length > 0 ? (
           tourguideInfo.map((item, index) => (
