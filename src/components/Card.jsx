@@ -2,18 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { TfiHandPointRight } from "react-icons/tfi";
 
-const Card = ({
-  imgSrc,
-  title,
-  price,
-  specialities1,
-  specialities2,
-  specialities3,
-}) => {
+const Card = ({ id, imgSrc, title, price, themes }) => {
   return (
-    <div className="rounded-2xl border-0 border-primary-200 min-[375px]:p-8 md:max-w-sm ">
-      <Link to="/search-results/:id">
-        <div className="border-primary-200 border border-1 rounded-2xl ">
+    <div className="rounded-2xl border-0 border-primary-200 min-[375px]:p-8 md:max-w-sm">
+      <Link to={`/search-tourguides/tourguide-profile/${id}`}>
+        <div className="border-1 rounded-2xl border border-primary-200">
           <img
             className="h-[257px] w-full rounded-t-xl object-cover md:max-h-[150px] xl:max-h-[240px]"
             src={imgSrc}
@@ -29,7 +22,7 @@ const Card = ({
                 {price} € / 小時
               </span>
             </div>
-            <div className="space-x-2 md:flex md:flex-col md:items-start md:justify-center md:space-x-0 md:space-y-1 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-start min-[1440px]:space-x-1 min-[1440px]:space-y-0 min-[1920px]:items-start min-[1920px]:justify-start">
+            {/* <div className="space-x-2 md:flex md:flex-col md:items-start md:justify-center md:space-x-0 md:space-y-1 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-start min-[1440px]:space-x-1 min-[1440px]:space-y-0 min-[1920px]:items-start min-[1920px]:justify-start">
               <span className="inline-block   text-[13px] leading-[18px] text-gray-600">
                 {specialities1}
               </span>
@@ -39,6 +32,16 @@ const Card = ({
               <span className="inline-block px-2 text-[13px] leading-[18px] text-gray-600">
                 {specialities3}
               </span>
+            </div> */}
+            <div className="space-x-2 md:flex md:flex-col md:items-start md:justify-center md:space-x-0 md:space-y-1 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-start min-[1440px]:space-x-1 min-[1440px]:space-y-0 min-[1920px]:items-start min-[1920px]:justify-start">
+              {themes?.map((theme, index) => (
+                <span
+                  key={index}
+                  className="inline-block px-2 text-[13px] leading-[18px] text-gray-600"
+                >
+                  {theme}
+                </span>
+              ))}
             </div>
           </div>
           <div className="flex justify-center pt-3 md:hidden">

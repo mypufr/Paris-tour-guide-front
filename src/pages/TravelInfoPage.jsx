@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom"
 import axios from "axios";
+
+import Card from "../components/Card";
+
+import Slider from "react-slick";
+
+import { settings4 } from "../components/helpers/sliderSettings";
+
 
 function TravelInfoPage() {
   const [input, setInput] = useState("");
   const [todoList, setTodoList] = useState([]);
   const [comments, setComments] = useState([]);
   const [commentary, setCommentary] = useState([]);
+
+  const [tourguideId, setTourguideId] = useState("");
+  const [tourguideInfo, setTourguideInfo] = useState([]);
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     setInput(e.target.value);
@@ -24,6 +38,7 @@ function TravelInfoPage() {
     setTodoList(updatedList);
   };
 
+  
   const getComments = async () => {
     try {
       const dataRes = await axios.get(
@@ -91,91 +106,124 @@ function TravelInfoPage() {
 
   const getTourguides = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/tourguides");
+      const res = await axios.get("http://localhost:8000/api/tourguides");
       console.log(res.data);
     } catch (error) {
       console.error("Error fetching tour guides:", error);
     }
   };
 
+  const getCommentaries = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/commentaries");
+      console.log(res.data);
+      setCommentary(res.data[0].commentaryText);
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
 
 
+  const handleCardClick = (id) => {
+    navigate(`/search-tourguides/tourguide-profile/${id}`); 
 
-const getCommentaries = async() => {
-  try {
-    const res = await axios.get("http://localhost:8000/commentaries");
-    console.log(res.data);
-    setCommentary(res.data[0].commentaryText)
-  } catch (error) {
-    console.error("Error fetching tour guides:", error);
-  }
-}
+  };
 
 
-const getTourguideInfo = async()=> {
-  try {                                             
-    const res = await axios.get("http://localhost:8000/tourguideInfo");
-    console.log(res.data);
-  } catch (error) {
-    console.error("Error fetching tour guides:", error);
-    
-  }
-}
+  const getTourguideInfo = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8000/api/tourguideInfo`);
+      console.log(res.data);
+   
+      setTourguideInfo(res.data.data); // 確保是陣列
+      
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
 
+  const getTourguideInfoById = async (id) => {
+    if (!id) {
+      setError("請輸入導遊 ID！");
+      return;
+    }
+    try {
+      setError("");
+      console.log("📌 正在查詢 ID:", id);
+      const res = await axios.get(
+        `http://localhost:8000/api/tourguideInfo/${id}`,
+      );
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
 
-const getTrips = async()=> {
-  try {                                             
-    const res = await axios.get("http://localhost:8000/trips");
-    console.log(res.data);
-  } catch (error) {
-    console.error("Error fetching tour guides:", error);
-    
-  }
-}
+  const getTrips = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/trips");
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
+
+  useEffect(() => {
+    getTourguideInfo();
+  }, []);
+
+  useEffect(() => {
+    console.log("🟢 更新後的 tourguideInfo:", tourguideInfo);
+  }, [tourguideInfo]);
+  
 
 
 
   return (
     <>
-      <button className="border border-t-cyan-600" onClick={getTourguides}>
-        取得導遊資料
+      <button className="border border-t-cyan-600" onClick={getTourguideInfo}>
+        取得所有導遊資料
       </button>
 
-<br />
-<br />
-<br />
+      <br />
+      <br />
+      <br />
 
       <button className="border border-t-cyan-600" onClick={getCommentaries}>
         取得評論資料
       </button>
       <br />
-<br />
-<br />
-
-{ commentary}
-
-{/* <div>
-      {tourguideInfo ? (
-        <pre>{JSON.stringify(tourguideInfo, null, 2)}</pre>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div> */}
-
-
-
-<button className="border border-t-cyan-600" onClick={getTourguideInfo}>
-        取得導遊完整資料
-      </button>
+      <br />
       <br />
 
+      {commentary}
+
+      <br />
+      <br />
+      <div>
+        <input
+          type="text"
+          placeholder="輸入導遊 ID"
+          value={tourguideId}
+          onChange={(e) => setTourguideId(e.target.value)}
+          className="m-2 border p-2"
+        />
+        <button
+          className="border border-t-cyan-600 p-2"
+          onClick={() => getTourguideInfoById(tourguideId)}
+        >
+          取得單筆導遊資料
+        </button>
+      </div>
 
       <button className="border border-t-cyan-600" onClick={getTrips}>
         取得trips
       </button>
+      <br />
+      <br />
+      <br />
 
-
-      <button className="border border-t-cyan-600" onClick={getComments}>
+      {/* <button className="border border-t-cyan-600" onClick={getComments}>
         get all comments
       </button>
 
@@ -251,7 +299,30 @@ const getTrips = async()=> {
         </ul>
       ) : (
         <p>No items in the list</p>
-      )}
+      )} */}
+
+      <div className="m-auto my-1">
+ 
+
+        <div className="mt-8">
+        {tourguideInfo && Array.isArray(tourguideInfo) && tourguideInfo.length > 0 ? (
+          tourguideInfo.map((item, index) => (
+            <Card key={index} 
+            id={item.id} 
+            imgSrc={item.imgUrl} 
+            title={item.name} 
+            price={item.price_adult} 
+            themes={item.themes} 
+            
+            onClick={()=> handleCardClick(item.id)} className="cursor-pointer"
+            
+            />
+          ))
+        ) : (
+          <p>⏳ 資料載入中...</p>
+        )}
+      </div>
+      </div>
     </>
   );
 }

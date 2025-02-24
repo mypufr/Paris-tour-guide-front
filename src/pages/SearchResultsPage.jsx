@@ -20,6 +20,7 @@ function SearchResultsPage() {
 
   const handleCardClick = (id) => {
     navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
+    // navigate(`/search-tourguides/tourguide-profile/${id}`);
   };
 
   const { search } = useLocation();
@@ -93,7 +94,7 @@ function SearchResultsPage() {
       <div className="m-auto my-20 max-w-[67.5%]">
         <div className="mt-8">
           <Slider {...settings4} className="overflow-clip">
-            {data.map((data, index) => (
+            {data.map((tourguide, index) => (
               <div
                 key={index}
                 onClick={() => handleCardClick(data.id)}
@@ -101,12 +102,11 @@ function SearchResultsPage() {
               >
                 <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
                   <Card
-                    imgSrc={data.img}
-                    title={data.name}
-                    price={data.price}
-                    specialities1={data.speciality1}
-                    specialities2={data.speciality2}
-                    specialities3={data.speciality3}
+                  id={tourguide.id}
+                    imgSrc={tourguide.img}
+                    title={tourguide.name}
+                    price={tourguide.price_adult}
+                    themes={tourguide.themes}
                   />
                 </div>
               </div>

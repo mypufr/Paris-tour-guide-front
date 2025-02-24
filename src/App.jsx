@@ -52,6 +52,8 @@ export default function App() {
                   path="/search-tourguides/search-results"
                   element={<SearchResultsPage />}
                 />
+                
+
                 <Route
                   path="/search-tourguides/tourguide-profile/:id"
                   element={<TourguideProfilePage />}

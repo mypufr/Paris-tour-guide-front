@@ -40,19 +40,25 @@ import { settings4 } from "../components/helpers/sliderSettings";
 
 function TourguideProfilePage() {
   const { id } = useParams();
-  const CardData = data.find((item) => item.id === parseInt(id));
+  // const CardData = data.find((item) => item.id === parseInt(id));
   // console.log(CardData);
 
-  if (!CardData) {
-    return <div>Results not found</div>;
-  }
+  // if (!CardData) {
+  //   return <div>Results not found</div>;
+  // }
+
+  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("tab-1");
   const [currentTab, setCurrentTab] = useState("group");
   const [currentSlide, setCurrentSlide] = useState(1);
   const [date, setDate] = useState(null);
   const [commentary, setCommentary] = useState("");
   const [tourguideInfo, setTourguideInfo] = useState("");
+  const [tourguideInfoById, setTourguideInfoById] = useState("");
 
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  const [availableSlots, setAvailableSlots] = useState([]); // 從 API 獲取的時段
 
   const settings1 = {
     dots: true,
@@ -139,7 +145,7 @@ function TourguideProfilePage() {
 
   const getCommentaries = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/commentaries");
+      const res = await axios.get("http://localhost:8000/api/commentaries");
       console.log(res.data);
     } catch (error) {
       console.error("Error fetching tour guides:", error);
@@ -148,18 +154,54 @@ function TourguideProfilePage() {
 
   const getTourguideInfo = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/tourguideInfo");
+      const res = await axios.get("http://localhost:8000/api/tourguideInfo");
       console.log(res.data);
       setTourguideInfo(res.data.data);
     } catch (error) {
-      console.error("Error fetching tour guides:", error);
+      console.error("Error fetching tour guide data:", error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const getTourguideInfoById = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8000/api/tourguideInfo/${id}`,
+      );
+      console.log(res.data);
+      setTourguideInfoById(res.data);
+      setAvailableSlots(res.data.available_slots);
+    } catch (error) {
+      console.error("Error fetching tour guide data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  //  const getSlots = async()=> {
+  //   try {
+  //     const res = await axios.get();
+  //   } catch (error) {
+  //     console.error("獲取時段失敗:", error);
+  //   }
+  //  }
+
+  const filteredSlots = date
+    ? availableSlots.filter(
+        (slot) => slot.date === date.toISOString().split("T")[0],
+      )
+    : [];
+
+  const handleSelectTime = (time) => {
+    setSelectedTime(time);
+    console.log("選擇的時段:", time);
   };
 
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
-    getTourguideInfo();
-  }, []);
+    getTourguideInfoById();
+  }, [id]);
 
   return (
     <>
@@ -180,7 +222,7 @@ function TourguideProfilePage() {
                     className="inline-block h-[30px]"
                   />
                   <h2 className="text-[28px] font-bold text-primary-600">
-                    您的專屬導遊 : {tourguideInfo.name}
+                    您的專屬導遊 : {tourguideInfoById.name}
                   </h2>
                   <img
                     src="/images/vector_title.png"
@@ -192,16 +234,14 @@ function TourguideProfilePage() {
                 <div className="grid grid-cols-2 gap-[2vw] px-11">
                   <div className="col-span-1">
                     <img
-                      src={tourguideInfo.imgUrl}
+                      src={tourguideInfoById.imgUrl}
                       alt=""
                       className="object-center-30 inline-block max-h-[421px] w-full rounded-xl object-cover"
                     />
                   </div>
                   <div className="col-span-1 flex flex-col justify-around">
-       
-
                     <div className="flex space-x-2">
-                      {tourguideInfo?.themes?.map((theme, index) => (
+                      {tourguideInfoById?.themes?.map((theme, index) => (
                         <p key={index} className="text-xl text-[#324561]">
                           {theme}
                         </p>
@@ -239,15 +279,15 @@ function TourguideProfilePage() {
                       <p className="text-sm text-grey-400">80人已評價{}</p>
                     </div>
 
-           
-
-
                     <div className="flex space-x-2">
-                      {tourguideInfo?.languages?.map((language, index) => (
-                        <button key={index} className="inline-block rounded-full bg-background-2 px-5">
+                      {tourguideInfoById?.languages?.map((language, index) => (
+                        <button
+                          key={index}
+                          className="inline-block rounded-full bg-background-2 px-5"
+                        >
                           <p className="text-[13px] text-grey-600">
-                          {language}
-                            </p>
+                            {language}
+                          </p>
                         </button>
                       ))}
                     </div>
@@ -255,7 +295,7 @@ function TourguideProfilePage() {
                     <div className="flex flex-col">
                       <span className="text-xl text-primary-800">大人 </span>
                       <span className="text-base text-grey-650">
-                        {tourguideInfo.price_adult}€ /小時
+                        {tourguideInfoById.price_adult}€ /小時
                       </span>
                     </div>
 
@@ -263,7 +303,7 @@ function TourguideProfilePage() {
                       <span className="text-xl text-primary-800">兒童 </span>
                       <span className="text-base text-grey-650">
                         {" "}
-                        {tourguideInfo.price_child}€ /小時
+                        {tourguideInfoById.price_child}€ /小時
                       </span>
                     </div>
 
@@ -278,7 +318,7 @@ function TourguideProfilePage() {
                                   /> */}
                       <TfiHandPointRight className="text-2xl text-white" />
                       <span className="ml-2 text-base text-white">
-                        留言給{tourguideInfo.name}
+                        留言給{tourguideInfoById.name}
                       </span>
                     </button>
                   </div>
@@ -386,8 +426,8 @@ function TourguideProfilePage() {
       </div>
 
       {/* tab */}
-      <div className="mx-auto flex w-3/4 py-20">
-        <div className="mx-auto px-8 sm:px-4">
+      <div className="flex py-20">
+        <div className="mx-auto  w-3/4 px-8 sm:px-4">
           <div className="sm:w-full">
             {/* Tab 列表 */}
             <div
@@ -470,16 +510,14 @@ function TourguideProfilePage() {
                               className="inline-block h-[30px]"
                             />
                             <h3 className="text-xl font-bold leading-[3rem] tracking-4 text-primary-600">
-                              關於{tourguideInfo.name}
+                              關於{tourguideInfoById.name}
                             </h3>
                           </div>
 
                           <div className="h-[35vh] overflow-y-scroll p-1 scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
-                      
-
                             <p className="bg-white text-xl">
                               {" "}
-                              {tourguideInfo.profile}
+                              {tourguideInfoById.profile}
                             </p>
                           </div>
                         </div>
@@ -492,7 +530,7 @@ function TourguideProfilePage() {
                               className="inline-block h-[30px]"
                             />
                             <h4 className="text-xl font-bold leading-[3rem] tracking-4 text-primary-600">
-                              {tourguideInfo.name}的連結
+                              {tourguideInfoById.name}的連結
                             </h4>
                           </div>
 
@@ -521,37 +559,62 @@ function TourguideProfilePage() {
 
               {activeTab === "tab-2" && (
                 <div role="tabpanel" id="panel-2" className="border-t-2">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    Second tab panel
-                  </h2>
-                  <p className="mt-4 text-gray-600">
+        
+                  {/* <p className="mt-4 text-gray-600">
                     這是第二個 Tab 的內容。Lorem ipsum dolor sit, amet
                     consectetur adipisicing elit. Assumenda voluptatum harum
                     tempore porro iure veniam, facere rem nemo architecto illum
                     tempora pariatur quis? Quas autem, accusamus atque
                     perferendis distinctio corporis.
-                  </p>
+                  </p> */}
 
                   <div
                     // popoverTarget="rdp-popover"
                     className="input-border input my-10 text-xl font-bold text-primary-300"
                     style={{ anchorName: "--rdp" }}
                   >
-                    {date
+                    {/* {date
                       ? `${date.toLocaleDateString()}還有這些空檔:`
-                      : "請選擇日期"}
-                    這是第二個 Tab 的內容。Lorem ipsum dolor sit, amet
-                    consectetur adipisicing elit. Assumenda voluptatum harum
-                    tempore porro iure veniam, facere rem nemo architecto illum
-                    tempora pariatur quis? Quas autem, accusamus atque
-                    perferendis distinctio corporis.
+                      : "請選擇日期"} */}
+
+                    {/* 顯示可用時段 */}
+                    <ul className="mt-2">
+                      {filteredSlots.length > 0 ? (
+                        filteredSlots.map((slot, index) => (
+                          <div key={index} className="my-2 w-full space-y-4 ">
+                            <p className="text-xl text-center font-semibold">
+                              {slot.date}可預約的空檔:
+                            </p>
+                            <div className="flex flex-wrap justify-center gap-2">
+                              {slot.time.map((timeSlot, timeIndex) => (
+                                <button
+                                  key={timeIndex}
+                                  className="rounded-lg font-normal bg-secondary-400 px-4 py-2 text-white hover:bg-blue-600"
+                                  onClick={() => handleSelectTime(timeSlot)}
+                                >
+                                  ⏰ {timeSlot}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <li className="text-red-500 text-2xl text-center">⚠️ 無可預約時段</li>
+                      )}
+                    </ul>
+
+                    {/* {selectedTime && (
+                      <p className="mt-4 text-lg font-semibold">
+                        已選擇時段: {selectedTime}
+                      </p>
+                    )} */}
                   </div>
 
                   <div className="flex">
                     <div
                       popover="auto"
                       id="rdp-popover"
-                      className="dropdown"
+                      className="dropdown mt-[5vh]"
                       style={{ positionAnchor: "--rdp" }}
                     >
                       <DayPicker
@@ -562,7 +625,7 @@ function TourguideProfilePage() {
                         }}
                         mode="single"
                         selected={date}
-                        onSelect={setDate}
+                        onSelect={(d) => setDate(new Date(d.setHours(12, 0, 0, 0)))} // 確保時區不變
                       />
                     </div>
                   </div>
@@ -627,7 +690,7 @@ function TourguideProfilePage() {
                     {/* 第一欄：標題與圖片 */}
                     <div className="flex w-full flex-col items-center justify-center">
                       <h2 className="text-base leading-[3rem] tracking-4 text-primary-600">
-                        {tourguideInfo.name} 10位客人的評價
+                        {tourguideInfoById.name} 10位客人的評價
                       </h2>
                       <p className="text-grey-400">
                         <span className="pr-2 text-xl font-bold text-red-500">
@@ -665,18 +728,20 @@ function TourguideProfilePage() {
                             </div>
                           </div>
                         ))} */}
-                                       {tourguideInfo.commentaries.map((comment, index) => (
-                          <div key={index} className="p-3">
-                            <div className="transform transition-transform duration-300 hover:scale-105">
-                              <CommentaryList
-                                userImg={data.userImg}
-                                name={comment.user}
-                                commentaryText={comment.comment}
-                                date={comment.date}
-                              />
+                        {tourguideInfoById.commentaries.map(
+                          (comment, index) => (
+                            <div key={index} className="p-3">
+                              <div className="transform transition-transform duration-300 hover:scale-105">
+                                <CommentaryList
+                                  userImg={data.userImg}
+                                  name={comment.user}
+                                  commentaryText={comment.comment}
+                                  date={comment.date}
+                                />
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ),
+                        )}
                       </div>
                       {commentary}
                     </div>
@@ -1001,11 +1066,13 @@ function TourguideProfilePage() {
 
                               <div className="flex items-center justify-center space-x-6">
                                 <img
-                                  src={tourguideInfo.imgUrl}
+                                  src={tourguideInfoById.imgUrl}
                                   alt=""
                                   className="inline-block h-20 w-20 rounded-full"
                                 />
-                                <p className="text-xl">{tourguideInfo.name}</p>
+                                <p className="text-xl">
+                                  {tourguideInfoById.name}
+                                </p>
                               </div>
 
                               <button
