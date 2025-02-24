@@ -377,8 +377,8 @@ function TourguidesPage() {
                         </svg>
                         <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
                           {selectedTheme ? (
-                            <p className="text-gray-600">
-                              <span className="text-base">{selectedTheme}</span>
+                            <p className="text-gray-400">
+                              <span className="text-[20px]">{selectedTheme}</span>
                             </p>
                           ) : (
                             <p className="text-gray-400">行程主題</p>

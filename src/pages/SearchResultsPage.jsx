@@ -99,7 +99,7 @@ function SearchResultsPage() {
           className="inline-block h-[30px]"
         />
         <h2 className="text-[28px] font-bold leading-[3rem] tracking-4 text-primary-600">
-          搜尋您的專屬導遊區，有10位導遊可為您服務
+          搜尋您的專屬導遊區，有{tourguideInfo.length}位導遊可為您服務
         </h2>
         <img
           src="/images/website_logo.png"

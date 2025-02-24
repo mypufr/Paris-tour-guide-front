@@ -59,6 +59,13 @@ function TourguideProfilePage() {
   const [selectedTime, setSelectedTime] = useState(null);
 
   const [availableSlots, setAvailableSlots] = useState([]); // 從 API 獲取的時段
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+
+  const [adultCount, setAdultCount] = useState(0);
+  const [childCount, setChildCount] = useState(0);
+
+  const [selectedTheme, setSelectedTheme] = useState("行程主題");
 
   const settings1 = {
     dots: true,
@@ -193,15 +200,59 @@ function TourguideProfilePage() {
       )
     : [];
 
-  const handleSelectTime = (time) => {
+  const handleSelectTime = (time, slot) => {
     setSelectedTime(time);
-    console.log("選擇的時段:", time);
+    console.log("選擇的時段:", slot.date, time);
+
+    if (!time || !slot) {
+      setSelectedSlot(""); // 清空預約時段
+      return;
+    }
+    setSelectedDate(slot.date);
+    setSelectedSlot(time);
+  };
+
+  const increaseAdultCount = () => {
+    if (adultCount < 10) {
+      setAdultCount(adultCount + 1);
+    }
+  };
+
+  const increaseChildCount = () => {
+    if (childCount < 10) {
+      setChildCount(childCount + 1);
+    }
+  };
+
+  // 減少人數
+  const decreaseAdultCount = () => {
+    if (adultCount >= 1) {
+      setAdultCount(adultCount - 1);
+    }
+  };
+
+  const decreaseChildCount = () => {
+    if (childCount >= 1) {
+      setChildCount(childCount - 1);
+    }
+  };
+
+  const handleThemeChange = (event) => {
+    setSelectedTheme(event.target.value);
   };
 
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
     getTourguideInfoById();
   }, [id]);
+
+
+  useEffect(() => {
+    if (filteredSlots.length === 0) {
+      setSelectedSlot(""); // 清空預約時段
+      setSelectedDate(""); // 清空預約時段
+    }
+  }, [filteredSlots]);
 
   return (
     <>
@@ -427,7 +478,7 @@ function TourguideProfilePage() {
 
       {/* tab */}
       <div className="flex py-20">
-        <div className="mx-auto  w-3/4 px-8 sm:px-4">
+        <div className="mx-auto w-3/4 px-8 sm:px-4">
           <div className="sm:w-full">
             {/* Tab 列表 */}
             <div
@@ -559,7 +610,6 @@ function TourguideProfilePage() {
 
               {activeTab === "tab-2" && (
                 <div role="tabpanel" id="panel-2" className="border-t-2">
-        
                   {/* <p className="mt-4 text-gray-600">
                     這是第二個 Tab 的內容。Lorem ipsum dolor sit, amet
                     consectetur adipisicing elit. Assumenda voluptatum harum
@@ -573,24 +623,22 @@ function TourguideProfilePage() {
                     className="input-border input my-10 text-xl font-bold text-primary-300"
                     style={{ anchorName: "--rdp" }}
                   >
-                    {/* {date
-                      ? `${date.toLocaleDateString()}還有這些空檔:`
-                      : "請選擇日期"} */}
-
                     {/* 顯示可用時段 */}
                     <ul className="mt-2">
                       {filteredSlots.length > 0 ? (
                         filteredSlots.map((slot, index) => (
-                          <div key={index} className="my-2 w-full space-y-4 ">
-                            <p className="text-xl text-center font-semibold">
+                          <div key={index} className="my-2 w-full space-y-6">
+                            <p className="text-center text-xl font-semibold">
                               {slot.date}可預約的空檔:
                             </p>
                             <div className="flex flex-wrap justify-center gap-2">
                               {slot.time.map((timeSlot, timeIndex) => (
                                 <button
                                   key={timeIndex}
-                                  className="rounded-lg font-normal bg-secondary-400 px-4 py-2 text-white hover:bg-blue-600"
-                                  onClick={() => handleSelectTime(timeSlot)}
+                                  className="rounded-lg bg-secondary-400 px-4 py-2 font-normal text-white hover:bg-blue-600"
+                                  onClick={() =>
+                                    handleSelectTime(timeSlot, slot)
+                                  }
                                 >
                                   ⏰ {timeSlot}
                                 </button>
@@ -599,15 +647,11 @@ function TourguideProfilePage() {
                           </div>
                         ))
                       ) : (
-                        <li className="text-red-500 text-2xl text-center">⚠️ 無可預約時段</li>
+                        <li className="text-center text-2xl text-red-500">
+                          ⚠️ 無可預約時段
+                        </li>
                       )}
                     </ul>
-
-                    {/* {selectedTime && (
-                      <p className="mt-4 text-lg font-semibold">
-                        已選擇時段: {selectedTime}
-                      </p>
-                    )} */}
                   </div>
 
                   <div className="flex">
@@ -625,7 +669,9 @@ function TourguideProfilePage() {
                         }}
                         mode="single"
                         selected={date}
-                        onSelect={(d) => setDate(new Date(d.setHours(12, 0, 0, 0)))} // 確保時區不變
+                        onSelect={(d) =>
+                          setDate(new Date(d.setHours(12, 0, 0, 0)))
+                        } // 確保時區不變
                       />
                     </div>
                   </div>
@@ -926,14 +972,22 @@ function TourguideProfilePage() {
                   case "private":
                     return (
                       <div className="">
-                        <div className="mt-10">
+                        <div className="w-ful mt-10">
                           <div className="border-grey-200 flex w-full max-w-lg flex-col items-center justify-center space-y-8 border p-10">
                             <p className="text-xl">
                               除了團體行程，我們的導遊提供靈活的私人行程，採用時薪制計費，讓您可以根據自己的需求與時間安排，預訂專屬的導覽服務。
                             </p>
-                            <div className="flex justify-center">
+
+                            <div className="mt-4 flex min-w-[400px] justify-center px-4 lg:mt-0">
                               <Link>
-                                <button className="flex w-full space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4">
+                                <button
+                                  className="flex w-[28vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
+                                  onClick={() =>
+                                    document
+                                      .getElementById("calendar_modal")
+                                      .showModal()
+                                  }
+                                >
                                   <svg
                                     className="h-8"
                                     width="24"
@@ -962,14 +1016,22 @@ function TourguideProfilePage() {
                                     <line x1="4" y1="11" x2="20" y2="11" />{" "}
                                     <rect x="8" y="15" width="2" height="2" />
                                   </svg>
-                                  <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    出發日期:
-                                    {/* {startDate} */}
-                                  </span>
-                                  <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    出發日期:
-                                    {/* {endDate} */}
-                                  </span>
+                                  <div className="flex flex-col items-center">
+                                    <p className="text-md font-bold text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                      出發日期:
+                                      <span className="font-normal">
+                                        {" "}
+                                        {selectedDate}
+                                      </span>
+                                    </p>
+                                    <p className="text-md font-bold text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                      預約時段:
+                                      <span className="font-normal">
+                                        {" "}
+                                        {selectedSlot}
+                                      </span>
+                                    </p>
+                                  </div>
                                   <svg
                                     className="h-8 text-red-500"
                                     fill="none"
@@ -987,9 +1049,97 @@ function TourguideProfilePage() {
                               </Link>
                             </div>
 
-                            <div className="flex justify-center">
+                            <dialog
+                              id="calendar_modal"
+                              className="modal modal-bottom sm:modal-middle bg-white w-1/2 h-[80vh] mx-auto"
+                            >
+                              <div
+                                className="input-border input text-xl font-bold text-primary-300  bg-white"
+                                style={{ anchorName: "--rdp" }}
+                              >
+                                {/* 顯示可用時段 */}
+                                <ul className="">
+                                  {filteredSlots.length > 0 ? (
+                                    filteredSlots.map((slot, index) => (
+                                      <div
+                                        key={index}
+                                        className="w-full space-y-6"
+                                      >
+                                        <p className="text-center text-xl font-semibold">
+                                          {slot.date}可預約的空檔:
+                                        </p>
+                                        <div className="flex flex-wrap justify-center gap-2">
+                                          {slot.time.map(
+                                            (timeSlot, timeIndex) => (
+                                              <button
+                                                key={timeIndex}
+                                                className="rounded-lg bg-secondary-400 px-4 py-2 font-normal text-white hover:bg-blue-600"
+                                                onClick={() =>
+                                                  handleSelectTime(
+                                                    timeSlot,
+                                                    slot,
+                                                  )
+                                                }
+                                              >
+                                                ⏰ {timeSlot}
+                                              </button>
+                                            ),
+                                          )}
+                                        </div>
+                                      </div>
+                                    ))
+                                  ) : (
+                                    <>
+                                    <li className="text-center text-2xl text-red-500">
+                                      ⚠️ 無可預約時段
+                                    </li>
+                              
+                                  </>
+                                  )}
+                                </ul>
+                              </div>
+
+                              <div className="flex">
+                                <div
+                                  popover="auto"
+                                  id="rdp-popover"
+                                  className="dropdown"
+                                  style={{ positionAnchor: "--rdp" }}
+                                >
+                                  <DayPicker
+                                    className="react-day-picker rounded-xl border border-primary-200 bg-white p-4 shadow-lg"
+                                    numberOfMonths={2}
+                                    classNames={{
+                                      day: "items-center justify-center text-lg hover:bg-gray-200 rounded-full",
+                                    }}
+                                    mode="single"
+                                    selected={date}
+                                    onSelect={(d) =>
+                                      setDate(new Date(d.setHours(12, 0, 0, 0)))
+                                    } // 確保時區不變
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="modal-action">
+                                <form method="dialog">
+                                  <button className="btn">確認</button>
+                                </form>
+                              </div>
+                            </dialog>
+
+                            {/* 人數選擇 */}
+
+                            <div className="mt-4 flex justify-center px-4 lg:mt-0">
                               <Link>
-                                <button className="flex w-full space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4">
+                                <button
+                                  className="flex w-[28vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
+                                  onClick={() =>
+                                    document
+                                      .getElementById("touristNum_modal")
+                                      .showModal()
+                                  }
+                                >
                                   <svg
                                     className="h-8"
                                     fill="none"
@@ -1003,9 +1153,20 @@ function TourguideProfilePage() {
                                       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                                     />
                                   </svg>
-                                  <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    參加人數:
-                                    {/* {adultCount}位大人、{childCount}位小孩 */}
+                                  <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
+                                    {adultCount || childCount ? (
+                                      <p className="text-primary-700">
+                                        <span className="text-base">
+                                          {adultCount}位大人
+                                          {"、"}
+                                          {childCount}位小孩
+                                        </span>
+                                      </p>
+                                    ) : (
+                                      <p className="text-base text-primary-700">
+                                        參加人數
+                                      </p>
+                                    )}
                                   </span>
                                   <svg
                                     className="h-8"
@@ -1024,9 +1185,81 @@ function TourguideProfilePage() {
                               </Link>
                             </div>
 
-                            <div className="flex justify-center">
+                            <dialog
+                              id="touristNum_modal"
+                              className="modal modal-bottom sm:modal-middle"
+                            >
+                              <div className="flex flex-col items-center space-y-8 rounded-lg bg-white p-20">
+                                <h2 className="text-xl font-bold text-primary-700">
+                                  選擇人數
+                                </h2>
+
+                                <div className="flex items-center space-x-4 rounded-lg border bg-white p-2 shadow-md">
+                                  <button
+                                    onClick={decreaseAdultCount}
+                                    className="rounded-lg bg-gray-200 px-3 py-2 text-lg font-bold hover:bg-gray-300"
+                                  >
+                                    −
+                                  </button>
+
+                                  <span className="text-xl font-semibold text-gray-800">
+                                    {adultCount}位大人
+                                  </span>
+
+                                  <button
+                                    onClick={increaseAdultCount}
+                                    className="rounded-lg bg-blue-500 px-3 py-2 text-lg font-bold text-white hover:bg-blue-600"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+
+                                <div className="flex items-center space-x-4 rounded-lg border bg-white p-2 shadow-md">
+                                  <button
+                                    onClick={decreaseChildCount}
+                                    className="rounded-lg bg-gray-200 px-3 py-2 text-lg font-bold hover:bg-gray-300"
+                                  >
+                                    −
+                                  </button>
+
+                                  <span className="text-xl font-semibold text-gray-800">
+                                    {childCount}位小孩
+                                  </span>
+
+                                  <button
+                                    onClick={increaseChildCount}
+                                    className="rounded-lg bg-blue-500 px-3 py-2 text-lg font-bold text-white hover:bg-blue-600"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+
+                                <p className="m-2 p-2 text-gray-600">
+                                  目前選擇{" "}
+                                  <span className="font-bold text-primary-600">
+                                    {adultCount}位大人、 {childCount}位小孩
+                                  </span>{" "}
+                                </p>
+                                <div className="modal-action">
+                                  <form method="dialog">
+                                    <button className="btn">確認</button>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
+
+                            {/* 行程主題 */}
+
+                            <div className="mt-4 flex justify-center px-4 lg:mt-0">
                               <Link>
-                                <button className="flex w-full space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4">
+                                <button
+                                  className="flex w-[28vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
+                                  onClick={() =>
+                                    document
+                                      .getElementById("theme_modal")
+                                      .showModal()
+                                  }
+                                >
                                   <svg
                                     className="inline-block h-8"
                                     fill="none"
@@ -1040,12 +1273,21 @@ function TourguideProfilePage() {
                                       d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
                                     />
                                   </svg>
-                                  <span className="text-xl font-bold text-primary-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    行程主題:
-                                    {/* {theme} */}
+                                  <span className="text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
+                                    {selectedTheme ? (
+                                      <p className="text-primary-700">
+                                        <span className="text-base">
+                                          {selectedTheme}
+                                        </span>
+                                      </p>
+                                    ) : (
+                                      <p className="text-primary-700">
+                                        行程主題
+                                      </p>
+                                    )}
                                   </span>
                                   <svg
-                                    className="h-8"
+                                    className="h-8 w-8"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="grey"
@@ -1060,6 +1302,64 @@ function TourguideProfilePage() {
                                 </button>
                               </Link>
                             </div>
+
+                            <dialog
+                              id="theme_modal"
+                              className="modal modal-bottom sm:modal-middle"
+                            >
+                              <div className="grid grid-cols-2 rounded-lg bg-white p-10">
+                                <h2 className="col-span-2 mb-4 text-lg font-bold text-primary-600">
+                                  選擇行程主題
+                                </h2>
+
+                                {/* 選擇主題的選項 */}
+
+                                {[
+                                  "法式美食",
+                                  "浪漫蜜月行",
+                                  "親子家庭遊",
+                                  "時尚購物",
+                                  "歷史建築",
+                                  "藝術博物館",
+                                  "文哲學巡禮",
+                                  "自然風光",
+                                ].map((theme, index) => (
+                                  <div key={index} className="form-control">
+                                    <label className="label flex cursor-pointer items-center space-x-2">
+                                      <input
+                                        type="radio"
+                                        name="theme-radio"
+                                        className="radio checked:bg-primary-500"
+                                        value={theme}
+                                        checked={selectedTheme === theme}
+                                        onChange={handleThemeChange}
+                                      />
+                                      <span className="label-text w-full text-left">
+                                        {theme}
+                                      </span>
+                                    </label>
+                                  </div>
+                                ))}
+
+                                <div className="modal-action">
+                                  <form method="dialog">
+                                    <div className="mx-auto flex gap-4">
+                                      <button
+                                        type="button"
+                                        className="btn btn-outline"
+                                        onClick={() => setSelectedTheme("")}
+                                      >
+                                        取消
+                                      </button>
+
+                                      <button className="btn bg-primary-200 text-primary-600">
+                                        確認
+                                      </button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
 
                             <div className="flex flex-col items-center justify-center space-y-8 px-8">
                               <p className="text-2xl">您目前選擇的導遊</p>
