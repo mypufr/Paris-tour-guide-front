@@ -8,14 +8,15 @@ import {
 } from "react-router-dom";
 
 import data from "../data/data.json";
-import TripsData from "../data/trips.json";
-import SingleTripData from "../data/singleSite.json";
-import CommentaryData from "../data/commentaries.json";
+// import TripsData from "../data/trips.json";
+// import SingleTripData from "../data/singleSite.json";
+// import CommentaryData from "../data/commentaries.json";
 
-import TripCard from "../components/TripCard";
+// import TripCard from "../components/TripCard";
 import SiteCard from "../components/SiteCard";
 import CommentaryList from "../components/CommentaryList";
 import Card from "../components/Card";
+import TourCard from "../components/tourCard";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -35,8 +36,8 @@ import { DayPicker } from "react-day-picker";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
 // import { settings5 } from "../components/helpers/sliderSettings";
-import { settings3 } from "../components/helpers/sliderSettings";
-import { settings4 } from "../components/helpers/sliderSettings";
+// import { settings3 } from "../components/helpers/sliderSettings";
+// import { settings4 } from "../components/helpers/sliderSettings";
 
 function TourguideProfilePage() {
   const { id } = useParams();
@@ -47,6 +48,8 @@ function TourguideProfilePage() {
   //   return <div>Results not found</div>;
   // }
 
+  const [toursSlidesLength, setToursSlidesLength] = useState(0);
+  const [sitesSlidesLength, setSitesSlidesLength] = useState(0);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("tab-1");
   const [currentTab, setCurrentTab] = useState("group");
@@ -54,7 +57,10 @@ function TourguideProfilePage() {
   const [date, setDate] = useState(null);
   const [commentary, setCommentary] = useState("");
   const [tourguideInfo, setTourguideInfo] = useState("");
+
+  const [sites, setSites] = useState([]);
   const [tourguideInfoById, setTourguideInfoById] = useState("");
+  const [tours, setTours] = useState([]);
 
   const [selectedTime, setSelectedTime] = useState(null);
 
@@ -153,7 +159,7 @@ function TourguideProfilePage() {
   const getCommentaries = async () => {
     try {
       const res = await axios.get("http://localhost:8000/api/commentaries");
-      console.log(res.data);
+      // console.log(res.data);
     } catch (error) {
       console.error("Error fetching tour guides:", error);
     }
@@ -162,7 +168,7 @@ function TourguideProfilePage() {
   const getTourguideInfo = async () => {
     try {
       const res = await axios.get("http://localhost:8000/api/tourguideInfo");
-      console.log(res.data);
+      // console.log(res.data);
       setTourguideInfo(res.data.data);
     } catch (error) {
       console.error("Error fetching tour guide data:", error);
@@ -176,7 +182,7 @@ function TourguideProfilePage() {
       const res = await axios.get(
         `http://localhost:8000/api/tourguideInfo/${id}`,
       );
-      console.log(res.data);
+      // console.log(res.data);
       setTourguideInfoById(res.data);
       setAvailableSlots(res.data.available_slots);
     } catch (error) {
@@ -186,13 +192,31 @@ function TourguideProfilePage() {
     }
   };
 
-  //  const getSlots = async()=> {
-  //   try {
-  //     const res = await axios.get();
-  //   } catch (error) {
-  //     console.error("獲取時段失敗:", error);
-  //   }
-  //  }
+  const getTours = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/tours");
+      console.log(res.data); // array
+      setTours(res.data);
+
+      setToursSlidesLength(res.data.length);
+      // console.group(res.data);
+    } catch (error) {
+      console.error("Error fetching tour guide data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getSites = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/sites");
+      // console.log(res.data);
+      setSites(res.data);
+      setSitesSlidesLength(res.data.length);
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
 
   const filteredSlots = date
     ? availableSlots.filter(
@@ -243,14 +267,15 @@ function TourguideProfilePage() {
 
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
+    getSites();
     getTourguideInfoById();
+    getTours();
   }, [id]);
-
 
   useEffect(() => {
     if (filteredSlots.length === 0) {
-      setSelectedSlot(""); // 清空預約時段
-      setSelectedDate(""); // 清空預約時段
+      setSelectedSlot("");
+      setSelectedDate("");
     }
   }, [filteredSlots]);
 
@@ -610,14 +635,6 @@ function TourguideProfilePage() {
 
               {activeTab === "tab-2" && (
                 <div role="tabpanel" id="panel-2" className="border-t-2">
-                  {/* <p className="mt-4 text-gray-600">
-                    這是第二個 Tab 的內容。Lorem ipsum dolor sit, amet
-                    consectetur adipisicing elit. Assumenda voluptatum harum
-                    tempore porro iure veniam, facere rem nemo architecto illum
-                    tempora pariatur quis? Quas autem, accusamus atque
-                    perferendis distinctio corporis.
-                  </p> */}
-
                   <div
                     // popoverTarget="rdp-popover"
                     className="input-border input my-10 text-xl font-bold text-primary-300"
@@ -858,7 +875,9 @@ function TourguideProfilePage() {
                           {/* 放置 pagination */}
                           <div className="pagination-container text-xl font-bold text-primary-600">
                             <span>{currentSlide}</span> /{" "}
-                            <span className="text-grey-950">{data.length}</span>
+                            <span className="text-grey-950">
+                              {toursSlidesLength}
+                            </span>
                             {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}
                           </div>
 
@@ -899,7 +918,9 @@ function TourguideProfilePage() {
                           {/* 放置 pagination */}
                           <div className="pagination-container text-xl font-bold text-primary-600">
                             <span>{currentSlide}</span> /{" "}
-                            <span className="text-grey-950">{data.length}</span>
+                            <span className="text-grey-950">
+                              {sitesSlidesLength}
+                            </span>
                             {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}
                           </div>
 
@@ -952,16 +973,16 @@ function TourguideProfilePage() {
 
                         <div className="w-full">
                           <Slider {...settings1} arrows={false} ref={sliderRef}>
-                            {SingleTripData.slice(0, 6).map((data, index) => (
+                            {tours.map((tour, index) => (
                               <div key={index}>
-                                <SiteCard
-                                  tripName={data.tripName}
-                                  imageUrl={data.imgUrl}
-                                  description={data.description}
-                                  date={data.date}
-                                  duration={data.duration}
-                                  NumPeople={data.NumPeople}
-                                  price={data.price}
+                                <TourCard
+                                  tourName={tour.tourName}
+                                  imageUrl={tour.imgUrl}
+                                  description={tour.description}
+                                  date={tour.date.slice(0, 1)}
+                                  sites={tour.sites.slice(0, 3)}
+                                  duration={tour.duration}
+                                  price={tour.price}
                                 />
                               </div>
                             ))}
@@ -1051,10 +1072,10 @@ function TourguideProfilePage() {
 
                             <dialog
                               id="calendar_modal"
-                              className="modal modal-bottom sm:modal-middle bg-white w-1/2 h-[80vh] mx-auto"
+                              className="modal modal-bottom mx-auto h-[80vh] w-1/2 bg-white sm:modal-middle"
                             >
                               <div
-                                className="input-border input text-xl font-bold text-primary-300  bg-white"
+                                className="input-border input bg-white text-xl font-bold text-primary-300"
                                 style={{ anchorName: "--rdp" }}
                               >
                                 {/* 顯示可用時段 */}
@@ -1090,11 +1111,10 @@ function TourguideProfilePage() {
                                     ))
                                   ) : (
                                     <>
-                                    <li className="text-center text-2xl text-red-500">
-                                      ⚠️ 無可預約時段
-                                    </li>
-                              
-                                  </>
+                                      <li className="text-center text-2xl text-red-500">
+                                        ⚠️ 無可預約時段
+                                      </li>
+                                    </>
                                   )}
                                 </ul>
                               </div>
@@ -1391,16 +1411,16 @@ function TourguideProfilePage() {
                       <>
                         <div className="w-full">
                           <Slider {...settings1} arrows={false} ref={sliderRef}>
-                            {SingleTripData.slice(0, 6).map((data, index) => (
+                            {sites.map((site, index) => (
                               <div key={index}>
                                 <SiteCard
-                                  tripName={data.tripName}
-                                  imageUrl={data.imgUrl}
-                                  description={data.description}
-                                  date={data.date}
-                                  duration={data.duration}
-                                  NumPeople={data.NumPeople}
-                                  price={data.price}
+                                  siteName={site.siteName}
+                                  imageUrl={site.imgUrl}
+                                  description={site.description}
+                                  date={site.date.slice(0, 1)}
+                                  duration={site.duration}
+                                  NumPeople={site.NumPeople}
+                                  price={site.price}
                                 />
                               </div>
                             ))}
@@ -1440,27 +1460,38 @@ function TourguideProfilePage() {
           <div className="m-auto mt-10 max-w-[1296px]">
             <div className="mx-auto w-3/4">
               {/* ul */}
-              <div className="grid grid-cols-1 gap-10 space-y-[1%] sm:grid-cols-2 lg:grid-cols-4">
-                <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
-                  <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
-                    行程規畫建議
-                  </p>
 
-                  <img src="/images/organize-trips.png" alt="" />
-                  <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
-                    針對個人或小團體的專屬導覽行程,根據客戶需求量身定制
-                  </p>
+              <div className="grid grid-cols-1 gap-10 space-y-[1%] sm:grid-cols-2 lg:grid-cols-4">
+                <div
+                  className="relative transform overflow-hidden rounded-3xl transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
+                  data-aos="zoom-in"
+                >
+                  <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
+                    <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
+                      行程規畫建議
+                    </p>
+
+                    <img src="/images/organize-trips.png" alt="" />
+                    <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
+                      針對個人或小團體的專屬導覽行程,根據客戶需求量身定制
+                    </p>
+                  </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
-                  <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
-                    語言翻譯
-                  </p>
+                <div
+                  className="relative transform overflow-hidden rounded-3xl transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
+                  data-aos="zoom-in"
+                >
+                  <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
+                    <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
+                      語言翻譯
+                    </p>
 
-                  <img src="/images/photographer.png" alt="" />
-                  <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
-                    提供雙語或多語導覽,並在必要時進行語言翻譯,幫助遊客與當地人交流
-                  </p>
+                    <img src="/images/photographer.png" alt="" />
+                    <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
+                      提供雙語或多語導覽,並在必要時進行語言翻譯,幫助遊客與當地人交流
+                    </p>
+                  </div>
                 </div>
 
                 <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
@@ -1589,7 +1620,7 @@ function TourguideProfilePage() {
         {/* 放置 pagination */}
         <div className="pagination-container text-xl font-bold text-primary-600">
           <span>{currentSlide}</span> /{" "}
-          <span className="text-grey-950">{data.length}</span>
+          {/* <span className="text-grey-950">{slidesLength}</span> */}
           {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}
         </div>
 

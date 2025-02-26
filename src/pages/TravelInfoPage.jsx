@@ -17,6 +17,8 @@ function TravelInfoPage() {
 
   const [tourguideId, setTourguideId] = useState("");
   const [tourguideInfo, setTourguideInfo] = useState([]);
+
+    const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -168,6 +170,31 @@ function TravelInfoPage() {
     }
   };
 
+
+  const getTours = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/tours",
+      );
+      console.log(res.data);
+
+
+    } catch (error) {
+      console.error("Error fetching tour guide data:", error);
+    } 
+  };
+
+
+  const getSites = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/sites");
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching tour guides:", error);
+    }
+  };
+
+
   useEffect(() => {
     getTourguideInfo();
   }, []);
@@ -222,6 +249,18 @@ function TravelInfoPage() {
       <br />
       <br />
       <br />
+
+      <button className="border border-t-cyan-600" onClick={getTours}>
+        取得tours
+      </button>
+
+      <br />
+      <br />
+      <br />
+
+      <button className="border border-t-cyan-600" onClick={getSites}>
+        取得sites
+      </button>
 
       {/* <button className="border border-t-cyan-600" onClick={getComments}>
         get all comments

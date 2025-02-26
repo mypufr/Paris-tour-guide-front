@@ -11,24 +11,27 @@ function truncateText(text, maxLength) {
 
 const TripCard = ({
   imageUrl,
-  tripName,
+  tourName,
   date,
-  site1,
-  site2,
-  site3,
-  site4,
-  site5,
+  sites,
   description,
 }) => {
   return (
     <div className="rounded-2xl bg-background-2 bg-white shadow-lg md:max-w-sm lg:border-2 lg:border-secondary-200 md:">
       <Link to="/book-trips">
-        <div className="rounded-xl border-0">
+
+
+
+        <div className="relative border-1 rounded-2xl border border-primary-200 overflow-hidden">
           <img
             className="h-[257px] w-full rounded-xl object-cover md:h-[150px] xl:h-[360px]"
             src={imageUrl}
-            alt={tripName}
+            alt={tourName}
           />
+               {/* Hover 時出現的半透明遮罩 */}
+               <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+            <span className="text-xl font-bold text-white">馬上預約</span>
+          </div>
 
           <div className="space-y-2 px-4 py-[18.5px]">
             <div className="flex space-x-2">
@@ -38,12 +41,12 @@ const TripCard = ({
                 className="inline-block h-5 max-w-5"
               />
               <h6 className="mb-2 text-[13px] font-bold text-blue-50 2xl:text-xl">
-                {tripName}
+                {tourName}
               </h6>
             </div>
 
             <div className="flex flex-wrap gap-2 md:justify-start md:gap-2]">
-              {[site1, site2, site3].map(
+              {[sites].map(
                 (site, index) =>
                   site && (
                     <span

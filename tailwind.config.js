@@ -51,6 +51,7 @@ export default {
         },
         grey: {
           100: "var(--grey-100)",
+          200: "var(--grey-200)",
           400: "var(--grey-400)",
           600: "var(--grey-600)",
           650: "var(--grey-650)",
