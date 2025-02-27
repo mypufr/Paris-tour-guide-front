@@ -73,6 +73,11 @@ function TourguideProfilePage() {
 
   const [selectedTheme, setSelectedTheme] = useState("行程主題");
 
+  const [email, setEmail] = useState("");
+  const [senderName, setSenderName] = useState("");
+
+  const [message, setMessage] = useState("");
+
   const settings1 = {
     dots: true,
     infinite: true,
@@ -135,9 +140,53 @@ function TourguideProfilePage() {
 
   const navigate = useNavigate();
 
-  const handleSendMessageClick = () => {
-    navigate(`/search-tourguides/tourguide-profile/${id}/message`);
+  const handleEditMessageClick = () => {
+    document.getElementById("message_modal").showModal();
+    // navigate(`/search-tourguides/tourguide-profile/${id}/message`);
   };
+
+  const handleSendMessageClick = async () => {
+    if (!message.trim()) {
+      alert("請輸入留言內容！");
+      return;
+    }
+
+    try {
+      console.log(message, tourguideInfoById._id);
+      const res = await axios.post(
+        "http://localhost:8000/api/messages",
+        {
+          tourguideName: tourguideInfoById.name,
+          email: email,
+          senderName: senderName,
+          message: message, // 傳送留言內容
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      console.log("留言成功", res.data);
+
+      document.getElementById("message_modal")?.close(); // 關閉 Modal
+      setMessage(""); // 清空輸入框
+      setSenderName(""); // 清空寄件者名稱
+      setEmail(""); // 清空 Email
+    } catch (error) {
+      console.error("留言失敗", error.res?.data || error.message);
+    }
+  };
+
+  const handleCloseModal = () => {
+    document.getElementById("message_modal")?.close();
+  }
+
+  // const handleCardClick = (id) => {
+  //   navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
+  //   // navigate(`/search-tourguides/tourguide-profile/${id}`);
+  // };
 
   const handlePrivateTripsClick = () => {
     navigate(`/search-tourguides/tourguide-profile/${id}/private-trips`);
@@ -317,11 +366,11 @@ function TourguideProfilePage() {
                   </div>
                   <div className="col-span-1 flex flex-col justify-around">
                     <div className="flex space-x-2">
-                      {tourguideInfoById?.themes?.map((theme, index) => (
-                        <p key={index} className="text-xl text-[#324561]">
-                          {theme}
-                        </p>
-                      ))}
+                      {tourguideInfoById?.themes?.length > 0 && (
+                        <span className="text-xl text-[#324561]">
+                          {tourguideInfoById.themes.join("、")}
+                        </span>
+                      )}
                     </div>
 
                     <div className="flex items-center space-x-6">
@@ -385,23 +434,80 @@ function TourguideProfilePage() {
 
                     <button
                       className="mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent"
-                      onClick={() => navigate("/")}
+                      onClick={() => handleEditMessageClick()}
                     >
-                      {/* <img
-                                    src="images/BsHandIndex.svg"
-                                    alt=""
-                                    className="inline-block"
-                                  /> */}
+                      <img
+                        src="images/BsHandIndex.svg"
+                        alt=""
+                        className="inline-block"
+                      />
                       <TfiHandPointRight className="text-2xl text-white" />
                       <span className="ml-2 text-base text-white">
                         留言給{tourguideInfoById.name}
                       </span>
                     </button>
+
+                    <dialog id="message_modal" className="modal">
+                      <div className="modal-box">
+                        <h3 className="text-lg font-bold">
+                          留言給 {tourguideInfoById.name}
+                        </h3>
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault(); // 防止頁面刷新
+                            handleSendMessageClick();
+                          }}
+                        >
+                          <div className="flex gap-2">
+                            {/* 姓名 */}
+                            <input
+                              type="text"
+                              className="mt-4 w-full rounded-lg border p-2"
+                              placeholder="姓名"
+                              value={senderName}
+                              onChange={(e) => setSenderName(e.target.value)}
+                              required
+                            />
+
+                            {/* 電子郵件 */}
+                            <input
+                              type="email"
+                              className="mt-4 w-full rounded-lg border p-2"
+                              placeholder="Email"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                              required
+                            />
+                          </div>
+
+                          {/* 留言內容 */}
+                          <textarea
+                            className="mt-4 w-full rounded-lg border p-2"
+                            placeholder="請輸入您的留言..."
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            required
+                          />
+
+                          <div className="modal-action">
+                            {/* 取消按鈕 */}
+
+                            <button className="btn btn-outline border-primary-200 text-primary-700"
+                            onClick={handleCloseModal}>
+                              取消
+                            </button>
+
+                            {/* 送出按鈕 */}
+                            <button type="submit" className="btn btn-primary">
+                              送出
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </dialog>
                   </div>
                 </div>
               </div>
-
-              <div></div>
             </div>
             <div className="relative lg:mb-[15%]">
               <div className="hidden md:absolute md:-bottom-[6rem] md:left-[-15%] md:block md:-rotate-12">
@@ -696,54 +802,7 @@ function TourguideProfilePage() {
               )}
 
               {activeTab === "tab-3" && (
-                // <div role="tabpanel" id="panel-3">
-                //   <div className="grid grid-cols-3 gap-x-60">
-                //     {/* 第一欄：標題與圖片 */}
-                //     <div className="col-span-1 flex flex-col items-center justify-center">
-                //       <h2 className="text-normal leading-[3rem] tracking-4 text-primary-500">
-                //         {CardData.name} 15位客人的評價
-                //       </h2>
-                //       <p className="text-grey-950">
-                //         <span className="font-bold text-red-500">5</span> /5
-                //         (80人已評價)
-                //       </p>
-
-                //       <div className="flex justify-center gap-4">
-                //         <img
-                //           src="/images/Frame 1000004544.png"
-                //           alt=""
-                //           className="inline-block"
-                //         />
-                //         <img
-                //           src="/images/Frame 1000004546.png"
-                //           alt=""
-                //           className="inline-block"
-                //         />
-                //       </div>
-                //     </div>
-
-                //     <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full col-span-2 h-[40vh] overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
-                //       <div className="flex flex-col items-center justify-center gap-2">
-                //         {CommentaryData.map((data, index) => (
-                //           <div
-                //             key={index}
-                //             // onClick={() => handleCardClick(data.id)}
-                //             className="p-3"
-                //           >
-                //             <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
-                //               <CommentaryList
-                //                 userImg={data.userImg}
-                //                 name={data.name}
-                //                 commentaryText={data.commentaryText}
-                //                 date={data.date}
-                //               />
-                //             </div>
-                //           </div>
-                //         ))}
-                //       </div>
-                //     </div>
-                //   </div>
-                // </div>
+          
                 <div
                   role="tabpanel"
                   id="panel-3"
@@ -779,18 +838,7 @@ function TourguideProfilePage() {
                     {/* 第二欄：評論列表 */}
                     <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full h-[520px] w-3/4 overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
                       <div className="flex flex-col items-center justify-center gap-2">
-                        {/* {CommentaryData.map((data, index) => (
-                          <div key={index} className="p-3">
-                            <div className="transform transition-transform duration-300 hover:scale-105">
-                              <CommentaryList
-                                userImg={data.userImg}
-                                name={data.name}
-                                commentaryText={data.commentaryText}
-                                date={data.date}
-                              />
-                            </div>
-                          </div>
-                        ))} */}
+                
                         {tourguideInfoById.commentaries.map(
                           (comment, index) => (
                             <div key={index} className="p-3">
@@ -948,28 +996,7 @@ function TourguideProfilePage() {
                   case "group":
                     return (
                       <>
-                        {/* <div className="w-full">
-                          <Slider {...settings1} arrows={false} ref={sliderRef}>
-                            {data.map((data, index) => (
-                              <div
-                                key={index}
-                                className="slide-item"
-                                onClick={() => handleCardClick(data.id)}
-                              >
-                                <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
-                                  <Card
-                                    imgSrc={data.img}
-                                    title={data.name}
-                                    price={data.price}
-                                    specialities1={data.speciality1}
-                                    specialities2={data.speciality2}
-                                    specialities3={data.speciality3}
-                                  />
-                                </div>
-                              </div>
-                            ))}
-                          </Slider>
-                        </div> */}
+       
 
                         <div className="w-full">
                           <Slider {...settings1} arrows={false} ref={sliderRef}>
@@ -994,7 +1021,7 @@ function TourguideProfilePage() {
                     return (
                       <div className="">
                         <div className="w-ful mt-10">
-                          <div className="border-grey-200 flex w-full max-w-lg flex-col items-center justify-center space-y-8 border p-10">
+                          <div className="flex w-full max-w-lg flex-col items-center justify-center space-y-8 border border-grey-200 p-10">
                             <p className="text-xl">
                               除了團體行程，我們的導遊提供靈活的私人行程，採用時薪制計費，讓您可以根據自己的需求與時間安排，預訂專屬的導覽服務。
                             </p>
@@ -1334,16 +1361,7 @@ function TourguideProfilePage() {
 
                                 {/* 選擇主題的選項 */}
 
-                                {[
-                                  "法式美食",
-                                  "浪漫蜜月行",
-                                  "親子家庭遊",
-                                  "時尚購物",
-                                  "歷史建築",
-                                  "藝術博物館",
-                                  "文哲學巡禮",
-                                  "自然風光",
-                                ].map((theme, index) => (
+                                {tourguideInfoById.themes.map((theme, index) => (
                                   <div key={index} className="form-control">
                                     <label className="label flex cursor-pointer items-center space-x-2">
                                       <input
