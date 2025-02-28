@@ -6,6 +6,8 @@ import {
   useNavigate,
   // , useLocation
 } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addPrivateOrder, setGroupOrderInfo} from "../store/reducers/orderSlice.jsx"
 
 import data from "../data/data.json";
 // import TripsData from "../data/trips.json";
@@ -139,6 +141,7 @@ function TourguideProfilePage() {
   const secondSliderRef = useRef(null);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleEditMessageClick = () => {
     document.getElementById("message_modal").showModal();
@@ -188,13 +191,36 @@ function TourguideProfilePage() {
   //   // navigate(`/search-tourguides/tourguide-profile/${id}`);
   // };
 
-  const handlePrivateTripsClick = () => {
-    navigate(`/search-tourguides/tourguide-profile/${id}/private-trips`);
+  const handlePrivateTripsClick = (id) => {
+    dispatch(
+      addPrivateOrder({
+  selectedDate,
+  selectedSlot,
+  adultCount,
+  childCount,
+  selectedTheme,
+  tourguideInfo: tourguideInfoById,
+}));
+    navigate(`/search-tourguides/tourguide-profile/${id}/private-trips/confirm-order`);
   };
 
-  const handleCardClick = (id) => {
-    navigate(`/search-tourguides/tourguide-profile/${id}`);
-  };
+
+  // const handleGroupOrder = () => {
+  //   dispatch(
+  //     setGroupOrderInfo({
+  //       selectedDate,
+  //       adultCount,
+  //       childCount,
+  //       selectedTour: "",
+  //       tourguideInfo: tourguideInfoById,
+  //       tourInfo: {},
+  //     })
+  //   );
+  // };
+
+  // const handleCardClick = (id) => {
+  //   navigate(`/search-tourguides/tourguide-profile/${id}`);
+  // };
 
   // const { search } = useLocation();
   // const queryParams = new URLSearchParams(search);
@@ -1415,7 +1441,7 @@ function TourguideProfilePage() {
 
                               <button
                                 className="flex w-full justify-center space-x-20 rounded-lg border border-secondary-300 bg-secondary-400 px-4 py-4 text-white"
-                                onClick={handlePrivateTripsClick}
+                                onClick={() => handlePrivateTripsClick(tourguideInfoById.id)}
                               >
                                 <p>私人行程馬上預定</p>
                               </button>

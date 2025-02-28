@@ -26,6 +26,8 @@ import UserProfile from "./pages/UserProfile";
 
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "../context/userContext";
+import { Provider } from "react-redux";
+import store from "./store/store.jsx";
 
 
 axios.defaults.baseURL = "http://localhost:8000";
@@ -35,11 +37,14 @@ export default function App() {
   return (
   
       <UserContextProvider>
+
+        <Provider store={store}>
+
         <div className="flex min-h-screen flex-col">
           <BrowserRouter>
             <Header />
             <Toaster
-              position="Top-right"
+              position="top-right"
               toastOptions={{ duration: 2000 }}
             />
 
@@ -105,6 +110,9 @@ export default function App() {
             <Footer />
           </BrowserRouter>
         </div>
+
+
+        </Provider>
       </UserContextProvider>
   
   );
