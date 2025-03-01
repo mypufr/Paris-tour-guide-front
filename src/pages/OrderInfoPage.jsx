@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
+import { useDispatch, useSelector } from "react-redux";
 
 import { addPrivateOrder } from "../store/reducers/orderSlice.jsx";
 
 import data from "../data/data.json";
-import { useDispatch, useSelector } from "react-redux";
 
 function OrderInfoPage() {
   const navigate = useNavigate();
