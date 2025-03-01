@@ -8,7 +8,12 @@ import {
   setPrivateOrdersInfo,
   setGroupOrdersInfo,
 } from "../store/reducers/orderSlice.jsx";
-import { selectTotalPrice } from "../store/reducers/orderSlice.jsx";
+import { selectTotalPrice} from "../store/reducers/orderSlice.jsx";
+import { getPrivateOrdersTotalPrice, //所有私人行程小計
+         getPrivateOrderPrice //單筆私人行程價格
+        
+        } from "../utils/calculatePrice"; 
+
 
 import data from "../data/data.json";
 
@@ -44,6 +49,12 @@ function PaymentPage() {
   const [isGroupOrderOpen, setGroupOrderOpen] = useState(false);
 
   const totalPrice = useSelector(selectTotalPrice);
+
+
+    // 計算所有私人訂單的小計（數字）
+    const subtotalPrivateOrders = privateOrders.reduce((acc, order) => {
+      return acc + getPrivateOrdersTotalPrice(order);
+    }, 0);
 
   return (
     <>
@@ -229,8 +240,14 @@ function PaymentPage() {
                       <p className="text-base font-normal">私人行程訂單</p>
 
                       <p className="text-end text-xl text-primary-700">
-                        {" "}
-                        {totalPrice}
+           
+
+                       
+
+       {subtotalPrivateOrders} €
+
+          
+  
                       </p>
                     </div>
                     <button
@@ -241,14 +258,14 @@ function PaymentPage() {
                     </button>
 
                     {/* 私人行程訂單 Modal */}
-                    {isPrivateOrderOpen && (
+                    {/* {isPrivateOrderOpen && (
                       <div className="fixed inset-0 flex items-center justify-center bg-black/50">
                         <div className="w-4/5 max-w-2xl rounded-lg bg-white p-6">
                           <h3 className="border-b-4 border-secondary-200 py-4 text-2xl text-secondary-500">
                             私人行程訂單
                           </h3>
 
-                          {/* 訂單內容 */}
+                 
                           <div className="flex flex-col items-center">
                             <div className="flex space-y-8 px-8 py-6">
                               <div className="flex items-center space-x-4">
@@ -294,7 +311,7 @@ function PaymentPage() {
                             </div>
                           </div>
 
-                          {/* 訂單價格 & 關閉按鈕 */}
+                  
                           <div className="flex justify-between pt-6">
                             <p className="text-2xl text-primary-700">
                               {totalPrice}
@@ -308,7 +325,101 @@ function PaymentPage() {
                           </div>
                         </div>
                       </div>
-                    )}
+                    )} */}
+
+                    {/* 私人行程訂單 Modal */}
+{isPrivateOrderOpen && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+    <div className="w-4/5 max-w-2xl rounded-lg bg-white p-6">
+
+
+
+
+      <h3 className="border-b-4 border-secondary-200 text-2xl text-secondary-500 flex justify-between">
+        私人行程訂單
+          
+      <span className="text-2xl text-primary-700 pt-4"> 小計:
+
+      {subtotalPrivateOrders}  €
+
+
+                {/* {totalPrice ? `${totalPrice} ` : "價格計算中..."} */}
+    </span>
+      </h3>
+      {/* 如果沒有訂單，顯示「無私人行程訂單」 */}
+      {privateOrders.length === 0 ? (
+        <p className="text-center text-xl text-grey-700 py-6">
+          無私人行程訂單
+        </p>
+      ) : (
+        <div className="flex p-4 gap-4">
+          {/* 🔹 使用 .map() 來遍歷所有訂單 */}
+          {privateOrders.map(
+            
+            
+            
+            (order, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center border-b border-gray-300 pb-4 border border-1"
+            >
+              {/* 訂單內容 */}
+              <div className="flex   space-y-8 px-8 py-6">
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={order.tourguideInfo.imgUrl || "https://images.unsplash.com/photo-1460794418188-1bb7dba2720d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D"}
+                    alt="導遊"
+                    className="inline-block h-20 w-20 rounded-full"
+                  />
+                  <p className="text-xl text-secondary-700">
+                    {order.tourguideInfo.name || "未知導遊"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-start space-y-2">
+                <p className="text-base font-normal text-grey-950">
+                  日期：{order.selectedDate || "未選擇日期"}
+                </p>
+                <p className="text-base font-normal text-grey-950">
+                  時段：{order.selectedSlot || "未選擇時段"}
+                </p>
+                <p className="text-base font-normal text-grey-950">
+                  人數: {order.adultCount || 0} 位大人、
+                  {order.childCount || 0} 位小孩
+                </p>
+                <p className="text-base font-normal text-grey-950">
+                  主題：{order.selectedTheme || "未選擇主題 "}
+                </p>
+              </div>
+
+              {/* 訂單價格 */}
+              {/* <p className="text-2xl text-primary-700 pt-4">
+                {totalPrice ? `${totalPrice} ` : "價格計算中..."}
+              </p> */}
+              <p className="text-xl text-primary-700 pt-4 ml-auto mr-4"> {getPrivateOrderPrice(order)}</p>
+            </div>
+          ))
+          
+          
+          
+          }
+        </div>
+      )}
+
+      {/* 關閉按鈕 */}
+      <div className="flex justify-center pt-6">
+        <button
+          className="rounded-lg bg-red-500 px-4 py-2 text-white text-base"
+          onClick={() => setPrivateOrderOpen(false)}
+        >
+          關閉
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
                   </div>
 
                   <div className="flex flex-col gap-2">
