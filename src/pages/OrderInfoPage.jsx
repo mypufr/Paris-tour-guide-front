@@ -82,7 +82,11 @@ function OrderInfoPage() {
         </div>
 
         <div className="m-auto flex max-w-[75%] justify-center space-x-6 py-5">
-          <div className="max-w-[30%] border-spacing-3 border">
+
+
+
+          
+          <div className="min-w-[80%] border-spacing-3 border">
             {/* Selected Tourguide  */}
             <div className="m-auto flex w-full flex-col items-center justify-center space-y-8 border border-background-2 bg-background-2 px-8 py-6">
               <p className="text-3xl text-secondary-500">您預約的導遊是：</p>
@@ -198,7 +202,7 @@ function OrderInfoPage() {
           </div>
 
           {/* Order Detail */}
-          <div className="flex h-full min-w-[50%] flex-col border">
+          <div className="flex h-full max-w-[30%] flex-col border">
             <h3 className="border-b-4 border-b-secondary-200 py-6 pl-4 text-start text-3xl text-primary-950">
               預約類型：私人行程訂單
             </h3>

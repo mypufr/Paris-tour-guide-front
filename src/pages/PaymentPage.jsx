@@ -43,16 +43,10 @@ function PaymentPage() {
   const handleConfirmOrderClick = async (id) => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/${id}/private-orders"`,
+        `http://localhost:8000/api/${id}/private-orders`,
         {
-          adultCount: privateOrders.adultCount,
-          childCount: privateOrders.childCount,
-          selectedDate: privateOrders.selectedDate,
-          selectedSlot: privateOrders.selectedSlot,
-          selectedTheme: privateOrders.seletedTheme,
-          tourguideInfo: privateOrders.tourguideInfo,
+          privateOrders: privateOrders,
         },
-
         {
           headers: {
             "Content-Type": "application/json",
@@ -69,7 +63,7 @@ function PaymentPage() {
 
       console.error("訂單資料送出失敗", error.response?.data || error.message);
     }
-  }
+  };
 
   const [isPrivateOrderOpen, setPrivateOrderOpen] = useState(false);
   const [isGroupOrderOpen, setGroupOrderOpen] = useState(false);
@@ -292,7 +286,7 @@ function PaymentPage() {
                               {" "}
                               小計:
                               {subtotalPrivateOrders} €
-                              {/* {totalPrice ? `${totalPrice} ` : "價格計算中..."} */}
+                  
                             </span>
                           </h3>
                           {/* 如果沒有訂單，顯示「無私人行程訂單」 */}
@@ -342,10 +336,7 @@ function PaymentPage() {
                                     </p>
                                   </div>
 
-                                  {/* 訂單價格 */}
-                                  {/* <p className="text-2xl text-primary-700 pt-4">
-                {totalPrice ? `${totalPrice} ` : "價格計算中..."}
-              </p> */}
+        
                                   <p className="ml-auto mr-4 pt-4 text-xl text-primary-700">
                                     {" "}
                                     {getPrivateOrderPrice(order)}
