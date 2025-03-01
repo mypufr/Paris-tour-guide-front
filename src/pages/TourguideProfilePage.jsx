@@ -7,7 +7,7 @@ import {
   // , useLocation
 } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addPrivateOrder, setGroupOrderInfo} from "../store/reducers/orderSlice.jsx"
+import { addPrivateOrder, setGroupOrdersInfo} from "../store/reducers/orderSlice.jsx"
 
 import data from "../data/data.json";
 // import TripsData from "../data/trips.json";
@@ -207,7 +207,7 @@ function TourguideProfilePage() {
 
   // const handleGroupOrder = () => {
   //   dispatch(
-  //     setGroupOrderInfo({
+  //     setGroupOrdersInfo({
   //       selectedDate,
   //       adultCount,
   //       childCount,

@@ -3,7 +3,12 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addPrivateOrder } from "../store/reducers/orderSlice.jsx";
+import {
+  addPrivateOrder,
+  setPrivateOrdersInfo,
+  setGroupOrdersInfo,
+} from "../store/reducers/orderSlice.jsx";
+import { selectTotalPrice } from "../store/reducers/orderSlice.jsx";
 
 import data from "../data/data.json";
 
@@ -37,6 +42,9 @@ function PaymentPage() {
 
   const [isPrivateOrderOpen, setPrivateOrderOpen] = useState(false);
   const [isGroupOrderOpen, setGroupOrderOpen] = useState(false);
+
+  const totalPrice = useSelector(selectTotalPrice);
+
   return (
     <>
       <div className="py-10 text-3xl font-bold text-black">
@@ -222,35 +230,7 @@ function PaymentPage() {
 
                       <p className="text-end text-xl text-primary-700">
                         {" "}
-                        {privateOrders.length > 0
-                          ? (() => {
-                              const latestOrder =
-                                privateOrders[privateOrders.length - 1];
-
-                              // 取得時段範圍，例如 "09:00-11:00"
-                              const [start, end] =
-                                latestOrder.selectedSlot.split("-");
-
-                              // 解析小時數
-                              const startHour = parseInt(
-                                start.split(":")[0],
-                                10,
-                              );
-                              const endHour = parseInt(end.split(":")[0], 10);
-                              const duration = endHour - startHour; // 計算時長（小時）
-
-                              // 計算價格
-                              const totalPrice =
-                                latestOrder.adultCount *
-                                  latestOrder.tourguideInfo.price_adult *
-                                  duration +
-                                latestOrder.childCount *
-                                  latestOrder.tourguideInfo.price_child *
-                                  duration;
-
-                              return `${totalPrice} €`;
-                            })()
-                          : "Loading..."}
+                        {totalPrice}
                       </p>
                     </div>
                     <button
@@ -278,27 +258,47 @@ function PaymentPage() {
                                   className="inline-block h-20 w-20 rounded-full"
                                 />
                                 <p className="text-2xl text-secondary-700">
-                                  私人導遊姓名
+                                  {privateOrders.length > 0
+                                    ? privateOrders[privateOrders.length - 1]
+                                        .tourguideInfo.name
+                                    : "Loading..."}
                                 </p>
                               </div>
                             </div>
 
                             <div className="flex flex-col items-start space-y-2">
                               <p className="text-lg text-grey-950">
-                                2024年10月20日
+                                {privateOrders.length > 0
+                                  ? privateOrders[privateOrders.length - 1]
+                                      .selectedDate
+                                  : "Loading..."}
                               </p>
                               <p className="text-lg text-grey-950">
-                                09:00-11:00
+                                {privateOrders.length > 0
+                                  ? privateOrders[privateOrders.length - 1]
+                                      .selectedSlot
+                                  : "Loading..."}
                               </p>
                               <p className="text-lg text-grey-950">
-                                2位大人, 1位小孩
+                                {privateOrders.length > 0
+                                  ? privateOrders[privateOrders.length - 1]
+                                      .adultCount
+                                  : "Loading..."}
+                                位大人、
+                                {privateOrders.length > 0
+                                  ? privateOrders[privateOrders.length - 1]
+                                      .childCount
+                                  : "Loading..."}
+                                位小孩
                               </p>
                             </div>
                           </div>
 
                           {/* 訂單價格 & 關閉按鈕 */}
                           <div className="flex justify-between pt-6">
-                            <p className="text-2xl text-primary-700">200 €</p>
+                            <p className="text-2xl text-primary-700">
+                              {totalPrice}
+                            </p>
                             <button
                               className="rounded-lg bg-red-500 px-4 py-2 text-white"
                               onClick={() => setPrivateOrderOpen(false)}
@@ -309,52 +309,6 @@ function PaymentPage() {
                         </div>
                       </div>
                     )}
-                    {/* <div className="flex flex-col items-center">
-                  <div className="flex space-y-8 px-8 py-6">
-                    <div className="flex items-center justify-center space-x-4">
-                      <img
-                        src={
-                          privateOrders.length > 0
-                            ? privateOrders[privateOrders.length - 1]
-                                .tourguideInfo.imgUrl
-                            : "Loading..."
-                        }
-                        alt=""
-                        className="inline-block h-20 max-w-20 rounded-full"
-                      />
-                      <p className="text-2xl text-secondary-700">
-                        {privateOrders.length > 0
-                          ? privateOrders[privateOrders.length - 1]
-                              .tourguideInfo.name
-                          : "Loading..."}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-start space-y-2">
-                    <p className="text-lg text-grey-950">
-                      {privateOrders.length > 0
-                        ? privateOrders[privateOrders.length - 1].selectedDate
-                        : "Loading..."}
-                    </p>
-                    <p className="text-lg text-grey-950">
-                      {privateOrders.length > 0
-                        ? privateOrders[privateOrders.length - 1].selectedSlot
-                        : "Loading..."}
-                    </p>
-                    <p className="ext-grey-950 text-lg">
-                      {" "}
-                      {privateOrders.length > 0
-                        ? privateOrders[privateOrders.length - 1].adultCount
-                        : "Loading..."}
-                      位大人、
-                      {privateOrders.length > 0
-                        ? privateOrders[privateOrders.length - 1].childCount
-                        : "Loading..."}
-                      位小孩
-                    </p>
-                  </div>
-                </div> */}
                   </div>
 
                   <div className="flex flex-col gap-2">
@@ -362,7 +316,7 @@ function PaymentPage() {
                       <p className="text-base font-normal">團體行程訂單</p>
                       <p className="text-end text-xl text-primary-700">
                         {" "}
-                        {privateOrders.length > 0
+                        {/* {privateOrders.length > 0
                           ? (() => {
                               const latestOrder =
                                 privateOrders[privateOrders.length - 1];
@@ -390,7 +344,7 @@ function PaymentPage() {
 
                               return `${totalPrice} €`;
                             })()
-                          : "Loading..."}
+                          : "Loading..."} */}
                       </p>
                     </div>
                     {/* 按鈕 - 開啟定點行程訂單 Modal */}
@@ -439,7 +393,9 @@ function PaymentPage() {
 
                           {/* 訂單價格 & 關閉按鈕 */}
                           <div className="flex justify-between pt-6">
-                            <p className="text-2xl text-primary-700">180 €</p>
+                            <p className="text-2xl text-primary-700">
+                              {totalPrice}
+                            </p>
                             <button
                               className="rounded-lg bg-red-500 px-4 py-2 text-white"
                               onClick={() => setGroupOrderOpen(false)}

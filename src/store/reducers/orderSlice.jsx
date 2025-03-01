@@ -32,7 +32,7 @@ const orderSlice = createSlice({
     },
 
     removePrivateOrder: (state, action) => {
-      state.privateOrders.state.privateOrders.filter(
+      state.privateOrders = state.privateOrders.filter(
         (privateOrder) => privateOrder.id !== action.payload,
       );
     },
@@ -51,16 +51,65 @@ const orderSlice = createSlice({
       }
     },
 
-    setPrivateOrderInfo: (state, action) => {
-      state.privateOrder = action.payload;
+    setPrivateOrdersInfo: (state, action) => {
+      state.privateOrders = action.payload;
     },
-    setGroupOrderInfo: (state, action) => {
-      state.groupOrder = action.payload;
+    setGroupOrdersInfo: (state, action) => {
+      state.groupOrders = action.payload;
     },
     resetOrder: () => initialState,
   },
 });
 
-export const { addPrivateOrder, removePrivateOrder, updatePrivateOrder, setPrivateOrderInfo, setGroupOrderInfo, resetOrder } =
+
+
+  // 🔹 計算價格的 Selector
+export const selectTotalPrice = (state) => {
+
+
+  if (!state.order || !state.order.privateOrders || state.order.privateOrders.length === 0) {
+    return "Loading...";
+  }
+ 
+
+  // 取得時段範圍，例如 "09:00-11:00"
+  const latestOrder = state.order.privateOrders[state.order.privateOrders.length -1]
+  
+ // 🛑 確保 selectedSlot 存在，否則返回 0 €
+ if (!latestOrder.selectedSlot || !latestOrder.selectedSlot.includes("-")) {
+  return "0 €";
+}
+
+  // 取得時段範圍，例如 "09:00-11:00"
+  const [start, end] = latestOrder.selectedSlot.split("-");
+
+  if (!start || !end) {
+    return "0 €"; // 🛑 如果分割後不符合格式，返回 0 €
+  }
+  
+  // 解析小時數
+  const startHour = parseInt(start.split(":")[0], 10);
+  const endHour = parseInt(end.split(":")[0], 10);
+  const duration = endHour - startHour; // 計算時長（小時）
+  
+  
+  // 計算價格
+  const adultPrice = latestOrder.tourguideInfo?.price_adult || 0;
+  const childPrice = latestOrder.tourguideInfo?.price_child || 0;
+  const adultCount = latestOrder.adultCount || 0;
+  const childCount = latestOrder.childCount || 0;
+  
+  const totalPrice = adultCount * adultPrice * duration + childCount * childPrice * duration;
+  
+  
+  return `${totalPrice} €`;
+
+
+}
+
+
+
+export const { addPrivateOrder, removePrivateOrder, updatePrivateOrder, setPrivateOrdersInfo, setGroupOrdersInfo, resetOrder } =
   orderSlice.actions;
+
 export default orderSlice.reducer;
