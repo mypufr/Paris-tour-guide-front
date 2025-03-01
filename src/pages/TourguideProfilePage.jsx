@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
 import {
   useNavigate,
   // , useLocation
@@ -43,6 +45,8 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
 function TourguideProfilePage() {
   const { id } = useParams();
+
+    const { user, setUser } = useContext(UserContext);
   // const CardData = data.find((item) => item.id === parseInt(id));
   // console.log(CardData);
 
@@ -192,8 +196,16 @@ function TourguideProfilePage() {
   // };
 
   const handlePrivateTripsClick = (id) => {
+console.log(user)
+    if (!user) {
+      console.error("❌ user is undefined! 確保 user 已經載入:", user);
+      return;
+    }
+
     dispatch(
       addPrivateOrder({
+        userEmail: user.email,
+        userName: user.username,
   selectedDate,
   selectedSlot,
   adultCount,
@@ -354,6 +366,20 @@ function TourguideProfilePage() {
     }
   }, [filteredSlots]);
 
+
+//  useEffect(() => {
+//       if (user) {
+//         localStorage.getItem("user", JSON.stringify(user));
+//       }
+//     }, [user]);
+
+    useEffect(() => {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      if (storedUser && storedUser._id) {
+        setUser(storedUser);
+      }
+    }, []);
+
   return (
     <>
       <div className="flex max-h-[640px] justify-center py-[2vh] text-3xl font-bold text-grey-950">
@@ -373,7 +399,8 @@ function TourguideProfilePage() {
                     className="inline-block h-[30px]"
                   />
                   <h2 className="text-[28px] font-bold text-primary-600">
-                    您的專屬導遊 : {tourguideInfoById.name}
+                    {user.username}的專屬導遊 : {tourguideInfoById.name}
+                    
                   </h2>
                   <img
                     src="/images/vector_title.png"

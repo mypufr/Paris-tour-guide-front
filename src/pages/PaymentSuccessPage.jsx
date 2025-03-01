@@ -1,6 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../context/userContext";
+import axios from "axios";
 
 import data from "../data/data.json";
 
@@ -22,6 +25,30 @@ function PaymentSuccessPage() {
   if (!CardData) {
     return <div>Results not found</div>;
   }
+
+     const { user, setUser } = useContext(UserContext);
+
+
+const getPrivateOrdersData = async(id)=> {
+
+try {
+  const res = await axios.get("http://localhost:8000/api/${id}/private-orders");
+  console.log(res.data)
+  
+} catch (error) {
+  console.error(error);
+}
+
+
+
+}
+
+    useEffect(() => {
+        if (user) {
+          localStorage.getItem("user", JSON.stringify(user));
+        }
+      }, [user]);
+  
   return (
     <>
       <div className="py-10 text-center text-3xl font-bold text-black">
@@ -44,25 +71,25 @@ function PaymentSuccessPage() {
 
         {/* subNavbar */}
         <div className="m-auto my-10 flex max-w-[75%] justify-center space-x-6 py-10">
+       
           <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
-            <p className="text-xl text-secondary-500">1. 預約項目</p>
+            <p className="text-xl text-secondary-500">Step 1 : 確認訂單</p>
           </button>
           <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
-            <p className="text-xl text-secondary-500">2. 確認訂單</p>
-          </button>
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
-            <p className="text-xl text-secondary-500">3. 付款資料</p>
+            <p className="text-xl text-secondary-500">Step 2 : 付款資料</p>
           </button>
           <button className="max-w-60 rounded-2xl bg-secondary-300 px-2 py-2">
-            <p className="text-xl text-white">4. 完成預約</p>
+            <p className="text-xl text-white">Step 3 : 完成預約</p>
           </button>
         </div>
 
         {/* title */}
         <div className="my-10">
           <p className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
-            恭喜您已完成預約，以下是您的預約資料 :
+            恭喜{user.username}已完成預約，以下是您的預約資料 :
           </p>
+
+          <button type="button" onClick={getPrivateOrdersData}>get private orders</button>
         </div>
 
         <div className="m-auto flex flex-col max-w-[55%] ">

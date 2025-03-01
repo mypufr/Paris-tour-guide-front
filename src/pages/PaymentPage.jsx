@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../context/userContext";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
@@ -28,6 +30,10 @@ function PaymentPage() {
   if (!CardData) {
     return <div>Results not found</div>;
   }
+
+      const { user, setUser } = useContext(UserContext);
+
+
   const privateOrders = useSelector((state) => state.order.privateOrders || []);
 
 
@@ -75,6 +81,13 @@ function PaymentPage() {
     return acc + getPrivateOrdersTotalPrice(order);
   }, 0);
 
+  useEffect(() => {
+      if (user) {
+        localStorage.getItem("user", JSON.stringify(user));
+      }
+    }, [user]);
+
+
   return (
     <>
       <div className="py-10 text-3xl font-bold text-black">
@@ -82,13 +95,13 @@ function PaymentPage() {
 
         <div className="m-auto my-10 flex max-w-[80%] justify-center space-x-6 py-10">
           <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
-            <p className="text-xl text-secondary-500">1. 確認訂單</p>
+            <p className="text-xl text-secondary-500">Step 1 : 確認訂單</p>
           </button>
           <button className="max-w-60 rounded-2xl border border-secondary-300 bg-secondary-300 px-2 py-2">
-            <p className="text-xl text-white">2. 付款資料</p>
+            <p className="text-xl text-white">Step 2 : 付款資料</p>
           </button>
           <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
-            <p className="text-xl text-secondary-500">3. 完成預約</p>
+            <p className="text-xl text-secondary-500">Step 3 : 完成預約</p>
           </button>
         </div>
 
@@ -99,9 +112,9 @@ function PaymentPage() {
             alt=""
             className="inline-block h-[40px]"
           />
-          {/* <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
-            付款資訊
-          </h2> */}
+          <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
+            {user.username}的付款資訊
+          </h2>
           <img
             src="images/vector_title.png"
             alt=""
@@ -133,7 +146,7 @@ function PaymentPage() {
                 <input
                   type="text"
                   className="grow"
-                  placeholder="請輸入您的姓名"
+                  placeholder={user.username}
                   required
                 />
                 <span className="text-secondary-400">必填</span>

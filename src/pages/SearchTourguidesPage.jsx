@@ -1,5 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, {useEffect} from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
@@ -42,7 +43,8 @@ function TourguidesPage() {
       url: "https://images.unsplash.com/photo-1528535619428-a995242b9096?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   ];
-
+  
+  const { user, setUser } = useContext(UserContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const [dateRange, setDateRange] = useState([null, null]);
@@ -110,6 +112,12 @@ function TourguidesPage() {
     setSelectedTheme(event.target.value);
   };
 
+   useEffect(() => {
+        if (user) {
+          localStorage.getItem("user", JSON.stringify(user));
+        }
+      }, [user]);
+
   return (
     <>
       <div className="group relative m-auto h-[480px] w-full py-0 md:h-[500px] lg:h-[780px]">
@@ -119,7 +127,7 @@ function TourguidesPage() {
         >
           <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[33%] lg:top-[20%]">
             <h1 className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
-              尋找你的專屬在地導遊
+              尋找{user.username}的專屬在地導遊
             </h1>
             {/* Search options */}
             <div className="mt-2 lg:mt-10">

@@ -13,7 +13,7 @@ function OrderInfoPage() {
   const navigate = useNavigate();
 
 
-    const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const privateOrders = useSelector((state) => state.order.privateOrders || []);
 
   const handleGoBackClick = (id) => {
@@ -56,13 +56,13 @@ function OrderInfoPage() {
 
         <div className="my m-auto flex max-w-[75%] justify-center space-x-6 py-10">
           <button className="max-w-60 rounded-2xl bg-secondary-300 px-2 py-2">
-            <p className="text-xl text-white">1. 預約資訊</p>
+            <p className="text-xl text-white">Step 1 :預約資訊</p>
           </button>
           <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
-            <p className="text-xl text-secondary-500">2. 預約付款</p>
+            <p className="text-xl text-secondary-500">Step 2 : 預約付款</p>
           </button>
           <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
-            <p className="text-xl text-secondary-500">3. 完成預約</p>
+            <p className="text-xl text-secondary-500">Step 3 : 完成預約</p>
           </button>
         </div>
 
@@ -89,7 +89,7 @@ function OrderInfoPage() {
           <div className="min-w-[80%] border-spacing-3 border">
             {/* Selected Tourguide  */}
             <div className="m-auto flex w-full flex-col items-center justify-center space-y-8 border border-background-2 bg-background-2 px-8 py-6">
-              <p className="text-3xl text-secondary-500">您預約的導遊是：</p>
+              <p className="text-3xl text-secondary-500">{user.username}預約的導遊是：</p>
 
               <div className="flex items-center justify-center space-x-4">
                 <img
