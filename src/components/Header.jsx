@@ -32,7 +32,7 @@ function Header() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("/logout", {}, { withCredentials: true });
+      await axios.post("http://localhost:8000/api/logout", {}, { withCredentials: true });
       setUser(null);
       navigate("/");
       toast.success("已成功登出");

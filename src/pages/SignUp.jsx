@@ -27,7 +27,7 @@ function SignUp() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const signupRes = await axios.post("/register", account);
+      const signupRes = await axios.post("http://localhost:8000/api/register", account);
       console.log(signupRes);
       setUser({
         username: account.username,

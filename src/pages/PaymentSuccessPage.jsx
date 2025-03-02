@@ -37,7 +37,6 @@ function PaymentSuccessPage() {
       );
       console.log(res.data);
       setOrderData(res.data);
-      // setPrivateOrders(res.data);
     } catch (error) {
       console.error(error.response?.data || error.message);
     }
@@ -55,161 +54,72 @@ function PaymentSuccessPage() {
         {/* title */}
         <div className="flex justify-center space-x-4 hover:cursor-pointer">
           <img
-            src="images/vector_title.png"
+            src="/images/vector_title.png"
             alt=""
             className="inline-block h-[40px]"
           />
           <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
-            預約成功 !
+            預約成功
           </h2>
           <img
-            src="images/vector_title.png"
+            src="/images/vector_title.png"
             alt=""
             className="inline-block h-[40px]"
           />
         </div>
 
         {/* subNavbar */}
-        <div className="m-auto my-10 flex max-w-[75%] justify-center space-x-6 py-10">
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
+        <div className="m-auto my-10 flex max-w-[75%] justify-center gap-16 py-10">
+          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
             <p className="text-xl text-secondary-500">Step 1 : 確認訂單</p>
           </button>
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
+          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
             <p className="text-xl text-secondary-500">Step 2 : 付款資料</p>
           </button>
-          <button className="max-w-60 rounded-2xl bg-secondary-300 px-2 py-2">
+          <button className="max-w-60 rounded-2xl bg-secondary-300 px-10 py-2">
             <p className="text-xl text-white">Step 3 : 完成預約</p>
           </button>
         </div>
 
         <div className="my-10">
           <p className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
-            恭喜{user.username}已完成預約，以下是您的預約資料 :
+            {/* 恭喜{user.username}已完成預約! */}
           </p>
-
-          <button type="button" onClick={getPrivateOrdersData}>
-            get private orders
-          </button>
         </div>
         {/* title */}
         <div className="m-auto flex max-w-[55%] flex-col">
           <div className="justify-center space-x-6">
             <div className="">
-              <h3 className="mb-10 border-b-4 border-b-secondary-200 py-6 pl-4 text-start text-3xl text-secondary-500">
-                私人行程訂單
-              </h3>
-          
-              {/* <div className="toMap">
-                <div className="bg-primary-600 p-4 text-xl text-white">
-                  <p>
-                    訂單編號 :{" "}
-                    {orderData.length > 0
-                      ? orderData[4].privateOrderNumber
-                      : "Loading..."}
-                  </p>
-                </div>
+              <button
+                type="button"
+                onClick={getPrivateOrdersData}
+                className="btn bg-primary-200 text-xl"
+              >
+                所有私人行程訂單
+              </button>
 
-                <div className="flex max-w-full border-spacing-3 border">
-           
-
-                  <div className="flex min-w-[30%] flex-col justify-center border border-background-2 bg-background-2 px-8 py-6">
-                    <div className="flex items-center justify-center space-x-4">
-                      <img
-                        src={
-                      
-                          orderData.length > 0
-                            ? orderData[4].tourguideInfo.imgUrl
-                            : "Loading..."
-                        }
-                        alt=""
-                        className="inline-block h-20 max-w-20 rounded-full"
-                      />
-                      <p className="text-xl text-secondary-700">
-                  
-                        {orderData.length > 0
-                          ? orderData[4].tourguideInfo.name
-                          : "Loading..."}
-                        導遊
-                      </p>
-                    </div>
-                  </div>
-
-          
-                  <div className="m-auto flex flex-col items-center">
-                    <div className="flex flex-col space-y-6 p-10">
-                      <div className="flex items-center">
-                        <div className="flex items-center">
-                          <p className="text-xl text-primary-700">預定日期：</p>
-                          <div className="relative max-w-sm">
-                     
-                            {orderData.length > 0
-                              ? orderData[4].selectedDate
-                              : "Loading..."}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="flex items-center">
-                          <p className="text-xl text-primary-700">預定人數：</p>
-                          <div className="relative max-w-sm">
-                            <p className="text-lg">
-                              {orderData.length > 0
-                                ? orderData[4].adultCount
-                                : "Loading..."}
-                              位大人、{" "}
-                              {orderData.length > 0
-                                ? orderData[4].childCount
-                                : "Loading..."}
-                              位小孩
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="flex items-center">
-                          <p className="text-xl text-primary-700">行程主題：</p>
-                          <div className="relative max-w-sm">
-                            <p className="text-lg">
-                              {orderData.length > 0
-                                ? orderData[4].selectedTheme
-                                : "Loading..."}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="flex items-center">
-                          <p className="text-xl text-primary-700">服務時段：</p>
-                          <div className="relative max-w-sm">
-                            <p className="text-lg">
-                              {orderData.length > 0
-                                ? orderData[4].selectedSlot
-                                : "Loading..."}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
+        
             </div>
           </div>
-    {/* Private Order List */}
-          <div className="toMap">
+          {/* Private Order List */}
+          <div className="mt-6">
+        
+                         <h3 className="mb-10 border-b-4 border-b-secondary-200 py-6 pl-4 text-start text-3xl text-secondary-500">
+                私人行程訂單
+              </h3>
+
             {orderData.length === 0 ? (
-              <p>Loading...</p>
+         <p></p>
             ) : (
+           
               orderData.map((order, index) => (
                 <div key={order._id || index} className="mb-6">
-                  {/* 訂單編號 */}
-                  <div className="bg-primary-600 p-4 text-xl text-white">
+                  <div className="bg-primary-100 p-4 text-xl text-primary-700">
                     <p>訂單編號: {order.privateOrderNumber}</p>
                   </div>
 
                   <div className="flex max-w-full border-spacing-3 border">
-                    {/* 導遊資料 */}
-                    <div className="flex min-w-[30%] flex-col justify-center border border-background-2 bg-background-2 px-8 py-6">
+                    <div className="flex min-w-[30%] flex-col justify-center border border-background-2 bg-gray-100 px-8 py-6 font-normal">
                       <div className="flex items-center justify-center space-x-4">
                         <img
                           src={order.tourguideInfo.imgUrl || "Loading..."}
@@ -222,8 +132,7 @@ function PaymentSuccessPage() {
                       </div>
                     </div>
 
-                    {/* 訂單選項 */}
-                    <div className="m-auto flex flex-col items-center">
+                    <div className="m-auto flex flex-col items-center font-normal">
                       <div className="flex flex-col space-y-6 p-10">
                         <div className="flex items-center">
                           <p className="text-xl text-primary-700">預定日期：</p>
@@ -259,7 +168,9 @@ function PaymentSuccessPage() {
                           </div>
                         </div>
 
-                        <button className="text-base font-normal bg-secondary-200 ml-auto p-2 px-6 rounded-xl text-secondary-700">看詳情</button>
+                        <button className="ml-auto rounded-xl bg-secondary-200 p-2 px-6 text-base font-normal text-secondary-700">
+                          看詳情
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -336,7 +247,7 @@ function PaymentSuccessPage() {
 
         <div className="my-20 flex flex-col items-center justify-center space-y-4">
           <button
-            className="flex min-w-60 justify-center space-x-20 rounded-3xl bg-primary-500 px-2 py-2 text-white"
+            className="flex min-w-60 justify-center space-x-20 rounded-3xl bg-primary-700 px-2 py-2 text-white"
             // onClick={handleComfirmtOrderClick}
           >
             <p className="text-xl">前往會員個人信箱</p>

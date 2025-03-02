@@ -400,7 +400,7 @@ console.log(user)
                     className="inline-block h-[30px]"
                   />
                   <h2 className="text-[28px] font-bold text-primary-600">
-                    {user.username}的專屬導遊 : {tourguideInfoById.name}
+                  你的專屬導遊 : {tourguideInfoById.name}
                     
                   </h2>
                   <img

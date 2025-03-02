@@ -24,12 +24,12 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 
 function PaymentPage() {
   const { id } = useParams();
-  const CardData = data.find((item) => item.id === parseInt(id));
-  console.log(CardData);
+  // const CardData = data.find((item) => item.id === parseInt(id));
+  // console.log(CardData);
 
-  if (!CardData) {
-    return <div>Results not found</div>;
-  }
+  // if (!CardData) {
+  //   return <div>Results not found</div>;
+  // }
 
       const { user, setUser } = useContext(UserContext);
 
@@ -46,10 +46,10 @@ function PaymentPage() {
     console.log(privateOrders);
   };
 
-  const handleConfirmOrderClick = async (id) => {
+  const handleConfirmOrderClick = async (userName = user.username) => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/${id}/private-orders`,
+        `http://localhost:8000/api/${user.username}/private-orders`,
         {
           privateOrders: privateOrders,
         },
@@ -93,14 +93,14 @@ function PaymentPage() {
       <div className="py-10 text-3xl font-bold text-black">
         {/* subNavbar */}
 
-        <div className="m-auto my-10 flex max-w-[80%] justify-center space-x-6 py-10">
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
+        <div className="m-auto my-10 flex max-w-[80%] justify-center gap-20 py-10">
+          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
             <p className="text-xl text-secondary-500">Step 1 : 確認訂單</p>
           </button>
-          <button className="max-w-60 rounded-2xl border border-secondary-300 bg-secondary-300 px-2 py-2">
+          <button className="max-w-60 rounded-2xl border border-secondary-300 bg-secondary-300 px-10 py-2">
             <p className="text-xl text-white">Step 2 : 付款資料</p>
           </button>
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-2 py-2">
+          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
             <p className="text-xl text-secondary-500">Step 3 : 完成預約</p>
           </button>
         </div>
@@ -108,20 +108,20 @@ function PaymentPage() {
         {/* title */}
         <div className="flex justify-center space-x-4 hover:cursor-pointer">
           <img
-            src="images/vector_title.png"
+            src="/images/vector_title.png"
             alt=""
             className="inline-block h-[40px]"
           />
-          <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
-            {user.username}的付款資訊
+          <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600"> <button onClick={checkOrderInfo}>  {user.username}的付款資訊</button>
+          
           </h2>
           <img
-            src="images/vector_title.png"
+            src="/images/vector_title.png"
             alt=""
             className="inline-block h-[40px]"
           />
         </div>
-        <button onClick={checkOrderInfo}>check order info</button>
+       
 
         <div className="m-auto my-10 flex max-w-[90%] justify-center space-x-8 py-10">
           {/* left: Payment  */}
@@ -373,43 +373,15 @@ function PaymentPage() {
                     )}
                   </div>
 
-                  <div className="flex flex-col gap-2">
+                  {/* <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between">
                       <p className="text-base font-normal">團體行程訂單</p>
                       <p className="text-end text-xl text-primary-700">
-                        {" "}
-                        {/* {privateOrders.length > 0
-                          ? (() => {
-                              const latestOrder =
-                                privateOrders[privateOrders.length - 1];
+                
 
-                              // 取得時段範圍，例如 "09:00-11:00"
-                              const [start, end] =
-                                latestOrder.selectedSlot.split("-");
-
-                              // 解析小時數
-                              const startHour = parseInt(
-                                start.split(":")[0],
-                                10,
-                              );
-                              const endHour = parseInt(end.split(":")[0], 10);
-                              const duration = endHour - startHour; // 計算時長（小時）
-
-                              // 計算價格
-                              const totalPrice =
-                                latestOrder.adultCount *
-                                  latestOrder.tourguideInfo.price_adult *
-                                  duration +
-                                latestOrder.childCount *
-                                  latestOrder.tourguideInfo.price_child *
-                                  duration;
-
-                              return `${totalPrice} €`;
-                            })()
-                          : "Loading..."} */}
                       </p>
                     </div>
-                    {/* 按鈕 - 開啟定點行程訂單 Modal */}
+       
                     <button
                       className="w-full rounded-lg bg-secondary-600 px-4 py-2 text-base font-normal text-white"
                       onClick={() => setGroupOrderOpen(true)}
@@ -417,7 +389,6 @@ function PaymentPage() {
                       查看訂單
                     </button>
 
-                    {/* 定點行程訂單 Modal */}
                     {isGroupOrderOpen && (
                       <div className="fixed inset-0 flex items-center justify-center bg-black/50">
                         <div className="w-4/5 max-w-2xl rounded-lg bg-white p-6">
@@ -425,7 +396,6 @@ function PaymentPage() {
                             定點行程訂單
                           </h3>
 
-                          {/* 訂單內容 */}
                           <div className="flex flex-col items-center">
                             <div className="flex space-y-8 px-8 py-6">
                               <div className="flex items-center space-x-4">
@@ -453,7 +423,7 @@ function PaymentPage() {
                             </div>
                           </div>
 
-                          {/* 訂單價格 & 關閉按鈕 */}
+                    
                           <div className="flex justify-between pt-6">
                             <p className="text-2xl text-primary-700">
                               {totalPrice}
@@ -468,7 +438,7 @@ function PaymentPage() {
                         </div>
                       </div>
                     )}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

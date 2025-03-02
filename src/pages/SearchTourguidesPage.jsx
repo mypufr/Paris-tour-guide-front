@@ -127,7 +127,7 @@ function TourguidesPage() {
         >
           <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[33%] lg:top-[20%]">
             <h1 className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
-              尋找{user.username}的專屬在地導遊
+              尋找你的專屬在地導遊
             </h1>
             {/* Search options */}
             <div className="mt-2 lg:mt-10">

@@ -25,37 +25,72 @@ function Login() {
     }));
   };
 
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const { data } = await axios.post("http://localhost:8000/api/login", account, {
+  //       withCredentials: true,
+  //     });
+  //     console.log("後端回應:",data);
+
+  //     if (data.error) {
+  //       toast.error(data.error);
+  //       return;
+  //     }
+
+  //     if (data.user) {
+  //       setUser(data.user);
+  //       localStorage.setItem("user", JSON.stringify(data.user));
+  //       toast.success("成功登入!");
+  //       navigate("/");
+  //       console.log(data.user)
+  //       console.log("登入成功，後端回傳資料：", data);
+  //     }
+
+  //     // if (data.error) {
+  //     //   toast.error(data.error);
+  //     // } else {
+  //     //   setAccount({
+  //     //     email: "",
+  //     //     password: "",
+  //     //   });
+  //     // }
+  //     // setTimeout(() => navigate("/"), 1500);
+  //   } catch (error) {
+  //     console.error("登入失敗", error);
+  //     toast.error("登入失敗，請檢查帳號或密碼 ❌");
+  //   }
+  // };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/login", account, {
-        withCredentials: true,
-      });
-      toast.success("成功登入!");
-      console.log(data);
-
-      if (data) {
-        setUser(data);
+      const { data } = await axios.post(
+        "http://localhost:8000/api/login",
+        account,
+        { withCredentials: true }
+      );
+  
+      console.log("後端回應:", data); // 確保你真的有接收到 user 資料
+  
+      if (data.error) {
+        toast.error(data.error);
+      } else if (data.user) {
+        setUser(data.user);
         localStorage.setItem("user", JSON.stringify(data.user));
         toast.success("成功登入!");
         navigate("/");
-        console.log(data.user)
-      }
-
-      if (data.error) {
-        toast.error(data.error);
       } else {
-        setAccount({
-          email: "",
-          password: "",
-        });
+        toast.error("未知錯誤，請稍後再試");
       }
+  
       setTimeout(() => navigate("/"), 1500);
     } catch (error) {
-      console.log("登入失敗", error);
+      console.error("登入失敗:", error);
       toast.error("登入失敗，請檢查帳號或密碼 ❌");
     }
   };
+  
 
   return (
     <>
@@ -70,7 +105,7 @@ function Login() {
           <img
             src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHx8fA%3D%3D"
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-bottom opacity-90"
+            className="absolute inset-0 h-full w-full object-cover object-bottom opacity-90 blur-xl"
             style={{
               maskImage:
                 "linear-gradient(to center, transparent 5%, black 100%))",
@@ -82,7 +117,7 @@ function Login() {
         <div className="absolute inset-0 flex items-center justify-center p-6 md:relative md:w-1/2">
           <form
             onSubmit={handleLogin}
-            className="-z-100 border-primary flex w-full max-w-[90%] flex-col gap-6 rounded-lg border-2 bg-white/80 p-6 backdrop-blur-md md:bg-white md:shadow-md"
+            className="-z-100 border-primary flex w-full max-w-[90%] flex-col gap-6 rounded-lg border-2 bg-white/80 p-6  md:bg-white"
           >
             <h1 className="text-center text-xl font-bold">會員登入</h1>
 
@@ -113,7 +148,7 @@ function Login() {
             <p className="text-center text-sm">
               <Link to="/login" className="text-primary-600 hover:underline">
                 {" "}
-                忘記密碼?
+                忘記密碼 ?
               </Link>
             </p>
             <button
@@ -129,13 +164,19 @@ function Login() {
               Google 登入
             </button>
 
-            <p className="text-center text-sm">
-              沒有帳號?
-              <Link to="/sign-up" className="text-primary-600 hover:underline">
-                {" "}
-                按此註冊
-              </Link>
+            <p className="text-center text-sm text-primary-600 hover:underline">
+              沒有帳號 ?
+          
             </p>
+
+            <Link to="/sign-up" className="text-primary-600 hover:underline">
+            <button
+              type="submit"
+              className="w-full rounded-md bg-secondary-600 py-2 text-white transition hover:bg-primary-700"
+            >
+               註冊會員
+            </button>
+            </Link>
           </form>
         </div>
       </div>
