@@ -29,6 +29,8 @@ import { UserContextProvider } from "../context/userContext";
 import { Provider } from "react-redux";
 import store from "./store/store.jsx";
 
+import Cursor from "../context/cursor.jsx";
+
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -39,7 +41,7 @@ export default function App() {
       <UserContextProvider>
 
         <Provider store={store}>
-
+        <Cursor />
         <div className="flex min-h-screen flex-col">
           <BrowserRouter>
             <Header />

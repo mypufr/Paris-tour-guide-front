@@ -145,7 +145,7 @@ function Login() {
               />
             </div>
 
-            <p className="text-center text-sm">
+            <p className="text-end text-sm">
               <Link to="/login" className="text-primary-600 hover:underline">
                 {" "}
                 忘記密碼 ?

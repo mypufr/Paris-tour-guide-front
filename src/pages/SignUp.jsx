@@ -71,7 +71,7 @@ function SignUp() {
         <div className="absolute inset-0 flex items-center justify-center p-6 md:relative md:w-1/2">
           <form
             onSubmit={handleSignUp}
-            className="-z-100 border-primary-100 flex w-full max-w-[90%] flex-col gap-6 border-2 bg-white/80 p-6 backdrop-blur-md rounded-lg md:bg-white md:shadow-md"
+            className="-z-100 border-primary-100 flex w-full max-w-[90%] flex-col gap-6 border-2 bg-white/80 p-6  rounded-lg md:bg-white md:shadow-md"
           >
             <h1 className="text-center text-xl font-bold">會員註冊</h1>
 

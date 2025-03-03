@@ -3,10 +3,14 @@ import { useState, useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+
 
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
+
+import { motion, AnimatePresence } from "motion/react";
+import SlidesData from "../data/slides.json";
+
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -20,30 +24,32 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+
 import { Navbar, Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 import data from "../data/data.json";
 
 function TourguidesPage() {
-  const slides = [
-    {
-      url: "https://plus.unsplash.com/premium_photo-1661919210043-fd847a58522d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1520503652613-5a55d772ec77?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1504896287989-ff1fbde00199?q=80&w=2533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1501622549218-2c3ef86627cb?q=80&w=2373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1528535619428-a995242b9096?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+  // const slides = [
+  //   {
+  //     url: "https://plus.unsplash.com/premium_photo-1661919210043-fd847a58522d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     url: "https://images.unsplash.com/photo-1520503652613-5a55d772ec77?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     url: "https://images.unsplash.com/photo-1504896287989-ff1fbde00199?q=80&w=2533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     url: "https://images.unsplash.com/photo-1501622549218-2c3ef86627cb?q=80&w=2373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  //   {
+  //     url: "https://images.unsplash.com/photo-1528535619428-a995242b9096?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  // ];
   
+   const [index, setIndex] = useState(0);
   const { user, setUser } = useContext(UserContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -118,13 +124,36 @@ function TourguidesPage() {
         }
       }, [user]);
 
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setIndex((prev) => (prev + 1) % SlidesData.length);
+        }, 3000); // 每3秒切換
+        return () => clearInterval(interval);
+      }, []);
+
   return (
     <>
       <div className="group relative m-auto h-[480px] w-full py-0 md:h-[500px] lg:h-[780px]">
-        <div
+        {/* <div
           style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
           className="relative h-full w-full bg-cover bg-center duration-500"
-        >
+        > */}
+
+
+        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
+          <AnimatePresence>
+            <motion.img
+              key={index} // 每次 index 變動時，重新渲染
+              src={SlidesData[index].imgUrl}
+              className="absolute h-full w-full rounded-lg object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2 }}
+            />
+          </AnimatePresence>
+        </div>
+
           <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[33%] lg:top-[20%]">
             <h1 className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
               尋找你的專屬在地導遊
@@ -499,9 +528,13 @@ function TourguidesPage() {
               {/* </Link> */}
             </div>
           </div>
-        </div>
 
-        <div className="absolute left-5 top-[50%] hidden -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block">
+
+
+
+        {/* </div> */}
+
+        {/* <div className="absolute left-5 top-[50%] hidden -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block">
           <BsChevronCompactLeft onClick={prevSlide} size={30} />
         </div>
 
@@ -517,7 +550,7 @@ function TourguidesPage() {
               className="cursor-pointer text-2xl"
             ></div>
           ))}
-        </div>
+        </div> */}
       </div>
 
       <div className="my-4 flex justify-center space-x-2 hover:cursor-pointer lg:my-10">
@@ -539,7 +572,9 @@ function TourguidesPage() {
       <div className="flex items-center justify-center">
         <div className="m-auto mb-[5%] max-w-[1296px]">
           <ul className="lg: grid gap-6 md:grid-cols-2 md:gap-20 lg:grid-cols-3 xl:flex xl:justify-between">
-            <li className="flex h-full max-w-[240px] flex-col items-center justify-center">
+            <li className="flex h-full max-w-[240px] flex-col items-center justify-center"    data-aos="zoom-out"
+                data-aos-offset="100"
+                data-aos-easing="ease-in-sine">
               <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 100%私人導覽
               </p>
@@ -552,7 +587,9 @@ function TourguidesPage() {
                 享受完全專屬於您的私人導遊體驗，不會與其他遊客分享導遊。
               </p>
             </li>
-            <li className="flex h-full max-w-[240px] flex-col items-center justify-center">
+            <li className="flex h-full max-w-[240px] flex-col items-center justify-center" data-aos="zoom-out"
+                data-aos-offset="100"
+                data-aos-easing="ease-in-sine">
               <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 客製化行程
               </p>
@@ -565,7 +602,9 @@ function TourguidesPage() {
                 根據您的興趣和需求，設計出 完全符合您個人偏好的獨特行程
               </p>
             </li>
-            <li className="flex h-full max-w-[240px] flex-col items-center justify-center">
+            <li className="flex h-full max-w-[240px] flex-col items-center justify-center" data-aos="zoom-out"
+                data-aos-offset="100"
+                data-aos-easing="ease-in-sine">
               <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 獲取當地視角
               </p>
@@ -578,7 +617,9 @@ function TourguidesPage() {
                 透過我們的專家帶領，發掘旅遊指南中找不到的熱點
               </p>
             </li>
-            <li className="flex h-full max-w-[240px] flex-col items-center justify-center">
+            <li className="flex h-full max-w-[240px] flex-col items-center justify-center" data-aos="zoom-out"
+                data-aos-offset="100"
+                data-aos-easing="ease-in-sine">
               <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 彈性取消政策
               </p>

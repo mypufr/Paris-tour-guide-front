@@ -9,6 +9,8 @@ import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+import { motion, AnimatePresence } from "motion/react";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -57,7 +59,11 @@ import TripCard from "../components/TripCard";
 import TourguideList from "../components/TourguideList";
 import SlideText from "../components/SlideText";
 
+
+
 export default function HomePage() {
+  const [index, setIndex] = useState(0);
+
   const navigate = useNavigate();
 
   const [postObject, setPostObject] = useState(null);
@@ -471,16 +477,13 @@ export default function HomePage() {
     console.log(popupPosition);
   };
 
-
-
-
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
     // axios.get("http://localhost:3000/posts").then(function (JsonRes) {
     //   console.log(JsonRes);
     //   setPostObject(JsonRes.data[0]);
     // }, []);
-  },[]);
+  }, []);
 
   // useEffect(() => {
   //   axios.get("http://localhost:3000/comments").then(function (CommentsRes) {
@@ -495,6 +498,13 @@ export default function HomePage() {
   //     setPostProfile(ProfilesRes.data[0]);
   //   });
   // }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % SlidesData.length);
+    }, 3000); // 每3秒切換
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -583,7 +593,7 @@ export default function HomePage() {
 
       {/* banner: Slides show */}
       <div className="relative overflow-hidden">
-        <Swiper
+        {/* <Swiper
           effect={"fade"}
           spaceBetween={30}
           centeredSlides={true}
@@ -603,7 +613,21 @@ export default function HomePage() {
               <SlideText imgUrl={data.imgUrl} />
             </SwiperSlide>
           ))}
-        </Swiper>
+        </Swiper> */}
+
+        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
+          <AnimatePresence>
+            <motion.img
+              key={index} // 每次 index 變動時，重新渲染
+              src={SlidesData[index].imgUrl}
+              className="absolute h-full w-full rounded-lg object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2 }}
+            />
+          </AnimatePresence>
+        </div>
 
         <div className="absolute left-[15vw] top-[17%] z-10 w-full md:top-[10%] xl:top-[15%] 2xl:left-[18%] 2xl:top-[17%] min-[1920px]:top-[20%]">
           <div className="flex-col text-start">
@@ -1098,8 +1122,8 @@ export default function HomePage() {
         </div>
 
         <div className="flex flex-col items-center justify-center md:space-x-0 lg:flex lg:flex-row lg:items-stretch lg:space-x-6">
-          <div className="md:border-grey-200 mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border lg:min-h-[1000px] lg:max-w-[34%]">
-            <div className="border-1 border-grey-200 mb-3 rounded-2xl border sm:border-0">
+          <div className="mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border md:border-grey-200 lg:min-h-[1000px] lg:max-w-[34%]">
+            <div className="border-1 mb-3 rounded-2xl border border-grey-200 sm:border-0">
               <span className="block rounded-t-2xl bg-primary-300 py-4 text-center text-2xl font-bold text-white lg:py-10">
                 預約導遊
               </span>
@@ -1190,8 +1214,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="md:border-grey-200 mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border lg:min-h-[1000px] lg:max-w-[34%]">
-            <div className="border-1 border-grey-200 mb-3 rounded-2xl border sm:border-0">
+          <div className="mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border md:border-grey-200 lg:min-h-[1000px] lg:max-w-[34%]">
+            <div className="border-1 mb-3 rounded-2xl border border-grey-200 sm:border-0">
               <span className="block rounded-t-2xl bg-secondary-300 py-4 text-center text-2xl font-bold text-white lg:py-10">
                 報名行程
               </span>

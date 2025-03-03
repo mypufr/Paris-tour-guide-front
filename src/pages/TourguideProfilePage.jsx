@@ -9,7 +9,10 @@ import {
   // , useLocation
 } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addPrivateOrder, setGroupOrdersInfo} from "../store/reducers/orderSlice.jsx"
+import {
+  addPrivateOrder,
+  setGroupOrdersInfo,
+} from "../store/reducers/orderSlice.jsx";
 
 import data from "../data/data.json";
 // import TripsData from "../data/trips.json";
@@ -46,7 +49,7 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 function TourguideProfilePage() {
   const { id } = useParams();
 
-    const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   // const CardData = data.find((item) => item.id === parseInt(id));
   // console.log(CardData);
 
@@ -188,7 +191,7 @@ function TourguideProfilePage() {
 
   const handleCloseModal = () => {
     document.getElementById("message_modal")?.close();
-  }
+  };
 
   // const handleCardClick = (id) => {
   //   navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
@@ -196,7 +199,7 @@ function TourguideProfilePage() {
   // };
 
   const handlePrivateTripsClick = (id) => {
-console.log(user)
+    console.log(user);
     if (!user) {
       console.error("❌ user is undefined! 確保 user 已經載入:", user);
       return;
@@ -206,16 +209,18 @@ console.log(user)
       addPrivateOrder({
         userEmail: user.email,
         userName: user.username,
-  selectedDate,
-  selectedSlot,
-  adultCount,
-  childCount,
-  selectedTheme,
-  tourguideInfo: tourguideInfoById,
-}));
-    navigate(`/search-tourguides/tourguide-profile/${id}/private-trips/confirm-order`);
+        selectedDate,
+        selectedSlot,
+        adultCount,
+        childCount,
+        selectedTheme,
+        tourguideInfo: tourguideInfoById,
+      }),
+    );
+    navigate(
+      `/search-tourguides/tourguide-profile/${id}/private-trips/confirm-order`,
+    );
   };
-
 
   // const handleGroupOrder = () => {
   //   dispatch(
@@ -366,20 +371,13 @@ console.log(user)
     }
   }, [filteredSlots]);
 
-
-//  useEffect(() => {
-//       if (user) {
-//         localStorage.getItem("user", JSON.stringify(user));
-//       }
-//     }, [user]);
-
-    useEffect(() => {
-      console.log(user)
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-      if (storedUser && storedUser._id) {
-        setUser(storedUser);
-      }
-    }, []);
+  useEffect(() => {
+    console.log(user);
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser && storedUser._id) {
+      setUser(storedUser);
+    }
+  }, []);
 
   return (
     <>
@@ -400,8 +398,7 @@ console.log(user)
                     className="inline-block h-[30px]"
                   />
                   <h2 className="text-[28px] font-bold text-primary-600">
-                  你的專屬導遊 : {tourguideInfoById.name}
-                    
+                    你的專屬導遊 : {tourguideInfoById.name}
                   </h2>
                   <img
                     src="/images/vector_title.png"
@@ -546,8 +543,10 @@ console.log(user)
                           <div className="modal-action">
                             {/* 取消按鈕 */}
 
-                            <button className="btn btn-outline border-primary-200 text-primary-700"
-                            onClick={handleCloseModal}>
+                            <button
+                              className="btn btn-outline border-primary-200 text-primary-700"
+                              onClick={handleCloseModal}
+                            >
                               取消
                             </button>
 
@@ -856,7 +855,6 @@ console.log(user)
               )}
 
               {activeTab === "tab-3" && (
-          
                 <div
                   role="tabpanel"
                   id="panel-3"
@@ -892,7 +890,6 @@ console.log(user)
                     {/* 第二欄：評論列表 */}
                     <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full h-[520px] w-3/4 overflow-y-scroll scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
                       <div className="flex flex-col items-center justify-center gap-2">
-                
                         {tourguideInfoById.commentaries.map(
                           (comment, index) => (
                             <div key={index} className="p-3">
@@ -999,7 +996,12 @@ console.log(user)
                   return (
                     <>
                       <div className="flex flex-col text-primary-600">
-                        <p className="flex-start text-xl">
+                        <p
+                          className="flex-start text-xl"
+                          data-aos="zoom-in"
+                          data-aos-offset="300"
+                          data-aos-easing="ease-in-sine"
+                        >
                           玩樂巴黎必打卡之地!
                         </p>
 
@@ -1007,6 +1009,9 @@ console.log(user)
                           src="/images/Paris_by_dist.png"
                           alt=""
                           className="inline-block p-[5vh]"
+                          data-aos="zoom-in"
+                          data-aos-offset="300"
+                          data-aos-easing="ease-in-sine"
                         />
 
                         <div className="flex items-center justify-center space-x-8 2xl:mt-6">
@@ -1050,9 +1055,12 @@ console.log(user)
                   case "group":
                     return (
                       <>
-       
-
-                        <div className="w-full">
+                        <div
+                          className="w-full"
+                          data-aos="zoom-in"
+                          data-aos-offset="300"
+                          data-aos-easing="ease-in-sine"
+                        >
                           <Slider {...settings1} arrows={false} ref={sliderRef}>
                             {tours.map((tour, index) => (
                               <div key={index}>
@@ -1415,23 +1423,25 @@ console.log(user)
 
                                 {/* 選擇主題的選項 */}
 
-                                {tourguideInfoById.themes.map((theme, index) => (
-                                  <div key={index} className="form-control">
-                                    <label className="label flex cursor-pointer items-center space-x-2">
-                                      <input
-                                        type="radio"
-                                        name="theme-radio"
-                                        className="radio checked:bg-primary-500"
-                                        value={theme}
-                                        checked={selectedTheme === theme}
-                                        onChange={handleThemeChange}
-                                      />
-                                      <span className="label-text w-full text-left">
-                                        {theme}
-                                      </span>
-                                    </label>
-                                  </div>
-                                ))}
+                                {tourguideInfoById.themes.map(
+                                  (theme, index) => (
+                                    <div key={index} className="form-control">
+                                      <label className="label flex cursor-pointer items-center space-x-2">
+                                        <input
+                                          type="radio"
+                                          name="theme-radio"
+                                          className="radio checked:bg-primary-500"
+                                          value={theme}
+                                          checked={selectedTheme === theme}
+                                          onChange={handleThemeChange}
+                                        />
+                                        <span className="label-text w-full text-left">
+                                          {theme}
+                                        </span>
+                                      </label>
+                                    </div>
+                                  ),
+                                )}
 
                                 <div className="modal-action">
                                   <form method="dialog">
@@ -1469,7 +1479,9 @@ console.log(user)
 
                               <button
                                 className="flex w-full justify-center space-x-20 rounded-lg border border-secondary-300 bg-secondary-400 px-4 py-4 text-white"
-                                onClick={() => handlePrivateTripsClick(tourguideInfoById.id)}
+                                onClick={() =>
+                                  handlePrivateTripsClick(tourguideInfoById.id)
+                                }
                               >
                                 <p>私人行程馬上預定</p>
                               </button>
@@ -1509,8 +1521,8 @@ console.log(user)
         </div>
       </div>
 
+      {/* service: Grid rwd */}
       <div className="">
-        {/* service: Grid rwd */}
         <div className="my-[80px] bg-[url('https://i.imgur.com/mydRBqI.png')] bg-cover bg-center py-20">
           <div
             className="mb-[60px] flex items-center justify-center space-x-2 hover:cursor-pointer"
@@ -1537,6 +1549,8 @@ console.log(user)
                 <div
                   className="relative transform overflow-hidden rounded-3xl transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
                   data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
                 >
                   <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
                     <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
@@ -1553,6 +1567,8 @@ console.log(user)
                 <div
                   className="relative transform overflow-hidden rounded-3xl transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
                   data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
                 >
                   <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
                     <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
@@ -1566,7 +1582,12 @@ console.log(user)
                   </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
+                <div
+                  className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
+                  data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
+                >
                   <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
                     交通協助
                   </p>
@@ -1577,7 +1598,12 @@ console.log(user)
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-6 text-center shadow-md">
+                <div
+                  className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-6 text-center shadow-md"
+                  data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
+                >
                   <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
                     美食餐廳預訂
                   </p>
@@ -1592,7 +1618,12 @@ console.log(user)
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
+                <div
+                  className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
+                  data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
+                >
                   <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
                     購物導覽
                   </p>
@@ -1603,7 +1634,12 @@ console.log(user)
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
+                <div
+                  className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
+                  data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
+                >
                   <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
                     攝影服務
                   </p>
@@ -1614,7 +1650,12 @@ console.log(user)
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
+                <div
+                  className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
+                  data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
+                >
                   <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
                     24/小時緊急支援
                   </p>
@@ -1625,7 +1666,12 @@ console.log(user)
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
+                <div
+                  className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
+                  data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
+                >
                   <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
                     夜間導覽
                   </p>

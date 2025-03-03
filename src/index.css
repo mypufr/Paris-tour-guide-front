@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   /* Primary Colors */
   --primary-50: #f1f6fe;
@@ -16,15 +15,14 @@
   --primary-900: #123768;
   --primary-950: #0c2345;
   /* Secondary Colors */
-  --secondary-200: #FFCDC6;
+  --secondary-200: #ffcdc6;
   --secondary-300: #ffab9f;
-  --secondary-400:#FF7C68;
+  --secondary-400: #ff7c68;
 
   --secondary-500: #fb5138;
   --secondary-600: #ea4229;
   --secondary-700: #c42811;
-  --secondary-950: #490F06;
-
+  --secondary-950: #490f06;
 
   /* Neutral Colors: */
   --grey-50: #f6f6f6;
@@ -45,8 +43,7 @@
 
   /* Background Colors */
   --background-2: #fff2db;
-  --background-blur: #F9F4EBCC;
-
+  --background-blur: #f9f4ebcc;
 
   /* Font weights  */
   --font-weight-normal: 400;
@@ -61,8 +58,7 @@
 }
 
 .slick-slide > div {
-  @apply 
-  mx-2.5;
+  @apply mx-2.5;
 }
 
 .swiper {
@@ -74,27 +70,21 @@
 }
 
 .slick-slide {
-  @apply 
-  
-  space-y-8;
+  @apply space-y-8;
 }
 
 .slick-list {
   /* @apply space-y-8; */
   @apply pb-0;
-  
 }
 
 .slick-dots {
   display: none !important;
 }
 
-
 .overflow-clip {
-
   overflow-x: clip;
 }
-
 
 .swiper-slide img {
   @apply block h-full w-full object-cover;
@@ -121,7 +111,6 @@
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
-
 .noto-sans-tc-bold-mobile {
   font-family: "Noto Sans TC", sans-serif;
   font-optical-sizing: auto;
@@ -131,29 +120,21 @@
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
-
 .text-shadow {
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-
 }
 
 .text-shadow-light {
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-
 }
-
 
 .slick-prev,
 .slick-next {
-  /* display: block !important;
-  z-index: 10; */
   background: transparent;
 }
-
 
 .swiper-button-next,
 .swiper-button-prev {
   display: none;
 }
-
