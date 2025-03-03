@@ -7,11 +7,21 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 import {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
+
+import {
   addPrivateOrder,
   setPrivateOrdersInfo,
   setGroupOrdersInfo,
 } from "../store/reducers/orderSlice.jsx";
-import { selectTotalPrice } from "../store/reducers/orderSlice.jsx";
+
+
+import { selectTotalPrice, resetOrder } from "../store/reducers/orderSlice.jsx";
 import {
   getPrivateOrdersTotalPrice, //所有私人行程小計
   getPrivateOrderPrice, //單筆私人行程價格
@@ -24,6 +34,9 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 
 function PaymentPage() {
   const { id } = useParams();
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(!open);
   // const CardData = data.find((item) => item.id === parseInt(id));
   // console.log(CardData);
 
@@ -31,13 +44,12 @@ function PaymentPage() {
   //   return <div>Results not found</div>;
   // }
 
-      const { user, setUser } = useContext(UserContext);
-
+  const { user, setUser } = useContext(UserContext);
 
   const privateOrders = useSelector((state) => state.order.privateOrders || []);
 
-
   const navigate = useNavigate();
+  const dispatch= useDispatch();
   // const handleGoBackClick = (id) => {
   //   navigate(`/search-tourguides/tourguide-profile/${id}`);
   // };
@@ -45,6 +57,8 @@ function PaymentPage() {
   const checkOrderInfo = () => {
     console.log(privateOrders);
   };
+
+ 
 
   const handleConfirmOrderClick = async (userName = user.username) => {
     try {
@@ -64,9 +78,8 @@ function PaymentPage() {
       navigate(
         `/search-tourguides/tourguide-profile/${id}/private-trips/payment-success`,
       );
-    } catch(error) {
-  
 
+    } catch (error) {
       console.error("訂單資料送出失敗", error.response?.data || error.message);
     }
   };
@@ -81,12 +94,17 @@ function PaymentPage() {
     return acc + getPrivateOrdersTotalPrice(order);
   }, 0);
 
-  useEffect(() => {
-      if (user) {
-        localStorage.getItem("user", JSON.stringify(user));
-      }
-    }, [user]);
 
+    const handleClearCartClick = (id) => {
+      dispatch(resetOrder());
+      navigate(`/search-tourguides/tourguide-profile/${id}`);
+    };
+
+  useEffect(() => {
+    if (user) {
+      localStorage.getItem("user", JSON.stringify(user));
+    }
+  }, [user]);
 
   return (
     <>
@@ -105,6 +123,8 @@ function PaymentPage() {
           </button>
         </div>
 
+
+
         {/* title */}
         <div className="flex justify-center space-x-4 hover:cursor-pointer">
           <img
@@ -112,8 +132,9 @@ function PaymentPage() {
             alt=""
             className="inline-block h-[40px]"
           />
-          <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600"> <button onClick={checkOrderInfo}>  {user.username}的付款資訊</button>
-          
+          <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
+            {" "}
+            <button onClick={checkOrderInfo}> {user.username}的付款資訊</button>
           </h2>
           <img
             src="/images/vector_title.png"
@@ -121,7 +142,6 @@ function PaymentPage() {
             className="inline-block h-[40px]"
           />
         </div>
-       
 
         <div className="m-auto my-10 flex max-w-[90%] justify-center space-x-8 py-10">
           {/* left: Payment  */}
@@ -252,13 +272,80 @@ function PaymentPage() {
             </div>
 
             <div className="m-auto">
-              <div className="my-20">
-                <button
+              <div className="my-10">
+                {/* <button
                   className="flex min-w-60 justify-center space-x-20 rounded-3xl bg-primary-700 px-2 py-2 text-white"
                   onClick={() => handleConfirmOrderClick(id)}
                 >
                   <p className="text-xl">確認刷卡</p>
+                </button> */}
+
+                {/* <Button
+                  onClick={handleOpen}
+                  className="flex min-w-40 justify-center rounded-3xl bg-primary-700 px-2 py-2 text-sm text-white"
+                >
+                  確認刷卡
+                </Button>
+                <Dialog open={open} handler={handleOpen} className="w-1/3 px-2">
+                  <DialogHeader className=""></DialogHeader>
+                  <DialogBody className="text-xl">交易成功，謝謝您的預約!</DialogBody>
+                  <DialogFooter>
+                    <Button
+                      variant="text"
+                      color="red"
+                      onClick={handleOpen}
+                      className="btn btn-outline m-1"
+                    >
+                      <span>預約其他行程</span>
+                    </Button>
+                    <Button
+       
+                      className="btn bg-primary-700 text-primary-700 text-white"
+                      onClick={() => handleConfirmOrderClick(id)}
+                    >
+                      <span>查看訂單紀錄</span>
+                    </Button>
+                  </DialogFooter>
+                </Dialog> */}
+
+               {/* Open the modal using document.getElementById('ID').showModal() method */}
+                <button
+                  className="flex min-w-40 justify-center rounded-3xl bg-primary-700 px-2 py-2 text-lg text-white"
+                  onClick={() =>
+                    document.getElementById("payment_modal").showModal()
+                  }
+                >
+                  確定付款
                 </button>
+                <dialog
+                  id="payment_modal"
+                  className="modal modal-bottom sm:modal-middle"
+                >
+                  <div className="modal-box space-y-2">
+                    <h3 className="text-lg font-bold">交易成功，謝謝您的預約!</h3>
+                    <p className="py-4 text-lg font-normal"></p>
+                    <div className="modal-action">
+                      <form method="dialog" className="flex gap-4">
+                        {/* <Button
+                          onClick={() => handleClearCartClick(id)}
+                          className="btn btn-outline text-secondary-600"
+                        >
+                          <span>預約其他行程</span>
+                        </Button> */}
+                        <Button
+                          className="btn bg-primary-700 text-primary-700 text-white"
+                          onClick={() => handleConfirmOrderClick(id)}
+                        >
+                          <span>查看訂單紀錄</span>
+                        </Button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
+
+
+
+
               </div>
             </div>
           </div>
@@ -299,7 +386,6 @@ function PaymentPage() {
                               {" "}
                               小計:
                               {subtotalPrivateOrders} €
-                  
                             </span>
                           </h3>
                           {/* 如果沒有訂單，顯示「無私人行程訂單」 */}
@@ -349,7 +435,6 @@ function PaymentPage() {
                                     </p>
                                   </div>
 
-        
                                   <p className="ml-auto mr-4 pt-4 text-xl text-primary-700">
                                     {" "}
                                     {getPrivateOrderPrice(order)}
@@ -452,9 +537,9 @@ function PaymentPage() {
             <div className="my-20 items-center space-y-4">
               <button
                 className="m-auto flex min-w-60 justify-center space-x-20 rounded-xl border border-secondary-600 bg-transparent px-2 py-2 text-secondary-600"
-                // onClick={()=>handleGoBackClick(id)}
+                onClick={() => handleClearCartClick(id)}
               >
-                <p className="text-xl">回上一頁</p>
+                <p className="text-lg">取消訂單</p>
               </button>
             </div>
           </div>

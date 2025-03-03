@@ -7,6 +7,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import { toast } from "react-hot-toast";
+import { ImCart } from "react-icons/im";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,12 +19,11 @@ function Header() {
     setIsOpen(!isOpen);
   };
 
-   useEffect(() => {
-      if (user) {
-        localStorage.getItem("user", JSON.stringify(user));
-      }
-    }, [user]);
-
+  useEffect(() => {
+    if (user) {
+      localStorage.getItem("user", JSON.stringify(user));
+    }
+  }, [user]);
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -32,7 +32,11 @@ function Header() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:8000/api/logout", {}, { withCredentials: true });
+      await axios.post(
+        "http://localhost:8000/api/logout",
+        {},
+        { withCredentials: true },
+      );
       setUser(null);
       navigate("/");
       toast.success("已成功登出");
@@ -99,16 +103,21 @@ function Header() {
             {user ? (
               <>
                 <li>
-                  <Link to="/edit-profile" className="text-primary-600 hover:font-bold hover:shadow-md">
-                  
-                  <p>我是{user.username}</p>
-                  
+                  <Link
+                    to="/edit-profile"
+                    className="text-primary-600 hover:font-bold hover:shadow-md"
+                  >
+                    <p>我是{user.username}</p>
                   </Link>
+                </li>
+
+                <li>
+                  <ImCart className="text-secondary-600" />
                 </li>
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="bg-secondary-400 rounded-2xl text-white py-1 px-4 hover:font-bold"
+                    className="rounded-2xl bg-secondary-400 px-4 py-1 text-white hover:font-bold"
                   >
                     登出
                   </button>
@@ -129,18 +138,128 @@ function Header() {
           </ul>
 
           {/* Hamburger Icon - visible on smaller screens */}
-          <div className="lg:hidden">
-            <button
+          <div className="relative lg:hidden">
+            <div className="dropdown absolute right-[-10px] top-[-20px]">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-circle btn-ghost"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h7"
+                  />{" "}
+                </svg>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content menu-sm absolute right-[-10px] z-[500] mt-3 w-52 max-w-[40vw] rounded-box bg-white p-2 shadow"
+              >
+                <li>
+                  {" "}
+                  <Link
+                    to="/search-tourguides"
+                    className="block w-full text-base text-primary-600 transition-colors duration-100 hover:font-bold hover:text-primary-600"
+                    onClick={toggleMenu}
+                  >
+                    <p className="text-base text-gray-950 hover:font-bold hover:text-primary-600">
+                      隨行導遊趣
+                    </p>
+                  </Link>
+                </li>
+                <li>
+                <Link
+                    to="/book-trips"
+                    className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-primary-600"
+                    onClick={toggleMenu}
+                  >
+                    <p className="text-base text-gray-950 hover:font-bold hover:text-primary-600">
+                      行程搶先報
+                    </p>
+                  </Link>
+                </li>
+                <li>
+                <Link
+                    to="/sites-info"
+                    className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-primary-600"
+                    onClick={toggleMenu}
+                  >
+                    <p className="text-base text-gray-950 hover:font-bold hover:text-primary-600">
+                      推薦景點
+                    </p>
+                  </Link>
+                </li>
+                <li>
+                <Link
+                    to="/travel-info"
+                    className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-white"
+                    onClick={toggleMenu}
+                  >
+                    <p className="text-base text-gray-950 hover:font-bold hover:text-primary-700">
+                      旅行指南
+                    </p>
+                  </Link>
+                </li>
+
+                {user ? (
+                  <>
+                    <li>
+                      <Link
+                        to="/profile"
+                        className="text-primary-600 hover:font-bold hover:shadow-md"
+                      >
+                        <BsPersonCircle className="hidden sm:block" />
+                        <p>Bonjour {user.username}!</p>
+                      </Link>
+                    </li>
+
+                    <li>
+                      <ImCart className="text-secondary-600" />
+                    </li>
+                    <li>
+                      <button
+                        onClick={handleLogout}
+                        className="rounded-2xl bg-secondary-400 px-4 py-1 text-white hover:font-bold"
+                      >
+                        登出
+                      </button>
+                    </li>
+                  </>
+                ) : (
+                  <li className="">
+                    <button className="flex w-full items-center bg-primary-600 px-2 py-2 pl-4 text-base text-white">
+                      <BsPersonCircle />
+                      <Link
+                        to="/login"
+                        className=" inline-block px-5 text-base text-white"
+                      >
+                        註冊/登入
+                      </Link>
+                    </button>
+                  </li>
+                )}
+              </ul>
+            </div>
+            {/* <button
               onClick={toggleMenu}
               className="rounded-full bg-primary-600 p-2 text-white"
             >
               {isOpen ? <FiMenu className="h-6 w-6" /> : <FiMenu />}
-            </button>
+            </button> */}
           </div>
         </div>
 
         {/* Mobile Menu - visible when isOpen is true */}
-        {isOpen && (
+        {/* {isOpen && (
           <div className="absolute left-0 top-full z-50 w-full shadow-lg lg:hidden">
             <div className="absolute right-0 top-0 max-w-[64%] bg-white">
               <ul className="flex flex-col justify-items-end">
@@ -198,18 +317,23 @@ function Header() {
 
                 {user ? (
                   <>
-                    {/* <BsPersonCircle /> */}
+       
                     <li>
-                    <Link to="/profile" className="text-primary-600 hover:font-bold hover:shadow-md">
-                  
-                  <p>我是{user.username}</p>
-                  
-                  </Link>
+                      <Link
+                        to="/profile"
+                        className="text-primary-600 hover:font-bold hover:shadow-md"
+                      >
+                        <p>Bonjour {user.username}!</p>
+                      </Link>
                     </li>
+
+                    <li>
+                  <ImCart className="text-secondary-600"/>
+                </li>
                     <li>
                       <button
                         onClick={handleLogout}
-                        className="bg-secondary-400 rounded-2xl text-white py-1 px-4 hover:font-bold"
+                        className="rounded-2xl bg-secondary-400 px-4 py-1 text-white hover:font-bold"
                       >
                         登出
                       </button>
@@ -231,7 +355,7 @@ function Header() {
               </ul>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

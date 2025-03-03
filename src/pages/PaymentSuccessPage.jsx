@@ -3,46 +3,65 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
+import { useSelector, useDispatch } from "react-redux";
+import { resetOrder } from "../store/reducers/orderSlice";
+
 import axios from "axios";
 
 import data from "../data/data.json";
 
 function PaymentSuccessPage() {
   const navigate = useNavigate();
-  const handleGoBackClick = (id) => {
-    navigate("/");
-  };
-
+  const dispatch = useDispatch();
+  const privateOrders = useSelector((state) => state.order.privateOrders || []);
+  
+  
   // const handleConfirmOrderClick = (id) => {
-  //   navigate(
-  //     `/search-tourguides/tourguide-profile/${id}/private-trips/payment`,
-  //   );
-  // };
-  const { id } = useParams();
-  const CardData = data.find((item) => item.id === parseInt(id));
-  // console.log(CardData);
-
-  if (!CardData) {
-    return <div>Results not found</div>;
-  }
-
-  const { user, setUser } = useContext(UserContext);
-  const [orderData, setOrderData] = useState([]);
-  // const [privateOrders, setPrivateOrders] = useState([]);
-
-  const getPrivateOrdersData = async (userName = user.username) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:8000/api/${user.username}/private-orders`,
-      );
-      console.log(res.data);
-      setOrderData(res.data);
-    } catch (error) {
-      console.error(error.response?.data || error.message);
-    }
-  };
-
-  useEffect(() => {
+    //   navigate(
+      //     `/search-tourguides/tourguide-profile/${id}/private-trips/payment`,
+      //   );
+      // };
+      const { id } = useParams();
+      const CardData = data.find((item) => item.id === parseInt(id));
+      // console.log(CardData);
+      
+      if (!CardData) {
+        return <div>Results not found</div>;
+      }
+      
+      const { user, setUser } = useContext(UserContext);
+      const [orderData, setOrderData] = useState([]);
+      // const [privateOrders, setPrivateOrders] = useState([]);
+      
+      const getPrivateOrdersData = async (userName = user.username) => {
+        try {
+          const res = await axios.get(
+            `http://localhost:8000/api/${user.username}/private-orders`,
+          );
+          console.log(res.data);
+          setOrderData(res.data);
+        } catch (error) {
+          console.error(error.response?.data || error.message);
+        }
+      };
+      
+      const handleResetBackToHomePageClick = (id) => {
+    
+        dispatch(resetOrder()); 
+    
+    
+        navigate("/");
+      };
+      
+      const handleClearCartClick = (id) => {
+    
+        dispatch(resetOrder()); 
+    
+    
+        navigate(`/search-tourguides/`);
+      };
+      
+      useEffect(() => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
     }
@@ -90,13 +109,7 @@ function PaymentSuccessPage() {
         <div className="m-auto flex max-w-[55%] flex-col">
           <div className="justify-center space-x-6">
             <div className="">
-              <button
-                type="button"
-                onClick={getPrivateOrdersData}
-                className="btn bg-primary-200 text-xl"
-              >
-                所有私人行程訂單
-              </button>
+        
 
         
             </div>
@@ -107,6 +120,14 @@ function PaymentSuccessPage() {
                          <h3 className="mb-10 border-b-4 border-b-secondary-200 py-6 pl-4 text-start text-3xl text-secondary-500">
                 私人行程訂單
               </h3>
+
+              <button
+                type="button"
+                onClick={getPrivateOrdersData}
+                className="btn btn-outline btn-primary text-xl mb-6"
+              >
+                瀏覽所有私人行程訂單
+              </button>
 
             {orderData.length === 0 ? (
          <p></p>
@@ -249,13 +270,14 @@ function PaymentSuccessPage() {
           <button
             className="flex min-w-60 justify-center space-x-20 rounded-3xl bg-primary-700 px-2 py-2 text-white"
             // onClick={handleComfirmtOrderClick}
+            onClick={() => handleClearCartClick(id)}
           >
-            <p className="text-xl">前往會員個人信箱</p>
+            <p className="text-xl">預約其他行程</p>
           </button>
 
           <button
             className="flex min-w-60 justify-center space-x-20 rounded-3xl border border-primary-700 bg-transparent px-2 py-2 text-primary-500"
-            onClick={handleGoBackClick}
+            onClick={() => handleResetBackToHomePageClick (id)}
           >
             <p className="text-xl">回首頁</p>
           </button>
