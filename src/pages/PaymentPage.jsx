@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../../context/userContext";
+import React, { useState, useContext, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import { UserContext } from "../../context/userContext";
 import axios from "axios";
 
 import {
@@ -20,7 +19,6 @@ import {
   setGroupOrdersInfo,
 } from "../store/reducers/orderSlice.jsx";
 
-
 import { selectTotalPrice, resetOrder } from "../store/reducers/orderSlice.jsx";
 import {
   getPrivateOrdersTotalPrice, //所有私人行程小計
@@ -34,6 +32,9 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 
 function PaymentPage() {
   const { id } = useParams();
+
+  const [modalMessage, setModalMessage] = useState("請稍候…");
+  const [paymentStatus, setPaymentStatus] = useState("pending");
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
@@ -49,7 +50,7 @@ function PaymentPage() {
   const privateOrders = useSelector((state) => state.order.privateOrders || []);
 
   const navigate = useNavigate();
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
   // const handleGoBackClick = (id) => {
   //   navigate(`/search-tourguides/tourguide-profile/${id}`);
   // };
@@ -58,7 +59,38 @@ function PaymentPage() {
     console.log(privateOrders);
   };
 
- 
+  const handleConfirmPayment = async (userName = user.username) => {
+    // 開啟 modal
+    document.getElementById("payment_modal").showModal();
+    // 顯示等待訊息
+    setModalMessage("請稍候，處理中...");
+
+    try {
+      const res = await axios.post(
+        `http://localhost:8000/api/${user.username}/private-orders`,
+        {
+          privateOrders: privateOrders,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      console.log("訂單資料送出成功", res.data);
+      // 模擬等待 3 秒後，改為交易成功
+      setTimeout(() => {
+        setModalMessage("交易成功，謝謝您的預約!");
+        setPaymentStatus("success");
+        navigate(
+          `/search-tourguides/tourguide-profile/${id}/private-trips/payment-success`,
+        );
+      }, 3000);
+    } catch (error) {
+      console.error("訂單資料送出失敗", error.response?.data || error.message);
+    }
+  };
 
   const handleConfirmOrderClick = async (userName = user.username) => {
     try {
@@ -78,7 +110,6 @@ function PaymentPage() {
       navigate(
         `/search-tourguides/tourguide-profile/${id}/private-trips/payment-success`,
       );
-
     } catch (error) {
       console.error("訂單資料送出失敗", error.response?.data || error.message);
     }
@@ -94,11 +125,10 @@ function PaymentPage() {
     return acc + getPrivateOrdersTotalPrice(order);
   }, 0);
 
-
-    const handleClearCartClick = (id) => {
-      dispatch(resetOrder());
-      navigate(`/search-tourguides/tourguide-profile/${id}`);
-    };
+  const handleClearCartClick = (id) => {
+    dispatch(resetOrder());
+    navigate(`/search-tourguides/tourguide-profile/${id}`);
+  };
 
   useEffect(() => {
     if (user) {
@@ -122,8 +152,6 @@ function PaymentPage() {
             <p className="text-xl text-secondary-500">Step 3 : 完成預約</p>
           </button>
         </div>
-
-
 
         {/* title */}
         <div className="flex justify-center space-x-4 hover:cursor-pointer">
@@ -308,8 +336,8 @@ function PaymentPage() {
                   </DialogFooter>
                 </Dialog> */}
 
-               {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <button
+                {/* Open the modal using document.getElementById('ID').showModal() method */}
+                {/* <button
                   className="flex min-w-40 justify-center rounded-3xl bg-primary-700 px-2 py-2 text-lg text-white"
                   onClick={() =>
                     document.getElementById("payment_modal").showModal()
@@ -326,12 +354,7 @@ function PaymentPage() {
                     <p className="py-4 text-lg font-normal"></p>
                     <div className="modal-action">
                       <form method="dialog" className="flex gap-4">
-                        {/* <Button
-                          onClick={() => handleClearCartClick(id)}
-                          className="btn btn-outline text-secondary-600"
-                        >
-                          <span>預約其他行程</span>
-                        </Button> */}
+            
                         <Button
                           className="btn bg-primary-700 text-primary-700 text-white"
                           onClick={() => handleConfirmOrderClick(id)}
@@ -341,11 +364,50 @@ function PaymentPage() {
                       </form>
                     </div>
                   </div>
+                </dialog> */}
+
+                <button
+                  className="flex min-w-40 justify-center rounded-3xl bg-primary-700 px-2 py-2 text-lg text-white"
+                  onClick={handleConfirmPayment}
+                >
+                  確定付款
+                </button>
+
+                <dialog
+                  id="payment_modal"
+                  className="modal modal-bottom sm:modal-middle"
+                >
+                  <div className="modal-box space-y-4">
+                    <h3 className="text-lg font-bold">{modalMessage}</h3>
+                    <div className="modal-action flex gap-4">
+                      {paymentStatus === "success" && (
+                        <Button
+                          className="btn bg-primary-700 text-white"
+                          onClick={() =>
+                            navigate(
+                              `/search-tourguides/tourguide-profile/${id}/private-trips/payment-success`,
+                            )
+                          }
+                        >
+                          查看訂單紀錄
+                        </Button>
+                      )}
+                      <Button
+                        variant="text"
+                        color="red"
+                        onClick={() => {
+                          document.getElementById("payment_modal").close();
+                          // 可選：重置狀態
+                          setModalMessage("請稍候…");
+                          setPaymentStatus("pending");
+                        }}
+                        className="btn btn-outline"
+                      >
+                        取消
+                      </Button>
+                    </div>
+                  </div>
                 </dialog>
-
-
-
-
               </div>
             </div>
           </div>
@@ -394,7 +456,7 @@ function PaymentPage() {
                               無私人行程訂單
                             </p>
                           ) : (
-                            <div className="flex gap-4 p-4">
+                            <div className="flex  justify-center gap-4 p-4">
                               {/* 🔹 使用 .map() 來遍歷所有訂單 */}
                               {privateOrders.map((order, index) => (
                                 <div

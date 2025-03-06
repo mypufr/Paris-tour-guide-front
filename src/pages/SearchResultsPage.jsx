@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 
 import Slider from "react-slick";
@@ -133,9 +132,9 @@ function SearchResultsPage() {
         </div>
       </div> */}
 
-      <div className="m-auto my-2 max-w-[67.5%]">
-        <div className="">
-          <Slider {...settings3} className="overflow-clip">
+      <div className="m-auto pt-10 max-w-[67.5%]">
+        <div className="grid grid-cols-3 gap-4">
+          {/* <Slider {...settings3} className="overflow-clip"> */}
             {tourguideInfo.map((item, index) => (
                 <div
                 key={index}
@@ -155,11 +154,13 @@ function SearchResultsPage() {
                    </div>
                 ))
                }
-              </Slider>
+              {/* </Slider> */}
         </div>
       </div>
 
-      <div className="mb-4 mt-auto flex justify-center pb-10">
+      
+
+      <div className="mt-auto flex justify-center pt-6 pb-4">
         <button className="mt-2 flex w-[10%] justify-center rounded-2xl bg-secondary-400 p-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
           <img src="images/BsHandIndex.svg" alt="" className="inline-block" />
 
@@ -172,15 +173,15 @@ function SearchResultsPage() {
 
       <div className="mt-10 flex justify-center space-x-4 hover:cursor-pointer">
         <img
-          src="images/website_logo.png"
+          src="/images/website_logo.png"
           alt=""
           className="inline-block h-[40px]"
         />
-        <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
+        <h2 className="text-[28px] font-bold leading-[3rem] tracking-4 text-primary-600">
           還有其他導遊正等你隨時預約!
         </h2>
         <img
-          src="images/website_logo.png"
+          src="/images/website_logo.png"
           alt=""
           className="inline-block h-[40px]"
         />
@@ -207,23 +208,31 @@ function SearchResultsPage() {
                 </div>
               ))}
             </Slider> */}
-          <Slider {...settings3}>
-            {data.map((data, index) => (
-              <div key={index} className="">
-                <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
-                  <Card
-                    imgSrc={data.img}
-                    title={data.name}
-                    price={data.price}
-                    specialities1={data.speciality1}
-                    specialities2={data.speciality2}
-                    specialities3={data.speciality3}
+          <Slider {...settings3} className="overflow-clip">
+          {tourguideInfo.map((item, index) => (
+                <div 
+                key={index}
+                onClick={() => handleCardClick(item.id)}
+                className=""
+              >
+                <Card
+                  key={index}
+                  id={item.id}
+                  imgSrc={item.imgUrl}
+                  title={item.name}
+                  price={item.price_adult}
+                  themes={item.themes}
+                  onClick={() => handleCardClick(item.id)}
+                  className="cursor-pointer"
                   />
-                </div>
-              </div>
-            ))}
+                   </div>
+                ))
+               }
           </Slider>
         </div>
+        
+
+        
       </div>
     </>
   );

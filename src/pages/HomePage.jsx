@@ -1,9 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 import AOS from "aos";
@@ -57,8 +54,6 @@ import SlidesData from "../data/slides.json";
 import Card from "../components/Card";
 import TripCard from "../components/TripCard";
 import TourguideList from "../components/TourguideList";
-import SlideText from "../components/SlideText";
-
 
 
 export default function HomePage() {
@@ -508,44 +503,6 @@ export default function HomePage() {
 
   return (
     <>
-      <div>
-        {/* {postObject ? (
-          // 渲染對象的內容
-          <div>
-            <h1>{postObject.title}</h1>
-            <p>{postObject.body}</p>
-          </div>
-        ) : (
-          // 當數據尚未加載時顯示提示
-          <p>加載中...</p>
-        )} */}
-      </div>
-
-      <div>
-        {/* {postComment ? (
-          // 渲染對象的內容
-          <div>
-            <h1>{postComment.id}</h1>
-            <p>{postComment.text}</p>
-          </div>
-        ) : (
-          // 當數據尚未加載時顯示提示
-          <p>加載中...</p>
-        )} */}
-      </div>
-
-      <div>
-        {/* {postProfile ? (
-          // 渲染對象的內容
-          <div>
-            <h1>{postProfile.name}</h1>
-  
-          </div>
-        ) : (
-          // 當數據尚未加載時顯示提示
-          <p>加載中...</p>
-        )} */}
-      </div>
 
       {/* trip themes */}
       <ul className="container hidden items-center justify-between text-base leading-[22.4px] text-grey-400 lg:flex lg:px-4 lg:py-2 xl:w-10/12 xl:justify-evenly xl:py-7">
@@ -593,27 +550,7 @@ export default function HomePage() {
 
       {/* banner: Slides show */}
       <div className="relative overflow-hidden">
-        {/* <Swiper
-          effect={"fade"}
-          spaceBetween={30}
-          centeredSlides={true}
-          autoplay={{
-            delay: 8000,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: false,
-          }}
-          navigation={true}
-          modules={[Autoplay, Navigation]}
-          className="mySwiper"
-        >
-          {SlidesData.map((data, index) => (
-            <SwiperSlide key={index}>
-              <SlideText imgUrl={data.imgUrl} />
-            </SwiperSlide>
-          ))}
-        </Swiper> */}
+ 
 
         <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
           <AnimatePresence>
@@ -961,6 +898,7 @@ export default function HomePage() {
         />
       </div>
 
+
       {/* slides show: popular tourist guides */}
       <div className="mt-10">
         <div className="flex justify-center space-x-4 hover:cursor-pointer">
@@ -982,13 +920,12 @@ export default function HomePage() {
       <div className="m-auto max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
         <div
 
-        // className="mt-0 2xl:mt-8" 原有
         >
           <Slider {...settings1} arrows={false} ref={sliderRef}>
             {data.map((data, index) => (
               <div
                 key={index}
-                // className="slide-item p-1 sm:p-4 2xl:p-10" 原有
+           
 
                 className="slide-item grid gap-4 p-1 sm:grid-cols-1 sm:p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
                 onClick={() => handleCardClick(data.id)}

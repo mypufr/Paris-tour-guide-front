@@ -81,7 +81,7 @@ function Login() {
         toast.success("成功登入!");
         navigate("/");
       } else {
-        toast.error("未知錯誤，請稍後再試");
+        toast.error("登入失敗，請檢查帳號或密碼 ❌");
       }
   
       setTimeout(() => navigate("/"), 1500);
@@ -145,7 +145,7 @@ function Login() {
               />
             </div>
 
-            <p className="text-end text-sm">
+            <p className="text-start text-sm">
               <Link to="/login" className="text-primary-600 hover:underline">
                 {" "}
                 忘記密碼 ?

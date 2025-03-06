@@ -103,8 +103,7 @@ function Header() {
             {user ? (
               <>
                 <li>
-                  <Link
-                    to="/edit-profile"
+                <Link to={`/${user.username}/profile`}
                     className="text-primary-600 hover:font-bold hover:shadow-md"
                   >
                     <p>我是{user.username}</p>
@@ -112,7 +111,9 @@ function Header() {
                 </li>
 
                 <li>
-                  <ImCart className="text-secondary-600" />
+                  <Link to={`/${user.username}/bookings`}>
+                    <ImCart className="text-primary-300 h-6 w-6" />
+                  </Link>
                 </li>
                 <li>
                   <button
@@ -177,7 +178,7 @@ function Header() {
                   </Link>
                 </li>
                 <li>
-                <Link
+                  <Link
                     to="/book-trips"
                     className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-primary-600"
                     onClick={toggleMenu}
@@ -188,7 +189,7 @@ function Header() {
                   </Link>
                 </li>
                 <li>
-                <Link
+                  <Link
                     to="/sites-info"
                     className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-primary-600"
                     onClick={toggleMenu}
@@ -199,7 +200,7 @@ function Header() {
                   </Link>
                 </li>
                 <li>
-                <Link
+                  <Link
                     to="/travel-info"
                     className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-white"
                     onClick={toggleMenu}
@@ -223,7 +224,9 @@ function Header() {
                     </li>
 
                     <li>
-                      <ImCart className="text-secondary-600" />
+                    <Link to={`/${user.username}/bookings`}>
+                    <ImCart className="text-secondary-600" />
+                  </Link>
                     </li>
                     <li>
                       <button
@@ -240,7 +243,7 @@ function Header() {
                       <BsPersonCircle />
                       <Link
                         to="/login"
-                        className=" inline-block px-5 text-base text-white"
+                        className="inline-block px-5 text-base text-white"
                       >
                         註冊/登入
                       </Link>
@@ -249,114 +252,12 @@ function Header() {
                 )}
               </ul>
             </div>
-            {/* <button
-              onClick={toggleMenu}
-              className="rounded-full bg-primary-600 p-2 text-white"
-            >
-              {isOpen ? <FiMenu className="h-6 w-6" /> : <FiMenu />}
-            </button> */}
+      
           </div>
         </div>
 
         {/* Mobile Menu - visible when isOpen is true */}
-        {/* {isOpen && (
-          <div className="absolute left-0 top-full z-50 w-full shadow-lg lg:hidden">
-            <div className="absolute right-0 top-0 max-w-[64%] bg-white">
-              <ul className="flex flex-col justify-items-end">
-                <li className="flex items-center justify-between px-2 py-4 transition-colors duration-300 hover:bg-grey-100 hover:text-white">
-                  <Link
-                    to="/search-tourguides"
-                    className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-white"
-                    onClick={toggleMenu}
-                  >
-                    <p className="text-base text-gray-950 hover:font-bold hover:text-white">
-                      隨行導遊趣
-                    </p>
-                  </Link>
-                  <SlArrowRight className="text-[8px]" />
-                </li>
-
-                <li className="flex items-center justify-between px-2 py-4 transition-colors duration-300 hover:bg-grey-100 hover:text-white">
-                  <Link
-                    to="/book-trips"
-                    className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-white"
-                    onClick={toggleMenu}
-                  >
-                    <p className="text-base text-gray-950 hover:font-bold hover:text-white">
-                      行程搶先報
-                    </p>
-                  </Link>
-                  <SlArrowRight className="text-[8px]" />
-                </li>
-
-                <li className="flex items-center justify-center px-2 py-4 transition-colors duration-300 hover:bg-grey-100 hover:text-white">
-                  <Link
-                    to="/sites-info"
-                    className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-white"
-                    onClick={toggleMenu}
-                  >
-                    <p className="text-base text-gray-950 hover:font-bold hover:text-white">
-                      推薦景點
-                    </p>
-                  </Link>
-                  <SlArrowRight className="text-[8px]" />
-                </li>
-
-                <li className="flex items-center justify-between px-2 py-4 transition-colors duration-300 hover:bg-grey-100 hover:text-white">
-                  <Link
-                    to="/travel-info"
-                    className="block w-full text-base text-gray-950 transition-colors duration-300 hover:font-bold hover:text-white"
-                    onClick={toggleMenu}
-                  >
-                    <p className="text-base text-gray-950 hover:font-bold hover:text-white">
-                      旅行指南
-                    </p>
-                  </Link>
-                  <SlArrowRight className="text-[8px]" />
-                </li>
-
-                {user ? (
-                  <>
-       
-                    <li>
-                      <Link
-                        to="/profile"
-                        className="text-primary-600 hover:font-bold hover:shadow-md"
-                      >
-                        <p>Bonjour {user.username}!</p>
-                      </Link>
-                    </li>
-
-                    <li>
-                  <ImCart className="text-secondary-600"/>
-                </li>
-                    <li>
-                      <button
-                        onClick={handleLogout}
-                        className="rounded-2xl bg-secondary-400 px-4 py-1 text-white hover:font-bold"
-                      >
-                        登出
-                      </button>
-                    </li>
-                  </>
-                ) : (
-                  <li className="">
-                    <button className="flex w-full items-center bg-primary-600 px-2 py-2 pl-4 text-base text-white">
-                      <BsPersonCircle />
-                      <Link
-                        to="/login"
-                        className="my-2 inline-block px-5 text-base text-white"
-                      >
-                        註冊/登入
-                      </Link>
-                    </button>
-                  </li>
-                )}
-              </ul>
             </div>
-          </div>
-        )} */}
-      </div>
     </div>
   );
 }

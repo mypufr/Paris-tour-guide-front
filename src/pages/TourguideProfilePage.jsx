@@ -1,14 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../../context/userContext";
-import {
-  useNavigate,
-  // , useLocation
-} from "react-router-dom";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+
+import { UserContext } from "../../context/userContext";
+
 import {
   addPrivateOrder,
   setGroupOrdersInfo,
@@ -154,9 +150,20 @@ function TourguideProfilePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const handleAlertLogin = () => {
+    document.getElementById("alertLogin_modal").showModal();
+    navigate("/login");
+  };
+
   const handleEditMessageClick = () => {
-    document.getElementById("message_modal").showModal();
-    // navigate(`/search-tourguides/tourguide-profile/${id}/message`);
+    if (!user) {
+      // alert("請先登入!");
+
+      // navigate("/login");
+      document.getElementById("alertLogin_modal").showModal();
+    } else {
+      document.getElementById("message_modal").showModal();
+    }
   };
 
   const handleSendMessageClick = async () => {
@@ -185,9 +192,11 @@ function TourguideProfilePage() {
       console.log("留言成功", res.data);
 
       document.getElementById("message_modal")?.close(); // 關閉 Modal
+
       setMessage(""); // 清空輸入框
       setSenderName(""); // 清空寄件者名稱
       setEmail(""); // 清空 Email
+      document.getElementById("sendMessageSuccess_modal").showModal(); // 關閉 Modal
     } catch (error) {
       console.error("留言失敗", error.res?.data || error.message);
     }
@@ -207,8 +216,25 @@ function TourguideProfilePage() {
     if (!user) {
       console.error("❌ user is undefined! 確保 user 已經載入:", user);
 
-      alert("請先登入!");
-      navigate("/login");
+      document.getElementById("alertLogin_modal").showModal();
+
+      return;
+    }
+
+    if (!selectedDate) {
+      document.getElementById("alertDate_modal").showModal();
+      return;
+    }
+    if (!selectedSlot) {
+      document.getElementById("alertSlot_modal").showModal();
+      return;
+    }
+    if (!selectedTheme) {
+      document.getElementById("alertTheme_modal").showModal();
+      return;
+    }
+    if (!adultCount && !childCount) {
+      document.getElementById("alertPeopleNum_modal").showModal();
       return;
     }
 
@@ -241,19 +267,6 @@ function TourguideProfilePage() {
   //     })
   //   );
   // };
-
-  // const handleCardClick = (id) => {
-  //   navigate(`/search-tourguides/tourguide-profile/${id}`);
-  // };
-
-  // const { search } = useLocation();
-  // const queryParams = new URLSearchParams(search);
-
-  // const startDate = queryParams.get("startDate");
-  // const endDate = queryParams.get("endDate");
-  // const adultCount = queryParams.get("adultCount");
-  // const childCount = queryParams.get("childCount");
-  // const theme = queryParams.get("theme");
 
   const getCommentaries = async () => {
     try {
@@ -491,7 +504,7 @@ function TourguideProfilePage() {
                     </div>
 
                     <button
-                      className="mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent"
+                      className="mt-2 flex w-3/4 justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent"
                       onClick={() => handleEditMessageClick()}
                     >
                       <img
@@ -506,46 +519,119 @@ function TourguideProfilePage() {
                     </button>
 
                     <dialog id="message_modal" className="modal">
-                      <div className="modal-box">
-                        <h3 className="text-lg font-bold">
-                          留言給 {tourguideInfoById.name}
+                      <div className="modal-box bg-primary-50">
+                        <h3 className="text-lg font-normal text-primary-500">
+                          留言給{" "}
+                          <span className="text-secondary-700">
+                            {tourguideInfoById.name}
+                          </span>
+                          導遊
                         </h3>
+
+                        <p className="text-end text-base font-normal text-grey-950">
+                          {" "}
+                          <span className="text-xl font-bold text-red-400">
+                            *{" "}
+                          </span>
+                          為必填
+                        </p>
                         <form
                           onSubmit={(e) => {
                             e.preventDefault(); // 防止頁面刷新
                             handleSendMessageClick();
                           }}
                         >
-                          <div className="flex gap-2">
-                            {/* 姓名 */}
-                            <input
-                              type="text"
-                              className="mt-4 w-full rounded-lg border p-2"
-                              placeholder="姓名"
-                              value={senderName}
-                              onChange={(e) => setSenderName(e.target.value)}
-                              required
-                            />
 
-                            {/* 電子郵件 */}
-                            <input
-                              type="email"
-                              className="mt-4 w-full rounded-lg border p-2"
-                              placeholder="Email"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
+
+                          <div className="flex flex-col gap-4 p-4">
+                            {/* <label className="input input-bordered flex items-center gap-2">
+                            <span className="text-red-400 text-xl font-bold">*</span>
+                              姓名
+                              <input
+                                type="text"
+                                className="grow"
+                                placeholder="請輸入您的姓名"
+                                value={senderName}
+                                onChange={(e) => setSenderName(e.target.value)}
+                                required
+                              />
+                 
+                            </label>
+                            <label className="input input-bordered flex items-center gap-2">
+                            <span className="text-red-400 text-xl font-bold">*</span>
+                              電子郵件信箱
+                              <input
+                                type="email"
+                                className="grow"
+                                placeholder="請輸入您的電子郵件信箱"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                              />
+                         
+                            </label> */}
+
+                            <div className="flex justify-between gap-4">
+                              {/* <label className="form-control w-full max-w-xs">
+                    <div className="label">
+                      <span className="label-text">姓名</span>
+                      <span className="label-text-alt text-primary-600">
+                        必填
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder=""
+                      className="input input-bordered w-full max-w-xs"
+                    />
+                    <div className="label"></div>
+                  </label> */}
+                              <label className="form-control w-full max-w-xs">
+                                <div className="label">
+                                  <span className="label-text">姓名</span>
+                                  <span className="label-text-alt text-primary-600">
+                                    必填
+                                  </span>
+                                </div>
+                                <input
+                                  type="text"
+                                  placeholder=""
+                                  className="input input-bordered w-full max-w-xs"
+                                  value={senderName}
+                                  onChange={(e) =>
+                                    setSenderName(e.target.value)
+                                  }
+                                />
+                              </label>
+                              <label className="form-control w-full max-w-xs">
+                                <div className="label">
+                                  <span className="label-text">
+                                    電子郵件信箱
+                                  </span>
+                                  <span className="label-text-alt text-primary-600">
+                                    必填
+                                  </span>
+                                </div>
+                                <input
+                                  type="text"
+                                  className="input input-bordered w-full max-w-xs"
+                                  value={email}
+                                  onChange={(e) => setEmail(e.target.value)}
+                                />
+                              </label>
+                            </div>
+                            {/* 留言內容 */}
+                            <span className="label-text-alt text-end text-primary-600">
+                              必填
+                            </span>
+                            <textarea
+                              className="input-border input mt-[-10px] w-full grow rounded-lg border p-2 text-lg font-bold text-gray-700 placeholder:label-text"
+                              placeholder="您的留言..."
+                              value={message}
+                              onChange={(e) => setMessage(e.target.value)}
                               required
                             />
                           </div>
-
-                          {/* 留言內容 */}
-                          <textarea
-                            className="mt-4 w-full rounded-lg border p-2"
-                            placeholder="請輸入您的留言..."
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            required
-                          />
 
                           <div className="modal-action">
                             {/* 取消按鈕 */}
@@ -563,6 +649,54 @@ function TourguideProfilePage() {
                             </button>
                           </div>
                         </form>
+                      </div>
+                    </dialog>
+
+                                {/* alertLogin_modal */}
+                                <dialog
+                              id="alertLogin_modal"
+                              className="modal modal-bottom sm:modal-middle"
+                            >
+                              <div className="modal-box space-y-2">
+                                <h3 className="text-lg font-bold">請先登入!</h3>
+                                <p className="py-4 text-lg font-normal"></p>
+                                <div className="modal-action">
+                                  <form method="dialog" className="flex gap-4">
+                                    <button
+                                      className="btn bg-primary-700 text-primary-700 text-white"
+                                      onClick={() => navigate("/login")}
+                                    >
+                                      <span>登入</span>
+                                    </button>
+                                    <button className="btn btn-outline text-secondary-600">
+                                      <span>取消</span>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
+
+                    {/* sendMessageSuccess_modal */}
+                    <dialog
+                      id="sendMessageSuccess_modal"
+                      className="modal modal-bottom sm:modal-middle"
+                    >
+                      <div className="modal-box space-y-2">
+                        <h3 className="text-lg font-bold">留言成功!</h3>
+                        <p className="py-4 text-lg font-normal"></p>
+                        <div className="modal-action">
+                          <form method="dialog" className="flex gap-4">
+                            <button
+                              className="btn bg-primary-700 text-primary-700 text-white"
+                              // onClick={() => navigate("/")}
+                            >
+                              <span>查看所有留言</span>
+                            </button>
+                            <button className="btn btn-outline text-secondary-600">
+                              <span>我知道了</span>
+                            </button>
+                          </form>
+                        </div>
                       </div>
                     </dialog>
                   </div>
@@ -685,8 +819,8 @@ function TourguideProfilePage() {
                     activeTab === "tab-1"
                       ? "0px"
                       : activeTab === "tab-2"
-                        ? "108px"
-                        : "230px",
+                        ? "120px"
+                        : "245px",
                 }}
               ></div>
 
@@ -832,7 +966,7 @@ function TourguideProfilePage() {
                       {filteredSlots.length > 0 ? (
                         filteredSlots.map((slot, index) => (
                           <div key={index} className="my-2 w-full space-y-6">
-                            <p className=" text-xl font-semibold">
+                            <p className="text-xl font-semibold">
                               {slot.date}可預約的空檔:
                             </p>
                             <div className="flex flex-wrap gap-2">
@@ -870,7 +1004,10 @@ function TourguideProfilePage() {
                     {/* 第一欄：標題與圖片 */}
                     <div className="flex w-full flex-col items-center justify-center">
                       <h2 className="text-base leading-[3rem] tracking-4 text-primary-600">
-                        {tourguideInfoById.name} 10位客人的評價
+                        <span className="text-grey-950">
+                          {tourguideInfoById.name}
+                        </span>{" "}
+                        10位客人的評價
                       </h2>
                       <p className="text-grey-400">
                         <span className="pr-2 text-xl font-bold text-red-500">
@@ -925,7 +1062,7 @@ function TourguideProfilePage() {
       <div className="mx-auto w-3/4">
         <div
           role="tablist"
-          className="mt-5 min-h-[40px} tabs-boxed tabs flex items-center justify-start gap-4 bg-transparent"
+          className="min-h-[40px} tabs-boxed tabs mt-5 flex items-center justify-start gap-4 bg-transparent"
         >
           <a
             role="tab"
@@ -983,7 +1120,6 @@ function TourguideProfilePage() {
                             <span className="text-grey-950">
                               {toursSlidesLength}
                             </span>
-                            {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}
                           </div>
 
                           <button
@@ -1034,7 +1170,7 @@ function TourguideProfilePage() {
                             <span className="text-grey-950">
                               {sitesSlidesLength}
                             </span>
-                            {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}
+                            {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}{" "}
                           </div>
 
                           <button
@@ -1097,7 +1233,7 @@ function TourguideProfilePage() {
                             <div className="mt-4 flex min-w-[400px] justify-center px-4 lg:mt-0">
                               <Link>
                                 <button
-                                  className="flex w-[28vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
+                                  className="flex w-[22vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
                                   onClick={() =>
                                     document
                                       .getElementById("calendar_modal")
@@ -1223,7 +1359,7 @@ function TourguideProfilePage() {
                                 >
                                   <DayPicker
                                     className="react-day-picker rounded-xl border border-primary-200 bg-white p-4 shadow-lg"
-                                    numberOfMonths={2}
+                                    numberOfMonths={1}
                                     classNames={{
                                       day: "items-center justify-center text-lg hover:bg-gray-200 rounded-full",
                                     }}
@@ -1272,7 +1408,7 @@ function TourguideProfilePage() {
                             <div className="mt-4 flex justify-center px-4 lg:mt-0">
                               <Link>
                                 <button
-                                  className="flex w-[28vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
+                                  className="flex w-[22vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
                                   onClick={() =>
                                     document
                                       .getElementById("touristNum_modal")
@@ -1392,7 +1528,7 @@ function TourguideProfilePage() {
                             <div className="mt-4 flex justify-center px-4 lg:mt-0">
                               <Link>
                                 <button
-                                  className="flex w-[28vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
+                                  className="flex w-[22vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
                                   onClick={() =>
                                     document
                                       .getElementById("theme_modal")
@@ -1516,6 +1652,107 @@ function TourguideProfilePage() {
                                 <p>私人行程馬上預定</p>
                               </button>
                             </div>
+                            {/* alertLogin_modal */}
+                            <dialog
+                              id="alertLogin_modal"
+                              className="modal modal-bottom sm:modal-middle"
+                            >
+                              <div className="modal-box space-y-2">
+                                <h3 className="text-lg font-bold">請先登入!</h3>
+                                <p className="py-4 text-lg font-normal"></p>
+                                <div className="modal-action">
+                                  <form method="dialog" className="flex gap-4">
+                                    <button
+                                      className="btn bg-primary-700 text-primary-700 text-white"
+                                      onClick={() => navigate("/login")}
+                                    >
+                                      <span>登入</span>
+                                    </button>
+                                    <button className="btn btn-outline text-secondary-600">
+                                      <span>取消</span>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
+                            {/* alertDate_modal */}
+                            <dialog
+                              id="alertDate_modal"
+                              className="modal modal-bottom sm:modal-middle"
+                            >
+                              <div className="modal-box space-y-2">
+                                <h3 className="text-lg font-bold">
+                                  請選擇日期!
+                                </h3>
+                                <p className="py-4 text-lg font-normal"></p>
+                                <div className="modal-action">
+                                  <form method="dialog" className="flex gap-4">
+                                    <button className="btn btn-outline text-secondary-600">
+                                      <span>我知道了</span>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
+                            {/* alertSlot_modal */}
+                            <dialog
+                              id="alertLogin_modal"
+                              className="modal modal-bottom sm:modal-middle"
+                            >
+                              <div className="modal-box space-y-2">
+                                <h3 className="text-lg font-bold">
+                                  請選擇時段!
+                                </h3>
+                                <p className="py-4 text-lg font-normal"></p>
+                                <div className="modal-action">
+                                  <form method="dialog" className="flex gap-4">
+                                    <button className="btn btn-outline text-secondary-600">
+                                      <span>我知道了</span>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
+
+                            {/* alertTheme_modal */}
+                            <dialog
+                              id="alertTheme_modal"
+                              className="modal modal-bottom sm:modal-middle"
+                            >
+                              <div className="modal-box space-y-2">
+                                <h3 className="text-lg font-bold">
+                                  請選擇行程主題!
+                                </h3>
+                                <p className="py-4 text-lg font-normal"></p>
+                                <div className="modal-action">
+                                  <form method="dialog" className="flex gap-4">
+                                    <button className="btn btn-outline text-secondary-600">
+                                      <span>我知道了</span>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
+
+                            {/* alertPeopleNum_modal */}
+                            <dialog
+                              id="alertLogin_modal"
+                              className="modal modal-bottom sm:modal-middle"
+                            >
+                              <div className="modal-box space-y-2">
+                                <h3 className="text-lg font-bold">
+                                  請至少選擇一位參加人數！
+                                </h3>
+                                <p className="py-4 text-lg font-normal"></p>
+                                <div className="modal-action">
+                                  <form method="dialog" className="flex gap-4">
+                                    <button className="btn btn-outline text-secondary-600">
+                                      <span>我知道了</span>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
                           </div>
                         </div>
                       </div>
@@ -1576,27 +1813,7 @@ function TourguideProfilePage() {
               {/* ul */}
 
               <div className="grid grid-cols-1 gap-10 space-y-[1%] sm:grid-cols-2 lg:grid-cols-4">
-                {/* <div
-                  className="relative transform overflow-hidden rounded-3xl transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
-                  data-aos="zoom-in"
-                  data-aos-offset="300"
-                  data-aos-easing="ease-in-sine"
-                >
-                  <div  className="relative transform overflow-hidden rounded-lg transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
-                      data-aos="zoom-in"
-                      data-aos-offset="300"
-                      data-aos-easing="ease-in-sine">
-                    <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
-                      行程規畫建議
-                    </p>
-
-                    <img src="/images/organize-trips.png" alt="" />
-                    <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
-                      針對個人或小團體的專屬導覽行程,根據客戶需求量身定制
-                    </p>
-                  </div>
-                </div> */}
-     <div
+                <div
                   className="relative transform overflow-hidden rounded-lg transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
                   data-aos="zoom-in"
                   data-aos-offset="300"
@@ -1604,12 +1821,12 @@ function TourguideProfilePage() {
                 >
                   <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
                     <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
-                    行程規畫建議
+                      行程規畫建議
                     </p>
 
                     <img src="/images/organize-trips.png" alt="" />
                     <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
-                    針對個人或小團體的專屬導覽行程,根據客戶需求量身定制
+                      針對個人或小團體的專屬導覽行程,根據客戶需求量身定制
                     </p>
                   </div>
                 </div>

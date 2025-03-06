@@ -1,12 +1,9 @@
-import React, {useEffect} from "react";
-import { useState, useContext } from "react";
+import React, {useEffect, useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
 import { UserContext } from "../../context/userContext";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 
-import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import { RxDotFilled } from "react-icons/rx";
 
 import { motion, AnimatePresence } from "motion/react";
 import SlidesData from "../data/slides.json";
@@ -24,32 +21,15 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+// import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+// import { RxDotFilled } from "react-icons/rx";
+// import { Navbar, Button, IconButton } from "@material-tailwind/react";
+// import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
-import { Navbar, Button, IconButton } from "@material-tailwind/react";
-import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
-import data from "../data/data.json";
+function SearchTourguidesPage() {
 
-function TourguidesPage() {
-  // const slides = [
-  //   {
-  //     url: "https://plus.unsplash.com/premium_photo-1661919210043-fd847a58522d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   },
-  //   {
-  //     url: "https://images.unsplash.com/photo-1520503652613-5a55d772ec77?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   },
-  //   {
-  //     url: "https://images.unsplash.com/photo-1504896287989-ff1fbde00199?q=80&w=2533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   },
-  //   {
-  //     url: "https://images.unsplash.com/photo-1501622549218-2c3ef86627cb?q=80&w=2373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   },
-  //   {
-  //     url: "https://images.unsplash.com/photo-1528535619428-a995242b9096?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   },
-  // ];
-  
-   const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
   const { user, setUser } = useContext(UserContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -60,20 +40,20 @@ function TourguidesPage() {
 
   const [selectedTheme, setSelectedTheme] = useState("行程主題");
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
+  // const prevSlide = () => {
+  //   const isFirstSlide = currentIndex === 0;
+  //   const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+  //   setCurrentIndex(newIndex);
+  // };
+  // const nextSlide = () => {
+  //   const isLastSlide = currentIndex === slides.length - 1;
+  //   const newIndex = isLastSlide ? 0 : currentIndex + 1;
+  //   setCurrentIndex(newIndex);
+  // };
 
-  const goToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex);
-  };
+  // const goToSlide = (slideIndex) => {
+  //   setCurrentIndex(slideIndex);
+  // };
 
   const increaseAdultCount = () => {
     if (adultCount < 10) {
@@ -134,11 +114,7 @@ function TourguidesPage() {
   return (
     <>
       <div className="group relative m-auto h-[480px] w-full py-0 md:h-[500px] lg:h-[780px]">
-        {/* <div
-          style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-          className="relative h-full w-full bg-cover bg-center duration-500"
-        > */}
-
+ 
 
         <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
           <AnimatePresence>
@@ -529,28 +505,6 @@ function TourguidesPage() {
             </div>
           </div>
 
-
-
-
-        {/* </div> */}
-
-        {/* <div className="absolute left-5 top-[50%] hidden -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block">
-          <BsChevronCompactLeft onClick={prevSlide} size={30} />
-        </div>
-
-        <div className="absolute right-5 top-[50%] hidden -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl text-white group-hover:block">
-          <BsChevronCompactRight onClick={nextSlide} size={30} />
-        </div>
-
-        <div className="top-4 flex justify-center py-2">
-          {slides.map((slide, slideIndex) => (
-            <div
-              key={slideIndex}
-              onClick={() => goToSlide(slideIndex)}
-              className="cursor-pointer text-2xl"
-            ></div>
-          ))}
-        </div> */}
       </div>
 
       <div className="my-4 flex justify-center space-x-2 hover:cursor-pointer lg:my-10">
@@ -639,4 +593,4 @@ function TourguidesPage() {
   );
 }
 
-export default TourguidesPage;
+export default SearchTourguidesPage;
