@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
@@ -54,7 +54,7 @@ import SlidesData from "../data/slides.json";
 import Card from "../components/Card";
 import TripCard from "../components/TripCard";
 import TourguideList from "../components/TourguideList";
-
+import { settings3 } from "../components/helpers/sliderSettings.jsx";
 
 export default function HomePage() {
   const [index, setIndex] = useState(0);
@@ -64,6 +64,8 @@ export default function HomePage() {
   const [postObject, setPostObject] = useState(null);
   const [postComment, setPostComment] = useState(null);
   const [postProfile, setPostProfile] = useState(null);
+
+  const [popularTourguidesList, setPopularTourguidesList] = useState([]);
 
   const handleCardClick = (id) => {
     navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
@@ -172,297 +174,298 @@ export default function HomePage() {
     left: "10px",
     top: "10px",
   });
+  const [recommendedGuides, setRecommendedGuides] = useState([]);
 
   // List of districts with their respective info
-  const districts = {
-    1: (
-      <div>
-        {District1.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    2: (
-      <div>
-        {District2.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    3: (
-      <div>
-        {District3.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    4: (
-      <div>
-        {District4.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    5: (
-      <div>
-        {District5.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    6: (
-      <div>
-        {District6.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    7: (
-      <div>
-        {District7.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    8: (
-      <div>
-        {District8.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    9: (
-      <div>
-        {District9.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    10: (
-      <div>
-        {District10.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    11: (
-      <div>
-        {District11.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    12: (
-      <div>
-        {District12.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    13: (
-      <div>
-        {District13.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    14: (
-      <div>
-        {District14.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    15: (
-      <div>
-        {District15.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    16: (
-      <div>
-        {District16.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    17: (
-      <div>
-        {District17.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    18: (
-      <div>
-        {District18.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    19: (
-      <div>
-        {District19.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-    20: (
-      <div>
-        {District20.map((district, index) => (
-          <TourguideList
-            key={index}
-            name={district.name}
-            district={district.district}
-            img={district.img}
-            specialities={district.specialities}
-            language={district.language}
-          />
-        ))}
-      </div>
-    ),
-  };
+  // const districts = {
+  //   1: (
+  //     <div>
+  //       {District1.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   2: (
+  //     <div>
+  //       {District2.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   3: (
+  //     <div>
+  //       {District3.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   4: (
+  //     <div>
+  //       {District4.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   5: (
+  //     <div>
+  //       {District5.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   6: (
+  //     <div>
+  //       {District6.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   7: (
+  //     <div>
+  //       {District7.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   8: (
+  //     <div>
+  //       {District8.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   9: (
+  //     <div>
+  //       {District9.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   10: (
+  //     <div>
+  //       {District10.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   11: (
+  //     <div>
+  //       {District11.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   12: (
+  //     <div>
+  //       {District12.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   13: (
+  //     <div>
+  //       {District13.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   14: (
+  //     <div>
+  //       {District14.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   15: (
+  //     <div>
+  //       {District15.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   16: (
+  //     <div>
+  //       {District16.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   17: (
+  //     <div>
+  //       {District17.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   18: (
+  //     <div>
+  //       {District18.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   19: (
+  //     <div>
+  //       {District19.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  //   20: (
+  //     <div>
+  //       {District20.map((district, index) => (
+  //         <TourguideList
+  //           key={index}
+  //           name={district.name}
+  //           district={district.district}
+  //           img={district.img}
+  //           specialities={district.specialities}
+  //           language={district.language}
+  //         />
+  //       ))}
+  //     </div>
+  //   ),
+  // };
 
   // Handler for when a district is clicked
-  const handleDistrictClick = (event, districtId) => {
+  const handleDistrictClick = (event, district) => {
     event.preventDefault();
     let x = event.clientX;
     let y = event.clientY;
-    setSelectedDistrict(districtId);
+    setSelectedDistrict(district);
     console.log(x, y);
 
     setPopupPosition({
@@ -470,6 +473,35 @@ export default function HomePage() {
       top: `${y * 0.1}px`, // Offset by 10% of the window height
     });
     console.log(popupPosition);
+    getRecommendedGuides(district);
+  };
+
+  // 根據區域呼叫後端 API
+  const getRecommendedGuides = async (district) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8000/api/district/${district}`,
+      );
+      console.log("推薦導遊：", res.data);
+      setRecommendedGuides(res.data);
+    } catch (error) {
+      console.error(
+        "取得推薦導遊失敗：",
+        error.response?.data || error.message,
+      );
+    }
+  };
+
+  const getPopularTourguidesList = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/popular-tourguides",
+      );
+      console.log(res.data);
+      setPopularTourguidesList(res.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -478,6 +510,7 @@ export default function HomePage() {
     //   console.log(JsonRes);
     //   setPostObject(JsonRes.data[0]);
     // }, []);
+    getPopularTourguidesList();
   }, []);
 
   // useEffect(() => {
@@ -503,7 +536,6 @@ export default function HomePage() {
 
   return (
     <>
-
       {/* trip themes */}
       <ul className="container hidden items-center justify-between text-base leading-[22.4px] text-grey-400 lg:flex lg:px-4 lg:py-2 xl:w-10/12 xl:justify-evenly xl:py-7">
         <li className="lg:border-r-1 xl:border-r-1 lg:border-grey-100 lg:pr-6 xl:border xl:border-y-0 xl:border-l-0 xl:px-8 xl:pr-8">
@@ -550,8 +582,6 @@ export default function HomePage() {
 
       {/* banner: Slides show */}
       <div className="relative overflow-hidden">
- 
-
         <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
           <AnimatePresence>
             <motion.img
@@ -684,7 +714,31 @@ export default function HomePage() {
                 <span>與{selectedDistrict}區導遊預定私人遊覽</span>
               </h3>
 
-              <div>{districts[selectedDistrict]}</div>
+              <div>
+                {/* {districts[selectedDistrict]} */}
+
+                {recommendedGuides.length > 0 ? (
+                  recommendedGuides.map((guide) => (
+                    <TourguideList
+                      key={guide._id}
+                      name={guide.name}
+                      imgUrl={guide.imgUrl}
+                      themes={
+                        Array.isArray(guide.themes)
+                          ? guide.themes.join("、")
+                          : guide.themes
+                      }
+                      languages={
+                        Array.isArray(guide.languages)
+                          ? guide.languages.join("、")
+                          : guide.languages
+                      }
+                    />
+                  ))
+                ) : (
+                  <p className="text-gray-500">Loading...</p>
+                )}
+              </div>
               <div className="mt-6 space-y-4">
                 <Link to="/book-trips" className="block">
                   <button className="flex w-full justify-center rounded-2xl bg-primary-600 py-4 font-bold tracking-1.5 text-white">
@@ -898,7 +952,6 @@ export default function HomePage() {
         />
       </div>
 
-
       {/* slides show: popular tourist guides */}
       <div className="mt-10">
         <div className="flex justify-center space-x-4 hover:cursor-pointer">
@@ -917,29 +970,25 @@ export default function HomePage() {
           />
         </div>
       </div>
-      <div className="m-auto max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
-        <div
-
-        >
+      <div className="m-auto my-20 max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
+        <div>
           <Slider {...settings1} arrows={false} ref={sliderRef}>
-            {data.map((data, index) => (
+            {popularTourguidesList.map((item, index) => (
               <div
                 key={index}
-           
-
-                className="slide-item grid gap-4 p-1 sm:grid-cols-1 sm:p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
-                onClick={() => handleCardClick(data.id)}
+                onClick={() => handleCardClick(item.id)}
+                className=""
               >
-                <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
-                  <Card
-                    imgSrc={data.img}
-                    title={data.name}
-                    price={data.price}
-                    specialities1={data.speciality1}
-                    specialities2={data.speciality2}
-                    specialities3={data.speciality3}
-                  />
-                </div>
+                <Card
+                  key={index}
+                  id={item.id}
+                  imgSrc={item.imgUrl}
+                  title={item.name}
+                  price={item.price_adult}
+                  themes={item.themes}
+                  onClick={() => handleCardClick(item.id)}
+                  className="cursor-pointer"
+                />
               </div>
             ))}
           </Slider>
@@ -986,7 +1035,7 @@ export default function HomePage() {
           <img
             src="https://i.imgur.com/MzjNbOk.png"
             alt=""
-            className="h-[328px] w-full object-cover"
+            className="h-[500px] w-full object-cover"
           />
           <img
             src="https://i.imgur.com/mydRBqI.png"

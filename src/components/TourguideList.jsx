@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const TourguideList = ({ name, img, specialities, language }) => {
+const TourguideList = ({ name, imgUrl, themes, languages }) => {
   return (
     <>
     
@@ -11,7 +11,7 @@ const TourguideList = ({ name, img, specialities, language }) => {
         <div className="flex rounded-2xl p-4 bg-white mb-4">
           <img
             className="rounded-full object-cover w-24 h-24"
-            src={img}
+            src={imgUrl}
             alt={name}
           />
           <div className="ml-4">
@@ -29,10 +29,10 @@ const TourguideList = ({ name, img, specialities, language }) => {
               </span>
               </div>
               <span className="text-[14px] leading-[19.6px] tracking-1.5 text-grey-400">
-                專長：{specialities}
+                專長：{themes}
               </span>
               <span className="text-[14px] leading-[19.6px] tracking-1.5 text-grey-400">
-                語言：{language}
+                語言：{languages}
               </span>
             </div>
           </div>
