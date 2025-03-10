@@ -6,12 +6,19 @@ import { FiMenu } from "react-icons/fi";
 import { BsPersonCircle } from "react-icons/bs";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
+
+import { useSelector } from "react-redux";
+
 import { toast } from "react-hot-toast";
 import { ImCart } from "react-icons/im";
+
+import { AiFillCopy } from "react-icons/ai";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, setUser } = useContext(UserContext);
+  const [orderCount, setOrderCount] = useState(0);
+ 
 
   const navigate = useNavigate();
 
@@ -44,6 +51,34 @@ function Header() {
       console.error("登出失敗", error);
     }
   };
+
+  // 取得訂單數量
+  const fetchOrders = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8000/api/${user.username}/private-orders`);
+      setOrderCount(res.data.length);
+    } catch (error) {
+      console.error("取得訂單數失敗", error);
+    }
+  };
+
+  useEffect(()=>{
+    fetchOrders();
+
+  // **監聽訂單更新事件**
+  const handleOrderUpdate = () => {
+    fetchOrders();
+  };
+  window.addEventListener("orderUpdated", handleOrderUpdate);
+
+  return () => {
+    window.removeEventListener("orderUpdated", handleOrderUpdate);
+  };
+
+
+
+  },[])
+
 
   return (
     <div className="container p-3 lg:py-10">
@@ -103,16 +138,30 @@ function Header() {
             {user ? (
               <>
                 <li>
-                <Link to={`/${user.username}/profile`}
+                  <Link
+                    to={`/${user.username}/profile`}
                     className="text-primary-600 hover:font-bold hover:shadow-md"
                   >
-                    <p>我是{user.username}</p>
+                    <p>{user.username}的會員中心</p>
                   </Link>
                 </li>
 
-                <li>
+                {/* <li>
                   <Link to={`/${user.username}/bookings`}>
-                    <ImCart className="text-primary-300 h-6 w-6" />
+                    <ImCart className="h-6 w-6 text-primary-600 transition-transform duration-500 ease-in-out hover:scale-150" />
+                  </Link>
+                </li> */}
+
+                <li className="relative">
+                  <Link to={`/${user.username}/bookings`}>
+                    <AiFillCopy className="h-6 w-6 text-primary-600 transition-transform duration-500 ease-in-out hover:scale-150" />
+                  
+                    {orderCount > 0 && (
+          <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-secondary-400 text-xs text-white">
+            {orderCount}
+          </span>
+        )}
+                  
                   </Link>
                 </li>
                 <li>
@@ -219,14 +268,22 @@ function Header() {
                         className="text-primary-600 hover:font-bold hover:shadow-md"
                       >
                         <BsPersonCircle className="hidden sm:block" />
-                        <p>Bonjour {user.username}!</p>
+                        <p>{user.username}的會員中心</p>
                       </Link>
                     </li>
 
+                    {/* <li>
+                      <Link
+                        to={`/search-tourguides/tourguide-profile/${user.id}/private-trips/confirm-order`}
+                      >
+                        <ImCart className="h-6 w-6 text-primary-600 transition-transform duration-500 ease-in-out hover:scale-150" />
+                      </Link>
+                    </li> */}
+
                     <li>
-                    <Link to={`/${user.username}/bookings`}>
-                    <ImCart className="text-secondary-600" />
-                  </Link>
+                      <Link to={`/${user.username}/bookings`}>
+                        <AiFillCopy className="h-6 w-6 text-primary-600 transition-transform duration-500 ease-in-out hover:scale-150" />
+                      </Link>
                     </li>
                     <li>
                       <button
@@ -252,12 +309,11 @@ function Header() {
                 )}
               </ul>
             </div>
-      
           </div>
         </div>
 
         {/* Mobile Menu - visible when isOpen is true */}
-            </div>
+      </div>
     </div>
   );
 }

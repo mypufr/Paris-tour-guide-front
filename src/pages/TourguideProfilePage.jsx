@@ -43,7 +43,7 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 // import { settings4 } from "../components/helpers/sliderSettings";
 
 function TourguideProfilePage() {
-  const { id } = useParams();
+
 
   const { user, setUser } = useContext(UserContext);
   // const CardData = data.find((item) => item.id === parseInt(id));
@@ -80,7 +80,7 @@ function TourguideProfilePage() {
   const [adultCount, setAdultCount] = useState(0);
   const [childCount, setChildCount] = useState(0);
 
-  const [selectedTheme, setSelectedTheme] = useState("行程主題");
+  const [selectedTheme, setSelectedTheme] = useState("");
 
   const [email, setEmail] = useState("");
   const [senderName, setSenderName] = useState("");
@@ -144,8 +144,10 @@ function TourguideProfilePage() {
     beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex + 1),
   };
 
+  const targetRef = useRef(null); // 1. 建立 useRef 來指向目標元素
   const sliderRef = useRef(null);
   const secondSliderRef = useRef(null);
+  const { id } = useParams();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -340,12 +342,18 @@ function TourguideProfilePage() {
     setSelectedTime(time);
     console.log("選擇的時段:", slot.date, time);
 
+    if (targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: "smooth" }); // 2. 觸發滾動
+    }
+
     if (!time || !slot) {
       setSelectedSlot(""); // 清空預約時段
       return;
     }
     setSelectedDate(slot.date);
     setSelectedSlot(time);
+
+  
   };
 
   const increaseAdultCount = () => {
@@ -401,7 +409,7 @@ function TourguideProfilePage() {
 
   return (
     <>
-      <div className="flex max-h-[640px] justify-center py-[2vh] text-3xl font-bold text-grey-950">
+      <div className="flex max-h-[640px] justify-center py-[2vh] text-3xl font-bold text-grey-950"     id="target-section">
         <div className="w-full bg-primary-50 py-11">
           <div className="mx-auto w-3/4">
             <div className="flex justify-evenly">
@@ -410,7 +418,7 @@ function TourguideProfilePage() {
                 {/* title */}
                 <div
                   className="mb-[60px] flex items-center justify-center space-x-2 hover:cursor-pointer"
-                  id="target-section"
+              
                 >
                   <img
                     src="/images/vector_title.png"
@@ -1223,7 +1231,7 @@ function TourguideProfilePage() {
                     );
                   case "private":
                     return (
-                      <div className="">
+                      <div className="" ref={targetRef} id="target-section">
                         <div className="w-ful mt-10">
                           <div className="flex w-full max-w-lg flex-col items-center justify-center space-y-8 border border-grey-200 p-10">
                             <p className="text-xl">

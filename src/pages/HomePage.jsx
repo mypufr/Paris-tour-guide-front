@@ -169,6 +169,17 @@ export default function HomePage() {
     // navigation: true,
   };
 
+  const themes = [
+    "法式美食",
+    "浪漫蜜月行",
+    "親子家庭遊",
+    "時尚購物",
+    "歷史建築",
+    "藝術博物館",
+    "文哲學巡禮",
+    "自然風光",
+  ];
+
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   const [popupPosition, setPopupPosition] = useState({
     left: "10px",
@@ -497,7 +508,6 @@ export default function HomePage() {
       const res = await axios.get(
         "http://localhost:8000/api/popular-tourguides",
       );
-      console.log(res.data);
       setPopularTourguidesList(res.data);
     } catch (error) {
       console.error(error);
@@ -513,19 +523,7 @@ export default function HomePage() {
     getPopularTourguidesList();
   }, []);
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3000/comments").then(function (CommentsRes) {
-  //     console.log(CommentsRes);
-  //     setPostComment(CommentsRes.data[0]);
-  //   }, []);
-  // });
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3000/posts").then(function (ProfilesRes) {
-  //     console.log(ProfilesRes);
-  //     setPostProfile(ProfilesRes.data[0]);
-  //   });
-  // }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -579,6 +577,21 @@ export default function HomePage() {
           </Link>
         </li>
       </ul>
+
+      {/* <ul className="container hidden items-center justify-between text-base leading-[22.4px] text-grey-400 lg:flex lg:px-4 lg:py-2 xl:w-10/12 xl:justify-evenly xl:py-7">
+  {themes.map((theme, index) => (
+    <li
+      key={index}
+      className={`border-x-1 lg:border-y-1 border border-y-0 border-r-0 border-grey-100 lg:px-6 xl:border-0 xl:px-0
+        ${index % 2 === 0 ? "xl:border-r-1 xl:border-l-1 xl:border xl:border-y-0 xl:px-8" : ""}
+      `}
+    >
+      <Link to="/">
+        <span>{theme}</span>
+      </Link>
+    </li>
+  ))}
+</ul>; */}
 
       {/* banner: Slides show */}
       <div className="relative overflow-hidden">
@@ -635,29 +648,29 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="absolute -left-4 mt-16 grid grid-cols-4 grid-rows-2 gap-x-1 gap-y-2 min-[390px]:left-0 md:left-0 md:mt-4 md:w-8/12 lg:-left-3 lg:w-5/12 lg:gap-y-[1px] xl:left-0 xl:mt-0 xl:flex xl:w-6/12 xl:justify-between xl:space-x-0 min-[1920px]:w-[37.5%]">
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-2 lg:mt-4 xl:mx-0">
+            <div className="absolute -left-4 mt-16 grid grid-cols-4 grid-rows-2 gap-x-2 gap-y-2 min-[390px]:left-0 md:left-0 md:mt-4 md:w-8/12 lg:-left-3 lg:w-5/12 lg:gap-y-[1px] xl:left-0 xl:mt-0 xl:flex xl:w-6/12 xl:justify-between xl:space-x-0 min-[1920px]:w-[37.5%]">
+              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
                 法式美食
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-2 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
                 浪漫蜜月行
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-2 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
                 親子家庭遊
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-2 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
                 時尚購物
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-2 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
                 歷史建築
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-2 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
                 藝術博物館
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-2 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
                 文哲學巡禮
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-2 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
                 自然風光
               </button>
             </div>
@@ -681,7 +694,7 @@ export default function HomePage() {
         />
       </div>
 
-      <div className="relative mt-5 2xl:mt-[60px]">
+      <div className="relative mt-5 2xl:mt-[60px] z-10">
         <div className="flex items-center justify-center">
           <p className="text-1xl absolute left-[51.5%] top-[45.5%] text-secondary-700 text-white">
             4
@@ -692,6 +705,7 @@ export default function HomePage() {
             alt="Paris District Map"
             data-aos="zoom-in-left"
             data-aos-easing="ease-in-sine"
+   
           />
         </div>
 
@@ -715,12 +729,13 @@ export default function HomePage() {
               </h3>
 
               <div>
-                {/* {districts[selectedDistrict]} */}
+          
 
                 {recommendedGuides.length > 0 ? (
                   recommendedGuides.map((guide) => (
                     <TourguideList
                       key={guide._id}
+                      id={guide.id}
                       name={guide.name}
                       imgUrl={guide.imgUrl}
                       themes={
@@ -742,7 +757,7 @@ export default function HomePage() {
               <div className="mt-6 space-y-4">
                 <Link to="/book-trips" className="block">
                   <button className="flex w-full justify-center rounded-2xl bg-primary-600 py-4 font-bold tracking-1.5 text-white">
-                    {/* <img src="images/BsHandIndex.svg" alt="" /> */}
+               
                     <TfiHandPointRight className="text-2xl" />
                     <span className="ml-2">馬上預約</span>
                   </button>
@@ -997,11 +1012,7 @@ export default function HomePage() {
               onClick={() => sliderRef.current.slickPrev()}
               className="hover:text-primary-400 p-2 text-grey-950"
             >
-              {/* <img
-                src="images/left_arrow.png"
-                alt="Previous"
-                className="h-8 bg-slate-200"
-              /> */}
+      
 
               <SlArrowLeft />
             </button>
@@ -1017,11 +1028,7 @@ export default function HomePage() {
               onClick={() => sliderRef.current.slickNext()}
               className="hover:text-primary-400 text-grey-950"
             >
-              {/* <img
-                src="images/right_arrow.png"
-                alt="Next"
-                className="h-8 bg-slate-200"
-              /> */}
+       
               <SlArrowRight />
             </button>
           </div>
@@ -1185,18 +1192,15 @@ export default function HomePage() {
               </div>
             </div>
             <div className="mb-4 mt-auto flex justify-center pb-10">
-              <button className="mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
-                {/* <img
-                  src="images/BsHandIndex.svg"
-                  alt=""
-                  className="inline-block"
-                /> */}
-                <TfiHandPointRight className="text-2xl text-white" />
+              <Link to="/search-tourguides" className="block w-full">
+                <button className="m-auto mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
+                  <TfiHandPointRight className="text-2xl text-white" />
 
-                <span className="ml-2 font-bold tracking-1.5 text-white">
-                  我要預約導遊
-                </span>
-              </button>
+                  <span className="ml-2 font-bold tracking-1.5 text-white">
+                    我要預約導遊
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
 
@@ -1299,17 +1303,14 @@ export default function HomePage() {
               </div>
             </div>
             <div className="mb-4 mt-auto flex justify-center pb-10">
-              <button className="mt-2 flex max-w-full justify-center rounded-2xl bg-secondary-400 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
-                {/* <img
-                  src="images/BsHandIndex.svg"
-                  alt=""
-                  className="inline-block"
-                /> */}
-                <TfiHandPointRight className="text-2xl text-white" />
-                <span className="ml-2 font-bold tracking-1.5 text-white">
-                  馬上報名行程
-                </span>
-              </button>
+              <Link to="/search-tourguides" className="block w-full">
+                <button className="mt-2 m-auto flex max-w-full justify-center rounded-2xl bg-secondary-400 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
+                  <TfiHandPointRight className="text-2xl text-white" />
+                  <span className="ml-2 font-bold tracking-1.5 text-white">
+                    馬上報名行程
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
         </div>

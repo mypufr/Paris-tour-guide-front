@@ -1,6 +1,8 @@
 import React, {useEffect, useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
+import axios from "axios";
+
 import { UserContext } from "../../context/userContext";
 
 
@@ -39,6 +41,7 @@ function SearchTourguidesPage() {
   const [childCount, setChildCount] = useState(0);
 
   const [selectedTheme, setSelectedTheme] = useState("行程主題");
+  const [selectedGuides, setSelectedGuides] = useState([]);
 
   // const prevSlide = () => {
   //   const isFirstSlide = currentIndex === 0;
@@ -82,20 +85,75 @@ function SearchTourguidesPage() {
 
   const navigate = useNavigate();
 
-  const handleSearchClick = () => {
+  const handleSearchClick = async() => {
     const queryParams = new URLSearchParams({
       startDate: startDate ? startDate.toISOString().split("T")[0] : "",
       endDate: endDate ? endDate.toISOString().split("T")[0] : "",
-      adultCount,
-      childCount,
+      // adultCount,
+      // childCount,
       theme: selectedTheme,
     }).toString();
 
-    navigate(`/search-tourguides/search-results?${queryParams}`);
+    try {
+  
+      const res = await axios.get(`http://localhost:8000/api/guides?theme=${selectedTheme}`);
+      console.log(res)
+      setSelectedGuides(res.data);
+  
+      
+      } catch (error) {
+        console.error("❌ 無法獲取導遊:", error.response?.data || error.message);
+      }
+
+      
+
+     navigate(`/search-tourguides/search-results?${queryParams}`);
   };
 
-  const handleThemeChange = (event) => {
-    setSelectedTheme(event.target.value);
+  const handleThemeChange = async (event) => {
+    const newTheme = event.target.value;
+    setSelectedTheme(newTheme);
+
+    try {
+  
+      const res = await axios.get(`http://localhost:8000/api/guides?theme=${newTheme}`);
+      console.log(res.data)
+      setSelectedGuides(res.data);
+  
+      const handleSearchClick = async() => {
+        const queryParams = new URLSearchParams({
+          startDate: startDate ? startDate.toISOString().split("T")[0] : "",
+          endDate: endDate ? endDate.toISOString().split("T")[0] : "",
+          // adultCount,
+          // childCount,
+          theme: selectedTheme,
+        }).toString();
+    
+        try {
+      
+          const res = await axios.get(`http://localhost:8000/api/guides?theme=${selectedTheme}`);
+          console.log(res)
+          setSelectedGuides(res.data);
+          navigate(`/search-tourguides/search-results?${queryParams}`)
+          // ,{
+          //   state: {guides:res}
+          // };
+          
+          } catch (error) {
+            console.error("❌ 無法獲取導遊:", error.response?.data || error.message);
+          }
+    
+          
+    
+      
+      };
+
+      
+      } catch (error) {
+        console.error("❌ 無法獲取導遊:", error.response?.data || error.message);
+      }
+
+
   };
 
    useEffect(() => {
@@ -249,7 +307,7 @@ function SearchTourguidesPage() {
 
                   {/* 人數選擇 */}
 
-                  <div className="mt-4 flex justify-center px-4 lg:mt-0">
+                  {/* <div className="mt-4 flex justify-center px-4 lg:mt-0">
                     <Link>
                       <button
                         className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
@@ -300,9 +358,9 @@ function SearchTourguidesPage() {
                         </svg>
                       </button>
                     </Link>
-                  </div>
+                  </div> */}
 
-                  <dialog
+                  {/* <dialog
                     id="touristNum_modal"
                     className="modal modal-bottom sm:modal-middle"
                   >
@@ -363,7 +421,7 @@ function SearchTourguidesPage() {
                         </form>
                       </div>
                     </div>
-                  </dialog>
+                  </dialog> */}
 
                   {/* 行程主題 */}
 
@@ -506,6 +564,27 @@ function SearchTourguidesPage() {
           </div>
 
       </div>
+
+
+
+      <div className="mt-4">
+  {selectedGuides.length > 0 ? (
+    selectedGuides.map((guide) => (
+      <div key={guide.id} className="border p-4 rounded-lg shadow">
+        <h3 className="text-lg font-bold">{guide.name}</h3>
+        <p>{guide.profile}</p>
+        <p><strong>語言：</strong> {guide.languages.join(", ")}</p>
+        <p><strong>主題：</strong> {guide.themes.join(", ")}</p>
+      </div>
+    ))
+  ) : (
+    <p className="text-gray-500">沒有找到符合的導遊</p>
+  )}
+</div>
+
+
+
+
 
       <div className="my-4 flex justify-center space-x-2 hover:cursor-pointer lg:my-10">
         <img

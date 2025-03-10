@@ -69,7 +69,7 @@ const Card = ({ id, imgSrc, title, price, themes }) => {
           {price} € / 小時
         </span>
       </div>
-      <div className="flex justify-evenly gap-1">
+      <div className="flex justify-between gap-1">
         {themes?.map((theme, index) => (
           <span
             key={index}

@@ -1,13 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
-const TourguideList = ({ name, imgUrl, themes, languages }) => {
+
+const TourguideList = ({ id, name, imgUrl, themes, languages }) => {
+
   return (
     <>
     
     <div className=""
     >
-      <Link to="/">
+      <Link to={`/search-tourguides/tourguide-profile/${id}#target-section`}>
         <div className="flex rounded-2xl p-4 bg-white mb-4">
           <img
             className="rounded-full object-cover w-24 h-24"

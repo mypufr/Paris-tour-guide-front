@@ -107,6 +107,10 @@ function PaymentPage() {
       );
 
       console.log("訂單資料送出成功", res.data);
+
+      // **發送事件通知 Header 更新**
+    window.dispatchEvent(new Event("orderUpdated"));
+
       navigate(
         `/search-tourguides/tourguide-profile/${id}/private-trips/payment-success`,
       );
