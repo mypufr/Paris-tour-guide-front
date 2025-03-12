@@ -21,15 +21,15 @@ const TourCard = ({
 
   return (
     <>
-      <div className="max-w-sm rounded-3xl border-2 border-primary-200 bg-white shadow-lg">
+      <div className="h-[450px] max-w-sm rounded-3xl border-2 border-primary-200 bg-white shadow-lg">
         <Link to="/">
-          <div className="border-1 group relative overflow-hidden rounded-2xl border border-primary-200">
+          <div className="border-1 group relative overflow-hidden rounded-2xl">
             <div className="absolute rounded-br-lg rounded-tl-lg bg-secondary-600 px-2 py-1 text-[14px] text-white">
-              {date}
+              {date[0]}
             </div>
 
             <img
-              className="transtion-all group-hoverblur:sm inline-block h-[200px] w-auto rounded-t-xl object-cover duration-300 group-hover:scale-110"
+              className="transtion-all group-hoverblur:sm inline-block h-[200px] w-full rounded-t-xl object-cover duration-300 group-hover:scale-110"
               src={imageUrl}
               alt={tourName}
             />
@@ -47,55 +47,56 @@ const TourCard = ({
                   className="inline-block h-4"
                 />
 
-                <h6 className="text-base font-bold text-gray-500">{tourName}</h6>
+                <h6 className="text-base font-bold text-gray-500">
+                  {tourName}
+                </h6>
                 <span className="inline-flex">
                   <img
                     src="/images/star.svg"
                     alt=""
-                    className="inline-block h-20 max-h-4"
+                    className="inline-block h-20 max-h-3"
                   />
-                  <img src="/images/star.svg" alt="" className="max-h-4" />
-                  <img src="/images/star.svg" alt="" className="max-h-4" />
-                  <img src="/images/star.svg" alt="" className="max-h-4" />
+                  <img src="/images/star.svg" alt="" className="max-h-3" />
+                  <img src="/images/star.svg" alt="" className="max-h-3" />
+                  <img src="/images/star.svg" alt="" className="max-h-3" />
                   <img
                     src="/images/empty-star.svg"
                     alt=""
-                    className="max-h-4"
+                    className="max-h-3"
                   />
                 </span>
               </div>
 
               {/* duration+intro */}
+          
 
-              <div className="grid grid-cols-3 gap-1">
+              <div className="grid grid-cols-3 mt-1">
                 <div className="col-span-1 flex justify-center">
                   <div className="scrollbar-active flex flex-col items-center justify-between">
-                    <div className="flex items-center gap-1">
-                      <IoRemoveOutline className="text-grey-200" />
-                      <p className="text-[12px] text-grey-600">
-                        {duration}小時
-                      </p>
-                      <IoRemoveOutline className="text-grey-200" />
+                    <div className="flex items-center gap-1">   <IoRemoveOutline className="text-grey-200" />
+                <p className="text-[12px] text-grey-600">{duration}小時</p>
+                <IoRemoveOutline className="text-grey-200" /></div>
+
+                    <div className="flex flex-col items-start gap-1">
+                      {sites?.map((site, index) => (
+                        <span
+                          key={index}
+                          className="inline-block rounded-2xl border border-transparent bg-background-2 px-1 text-[12px] leading-[18px] text-grey-600"
+                        >
+                          {site}
+                        </span>
+                      ))}
                     </div>
-                    {sites?.map((site, index) => (
-                      <span
-                        key={index}
-                        className="inline-block rounded-2xl border border-transparent bg-background-2 px-2 text-[12px] leading-[18px] text-grey-600"
-                      >
-                        {site}
-                      </span>
-                    ))}
                   </div>
                 </div>
 
-                <p className="col-span-2 line-clamp-5 max-h-[100px] overflow-y-scroll text-[14px] leading-[19.6px] tracking-1.5 text-grey-400">
+                <p className="col-span-2 line-clamp-5  text-[14px] leading-[19.6px] tracking-1.5 text-grey-400 px-2">
                   {description}
                 </p>
               </div>
             </div>
 
             <div className="my-4 flex justify-end space-x-2 px-2">
-           
               <p className="text-sm font-bold leading-[15.4px] tracking-1.5 text-grey-600">
                 {price} €/人
               </p>

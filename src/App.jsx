@@ -23,7 +23,8 @@ import EditProfile from "./pages/EditProfile";
 import EditTourguideProfile from "./pages/EditTourguideProfile";
 import Login from "./pages/Login";
 import UserProfile from "./pages/UserProfile";
-import CartPage from "./pages/CartPage.jsx"
+import CartPage from "./pages/CartPage.jsx";
+import SearchToursByKeyWords from "./pages/SearchToursByKeyWords.jsx";
 
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "../context/userContext";
@@ -54,7 +55,7 @@ export default function App() {
             <main className="flex-grow">
               <Routes>
                 <Route path="/" element={<HomePage />}></Route>
-
+                <Route path="/search" element={<SearchToursByKeyWords />} />
                 <Route path="/search-tourguides" element={<SearchTourguidesPage />} />
                 <Route
                   path="/search-tourguides/search-results"

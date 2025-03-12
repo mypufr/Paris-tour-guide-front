@@ -1,0 +1,44 @@
+.wave-mask {
+  -webkit-mask-image: url("/images/upper-background_popular_sites_w1914.png");
+  mask-image: url('/images/upper-background_popular_sites_w1914.png');
+  /* -webkit-mask-image: url("/images/slide-background-vector4.svg");
+mask-image: url('/images/slide-background-vector4.svg'); */
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: bottom;
+  mask-position: bottom;
+}
+
+
+.wave-mask-search-tourguide {
+  -webkit-mask-image: url("/images/slide-background-vector3.png");
+  mask-image: url('/images/slide-background-vector3.svg');
+  -webkit-mask-size: cover;
+  mask-size: 50%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: bottom;
+  mask-position: bottom;
+
+  
+}
+
+
+.wave-clip {
+  clip-path: polygon(0% 85%, 10% 90%, 25% 80%, 50% 90%, 75% 80%, 90% 85%, 100% 80%, 100% 100%, 0% 100%);
+
+  clip-path: polygon(11% 23%, 15% 21%, 16% 20%, 14% 21%, 13% 22%, 17% 20%, 18% 20%, 20% 20%, 22% 21%, 24% 23%, 26% 24%, 28% 25%, 31% 26%, 34% 28%, 35% 27%, 38% 26%, 40% 25%, 41% 24%, 43% 24%, 45% 23%, 46% 21%, 47% 20%, 47% 19%, 48% 18%, 49% 17%, 53% 14%, 52% 14%, 55% 11%, 56% 11%, 60% 8%, 60% 7%, 63% 7%, 64% 7%, 69% 7%, 69% 8%, 71% 9%, 72% 9%, 73% 10%, 74% 11%, 76% 13%, 78% 14%, 79% 15%, 80% 17%, 81% 18%, 82% 21%, 83% 22%, 86% 24%, 87% 24%, 88% 25%, 90% 25%, 92% 27%, 93% 28%, 95% 30%, 96% 33%, 96% 35%, 96% 37%, 96% 43%, 96% 43%, 96% 45%, 95% 46%, 97% 40%, 95% 47%, 95% 49%, 94% 52%, 93% 52%, 93% 53%, 92% 54%, 90% 58%, 87% 59%, 82% 61%, 81% 62%, 80% 63%, 76% 64%, 76% 64%, 70% 67%, 69% 67%, 65% 67%, 59% 68%, 58% 70%, 53% 70%, 47% 70%, 43% 70%, 35% 71%, 34% 71%, 29% 70%, 26% 70%, 20% 69%, 16% 67%, 13% 66%, 9% 65%, 6% 62%, 5% 57%, 4% 52%, 4% 52%, 4% 51%, 4% 49%, 4% 47%, 7% 43%, 4% 55%, 4% 58%, 5% 60%, 5% 60%, 6% 45%, 9% 41%, 11% 41%, 13% 41%, 14% 41%, 17% 39%, 17% 39%, 17% 39%, 17% 38%, 17% 36%, 16% 36%, 15% 36%, 13% 35%, 12% 33%, 12% 33%, 11% 33%, 10% 32%, 9% 31%, 9% 29%, 9% 28%, 9% 25%, 10% 25%);
+}
+
+.irregular-shape {
+  /* width: 500px; */
+  height: 500px;
+  background-image: url('your-image.jpg');
+  background-size: cover;
+  background-position: center;
+  clip-path: ellipse(50% 40% at 50% 50%);
+
+}
+

@@ -96,6 +96,7 @@ function TourguideProfilePage() {
     arrows: true,
     rows: 1,
     afterChange: (index) => setCurrentSlide(index + 1),
+    adaptiveHeight: true,
     responsive: [
       {
         breakpoint: 768,
@@ -1211,7 +1212,7 @@ function TourguideProfilePage() {
                           data-aos-offset="300"
                           data-aos-easing="ease-in-sine"
                         >
-                          <Slider {...settings1} arrows={false} ref={sliderRef}>
+                          <Slider {...settings1} arrows={false} ref={sliderRef} className="">
                             {tours.map((tour, index) => (
                               <div key={index}>
                                 <TourCard
@@ -1233,7 +1234,7 @@ function TourguideProfilePage() {
                     return (
                       <div className="" ref={targetRef} id="target-section">
                         <div className="w-ful mt-10">
-                          <div className="flex w-full max-w-lg flex-col items-center justify-center space-y-8 border border-grey-200 p-10">
+                          <div className="flex w-full col-span-1 flex-col items-center justify-center space-y-8 border border-grey-200 p-10">
                             <p className="text-xl">
                               除了團體行程，我們的導遊提供靈活的私人行程，採用時薪制計費，讓您可以根據自己的需求與時間安排，預訂專屬的導覽服務。
                             </p>

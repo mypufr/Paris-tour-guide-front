@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { UserContext } from "../../context/userContext";
 
-
+import "./homepage.css"
 
 import { motion, AnimatePresence } from "motion/react";
 import SlidesData from "../data/slides.json";
@@ -156,6 +156,11 @@ function SearchTourguidesPage() {
 
   };
 
+
+
+
+
+
    useEffect(() => {
         if (user) {
           localStorage.getItem("user", JSON.stringify(user));
@@ -172,9 +177,18 @@ function SearchTourguidesPage() {
   return (
     <>
       <div className="group relative m-auto h-[480px] w-full py-0 md:h-[500px] lg:h-[780px]">
- 
+      <img
+            src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHx8fA%3D%3D"
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover object-bottom opacity-90 blur-xl"
+            style={{
+              maskImage:
+                "linear-gradient(to center, transparent 5%, black 100%))",
+              WebkitMaskImage:
+                "linear-gradient(to center, transparent 5%, black 100%",
+            }}/>
 
-        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
+        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden wave-mask-search-tourguide">
           <AnimatePresence>
             <motion.img
               key={index} // 每次 index 變動時，重新渲染
@@ -184,6 +198,7 @@ function SearchTourguidesPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 2 }}
+         
             />
           </AnimatePresence>
         </div>
@@ -195,7 +210,7 @@ function SearchTourguidesPage() {
             {/* Search options */}
             <div className="mt-2 lg:mt-10">
               <div className="my-6 flex flex-col justify-center lg:mt-10 lg:flex-row lg:space-x-8">
-                <div className="relative w-full max-w-lg space-y-3 lg:space-y-8">
+                <div className="mt-10 relative w-full max-w-lg space-y-3 lg:space-y-8">
                   {/* 日期範圍 */}
                   <div className="mt-4 flex min-w-[400px] justify-center px-4 lg:mt-0">
                     <Link>
@@ -564,27 +579,6 @@ function SearchTourguidesPage() {
           </div>
 
       </div>
-
-
-
-      <div className="mt-4">
-  {selectedGuides.length > 0 ? (
-    selectedGuides.map((guide) => (
-      <div key={guide.id} className="border p-4 rounded-lg shadow">
-        <h3 className="text-lg font-bold">{guide.name}</h3>
-        <p>{guide.profile}</p>
-        <p><strong>語言：</strong> {guide.languages.join(", ")}</p>
-        <p><strong>主題：</strong> {guide.themes.join(", ")}</p>
-      </div>
-    ))
-  ) : (
-    <p className="text-gray-500">沒有找到符合的導遊</p>
-  )}
-</div>
-
-
-
-
 
       <div className="my-4 flex justify-center space-x-2 hover:cursor-pointer lg:my-10">
         <img

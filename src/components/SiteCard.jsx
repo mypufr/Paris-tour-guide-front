@@ -24,7 +24,7 @@ const SiteCard = ({
     <>
       <div className="max-w-sm rounded-3xl border-2 border-primary-200 bg-white shadow-lg">
         <Link to="/">
-          <div className="border-1 group relative overflow-hidden rounded-2xl border border-primary-200">
+          <div className="border-1 group relative overflow-hidden rounded-2xl">
           <div className="absolute top-0 right-0 rounded-bl-lg rounded-tr-lg px-2 py-1 text-[14px] bg-grey-400 text-white flex items-center gap-1">
               
               
@@ -32,7 +32,7 @@ const SiteCard = ({
               {duration}小時
             </div>
             <img
-              className="transtion-all group-hoverblur:sm inline-block h-[200px] w-auto rounded-t-xl object-cover duration-300 group-hover:scale-110"
+              className="transtion-all group-hoverblur:sm inline-block h-[200px] w-full rounded-t-xl object-cover duration-300 group-hover:scale-110"
               src={imageUrl}
               alt={siteName}
             />
@@ -74,7 +74,7 @@ const SiteCard = ({
               {/* duration+intro */}
 
               <div className="">
-                <p className="line-clamp-5 max-h-[100px] overflow-y-scroll px-2 text-[14px] leading-[19.6px] tracking-1.5 text-grey-400">
+                <p className="line-clamp-5  px-2 text-[14px] leading-[19.6px] tracking-1.5 text-grey-400">
                   {description}
                 </p>
               </div>

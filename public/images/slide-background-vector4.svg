@@ -1,0 +1,11 @@
+<svg width="100%" height="100%" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="15" />
+    </filter>
+    <mask id="waveMask">
+      <path d="M0 300 Q 300 400, 600 300 T 1200 300 V 600 H 0 Z" fill="white" filter="url(#blur)"/>
+    </mask>
+  </defs>
+  <rect width="100%" height="100%" fill="black" mask="url(#waveMask)"/>
+</svg>

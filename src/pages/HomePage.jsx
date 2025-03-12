@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import axios from "axios";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "./homepage.css"
 
 import { motion, AnimatePresence } from "motion/react";
 
@@ -57,16 +57,21 @@ import TourguideList from "../components/TourguideList";
 import { settings3 } from "../components/helpers/sliderSettings.jsx";
 
 export default function HomePage() {
+  
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0);
 
-  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState(""); // 存放使用者輸入的關鍵字 
+  const [tours, setTours] = useState([]); // 存放所有行程資料
+  const [filteredTours, setFilteredTours] = useState([]); // 存放篩選後的行程
 
+  
   const [postObject, setPostObject] = useState(null);
   const [postComment, setPostComment] = useState(null);
   const [postProfile, setPostProfile] = useState(null);
-
+  
   const [popularTourguidesList, setPopularTourguidesList] = useState([]);
-
+  
   const handleCardClick = (id) => {
     navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
   };
@@ -514,6 +519,20 @@ export default function HomePage() {
     }
   };
 
+
+  const getToursByKeyWord = async() => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/tours");
+      setTours(res.data || []); // 確保 `tours` 是陣列
+      setFilteredTours(res.data)
+      
+    } catch (error) {
+      console.error("❌ 無法獲取行程資料:", error);
+    }
+  }
+
+
+
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
     // axios.get("http://localhost:3000/posts").then(function (JsonRes) {
@@ -524,6 +543,27 @@ export default function HomePage() {
   }, []);
 
 
+  useEffect(() => {
+    getToursByKeyWord();
+  }, []);
+
+
+  // 監聽搜尋輸入並篩選行程
+  useEffect(() => {
+    if (!searchQuery) {
+      setFilteredTours(tours); // 若無輸入則顯示所有行程
+    } else {
+      const safeSearchQuery = searchQuery || "";
+      const filtered = (tours || []).filter((tour) =>
+
+
+        (tour.sites || []).some((site) =>
+          site.toLowerCase().includes(safeSearchQuery)
+        )
+      );
+      setFilteredTours(filtered);
+    }
+  }, [searchQuery, tours]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -594,8 +634,8 @@ export default function HomePage() {
 </ul>; */}
 
       {/* banner: Slides show */}
-      <div className="relative overflow-hidden">
-        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
+      <div className="relative overflow-hidden ">
+        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden wave-mask">
           <AnimatePresence>
             <motion.img
               key={index} // 每次 index 變動時，重新渲染
@@ -636,12 +676,15 @@ export default function HomePage() {
                   type="text"
                   className="-left-8 m-auto rounded-lg border border-gray-300 bg-white p-[13px] pr-10 text-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-[200px]:w-8/12 md:w-6/12 lg:w-5/12 lg:pr-0 xl:h-12 xl:w-6/12 2xl:w-[35%]"
                   placeholder="尋找你的完美巴黎旅程"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)} // 更新關鍵字
                 />
                 <div className="absolute inset-y-0 right-[28vw] top-14 flex items-center rounded-r-lg bg-primary-600 p-5 md:right-[45vw] md:top-[80%] lg:right-[58vw] lg:top-0 lg:p-3 xl:right-[50vw] 2xl:top-10 min-[1536px]:right-[64vw] min-[1920px]:right-[63vw]">
                   <svg
                     className="h-4 w-4 text-white lg:h-5 lg:w-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
+                    onClick={() => navigate(`/search?query=${encodeURIComponent(searchQuery)}`)}
                   >
                     <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707a1 1 0 001.414-1.414l-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
                   </svg>

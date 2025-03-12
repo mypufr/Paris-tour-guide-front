@@ -18,7 +18,7 @@ function Cursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-20 h-10  rounded-full pointer-events-none z-[1000]"
+      className="fixed top-0 left-0 w-20 h-10 bg-transparent rounded-full pointer-events-none z-[1000]"
       style={{
         backgroundImage: "url('/images/chauffeur-service-1.png')", 
         backgroundSize: "contain",
