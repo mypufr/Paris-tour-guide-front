@@ -410,7 +410,7 @@ function TourguideProfilePage() {
 
   return (
     <>
-      <div className="flex max-h-[640px] justify-center py-[2vh] text-3xl font-bold text-grey-950"     id="target-section">
+      <div className="flex max-h-[640px] justify-center py-[2vh] text-3xl font-bold text-grey-950" id="target-section">
         <div className="w-full bg-primary-50 py-11">
           <div className="mx-auto w-3/4">
             <div className="flex justify-evenly">
@@ -1802,7 +1802,7 @@ function TourguideProfilePage() {
         <div className="my-[80px] bg-[url('https://i.imgur.com/mydRBqI.png')] bg-cover bg-center py-20">
           <div
             className="mb-[60px] flex items-center justify-center space-x-2 hover:cursor-pointer"
-            id="target-section"
+     
           >
             <img
               src="/images/vector_title.png"
@@ -1822,13 +1822,11 @@ function TourguideProfilePage() {
               {/* ul */}
 
               <div className="grid grid-cols-1 gap-10 space-y-[1%] sm:grid-cols-2 lg:grid-cols-4">
-                <div
-                  className="relative transform overflow-hidden rounded-lg transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
-                  data-aos="zoom-in"
-                  data-aos-offset="300"
-                  data-aos-easing="ease-in-sine"
-                >
-                  <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
+          
+                  <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
+                        data-aos="zoom-in"
+                        data-aos-offset="300"
+                        data-aos-easing="ease-in-sine">
                     <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
                       行程規畫建議
                     </p>
@@ -1838,14 +1836,12 @@ function TourguideProfilePage() {
                       針對個人或小團體的專屬導覽行程,根據客戶需求量身定制
                     </p>
                   </div>
-                </div>
-                <div
-                  className="relative transform overflow-hidden rounded-lg transition-all duration-200 hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
-                  data-aos="zoom-in"
-                  data-aos-offset="300"
-                  data-aos-easing="ease-in-sine"
-                >
-                  <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md">
+           
+          
+                  <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
+                     data-aos="zoom-in"
+                     data-aos-offset="300"
+                     data-aos-easing="ease-in-sine">
                     <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
                       語言翻譯
                     </p>
@@ -1855,7 +1851,7 @@ function TourguideProfilePage() {
                       提供雙語或多語導覽,並在必要時進行語言翻譯,幫助遊客與當地人交流
                     </p>
                   </div>
-                </div>
+              
 
                 <div
                   className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"

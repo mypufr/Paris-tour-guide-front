@@ -24,7 +24,7 @@ function Footer() {
               <img
                 src="https://i.imgur.com/IKExSXw.png"
                 alt="footer_img"
-                className="h-auto w-full md:h-60 lg:h-[300px] xl:h-[450px] 2xl:h-[600px]"
+                className="h-auto w-full md:h-60 lg:h-[300px] xl:h-[450px] 2xl:h-[500px]"
               />
             </div>
 

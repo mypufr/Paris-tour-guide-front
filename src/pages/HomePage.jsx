@@ -4,7 +4,7 @@ import axios from "axios";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import "./homepage.css"
+import "./homepage.css";
 
 import { motion, AnimatePresence } from "motion/react";
 
@@ -52,32 +52,36 @@ import SlidesData from "../data/slides.json";
 // import component
 
 import Card from "../components/Card";
+import TourCard from "../components/tourCard.jsx";
 import TripCard from "../components/TripCard";
 import TourguideList from "../components/TourguideList";
 import { settings3 } from "../components/helpers/sliderSettings.jsx";
 
 export default function HomePage() {
-  
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
 
-  const [searchQuery, setSearchQuery] = useState(""); // 存放使用者輸入的關鍵字 
+  const [searchQuery, setSearchQuery] = useState(""); // 存放使用者輸入的關鍵字
   const [tours, setTours] = useState([]); // 存放所有行程資料
   const [filteredTours, setFilteredTours] = useState([]); // 存放篩選後的行程
 
-  
   const [postObject, setPostObject] = useState(null);
   const [postComment, setPostComment] = useState(null);
   const [postProfile, setPostProfile] = useState(null);
-  
+
   const [popularTourguidesList, setPopularTourguidesList] = useState([]);
-  
+
   const handleCardClick = (id) => {
     navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
   };
 
   const sliderRef = useRef(null);
+
+  const toursSliderRef = useRef(null);
+
   const [currentSlide, setCurrentSlide] = useState(1);
+
+  const [toursCurrentSlide, settoursCurrentSlide] = useState(1);
 
   const settings1 = {
     dots: true,
@@ -519,19 +523,15 @@ export default function HomePage() {
     }
   };
 
-
-  const getToursByKeyWord = async() => {
+  const getToursByKeyWord = async () => {
     try {
       const res = await axios.get("http://localhost:8000/api/tours");
       setTours(res.data || []); // 確保 `tours` 是陣列
-      setFilteredTours(res.data)
-      
+      setFilteredTours(res.data);
     } catch (error) {
       console.error("❌ 無法獲取行程資料:", error);
     }
-  }
-
-
+  };
 
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
@@ -542,11 +542,24 @@ export default function HomePage() {
     getPopularTourguidesList();
   }, []);
 
-
   useEffect(() => {
     getToursByKeyWord();
   }, []);
 
+  // 取得所有行程
+  useEffect(() => {
+    const fetchTours = async () => {
+      try {
+        const res = await axios.get("http://localhost:8000/api/tours");
+        console.log(res.data)
+        setTours(res.data || []);
+      } catch (error) {
+        console.error("❌ 無法獲取行程資料:", error);
+      }
+    };
+
+    fetchTours();
+  }, []);
 
   // 監聽搜尋輸入並篩選行程
   useEffect(() => {
@@ -555,11 +568,9 @@ export default function HomePage() {
     } else {
       const safeSearchQuery = searchQuery || "";
       const filtered = (tours || []).filter((tour) =>
-
-
         (tour.sites || []).some((site) =>
-          site.toLowerCase().includes(safeSearchQuery)
-        )
+          site.toLowerCase().includes(safeSearchQuery),
+        ),
       );
       setFilteredTours(filtered);
     }
@@ -634,8 +645,8 @@ export default function HomePage() {
 </ul>; */}
 
       {/* banner: Slides show */}
-      <div className="relative overflow-hidden ">
-        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden wave-mask">
+      <div className="relative overflow-hidden">
+        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
           <AnimatePresence>
             <motion.img
               key={index} // 每次 index 變動時，重新渲染
@@ -684,7 +695,11 @@ export default function HomePage() {
                     className="h-4 w-4 text-white lg:h-5 lg:w-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
-                    onClick={() => navigate(`/search?query=${encodeURIComponent(searchQuery)}`)}
+                    onClick={() =>
+                      navigate(
+                        `/search?query=${encodeURIComponent(searchQuery)}`,
+                      )
+                    }
                   >
                     <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707a1 1 0 001.414-1.414l-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
                   </svg>
@@ -737,7 +752,7 @@ export default function HomePage() {
         />
       </div>
 
-      <div className="relative mt-5 2xl:mt-[60px] z-10">
+      <div className="relative z-10 mt-5 2xl:mt-[60px]">
         <div className="flex items-center justify-center">
           <p className="text-1xl absolute left-[51.5%] top-[45.5%] text-secondary-700 text-white">
             4
@@ -748,7 +763,6 @@ export default function HomePage() {
             alt="Paris District Map"
             data-aos="zoom-in-left"
             data-aos-easing="ease-in-sine"
-   
           />
         </div>
 
@@ -772,8 +786,6 @@ export default function HomePage() {
               </h3>
 
               <div>
-          
-
                 {recommendedGuides.length > 0 ? (
                   recommendedGuides.map((guide) => (
                     <TourguideList
@@ -800,7 +812,6 @@ export default function HomePage() {
               <div className="mt-6 space-y-4">
                 <Link to="/book-trips" className="block">
                   <button className="flex w-full justify-center rounded-2xl bg-primary-600 py-4 font-bold tracking-1.5 text-white">
-               
                     <TfiHandPointRight className="text-2xl" />
                     <span className="ml-2">馬上預約</span>
                   </button>
@@ -1028,7 +1039,13 @@ export default function HomePage() {
           />
         </div>
       </div>
-      <div className="m-auto my-20 max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
+      <button
+              onClick={() => sliderRef.current.slickPrev()}
+              className="hover:text-primary-400 p-2 text-grey-950 z-10"
+            >
+              <SlArrowLeft />
+            </button>
+      <div className=" m-auto my-20 max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
         <div>
           <Slider {...settings1} arrows={false} ref={sliderRef}>
             {popularTourguidesList.map((item, index) => (
@@ -1053,15 +1070,13 @@ export default function HomePage() {
           <div className="flex items-center justify-center space-x-8 2xl:mt-6">
             <button
               onClick={() => sliderRef.current.slickPrev()}
-              className="hover:text-primary-400 p-2 text-grey-950"
+              className="hover:text-primary-400 p-2 text-grey-950 z-10"
             >
-      
-
               <SlArrowLeft />
             </button>
 
             {/* 放置 pagination */}
-            <div className="pagination-container text-xl font-bold text-primary-600">
+            <div className="pagination-container text-xl font-bold text-primary-600 z-10">
               <span>{currentSlide}</span> /{" "}
               <span className="text-grey-950">{data.length}</span>
               {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}
@@ -1069,9 +1084,8 @@ export default function HomePage() {
 
             <button
               onClick={() => sliderRef.current.slickNext()}
-              className="hover:text-primary-400 text-grey-950"
+              className="hover:text-primary-400 text-grey-950 z-10"
             >
-       
               <SlArrowRight />
             </button>
           </div>
@@ -1080,21 +1094,21 @@ export default function HomePage() {
 
       {/* background settings */}
 
-      <div className="bg-popular_sites relative">
+      <div className="bg-popular_sites relative mt-[-140px] bg-gradient-to-t from-white/80 via-white/50 to-transparent">
         <div className="hidden lg:block">
           <img
             src="https://i.imgur.com/MzjNbOk.png"
             alt=""
-            className="h-[500px] w-full object-cover"
+            className="h-[200px] w-full object-cover"
           />
           <img
             src="https://i.imgur.com/mydRBqI.png"
             alt=""
-            className="h-[900px] w-full"
+            className="h-[733px] w-full"
           />
         </div>
 
-        <div className="mt-8 lg:absolute lg:left-[43%] lg:top-[30%] lg:mt-16">
+        <div className="mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16">
           <div className="flex justify-center space-x-4 hover:cursor-pointer">
             <img
               src="https://i.imgur.com/zoB5vaQ.png"
@@ -1113,14 +1127,43 @@ export default function HomePage() {
         </div>
 
         {/* slides show: popular sites */}
-        <div className="m-auto min-[425px]:max-w-[95%] md:mt-4 min-[768px]:max-w-[85%] lg:absolute lg:left-[15%] lg:top-[40%] lg:max-w-[67.5%]">
-          <div className="mt-2 lg:mt-20">
-            <Slider {...settings2}>
-              {TripsData.map((data, index) => (
+        <div className="m-auto min-[425px]:max-w-[95%] md:mt-4 min-[768px]:max-w-[85%] lg:absolute lg:left-[15%] lg:top-[30%] lg:w-[68%]">
+          <div className="relative mt-2 lg:mt-20">
+
+
+          <button
+              onClick={() => toursSliderRef.current.slickPrev()}
+              className="absolute left-[-50px] top-1/2 -translate-y-1/2 hover:text-primary-400  text-grey-950 z-10 rounded-full bg-gray-200 p-4"
+            >
+              <SlArrowLeft size={20} />
+            </button>
+
+
+            <Slider {...settings2}  ref={toursSliderRef}>
+              {tours.map((tour, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleCardClick(tour.id)}
+                  className=""
+                >
+                  <TripCard
+                    key={tour.id}
+                    imageUrl={tour.imgUrl}
+                    tourName={tour.tourName}
+                    date={tour.date}
+                    sites={tour.sites}
+                    duration={tour.duration}
+                    description={tour.description}
+                    price={tour.price}
+                  />
+                </div>
+              ))}
+
+              {/* {TripsData.map((data, index) => (
                 <div key={index} className="p-4 md:p-0">
                   <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
                     <TripCard
-                      tripName={data.tripName}
+                      tripName={data.tourName}
                       imageUrl={data.imgUrl}
                       description={data.description}
                       date={data.date}
@@ -1132,8 +1175,15 @@ export default function HomePage() {
                     />
                   </div>
                 </div>
-              ))}
+              ))} */}
             </Slider>
+
+            <button
+              onClick={() => toursSliderRef.current.slickNext()}
+              className="absolute right-[-50px] top-1/2 -translate-y-1/2 hover:text-primary-400 text-grey-950 z-10 rounded-full bg-gray-200 p-4"
+            >
+              <SlArrowRight size={20}/>
+            </button>
           </div>
         </div>
       </div>
@@ -1347,7 +1397,7 @@ export default function HomePage() {
             </div>
             <div className="mb-4 mt-auto flex justify-center pb-10">
               <Link to="/search-tourguides" className="block w-full">
-                <button className="mt-2 m-auto flex max-w-full justify-center rounded-2xl bg-secondary-400 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
+                <button className="m-auto mt-2 flex max-w-full justify-center rounded-2xl bg-secondary-400 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
                   <TfiHandPointRight className="text-2xl text-white" />
                   <span className="ml-2 font-bold tracking-1.5 text-white">
                     馬上報名行程

@@ -8,7 +8,7 @@ import { UserContext } from "../../context/userContext";
 import "./homepage.css"
 
 import { motion, AnimatePresence } from "motion/react";
-import SlidesData from "../data/slides.json";
+import SlidesData from "../data/slidesSearchTourguidesPage.json";
 
 
 import Slider from "react-slick";
@@ -22,11 +22,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-// import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-// import { RxDotFilled } from "react-icons/rx";
-// import { Navbar, Button, IconButton } from "@material-tailwind/react";
-// import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 
 function SearchTourguidesPage() {
@@ -176,19 +171,20 @@ function SearchTourguidesPage() {
 
   return (
     <>
-      <div className="group relative m-auto h-[480px] w-full py-0 md:h-[500px] lg:h-[780px]">
+      <div className=" group relative m-auto h-[680px] w-full py-0 md:h-[500px] lg:h-[780px]">
       <img
-            src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHx8fA%3D%3D"
+            src="/images/background_popular_sites_cutted.png"
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-bottom opacity-90 blur-xl"
+            className="absolute inset-0 h-[750px] w-full object-cover object-bottom "
             style={{
               maskImage:
                 "linear-gradient(to center, transparent 5%, black 100%))",
               WebkitMaskImage:
                 "linear-gradient(to center, transparent 5%, black 100%",
-            }}/>
+            }}
+            />
 
-        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden wave-mask-search-tourguide">
+        <div className="relative top-20  flex h-[700px] w-full items-center justify-center overflow-hidden wave-mask">
           <AnimatePresence>
             <motion.img
               key={index} // 每次 index 變動時，重新渲染
@@ -203,7 +199,7 @@ function SearchTourguidesPage() {
           </AnimatePresence>
         </div>
 
-          <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[33%] lg:top-[20%]">
+          <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[30%] lg:top-[30%]">
             <h1 className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
               尋找你的專屬在地導遊
             </h1>
