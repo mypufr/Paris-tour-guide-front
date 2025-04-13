@@ -38,20 +38,6 @@ function SearchTourguidesPage() {
   const [selectedTheme, setSelectedTheme] = useState("行程主題");
   const [selectedGuides, setSelectedGuides] = useState([]);
 
-  // const prevSlide = () => {
-  //   const isFirstSlide = currentIndex === 0;
-  //   const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-  //   setCurrentIndex(newIndex);
-  // };
-  // const nextSlide = () => {
-  //   const isLastSlide = currentIndex === slides.length - 1;
-  //   const newIndex = isLastSlide ? 0 : currentIndex + 1;
-  //   setCurrentIndex(newIndex);
-  // };
-
-  // const goToSlide = (slideIndex) => {
-  //   setCurrentIndex(slideIndex);
-  // };
 
   const increaseAdultCount = () => {
     if (adultCount < 10) {
@@ -65,7 +51,7 @@ function SearchTourguidesPage() {
     }
   };
 
-  // 減少人數
+
   const decreaseAdultCount = () => {
     if (adultCount >= 1) {
       setAdultCount(adultCount - 1);
@@ -84,8 +70,6 @@ function SearchTourguidesPage() {
     const queryParams = new URLSearchParams({
       startDate: startDate ? startDate.toISOString().split("T")[0] : "",
       endDate: endDate ? endDate.toISOString().split("T")[0] : "",
-      // adultCount,
-      // childCount,
       theme: selectedTheme,
     }).toString();
 
@@ -117,8 +101,6 @@ function SearchTourguidesPage() {
         const queryParams = new URLSearchParams({
           startDate: startDate ? startDate.toISOString().split("T")[0] : "",
           endDate: endDate ? endDate.toISOString().split("T")[0] : "",
-          // adultCount,
-          // childCount,
           theme: selectedTheme,
         }).toString();
 
@@ -129,9 +111,7 @@ function SearchTourguidesPage() {
           console.log(res);
           setSelectedGuides(res.data);
           navigate(`/search-tourguides/search-results?${queryParams}`);
-          // ,{
-          //   state: {guides:res}
-          // };
+
         } catch (error) {
           console.error(
             "❌ 無法獲取導遊:",
@@ -145,6 +125,7 @@ function SearchTourguidesPage() {
   };
 
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -165,7 +146,7 @@ function SearchTourguidesPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % SlidesData.length);
-    }, 3000); // 每3秒切換
+    }, 3000); 
     return () => clearInterval(interval);
   }, []);
 
@@ -178,7 +159,7 @@ function SearchTourguidesPage() {
         <img
           src="/images/background_popular_sites_cutted.png"
           alt=""
-          className="absolute inset-0 h-[750px] w-full object-cover object-bottom"
+          className="absolute inset-0 h-[750px] w-full object-cover object-top"
           style={{
             maskImage:
               "linear-gradient(to center, transparent 5%, black 100%))",
@@ -201,9 +182,12 @@ function SearchTourguidesPage() {
           </AnimatePresence>
         </div>
 
-        <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[30%] lg:top-[30%]">
-          <h1 className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
-            {/* 尋找你的專屬在地導遊 */}
+        <div
+          className={`absolute left-[15%] top-[20%] max-w-[70vw] md:left-[25%] md:top-[15%] lg:top-[30%] ${i18n.language === "fr" ? "lg:left-[35rem]" : ""} ${i18n.language === "en" ? "lg:left-[30rem]" : ""} ${i18n.language === "中文" ? "lg:left-[40rem]" : ""} `}
+        >
+          <h1
+            className={`noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]`}
+          >
             {t("title")}
           </h1>
 
@@ -211,11 +195,10 @@ function SearchTourguidesPage() {
           <div className="mt-2 lg:mt-10">
             <div className="my-6 flex flex-col justify-center lg:mt-10 lg:flex-row lg:space-x-8">
               <div className="relative mt-10 w-full max-w-lg space-y-3 lg:space-y-8">
-                {/* 日期範圍 */}
                 <div className="mt-4 flex min-w-[400px] justify-center px-4 lg:mt-0">
                   <Link>
                     <button
-                      className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
+                      className="flex w-[19vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
                       onClick={() =>
                         document.getElementById("calendar_modal").showModal()
                       }
@@ -297,24 +280,10 @@ function SearchTourguidesPage() {
                         calendarClassName="flex gap-6 bg-primary-50 rounded-lg  border-none"
                         minDate={
                           new Date(new Date().setDate(new Date().getDate() + 2))
-                        } // 限制三天後才可選擇
+                        } 
                       />
                     </div>
 
-                    {/* 已選日期顯示 */}
-                    {/* <div className="text-center">
-                        {startDate && endDate ? (
-                          <p className="text-grey-600">
-                            選擇的日期範圍：
-                            <span className="font-bold text-primary-600">
-                              {startDate.toLocaleDateString()} -{" "}
-                              {endDate.toLocaleDateString()}
-                            </span>
-                          </p>
-                        ) : (
-                          <p className="text-gray-400">請選擇開始和結束日期</p>
-                        )}
-                      </div> */}
 
                     <div className="text-center">
                       {startDate && endDate ? (
@@ -346,130 +315,16 @@ function SearchTourguidesPage() {
                   </div>
                 </dialog>
 
-                {/* 人數選擇 */}
 
-                {/* <div className="mt-4 flex justify-center px-4 lg:mt-0">
-                    <Link>
-                      <button
-                        className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
-                        onClick={() =>
-                          document
-                            .getElementById("touristNum_modal")
-                            .showModal()
-                        }
-                      >
-                        <svg
-                          className="h-8"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="grey"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                          />
-                        </svg>
-                        <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
-                          {adultCount || childCount ? (
-                            <p className="text-primary-700">
-                              <span className="text-base">
-                                {adultCount}位大人
-                                {"、"}
-                                {childCount}位小孩
-                              </span>
-                            </p>
-                          ) : (
-                            <p className="text-gray-400">參加人數</p>
-                          )}
-                        </span>
-                        <svg
-                          className="h-8"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="grey"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1"
-                            d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                          />
-                        </svg>
-                      </button>
-                    </Link>
-                  </div> */}
 
-                {/* <dialog
-                    id="touristNum_modal"
-                    className="modal modal-bottom sm:modal-middle"
-                  >
-                    <div className="flex flex-col items-center space-y-8 rounded-lg bg-white p-20">
-                      <h2 className="text-xl font-bold text-primary-700">
-                        選擇人數
-                      </h2>
+       
 
-                      <div className="flex items-center space-x-4 rounded-lg border bg-white p-2 shadow-md">
-                        <button
-                          onClick={decreaseAdultCount}
-                          className="rounded-lg bg-gray-200 px-3 py-2 text-lg font-bold hover:bg-gray-300"
-                        >
-                          −
-                        </button>
 
-                        <span className="text-xl font-semibold text-gray-800">
-                          {adultCount}位大人
-                        </span>
-
-                        <button
-                          onClick={increaseAdultCount}
-                          className="rounded-lg bg-blue-500 px-3 py-2 text-lg font-bold text-white hover:bg-blue-600"
-                        >
-                          +
-                        </button>
-                      </div>
-
-                      <div className="flex items-center space-x-4 rounded-lg border bg-white p-2 shadow-md">
-                        <button
-                          onClick={decreaseChildCount}
-                          className="rounded-lg bg-gray-200 px-3 py-2 text-lg font-bold hover:bg-gray-300"
-                        >
-                          −
-                        </button>
-
-                        <span className="text-xl font-semibold text-gray-800">
-                          {childCount}位小孩
-                        </span>
-
-                        <button
-                          onClick={increaseChildCount}
-                          className="rounded-lg bg-blue-500 px-3 py-2 text-lg font-bold text-white hover:bg-blue-600"
-                        >
-                          +
-                        </button>
-                      </div>
-
-                      <p className="m-2 p-2 text-gray-600">
-                        目前選擇{" "}
-                        <span className="font-bold text-primary-600">
-                          {adultCount}位大人、 {childCount}位小孩
-                        </span>{" "}
-                      </p>
-                      <div className="modal-action">
-                        <form method="dialog">
-                          <button className="btn">確認</button>
-                        </form>
-                      </div>
-                    </div>
-                  </dialog> */}
-
-                {/* 行程主題 */}
 
                 <div className="mt-4 flex justify-center px-4 lg:mt-0">
                   <Link>
                     <button
-                      className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
+                      className="flex w-[19vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
                       onClick={() =>
                         document.getElementById("theme_modal").showModal()
                       }
@@ -493,7 +348,7 @@ function SearchTourguidesPage() {
                             <span className="text-[20px]">
                               {/* {selectedTheme} */}
                               {t("search")}
-                              </span>  
+                            </span>
                           </p>
                         ) : (
                           <p className="text-gray-400"></p>
@@ -580,12 +435,12 @@ function SearchTourguidesPage() {
           <div className="mt-2 lg:mt-8">
             {/* <Link to="/search-tourguides/search-results"> */}
             <button
-              className="absolute left-[25%] flex min-w-[50%] rounded-3xl bg-primary-500 py-3 lg:bottom-[-15%] lg:left-[32%] lg:min-w-[40%]"
+              className="absolute left-[25%] flex min-w-[50%] rounded-3xl bg-primary-500 py-3 lg:bottom-[-15%] lg:left-[30%] lg:min-w-[40%]"
               onClick={handleSearchClick}
             >
               <div className="relative flex-grow">
                 <span className="pr-2 text-[13px] font-bold text-white lg:pr-4 lg:text-xl">
-            {t("quickSearch")}
+                  {t("quickSearch")}
                 </span>
                 <svg
                   className="absolute right-3 top-1 inline-block h-6 w-6 pl-1 text-white"
@@ -602,7 +457,7 @@ function SearchTourguidesPage() {
                 </svg>
               </div>
             </button>
-            {/* </Link> */}
+
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 {
-  "title": "Trouvez votre guide local personnalisé",
-  "dateRange": "Plage de dates",
+  "title": "Trouvez votre guide local",
+  "dateRange": "Dates",
   "departure": "Départ le {{date}}",
   "return": "Retour le {{date}}",
   "search": "Rechercher",
