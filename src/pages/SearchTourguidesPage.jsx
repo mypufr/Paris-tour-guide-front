@@ -22,6 +22,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+import "../utils/i18n";
+import { useTranslation } from "react-i18next";
+
 function SearchTourguidesPage() {
   const [index, setIndex] = useState(0);
   const { user, setUser } = useContext(UserContext);
@@ -34,7 +37,6 @@ function SearchTourguidesPage() {
 
   const [selectedTheme, setSelectedTheme] = useState("行程主題");
   const [selectedGuides, setSelectedGuides] = useState([]);
-
 
   // const prevSlide = () => {
   //   const isFirstSlide = currentIndex === 0;
@@ -142,12 +144,14 @@ function SearchTourguidesPage() {
     }
   };
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     const hash = window.location.hash;
     if (hash) {
       const element = document.querySelector(hash);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, []);
@@ -167,7 +171,10 @@ function SearchTourguidesPage() {
 
   return (
     <>
-      <div className="group relative m-auto h-[680px] w-full py-0 md:h-[500px] lg:h-[780px]" id="target-section">
+      <div
+        className="group relative m-auto h-[680px] w-full py-0 md:h-[500px] lg:h-[780px]"
+        id="target-section"
+      >
         <img
           src="/images/background_popular_sites_cutted.png"
           alt=""
@@ -196,8 +203,10 @@ function SearchTourguidesPage() {
 
         <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[30%] lg:top-[30%]">
           <h1 className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
-            尋找你的專屬在地導遊
+            {/* 尋找你的專屬在地導遊 */}
+            {t("title")}
           </h1>
+
           {/* Search options */}
           <div className="mt-2 lg:mt-10">
             <div className="my-6 flex flex-col justify-center lg:mt-10 lg:flex-row lg:space-x-8">
@@ -243,7 +252,7 @@ function SearchTourguidesPage() {
                             </span>
                           </p>
                         ) : (
-                          <p className="text-gray-400">日期範圍</p>
+                          <p className="text-gray-400">{t("dateRange")}</p>
                         )}
                       </span>
                       <svg
@@ -481,7 +490,10 @@ function SearchTourguidesPage() {
                       <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
                         {selectedTheme ? (
                           <p className="text-gray-400">
-                            <span className="text-[20px]">{selectedTheme}</span>
+                            <span className="text-[20px]">
+                              {/* {selectedTheme} */}
+                              {t("search")}
+                              </span>  
                           </p>
                         ) : (
                           <p className="text-gray-400"></p>
@@ -506,7 +518,7 @@ function SearchTourguidesPage() {
 
                 <dialog
                   id="theme_modal"
-                  className="modal fixed top-[30vh]  rounded-lg bg-white p-6 max-w-sm h-[50vh] m-auto" 
+                  className="modal fixed top-[30vh] m-auto h-[50vh] max-w-sm rounded-lg bg-white p-6"
                 >
                   <div className="grid grid-cols-2 rounded-lg bg-white p-10">
                     <h2 className="col-span-2 mb-4 text-lg font-bold text-primary-600">
@@ -541,25 +553,24 @@ function SearchTourguidesPage() {
                         </label>
                       </div>
                     ))}
-
                   </div>
-                    <div className="modal-action text-center">
-                      <form method="dialog" className="inline-block">
-                        <div className="flex gap-4 justify-center">
-                          <button
-                            type="button"
-                            className="btn btn-outline"
-                            onClick={() => setSelectedTheme("")}
-                          >
-                            取消
-                          </button>
+                  <div className="modal-action text-center">
+                    <form method="dialog" className="inline-block">
+                      <div className="flex justify-center gap-4">
+                        <button
+                          type="button"
+                          className="btn btn-outline"
+                          onClick={() => setSelectedTheme("")}
+                        >
+                          取消
+                        </button>
 
-                          <button className="btn bg-primary-200 text-primary-600">
-                            確認
-                          </button>
-                        </div>
-                      </form>
-                    </div>
+                        <button className="btn bg-primary-200 text-primary-600">
+                          確認
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </dialog>
               </div>
             </div>
@@ -574,7 +585,7 @@ function SearchTourguidesPage() {
             >
               <div className="relative flex-grow">
                 <span className="pr-2 text-[13px] font-bold text-white lg:pr-4 lg:text-xl">
-                  立即搜尋
+            {t("quickSearch")}
                 </span>
                 <svg
                   className="absolute right-3 top-1 inline-block h-6 w-6 pl-1 text-white"

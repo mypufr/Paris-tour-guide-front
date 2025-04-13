@@ -1,0 +1,15 @@
+{
+  "title": "Trouvez votre guide local personnalisé",
+  "dateRange": "Plage de dates",
+  "departure": "Départ le {{date}}",
+  "return": "Retour le {{date}}",
+  "search": "Rechercher",
+  "quickSearch": "Rechercher Maintenant",
+  "tour_guide": "Guide local à vos côtés",
+  "book_trip": "Réserver un voyage",
+  "site_info": "Sites recommandés",
+  "travel_info": "Guide de voyage",
+  "logout": "Se déconnecter",
+  "login_register": "Connexion / Inscription",
+  "member_center": "Espace membre de {{username}}"
+}

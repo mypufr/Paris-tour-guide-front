@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 import { NavLink } from "react-router-dom";
 
 import axios from "axios";
@@ -9,6 +9,8 @@ import { BsPersonCircle } from "react-icons/bs";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 
+
+
 import { useSelector } from "react-redux";
 
 import { toast } from "react-hot-toast";
@@ -16,12 +18,17 @@ import { ImCart } from "react-icons/im";
 
 import { AiFillCopy } from "react-icons/ai";
 
+import "../utils/i18n";
+import { useTranslation } from "react-i18next";
+import LanguageDropdown from "./languages/LanguageDropdown.jsx";
+
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const [orderCount, setOrderCount] = useState(0);
 
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -81,9 +88,9 @@ function Header() {
 
   const linkClass = ({ isActive }) =>
     isActive
-      ? "text-secondary-600 font-semibold"
-      : "text-primary-500 hover:font-bold";
-
+  ? "text-secondary-600 font-semibold transition-colors duration-200"
+  : "text-primary-500 hover:font-bold transition-colors duration-200";
+  
   return (
     <div className="container p-3 lg:py-10">
       <div className="relative">
@@ -108,22 +115,26 @@ function Header() {
           <ul className="hidden lg:flex lg:items-center lg:justify-between lg:space-x-16">
             <li className="text-base leading-[22.4px] text-grey-950">
               <NavLink to="/search-tourguides" className={linkClass}>
-                隨行導遊趣
+                {/* 隨行導遊趣 */}
+                {t("tour_guide")}
               </NavLink>
             </li>
             <li className="text-base leading-[22.4px] text-grey-950">
               <NavLink to="/book-trips" className={linkClass}>
-                行程搶先報
+                {/* 行程搶先報 */}
+                {t("book_trip")}
               </NavLink>
             </li>
             <li className="text-base leading-[22.4px] text-grey-950">
               <NavLink to="/sites-info" className={linkClass}>
-                推薦景點
+                {/* 推薦景點 */}
+                {t("site_info")}
               </NavLink>
             </li>
             <li className="text-base leading-[22.4px] text-grey-950">
               <NavLink to="/travel-info" className={linkClass}>
-                旅行指南
+                {/* 旅行指南 */}
+                {t("travel_info")}
               </NavLink>
             </li>
 
@@ -134,7 +145,10 @@ function Header() {
                     to={`/${user.username}/profile`}
                     className="text-primary-600 hover:font-bold hover:shadow-md"
                   >
-                    <p>{user.username}的會員中心</p>
+                    <p>
+                      {/* {user.username}的會員中心 */}
+                      <p>{t("member_center", { username: user.username })}</p>
+                    </p>
                   </Link>
                 </li>
 
@@ -160,7 +174,8 @@ function Header() {
                     onClick={handleLogout}
                     className="rounded-2xl bg-secondary-400 px-4 py-1 text-white hover:font-bold"
                   >
-                    登出
+                    {/* 登出 */}
+                    {t("logout")}
                   </button>
                 </li>
               </>
@@ -171,11 +186,13 @@ function Header() {
                     to="/login"
                     className="my-2 inline-block px-5 text-base text-white"
                   >
-                    登入 / 註冊
+                    {/* 登入 / 註冊 */}
+                    {t("login_register")}
                   </Link>
                 </button>
               </li>
             )}
+            <LanguageDropdown />
           </ul>
 
           {/* Hamburger Icon - visible on smaller screens */}
@@ -213,7 +230,8 @@ function Header() {
                     onClick={toggleMenu}
                   >
                     <p className="text-base text-gray-950 hover:font-bold hover:text-primary-600">
-                      隨行導遊趣
+                      {/* 隨行導遊趣 */}
+                      {t("tour_guide")}
                     </p>
                   </Link>
                 </li>
@@ -224,7 +242,8 @@ function Header() {
                     onClick={toggleMenu}
                   >
                     <p className="text-base text-gray-950 hover:font-bold hover:text-primary-600">
-                      行程搶先報
+                      {/* 行程搶先報 */}
+                      {t("book_trip")}
                     </p>
                   </Link>
                 </li>
@@ -235,7 +254,8 @@ function Header() {
                     onClick={toggleMenu}
                   >
                     <p className="text-base text-gray-950 hover:font-bold hover:text-primary-600">
-                      推薦景點
+                      {/* 推薦景點 */}
+                      {t("site_info")}
                     </p>
                   </Link>
                 </li>
@@ -246,7 +266,8 @@ function Header() {
                     onClick={toggleMenu}
                   >
                     <p className="text-base text-gray-950 hover:font-bold hover:text-primary-700">
-                      旅行指南
+                      {/* 旅行指南 */}
+                      {t("travel_info")}
                     </p>
                   </Link>
                 </li>
@@ -259,7 +280,7 @@ function Header() {
                         className="text-primary-600 hover:font-bold hover:shadow-md"
                       >
                         <BsPersonCircle className="hidden sm:block" />
-                        <p>{user.username}的會員中心</p>
+                        <p>{t("member_center", { username: user.username })}</p>
                       </Link>
                     </li>
 
@@ -281,7 +302,8 @@ function Header() {
                         onClick={handleLogout}
                         className="rounded-2xl bg-secondary-400 px-4 py-1 text-white hover:font-bold"
                       >
-                        登出
+                        {/* 登出 */}
+                        {t("logout")}
                       </button>
                     </li>
                   </>
@@ -294,6 +316,7 @@ function Header() {
                         className="inline-block px-5 text-base text-white"
                       >
                         註冊/登入
+                        {t("login_register")}
                       </Link>
                     </button>
                   </li>
@@ -301,11 +324,16 @@ function Header() {
               </ul>
             </div>
           </div>
+
         </div>
 
         {/* Mobile Menu - visible when isOpen is true */}
       </div>
     </div>
+
+
+
+
   );
 }
 

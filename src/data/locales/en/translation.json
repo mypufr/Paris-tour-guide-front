@@ -1,0 +1,24 @@
+
+{
+  "tour_guide": "Tour Guide",
+  "book_trip": "Trip Planner",
+  "site_info": "Top Attractions",
+  "travel_info": "Travel Guide",
+  "logout": "Logout",
+  "login_register": "Login / Register",
+  "member_center": "{{username}}'s Member Center",
+  "welcomeMessage": "Welcome to our website!",
+  "login": "Login",
+  "title": "Find your personal local guide",
+  "dateRange": "Date Range",
+  "departure": "Departure on {{date}}",
+  "return": "Return on {{date}}",
+  "search": "Search",
+  "quickSearch": "Search Now",
+  "selectDate": "Please select a date range",
+  "theme": "Trip Theme",
+  "selectTheme": "Select a trip theme",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "selectedDateRange": "Selected date range: {{start}} - {{end}}"
+}

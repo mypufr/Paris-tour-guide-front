@@ -33,35 +33,54 @@ import store from "./store/store.jsx";
 
 import Cursor from "../context/cursor.jsx";
 
+import "./utils/i18n.js"
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
+
+import LanguageSelectorModal from "./components/languages/LanguageSelectorModal";
+import LanguageDropdown from "./components/languages/LanguageDropdown";
+
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 export default function App() {
-  return (
-  
-      <UserContextProvider>
+  const { t } = useTranslation();
 
-        <Provider store={store}>
+  return (
+    <UserContextProvider>
+      <Provider store={store}>
         <Cursor />
         <div className="flex min-h-screen flex-col">
+          {/* <div>
+            <h1>{t("welcomeMessage")}</h1>
+          
+            <button onClick={() => i18n.changeLanguage("zh")}>中文</button>
+
+<button onClick={() => i18n.changeLanguage("fr")}>Français</button>
+
+          
+          </div> */}
+
+<LanguageSelectorModal />
+
+
           <BrowserRouter>
             <Header />
-            <Toaster
-              position="top-right"
-              toastOptions={{ duration: 2000 }}
-            />
+            <Toaster position="top-right" toastOptions={{ duration: 2000 }} />
 
             <main className="flex-grow">
               <Routes>
                 <Route path="/" element={<HomePage />}></Route>
                 <Route path="/search" element={<SearchToursByKeyWords />} />
-                <Route path="/search-tourguides" element={<SearchTourguidesPage />} />
+                <Route
+                  path="/search-tourguides"
+                  element={<SearchTourguidesPage />}
+                />
                 <Route
                   path="/search-tourguides/search-results"
                   element={<SearchResultsPage />}
                 />
-                
 
                 <Route
                   path="/search-tourguides/tourguide-profile/:id"
@@ -92,10 +111,7 @@ export default function App() {
                   element={<PaymentSuccessPage />}
                 />
 
-<Route
-                  path="/:username/bookings"
-                  element={<CartPage />}
-                />
+                <Route path="/:username/bookings" element={<CartPage />} />
                 <Route path="/book-trips" element={<TripsPage />}></Route>
                 <Route path="/sites-info" element={<SitesInfoPage />}></Route>
                 <Route path="/travel-info" element={<TravelInfoPage />}></Route>
@@ -108,10 +124,11 @@ export default function App() {
                 <Route path="/login" element={<Login />}></Route>
                 {/* <Route path="/:username/profile" element={<UserProfile />}></Route> */}
                 <Route path="/:username/profile" element={<UserProfile />} />
-                
-                
-                <Route path="/:username/edit-profile"
-                element={<EditProfile />}></Route>
+
+                <Route
+                  path="/:username/edit-profile"
+                  element={<EditProfile />}
+                ></Route>
                 {/* /:username/edit-profile */}
                 <Route
                   path="/edit-tourguide-profile"
@@ -123,10 +140,7 @@ export default function App() {
             <Footer />
           </BrowserRouter>
         </div>
-
-
-        </Provider>
-      </UserContextProvider>
-  
+      </Provider>
+    </UserContextProvider>
   );
 }
