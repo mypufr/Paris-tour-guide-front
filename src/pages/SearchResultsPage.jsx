@@ -62,10 +62,10 @@ function SearchResultsPage() {
     }
   };
 
-  const getSelectedGuides = async () => {
+  const getSelectedGuides = async (theme) => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/guides?theme=${selectedTheme}`,
+        `http://localhost:8000/api/guides?theme=${theme}`,
       );
       console.log(res);
       setSelectedGuides(res.data);
@@ -89,10 +89,14 @@ function SearchResultsPage() {
   };
 
   useEffect(() => {
-    getTourguideInfo();
-    getSelectedGuides();
-    console.log(selectedGuides);
-  }, []);
+
+if(theme){
+  setSelectedTheme(theme);
+  getSelectedGuides(theme);
+} else {
+  getTourguideInfo();
+}
+  }, [theme]);
 
   // const totalPages = Math.ceil(tourguideInfo.length / itemsPerPage);
 
@@ -133,7 +137,7 @@ function SearchResultsPage() {
             </span>{" "}
           </h2> */}
           <h2 className="text-xl text-primary-700 font-bold">
-            行程主題： <span className="font-normal"> {theme} </span>
+            行程主題： <span className="font-normal"> {selectedTheme} </span>
           </h2>
         </div>
       </div>
@@ -203,7 +207,11 @@ function SearchResultsPage() {
               className="inline-block h-[30px]"
             />
           </div>
-          <div className="mt-4 grid grid-cols-3 gap-10 h-[80vh] overflow-y-scroll p-4 scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-600">
+          <div className="mt-4 grid grid-cols-3 gap-10" 
+          
+          // h-[80vh] overflow-y-scroll p-4 scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-600
+          
+          >
             {/* <Slider {...settings3} className="overflow-clip"> */}
 
             {selectedGuides.length > 0 ? (

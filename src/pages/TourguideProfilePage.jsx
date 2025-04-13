@@ -35,9 +35,11 @@ import { AiFillTwitterCircle } from "react-icons/ai";
 import { TfiHandPointRight } from "react-icons/tfi";
 
 import { DayPicker } from "react-day-picker";
+import DatePicker from "react-datepicker";
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
+import { zhTW } from "date-fns/locale";
 // import { settings5 } from "../components/helpers/sliderSettings";
 // import { settings3 } from "../components/helpers/sliderSettings";
 // import { settings4 } from "../components/helpers/sliderSettings";
@@ -46,12 +48,6 @@ function TourguideProfilePage() {
 
 
   const { user, setUser } = useContext(UserContext);
-  // const CardData = data.find((item) => item.id === parseInt(id));
-  // console.log(CardData);
-
-  // if (!CardData) {
-  //   return <div>Results not found</div>;
-  // }
 
   const [toursSlidesLength, setToursSlidesLength] = useState(0);
   const [sitesSlidesLength, setSitesSlidesLength] = useState(0);
@@ -63,6 +59,7 @@ function TourguideProfilePage() {
 
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+
 
   const [commentary, setCommentary] = useState("");
   const [tourguideInfo, setTourguideInfo] = useState("");
@@ -339,6 +336,8 @@ function TourguideProfilePage() {
       )
     : [];
 
+
+
   const handleSelectTime = (time, slot) => {
     setSelectedTime(time);
     console.log("選擇的時段:", slot.date, time);
@@ -385,6 +384,17 @@ function TourguideProfilePage() {
   const handleThemeChange = (event) => {
     setSelectedTheme(event.target.value);
   };
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
+
 
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
@@ -513,7 +523,7 @@ function TourguideProfilePage() {
                     </div>
 
                     <button
-                      className="mt-2 flex w-3/4 justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent"
+                      className="mt-2 flex w-3/4 justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-primary-200 hover:text-grey-500 active:border active:border-gray-500"
                       onClick={() => handleEditMessageClick()}
                     >
                       <img
@@ -723,91 +733,6 @@ function TourguideProfilePage() {
             </div>
           </div>
         </div>
-        {/* single trip title */}
-        {/* <div className="mt-10 flex justify-center space-x-4 hover:cursor-pointer">
-          <img
-            src="/images/vector_title.png"
-            alt=""
-            className="inline-block h-[40px]"
-          />
-          <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
-            {CardData.name} 的定點深度導覽
-          </h2>
-          <img
-            src="/images/vector_title.png"
-            alt=""
-            className="inline-block h-[40px]"
-          />
-        </div> */}
-
-        {/* single trips : Grid*/}
-        {/* <div className="m-auto my-20 grid max-w-[75%] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {SingleTripData.slice(0, 6).map((data, index) => (
-            <div key={index}>
-              <div
-                className=""
-                data-aos="zoom-in"
-                data-aos-offset="300"
-                data-aos-easing="ease-in-sine"
-              >
-                <SiteCard
-                  tripName={data.tripName}
-                  imageUrl={data.imgUrl}
-                  description={data.description}
-                  date={data.date}
-                  duration={data.duration}
-                  NumPeople={data.NumPeople}
-                  price={data.price}
-                />
-              </div>
-            </div>
-          ))}
-        </div> */}
-
-        {/* thematic trip title */}
-        {/* <div className="flex justify-center space-x-4 hover:cursor-pointer">
-          <img
-            src="/images/vector_title.png"
-            alt=""
-            className="inline-block h-[40px]"
-          />
-          <h2 className="text-[40px] font-bold leading-[3rem] tracking-4 text-primary-600">
-            {CardData.name} 的主題式導覽行程
-          </h2>
-          <img
-            src="/images/vector_title.png"
-            alt=""
-            className="inline-block h-[40px]"
-          />
-        </div> */}
-        {/* thematic trips : Grid*/}
-
-        {/* <div className="m-auto my-20 grid max-w-[75%] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {TripsData.slice(0, 6).map((data, index) => (
-            <div key={index}>
-              <div
-                className="duration-400 relative transform overflow-hidden rounded-3xl transition-all hover:scale-105 hover:bg-gray-100 hover:shadow-xl"
-                data-aos="zoom-in-left"
-                data-aos-offset="300"
-                data-aos-easing="ease-in-sine"
-              >
-                <TripCard
-                  tripName={data.tripName}
-                  imageUrl={data.imgUrl}
-                  description={data.description}
-                  date={data.date}
-                  duration={data.duration}
-                  NumPeople={data.NumPeople}
-                  site1={data.site1}
-                  site2={data.site2}
-                  site3={data.site3}
-                  site4={data.site4}
-                  site5={data.site5}
-                />
-              </div>
-            </div>
-          ))}
-        </div> */}
       </div>
 
       {/* tab */}
@@ -900,7 +825,7 @@ function TourguideProfilePage() {
                           </div>
 
                           <div className="h-[35vh] overflow-y-scroll p-1 scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
-                            <p className="bg-white text-xl">
+                            <p className="bg-white text-xl px-2">
                               {" "}
                               {tourguideInfoById.profile}
                             </p>
@@ -943,20 +868,20 @@ function TourguideProfilePage() {
               )}
 
               {activeTab === "tab-2" && (
-                <div role="tabpanel" id="panel-2" className="border-t-2">
+                <div role="tabpanel" id="panel-2" className="border-t-2 pl-4">
                   <div
                     // popoverTarget="rdp-popover"
-                    className="my-10 grid grid-cols-3 text-xl font-bold text-primary-300"
+                    className="my-10 grid grid-cols-2 text-xl font-bold text-primary-300"
                     style={{ anchorName: "--rdp" }}
                   >
-                    <div className="col-span-2 flex pb-[1rem]">
+                    <div className="col-span-1 flex pb-[1rem]">
                       <div
                         popover="auto"
                         id="rdp-popover"
                         className="dropdown mt-[5vh]"
                         style={{ positionAnchor: "--rdp" }}
                       >
-                        <DayPicker
+                        {/* <DayPicker
                           className="react-day-picker rounded-xl border border-primary-200 bg-white p-6 shadow-lg"
                           numberOfMonths={1}
                           classNames={{
@@ -967,9 +892,27 @@ function TourguideProfilePage() {
                           onSelect={(d) =>
                             setDate(new Date(d.setHours(12, 0, 0, 0)))
                           } // 確保時區不變
-                        />
+                        /> */}
+                        <DayPicker
+  className="react-day-picker rounded-xl border border-primary-200 bg-white p-6 shadow-lg"
+  numberOfMonths={1}
+  classNames={{
+    day: "items-center justify-center text-lg hover:bg-gray-200 rounded-full",
+  }}
+  mode="single"
+  selected={date}
+  onSelect={(d) => setDate(new Date(d.setHours(12, 0, 0, 0)))} // 確保時區不變
+  minDate={
+    new Date(new Date().setDate(new Date().getDate() + 2))
+  } // 限制三天後才可選擇
+/>
                       </div>
                     </div>
+
+
+
+
+
                     {/* 顯示可用時段 */}
                     <ul className="col-span-1 mt-2">
                       {filteredSlots.length > 0 ? (
@@ -982,7 +925,7 @@ function TourguideProfilePage() {
                               {slot.time.map((timeSlot, timeIndex) => (
                                 <button
                                   key={timeIndex}
-                                  className="rounded-lg bg-secondary-400 px-4 py-2 font-normal text-white hover:bg-blue-600"
+                                  className="rounded-lg bg-gray-400 px-4 py-2 font-normal text-white hover:bg-blue-600"
                                   onClick={() =>
                                     handleSelectTime(timeSlot, slot)
                                   }
@@ -1020,7 +963,7 @@ function TourguideProfilePage() {
                       </h2>
                       <p className="text-grey-400">
                         <span className="pr-2 text-xl font-bold text-red-500">
-                          5
+                          4
                         </span>
                         / 5 (80人已評價)
                       </p>
@@ -1232,9 +1175,10 @@ function TourguideProfilePage() {
                     );
                   case "private":
                     return (
-                      <div className="" ref={targetRef} id="target-section">
-                        <div className="w-ful mt-10">
-                          <div className="flex w-full col-span-1 flex-col items-center justify-center space-y-8 border border-grey-200 p-10">
+                      <div className="flex" ref={targetRef} id="target-section">
+               
+                        <div className="w-full mt-10">
+                          <div className="flex w-[38vw] col-span-1 flex-col items-center justify-center space-y-8 border border-grey-200 p-10">
                             <p className="text-xl">
                               除了團體行程，我們的導遊提供靈活的私人行程，採用時薪制計費，讓您可以根據自己的需求與時間安排，預訂專屬的導覽服務。
                             </p>
@@ -1242,7 +1186,7 @@ function TourguideProfilePage() {
                             <div className="mt-4 flex min-w-[400px] justify-center px-4 lg:mt-0">
                               <Link>
                                 <button
-                                  className="flex w-[22vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
+                                  className="flex w-[32vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
                                   onClick={() =>
                                     document
                                       .getElementById("calendar_modal")
@@ -1315,50 +1259,10 @@ function TourguideProfilePage() {
                               className="modal modal-bottom mx-auto h-[80vh] w-1/2 bg-white sm:modal-middle"
                             >
                               <div
-                                className="bg-white text-xl font-bold text-primary-300"
+                                className="bg-white text-xl font-bold text-primary-300 grid grid-cols-2"
                                 style={{ anchorName: "--rdp" }}
                               >
-                                {/* 顯示可用時段 */}
-                                <ul className="">
-                                  {filteredSlots.length > 0 ? (
-                                    filteredSlots.map((slot, index) => (
-                                      <div
-                                        key={index}
-                                        className="w-full space-y-6"
-                                      >
-                                        <p className="text-center text-xl font-semibold">
-                                          {slot.date}可預約的空檔:
-                                        </p>
-                                        <div className="flex flex-wrap justify-center gap-2">
-                                          {slot.time.map(
-                                            (timeSlot, timeIndex) => (
-                                              <button
-                                                key={timeIndex}
-                                                className="rounded-lg bg-secondary-400 px-4 py-2 font-normal text-white hover:bg-blue-600"
-                                                onClick={() =>
-                                                  handleSelectTime(
-                                                    timeSlot,
-                                                    slot,
-                                                  )
-                                                }
-                                              >
-                                                ⏰ {timeSlot}
-                                              </button>
-                                            ),
-                                          )}
-                                        </div>
-                                      </div>
-                                    ))
-                                  ) : (
-                                    <>
-                                      <li className="text-center text-2xl text-red-500">
-                                        ⚠️ 無可預約時段
-                                      </li>
-                                    </>
-                                  )}
-                                </ul>
-                              </div>
-
+                        
                               <div className="flex">
                                 <div
                                   popover="auto"
@@ -1380,6 +1284,50 @@ function TourguideProfilePage() {
                                   />
                                 </div>
                               </div>
+                                <ul className="">
+                                  {filteredSlots.length > 0 ? (
+                                    filteredSlots.map((slot, index) => (
+                                      <div
+                                        key={index}
+                                        className="w-full space-y-6"
+                                      >
+                                        <p className="text-center text-xl font-semibold">
+                                          {slot.date}可預約的空檔:
+                                        </p>
+                                        <div className="flex flex-wrap justify-start gap-2">
+                                          {slot.time.map(
+                                            (timeSlot, timeIndex) => (
+                                              <button
+                                                key={timeIndex}
+                                                className="rounded-lg bg-gray-400 p-2 text-sm text-white hover:bg-blue-600"
+                                                onClick={() =>
+                                                  handleSelectTime(
+                                                    timeSlot,
+                                                    slot,
+                                                  )
+                                                }
+                                              >
+                                                 {timeSlot}
+                                              </button>
+                                            ),
+                                          )}
+                                        </div>
+                                      </div>
+                                    ))
+                                  ) : (
+                                    <>
+                                      <li className="text-center text-2xl text-red-500">
+                                        ⚠️ 無可預約時段
+                                      </li>
+                                    </>
+                                  )}
+                                </ul>
+                              </div>
+
+<div>
+
+
+</div>
 
                               {/* 已選日期顯示 */}
                               <div className="text-center">
@@ -1417,7 +1365,7 @@ function TourguideProfilePage() {
                             <div className="mt-4 flex justify-center px-4 lg:mt-0">
                               <Link>
                                 <button
-                                  className="flex w-[22vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
+                                  className="flex w-[32vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
                                   onClick={() =>
                                     document
                                       .getElementById("touristNum_modal")
@@ -1537,7 +1485,7 @@ function TourguideProfilePage() {
                             <div className="mt-4 flex justify-center px-4 lg:mt-0">
                               <Link>
                                 <button
-                                  className="flex w-[22vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
+                                  className="flex w-[32vw] items-center justify-between space-x-20 rounded-lg border border-gray-300 bg-background-2 px-4 py-4"
                                   onClick={() =>
                                     document
                                       .getElementById("theme_modal")
@@ -1565,7 +1513,7 @@ function TourguideProfilePage() {
                                         </span>
                                       </p>
                                     ) : (
-                                      <p className="text-primary-700">
+                                      <p className="text-base text-primary-700">
                                         行程主題
                                       </p>
                                     )}
@@ -1653,7 +1601,7 @@ function TourguideProfilePage() {
                               </div>
 
                               <button
-                                className="flex w-full justify-center space-x-20 rounded-lg border border-secondary-300 bg-secondary-400 px-4 py-4 text-white"
+                                className="flex w-full justify-center space-x-20 rounded-lg border border-secondary-300 bg-secondary-400 px-4 py-4 text-white transition-colors duration-200 hover:bg-secondary-200  active:border-secondary-200"
                                 onClick={() =>
                                   handlePrivateTripsClick(tourguideInfoById.id)
                                 }
@@ -2006,11 +1954,10 @@ function TourguideProfilePage() {
           <SlArrowLeft />
         </button>
 
-        {/* 放置 pagination */}
+
         <div className="pagination-container text-xl font-bold text-primary-600">
           <span>{currentSlide}</span> /{" "}
-          {/* <span className="text-grey-950">{slidesLength}</span> */}
-          {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}
+  {data.length}
         </div>
 
         <button

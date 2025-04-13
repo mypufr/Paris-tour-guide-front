@@ -35,14 +35,14 @@ export default function UserProfile() {
       </div>
 
       {user && (
-        <div className="min-h-screen md:flex">
-          <aside className="bg-primary-300 p-6 pt-8 text-white md:w-1/6">
+        <div className="m-auto w-3/4 min-h-screen md:flex">
+          <aside className="bg-primary-600 p-6 pt-8 text-white md:w-1/6">
             <h2 className="text-xl font-bold">會員中心</h2>
             <ul className="flex pt-2 md:flex-col">
               <li>
                 <Link
                   to={`/${user.username}/profile`}
-                  className={`block rounded p-2 hover:bg-gray-700 ${
+                  className={`block rounded p-2 hover:bg-primary-900 ${
                     location.pathname === `/${user.username}/profile`
                       ? "text-lg font-bold"
                       : ""
@@ -54,7 +54,7 @@ export default function UserProfile() {
               <li>
                 <Link
                   to={`/${user.username}/mailbox`}
-                  className={`block rounded p-2 hover:bg-gray-700 ${
+                  className={`block rounded p-2 hover:bg-primary-900 ${
                     location.pathname === "/mailbox" ? "text-lg font-bold" : ""
                   }`}
                 >
@@ -64,7 +64,7 @@ export default function UserProfile() {
               <li>
                 <Link
                   to={`/${user.username}/bookings`}
-                  className={`block rounded p-2 hover:bg-gray-700 ${
+                  className={`block rounded p-2 hover:bg-primary-900 ${
                     location.pathname === "/bookings" ? "text-lg font-bold" : ""
                   }`}
                 >
@@ -74,7 +74,7 @@ export default function UserProfile() {
               <li>
                 <Link
                   to={`/${user.username}/reviews`}
-                  className={`block rounded p-2 hover:bg-gray-700 ${
+                  className={`block rounded p-2 hover:bg-primary-900 ${
                     location.pathname === "/reviews" ? "text-lg font-bold" : ""
                   }`}
                 >
@@ -154,8 +154,6 @@ export default function UserProfile() {
                       className="mb-2 w-full rounded-md border border-primary-100 p-2"
                       placeholder="01-2345678"
                     />
-
-              
                   </div>
                   <div>
                     <label className="text-md mt-2 block text-primary-600">
@@ -200,11 +198,29 @@ export default function UserProfile() {
                       <p className="mt-2 text-sm text-gray-600">
                         選擇圖片上傳作為您的個人頭像。
                       </p>
+                      <label
+                        htmlFor="fileUpload"
+                        className="block w-fit cursor-pointer rounded-md bg-primary-200 px-4 py-2 text-white hover:bg-primary-300"
+                      >
+                        📁 選擇圖片
+                      </label>
                       <input
+                        id="fileUpload"
                         type="file"
                         accept="image/*"
-                        className="block w-full text-sm text-gray-500 file:mr-4 file:border-0 file:bg-primary-200 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-gray-700"
+                        className="hidden"
                       />
+
+                      {/* <input
+                        type="file"
+                        accept="image/*"
+                        className="block w-full text-sm text-gray-500 
+                        file:mr-4 file:border-0
+                         file:bg-primary-200 file:px-4 file:py-2 
+                         file:text-sm file:font-semibold file:text-white hover:file:bg-gray-700
+                         file:cursor-pointer file:content-['選擇圖片']"
+                         placeholder="選擇圖片"
+                      /> */}
                     </div>
                   </div>
                 </div>
@@ -212,7 +228,7 @@ export default function UserProfile() {
 
               <button
                 type="submit"
-                className="m-auto w-1/3 rounded-md bg-primary-600 py-2 text-white transition hover:bg-primary-700"
+                className="m-auto w-1/6 rounded-md bg-primary-600 py-2 text-white transition hover:bg-primary-700"
               >
                 送出
               </button>

@@ -67,12 +67,23 @@ function OrderInfoPage() {
     );
   };
   const { id } = useParams();
-  const CardData = data.find((item) => item.id === parseInt(id));
-  console.log(CardData);
+  // const CardData = data.find((item) => item.id === parseInt(id));
+  // console.log(CardData);
 
-  if (!CardData) {
-    return <div>Results not found</div>;
-  }
+  // if (!CardData) {
+  //   return <div>Results not found</div>;
+  // }
+
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -82,20 +93,20 @@ function OrderInfoPage() {
 
   return (
     <>
-      <div className="py-10 text-center text-3xl font-bold text-black">
+      <div className="py-10 text-center text-3xl font-bold text-black" id="target-section">
         {/* subNavbar */}
         {/* 
         <button onClick={checkOrderInfo}>check order info</button> */}
 
         <div className="my max-w-3/4 m-auto flex justify-center gap-16 py-10">
-          <button className="max-w-60 rounded-2xl bg-secondary-300 px-8 py-2">
+          <button className="max-w-60 rounded-2xl bg-primary-300 px-8 py-2">
             <p className="text-xl text-white">Step 1 :預約資訊</p>
           </button>
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
-            <p className="text-xl text-secondary-500">Step 2 : 預約付款</p>
+          <button className="max-w-60 rounded-2xl border border-primary-300 px-10 py-2">
+            <p className="text-xl text-primary-300">Step 2 : 預約付款</p>
           </button>
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
-            <p className="text-xl text-secondary-500">Step 3 : 完成預約</p>
+          <button className="max-w-60 rounded-2xl border border-primary-300 px-10 py-2">
+            <p className="text-xl text-primary-300">Step 3 : 完成預約</p>
           </button>
         </div>
 
@@ -193,11 +204,11 @@ function OrderInfoPage() {
               <div className="border-spacing-3 border">
                 {/* Selected Tourguide  */}
                 <div className="m-auto flex w-full flex-col justify-center space-y-8 py-6">
-                  <h3 className="border-b-4 border-b-secondary-200 p-4 text-start text-xl text-secondary-500">
+                  <h3 className="border-b-4 border-b-primary-200 p-4 text-start text-xl text-primary-300">
                     最新訂單
                   </h3>
 
-                  <div className="space-y-4 bg-background-2 py-4">
+                  <div className="space-y-4 bg-primary-50 py-4">
                     <div className="flex items-center justify-center space-x-4">
                       <img
                         src={
@@ -209,14 +220,14 @@ function OrderInfoPage() {
                         alt=""
                         className="inline-block h-20 w-20 rounded-full"
                       />
-                      <p className="text-xl text-secondary-700">
+                      <p className="text-xl text-primary-700">
                         {privateOrders.length > 0
                           ? privateOrders[privateOrders.length - 1]
                               .tourguideInfo.name
                           : "Loading..."}
                       </p>
                     </div>
-                    <p className="text-base font-normal text-primary-800">
+                    <p className="text-base font-bold text-primary-800">
                       專長：
                       {privateOrders.length > 0
                         ? privateOrders[
@@ -224,7 +235,7 @@ function OrderInfoPage() {
                           ].tourguideInfo.themes.map((theme, index, arr) => (
                             <span
                               key={index}
-                              className="text-base font-normal text-secondary-700"
+                              className="text-base font-normal"
                             >
                               {theme}
                               {index !== arr.length - 1 ? "、" : ""}
@@ -239,12 +250,12 @@ function OrderInfoPage() {
                   <div className="marker: flex flex-col space-y-6">
                     <div className="flex items-center">
                       <div className="flex items-center">
-                        <p className="text-xl font-normal text-primary-700">
+                        <p className="text-xl font-bold text-primary-700">
                           預約人：
                         </p>
                         <div className="relative max-w-sm">
-                          <p className="text-xl">
-                            {/* {user.id } */}
+                          <p className="text-xl font-normal">
+                
                             {user.username}
                           </p>
                         </div>
@@ -253,11 +264,11 @@ function OrderInfoPage() {
 
                     <div className="flex items-center">
                       <div className="flex items-center">
-                        <p className="text-xl font-normal text-primary-700">
+                        <p className="text-xl font-bold text-primary-700">
                           日期：
                         </p>
                         <div className="relative max-w-sm">
-                          <p className="text-xl">
+                          <p className="text-xl font-normal">
                             {privateOrders.length > 0
                               ? privateOrders[privateOrders.length - 1]
                                   .selectedDate
@@ -268,11 +279,11 @@ function OrderInfoPage() {
                     </div>
                     <div className="flex items-center">
                       <div className="flex items-center">
-                        <p className="text-xl font-normal text-primary-700">
+                        <p className="text-xl font-bold text-primary-700">
                           人數：
                         </p>
                         <div className="relative max-w-sm">
-                          <p className="text-xl">
+                          <p className="text-xl font-normal">
                             {privateOrders.length > 0
                               ? privateOrders[privateOrders.length - 1]
                                   .adultCount
@@ -289,11 +300,11 @@ function OrderInfoPage() {
                     </div>
                     <div className="flex items-center">
                       <div className="flex items-center">
-                        <p className="text-xl font-normal text-primary-700">
+                        <p className="text-xl font-bold text-primary-700">
                           主題：
                         </p>
                         <div className="relative max-w-sm">
-                          <p className="text-xl">
+                          <p className="text-xl font-normal">
                             {privateOrders.length > 0
                               ? privateOrders[privateOrders.length - 1]
                                   .selectedTheme
@@ -304,11 +315,11 @@ function OrderInfoPage() {
                     </div>
                     <div className="flex items-center">
                       <div className="flex items-center">
-                        <p className="text-xl font-normal text-primary-700">
+                        <p className="text-xl font-bold text-primary-700">
                           時段：
                         </p>
                         <div className="relative max-w-sm">
-                          <p className="text-xl">
+                          <p className="text-xl font-normal">
                             {privateOrders.length > 0
                               ? privateOrders[privateOrders.length - 1]
                                   .selectedSlot
@@ -320,12 +331,12 @@ function OrderInfoPage() {
                   </div>
 
                   <div className="my-6 space-y-3">
-                    <button
+                    {/* <button
                       className="flex min-w-60 justify-center rounded-3xl border border-secondary-300 bg-secondary-400 px-2 py-2 text-white"
                       // onClick={handleComfirmtOrderClick}
                     >
                       <p className="text-xl">修改訂單</p>
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
@@ -333,15 +344,15 @@ function OrderInfoPage() {
 
             {/* Order Price */}
             <div className="col-span-1 flex h-full flex-col border p-2">
-              <h3 className="border-b-4 border-b-secondary-200 p-4 py-6 text-start text-xl text-secondary-500">
+              <h3 className="border-b-4 border-b-primary-200 p-4 py-6 text-start text-xl text-primary-300">
                 最新訂單金額
               </h3>
 
               <div className="flex flex-grow flex-col px-2">
                 <div className="mt-4 flex justify-between">
-                  <p className="text-base font-normal">大人</p>
+                  <p className="text-xl font-bold text-primary-700">大人</p>
 
-                  <p className="text-base font-normal">
+                  <p className="text-xl font-normal">
                     {privateOrders.length > 0
                       ? privateOrders[privateOrders.length - 1].tourguideInfo
                           .price_adult
@@ -351,9 +362,9 @@ function OrderInfoPage() {
                 </div>
 
                 <div className="flex justify-between">
-                  <p className="text-base font-normal">小孩</p>
+                  <p className="text-xl font-bold text-primary-700">小孩</p>
 
-                  <p className="text-base font-normal">
+                  <p className="text-xl font-normal">
                     {privateOrders.length > 0
                       ? privateOrders[privateOrders.length - 1].tourguideInfo
                           .price_child
@@ -363,9 +374,9 @@ function OrderInfoPage() {
                 </div>
 
                 <div className="flex justify-between text-base font-normal">
-                  <p className="text-base font-normal">服務時間：</p>
+                  <p className="text-xl font-bold text-primary-700">服務時間：</p>
 
-                  <p>
+                  <p className="text-xl font-normal">
                     {privateOrders.length > 0
                       ? (() => {
                           const latestOrder =
@@ -390,7 +401,7 @@ function OrderInfoPage() {
               {/* subtotal */}
               <div className="mt-auto px-2 py-8">
                 <div className="flex justify-between">
-                  <h4 className="text-2xl font-black text-primary-700">小計</h4>
+                  <h4 className="text-xl font-black text-primary-700">小計</h4>
                   {/* <p className="text-3xl font-black text-primary-700">
                     
                   {privateOrders.length > 0 ? (privateOrders[privateOrders.length-1].adultCount) *( privateOrders[privateOrders.length-1].tourguideInfo.price_adult) + 
@@ -438,7 +449,7 @@ function OrderInfoPage() {
                 <div className="my-20 items-center justify-center space-y-4 p-4">
                   {/* Open the modal using document.getElementById('ID').showModal() method */}
                   <button
-                    className="m-auto flex min-w-60 justify-center rounded-3xl border border-secondary-300 bg-secondary-400 px-2 py-2 text-lg text-white"
+                    className="m-auto flex min-w-60 justify-center rounded-3xl  bg-primary-600 px-2 py-2 text-lg text-white"
                     onClick={() =>
                       document.getElementById("confirmOrder_modal").showModal()
                     }
@@ -472,7 +483,7 @@ function OrderInfoPage() {
                   </dialog>
 
                   <button
-                    className="m-auto flex min-w-60 justify-center rounded-3xl border border-secondary-600 bg-transparent px-2 py-2 text-secondary-600"
+                    className="m-auto flex min-w-60 justify-center rounded-3xl border border-grey-400 bg-transparent px-2 py-2 text-grey-400"
                     onClick={() => handleClearCartClick(id)}
                   >
                     <p className="text-lg">取消訂單</p>
@@ -488,7 +499,7 @@ function OrderInfoPage() {
               {/* 1st order */}
               <div className="bg-primary-50 p-4">
                 <div className="flex max-w-full flex-col">
-                  <h3 className="py-2 text-start text-lg text-secondary-500">
+                  <h3 className="py-2 text-start text-lg text-primary-300">
                     所有訂單
                   </h3>
                   {/* 按鈕 - 開啟私人體驗行程訂單 Modal */}

@@ -63,6 +63,16 @@ function PaymentSuccessPage() {
   };
 
   useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
     }
@@ -74,7 +84,7 @@ function PaymentSuccessPage() {
 
   return (
     <>
-      <div className="py-10 text-center text-3xl font-bold text-black">
+      <div className="py-10 text-center text-3xl font-bold text-black" id="target-section">
         {/* title */}
         <div className="flex justify-center space-x-4 hover:cursor-pointer">
           <img
@@ -93,19 +103,19 @@ function PaymentSuccessPage() {
         </div>
 
         {/* subNavbar */}
-        <div className="m-auto my-10 flex max-w-[75%] justify-center gap-16 py-10">
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
-            <p className="text-xl text-secondary-500">Step 1 : 確認訂單</p>
+        <div className="m-auto my-4 flex max-w-[75%] justify-center gap-16 py-10">
+          <button className="max-w-60 rounded-2xl border border-primary-300 px-10 py-2">
+            <p className="text-xl text-primary-300">Step 1 : 確認訂單</p>
           </button>
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
-            <p className="text-xl text-secondary-500">Step 2 : 付款資料</p>
+          <button className="max-w-60 rounded-2xl border border-primary-300 px-10 py-2">
+            <p className="text-xl text-primary-300">Step 2 : 付款資料</p>
           </button>
-          <button className="max-w-60 rounded-2xl bg-secondary-300 px-10 py-2">
+          <button className="max-w-60 rounded-2xl bg-primary-300 px-10 py-2">
             <p className="text-xl text-white">Step 3 : 完成預約</p>
           </button>
         </div>
 
-        <div className="my-10">
+        <div className="my-4">
           <p className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600">
             {/* 恭喜{user.username}已完成預約! */}
           </p>
@@ -117,8 +127,8 @@ function PaymentSuccessPage() {
           </div>
           {/* Private Order List */}
 
-          <div className="mt-6">
-            <h3 className="mb-10 border-b-4 border-b-secondary-200 py-6 pl-4 text-start text-3xl text-secondary-500">
+          <div className="">
+            <h3 className="mb-10 border-b-4 border-b-primary-300 py-6 pl-4 text-start text-3xl text-primary-600">
               最新私人行程訂單
             </h3>
             {privateOrders.length === 0 ? (
@@ -153,9 +163,9 @@ function PaymentSuccessPage() {
 
         </div>
 
-        <div className="my-20 flex flex-col items-center justify-center space-y-4">
+        <div className="my-4 flex flex-col items-center justify-center space-y-4">
           <button
-            className="flex min-w-60 justify-center space-x-20 rounded-3xl bg-primary-700 px-2 py-2 text-white"
+            className="flex min-w-60 justify-center space-x-20 rounded-3xl bg-primary-700 px-2 py-2 text-white font-normal"
             // onClick={handleComfirmtOrderClick}
             onClick={() => handleClearCartClick(id)}
           >
@@ -163,7 +173,7 @@ function PaymentSuccessPage() {
           </button>
 
           <button
-            className="flex min-w-60 justify-center space-x-20 rounded-3xl border border-primary-700 bg-transparent px-2 py-2 text-primary-500"
+            className="flex min-w-60 justify-center space-x-20 rounded-3xl border border-primary-700 bg-transparent px-2 py-2 text-primary-600 font-normal"
             onClick={() => handleResetBackToHomePageClick(id)}
           >
             <p className="text-xl">回首頁</p>

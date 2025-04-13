@@ -29,7 +29,7 @@ const CollapsibleOrderCard = ({ order, index }) => {
               alt="導遊"
               className="inline-block h-20 w-20 rounded-full"
             />
-            <p className="mt-4 text-xl text-secondary-700">
+            <p className="mt-4 text-xl text-primary-700">
               {order.tourguideInfo.name || "未知導遊"} 導遊
             </p>
           </div>
@@ -87,7 +87,7 @@ const CollapsibleOrderCard = ({ order, index }) => {
 
 
             <Link>
-            <button className="btn bg-secondary-200 text-secondary-700" >留言給導遊</button>
+            <button className="btn bg-primary-100 text-primary-700" >留言給導遊</button>
             
             </Link>
           </div>

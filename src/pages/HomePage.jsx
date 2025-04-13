@@ -56,6 +56,7 @@ import TourCard from "../components/tourCard.jsx";
 import TripCard from "../components/TripCard";
 import TourguideList from "../components/TourguideList";
 import { settings3 } from "../components/helpers/sliderSettings.jsx";
+import GuideButton from "../components/GuideButton";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -551,7 +552,7 @@ export default function HomePage() {
     const fetchTours = async () => {
       try {
         const res = await axios.get("http://localhost:8000/api/tours");
-        console.log(res.data)
+        console.log(res.data);
         setTours(res.data || []);
       } catch (error) {
         console.error("❌ 無法獲取行程資料:", error);
@@ -685,14 +686,14 @@ export default function HomePage() {
               <div className="mt-6 w-full lg:relative lg:mt-5 2xl:pt-10">
                 <input
                   type="text"
-                  className="-left-8 m-auto rounded-lg border border-gray-300 bg-white p-[13px] pr-10 text-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-[200px]:w-8/12 md:w-6/12 lg:w-5/12 lg:pr-0 xl:h-12 xl:w-6/12 2xl:w-[35%]"
+                  className="-left-8 m-auto rounded-lg border border-gray-300 bg-white p-[13px] pr-10 text-primary-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-[200px]:w-8/12 md:w-6/12 lg:w-5/12 lg:pr-0 xl:h-12 xl:w-6/12 2xl:w-[32.5%]"
                   placeholder="尋找你的完美巴黎旅程"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)} // 更新關鍵字
                 />
-                <div className="absolute inset-y-0 right-[28vw] top-14 flex items-center rounded-r-lg bg-primary-600 p-5 md:right-[45vw] md:top-[80%] lg:right-[58vw] lg:top-0 lg:p-3 xl:right-[50vw] 2xl:top-10 min-[1536px]:right-[64vw] min-[1920px]:right-[63vw]">
+                <div className="active:scale-120 absolute inset-y-0 right-[26vw] top-14 flex items-center rounded-r-lg bg-primary-600 p-5 transition duration-200 hover:bg-primary-200 hover:text-gray-300 md:right-[45vw] md:top-[80%] lg:right-[58vw] lg:top-0 lg:p-3 xl:right-[50vw] 2xl:top-10 min-[1536px]:right-[64vw] min-[1920px]:right-[67vw]">
                   <svg
-                    className="h-4 w-4 text-white lg:h-5 lg:w-5"
+                    className="active:scale-120 h-4 w-4 text-white transition duration-200 hover:bg-primary-200 hover:text-gray-600 lg:h-5 lg:w-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     onClick={() =>
@@ -1040,12 +1041,12 @@ export default function HomePage() {
         </div>
       </div>
       <button
-              onClick={() => sliderRef.current.slickPrev()}
-              className="hover:text-primary-400 p-2 text-grey-950 z-10"
-            >
-              <SlArrowLeft />
-            </button>
-      <div className=" m-auto my-20 max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
+        onClick={() => sliderRef.current.slickPrev()}
+        className="hover:text-primary-400 z-10 p-2 text-grey-950"
+      >
+        <SlArrowLeft />
+      </button>
+      <div className="m-auto mb-20 max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
         <div>
           <Slider {...settings1} arrows={false} ref={sliderRef}>
             {popularTourguidesList.map((item, index) => (
@@ -1070,13 +1071,13 @@ export default function HomePage() {
           <div className="flex items-center justify-center space-x-8 2xl:mt-6">
             <button
               onClick={() => sliderRef.current.slickPrev()}
-              className="hover:text-primary-400 p-2 text-grey-950 z-10"
+              className="hover:text-primary-400 z-10 p-2 text-grey-950"
             >
               <SlArrowLeft />
             </button>
 
             {/* 放置 pagination */}
-            <div className="pagination-container text-xl font-bold text-primary-600 z-10">
+            <div className="pagination-container z-10 text-xl font-bold text-primary-600">
               <span>{currentSlide}</span> /{" "}
               <span className="text-grey-950">{data.length}</span>
               {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}
@@ -1084,7 +1085,7 @@ export default function HomePage() {
 
             <button
               onClick={() => sliderRef.current.slickNext()}
-              className="hover:text-primary-400 text-grey-950 z-10"
+              className="hover:text-primary-400 z-10 text-grey-950"
             >
               <SlArrowRight />
             </button>
@@ -1129,17 +1130,14 @@ export default function HomePage() {
         {/* slides show: popular sites */}
         <div className="m-auto min-[425px]:max-w-[95%] md:mt-4 min-[768px]:max-w-[85%] lg:absolute lg:left-[15%] lg:top-[30%] lg:w-[68%]">
           <div className="relative mt-2 lg:mt-20">
-
-
-          <button
+            <button
               onClick={() => toursSliderRef.current.slickPrev()}
-              className="absolute left-[-50px] top-1/2 -translate-y-1/2 hover:text-primary-400  text-grey-950 z-10 rounded-full bg-gray-200 p-4"
+              className="hover:text-primary-400 absolute left-[-50px] top-1/2 z-10 -translate-y-1/2 rounded-full bg-gray-200 p-4 text-grey-950"
             >
               <SlArrowLeft size={20} />
             </button>
 
-
-            <Slider {...settings2}  ref={toursSliderRef}>
+            <Slider {...settings2} ref={toursSliderRef}>
               {tours.map((tour, index) => (
                 <div
                   key={index}
@@ -1180,9 +1178,9 @@ export default function HomePage() {
 
             <button
               onClick={() => toursSliderRef.current.slickNext()}
-              className="absolute right-[-50px] top-1/2 -translate-y-1/2 hover:text-primary-400 text-grey-950 z-10 rounded-full bg-gray-200 p-4"
+              className="hover:text-primary-400 absolute right-[-50px] top-1/2 z-10 -translate-y-1/2 rounded-full bg-gray-200 p-4 text-grey-950"
             >
-              <SlArrowRight size={20}/>
+              <SlArrowRight size={20} />
             </button>
           </div>
         </div>
@@ -1284,16 +1282,12 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="mb-4 mt-auto flex justify-center pb-10">
-              <Link to="/search-tourguides" className="block w-full">
-                <button className="m-auto mt-2 flex max-w-full justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
-                  <TfiHandPointRight className="text-2xl text-white" />
 
-                  <span className="ml-2 font-bold tracking-1.5 text-white">
-                    我要預約導遊
-                  </span>
-                </button>
-              </Link>
+            <div className="mb-4 mt-auto flex justify-center pb-10">
+              <GuideButton
+                to="/search-tourguides#target-section"
+                label="我要預約導遊"
+              />
             </div>
           </div>
 
@@ -1396,14 +1390,12 @@ export default function HomePage() {
               </div>
             </div>
             <div className="mb-4 mt-auto flex justify-center pb-10">
-              <Link to="/search-tourguides" className="block w-full">
-                <button className="m-auto mt-2 flex max-w-full justify-center rounded-2xl bg-secondary-400 px-[15%] py-3 transition-colors duration-200 hover:bg-secondary-200 active:border active:border-secondary-200 active:bg-transparent">
-                  <TfiHandPointRight className="text-2xl text-white" />
-                  <span className="ml-2 font-bold tracking-1.5 text-white">
-                    馬上報名行程
-                  </span>
-                </button>
-              </Link>
+              <GuideButton
+                to="/book-trips#target-section"
+                color="bg-secondary-400"
+                hoverColor="hover:bg-secondary-300"
+                label="馬上報名行程"
+              />
             </div>
           </div>
         </div>

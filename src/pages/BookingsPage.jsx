@@ -122,7 +122,7 @@ function BookingsPage() {
             <li>
               <Link
                 to={`/${user.username}/profile`}
-                className={`block rounded p-2 hover:bg-gray-700 ${
+                className={`block rounded p-2 hover:bg-primary-900 ${
                   location.pathname === `/${user.username}/profile`
                     ? "text-lg font-bold"
                     : ""
@@ -134,7 +134,7 @@ function BookingsPage() {
             <li>
               <Link
                 to={`/${user.username}/mailbox`}
-                className={`block rounded p-2 hover:bg-gray-700 ${
+                className={`block rounded p-2 hover:bg-primary-900 ${
                   location.pathname === "/mailbox" ? "text-lg font-bold" : ""
                 }`}
               >
@@ -144,7 +144,7 @@ function BookingsPage() {
             <li>
               <Link
                 to={`/${user.username}/bookings`}
-                className={`block rounded p-2 hover:bg-gray-700 ${
+                className={`block rounded p-2 hover:bg-primary-900 ${
                   location.pathname === "/bookings" ? "text-lg font-bold" : ""
                 }`}
               >

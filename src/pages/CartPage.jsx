@@ -131,13 +131,13 @@ function EditProfile() {
       </div>
 
       <div className="m-auto my-6 min-h-screen w-5/6 gap-2 md:flex">
-        <aside className="bg-primary-300 p-6 pt-8 text-white md:w-1/6">
+        <aside className="bg-primary-600 p-6 pt-8 text-white md:w-1/6">
           <h2 className="text-xl font-bold">會員中心</h2>
           <ul className="flex pt-2 md:flex-col">
             <li>
               <Link
                 to={user ? `/${user.username}/profile` : "#"}
-                className={`block rounded p-2 hover:bg-gray-700 ${
+                className={`block rounded p-2 hover:bg-primary-900 ${
                   location.pathname === `/${user?.username}/profile`
                     ? "text-lg font-bold"
                     : ""
@@ -149,7 +149,7 @@ function EditProfile() {
             <li>
               <Link
                 to={`/${user.username}/mailbox`}
-                className={`block rounded p-2 hover:bg-gray-700 ${
+                className={`block rounded p-2 hover:bg-primary-900 ${
                   location.pathname === "/mailbox" ? "text-lg font-bold" : ""
                 }`}
               >
@@ -159,7 +159,7 @@ function EditProfile() {
             <li>
               <Link
                 to={`/${user.username}/bookings`}
-                className={`block rounded p-2 hover:bg-gray-700 ${
+                className={`block rounded p-2 hover:bg-primary-900 ${
                   location.pathname === "/bookings" ? "text-lg font-bold" : ""
                 }`}
               >
@@ -169,7 +169,7 @@ function EditProfile() {
             <li>
               <Link
                 to={`/${user.username}/reviews`}
-                className={`block rounded p-2 hover:bg-gray-700 ${
+                className={`block rounded p-2 hover:bg-primary-900 ${
                   location.pathname === "/reviews" ? "text-lg font-bold" : ""
                 }`}
               >

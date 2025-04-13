@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { SlArrowRight } from "react-icons/sl";
@@ -18,7 +20,6 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const [orderCount, setOrderCount] = useState(0);
- 
 
   const navigate = useNavigate();
 
@@ -55,37 +56,40 @@ function Header() {
   // 取得訂單數量
   const fetchOrders = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/${user.username}/private-orders`);
+      const res = await axios.get(
+        `http://localhost:8000/api/${user.username}/private-orders`,
+      );
       setOrderCount(res.data.length);
     } catch (error) {
       console.error("取得訂單數失敗", error);
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchOrders();
 
-  // **監聽訂單更新事件**
-  const handleOrderUpdate = () => {
-    fetchOrders();
-  };
-  window.addEventListener("orderUpdated", handleOrderUpdate);
+    // **監聽訂單更新事件**
+    const handleOrderUpdate = () => {
+      fetchOrders();
+    };
+    window.addEventListener("orderUpdated", handleOrderUpdate);
 
-  return () => {
-    window.removeEventListener("orderUpdated", handleOrderUpdate);
-  };
+    return () => {
+      window.removeEventListener("orderUpdated", handleOrderUpdate);
+    };
+  }, []);
 
-
-
-  },[])
-
+  const linkClass = ({ isActive }) =>
+    isActive
+      ? "text-secondary-600 font-semibold"
+      : "text-primary-500 hover:font-bold";
 
   return (
     <div className="container p-3 lg:py-10">
       <div className="relative">
         <div className="mx-auto flex max-w-full items-center justify-between xl:w-10/12">
           {/* Logo */}
-          <Link to="/" className="flex cursor-pointer items-center">
+          <NavLink to="/" className="flex cursor-pointer items-center">
             <img src="/images/website_logo.png" alt="logo" className="h-10" />
             <div className="flex flex-col justify-around">
               <h1 className="text-[20px] font-bold leading-6 text-secondary-600">
@@ -98,41 +102,29 @@ function Header() {
                 在地導遊媒合平台
               </p>
             </div>
-          </Link>
+          </NavLink>
 
           {/* Desktop Menu - visible on larger screens */}
           <ul className="hidden lg:flex lg:items-center lg:justify-between lg:space-x-16">
             <li className="text-base leading-[22.4px] text-grey-950">
-              <Link
-                to="/search-tourguides"
-                className="text-primary-500 hover:font-bold"
-              >
+              <NavLink to="/search-tourguides" className={linkClass}>
                 隨行導遊趣
-              </Link>
+              </NavLink>
             </li>
             <li className="text-base leading-[22.4px] text-grey-950">
-              <Link
-                to="/book-trips"
-                className="text-primary-500 hover:font-bold"
-              >
+              <NavLink to="/book-trips" className={linkClass}>
                 行程搶先報
-              </Link>
+              </NavLink>
             </li>
             <li className="text-base leading-[22.4px] text-grey-950">
-              <Link
-                to="/sites-info"
-                className="text-primary-500 hover:font-bold"
-              >
+              <NavLink to="/sites-info" className={linkClass}>
                 推薦景點
-              </Link>
+              </NavLink>
             </li>
             <li className="text-base leading-[22.4px] text-grey-950">
-              <Link
-                to="/travel-info"
-                className="text-primary-500 hover:font-bold"
-              >
+              <NavLink to="/travel-info" className={linkClass}>
                 旅行指南
-              </Link>
+              </NavLink>
             </li>
 
             {user ? (
@@ -155,13 +147,12 @@ function Header() {
                 <li className="relative">
                   <Link to={`/${user.username}/bookings`}>
                     <AiFillCopy className="h-6 w-6 text-primary-600 transition-transform duration-500 ease-in-out hover:scale-150" />
-                  
+
                     {orderCount > 0 && (
-          <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-secondary-400 text-xs text-white">
-            {orderCount}
-          </span>
-        )}
-                  
+                      <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-secondary-400 text-xs text-white">
+                        {orderCount}
+                      </span>
+                    )}
                   </Link>
                 </li>
                 <li>

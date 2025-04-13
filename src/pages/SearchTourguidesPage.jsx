@@ -1,15 +1,14 @@
-import React, {useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import axios from "axios";
 
 import { UserContext } from "../../context/userContext";
 
-import "./homepage.css"
+import "./homepage.css";
 
 import { motion, AnimatePresence } from "motion/react";
 import SlidesData from "../data/slidesSearchTourguidesPage.json";
-
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -23,9 +22,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-
 function SearchTourguidesPage() {
-
   const [index, setIndex] = useState(0);
   const { user, setUser } = useContext(UserContext);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,6 +34,7 @@ function SearchTourguidesPage() {
 
   const [selectedTheme, setSelectedTheme] = useState("行程主題");
   const [selectedGuides, setSelectedGuides] = useState([]);
+
 
   // const prevSlide = () => {
   //   const isFirstSlide = currentIndex === 0;
@@ -80,7 +78,7 @@ function SearchTourguidesPage() {
 
   const navigate = useNavigate();
 
-  const handleSearchClick = async() => {
+  const handleSearchClick = async () => {
     const queryParams = new URLSearchParams({
       startDate: startDate ? startDate.toISOString().split("T")[0] : "",
       endDate: endDate ? endDate.toISOString().split("T")[0] : "",
@@ -90,19 +88,16 @@ function SearchTourguidesPage() {
     }).toString();
 
     try {
-  
-      const res = await axios.get(`http://localhost:8000/api/guides?theme=${selectedTheme}`);
-      console.log(res)
+      const res = await axios.get(
+        `http://localhost:8000/api/guides?theme=${selectedTheme}`,
+      );
+      console.log(res);
       setSelectedGuides(res.data);
-  
-      
-      } catch (error) {
-        console.error("❌ 無法獲取導遊:", error.response?.data || error.message);
-      }
+    } catch (error) {
+      console.error("❌ 無法獲取導遊:", error.response?.data || error.message);
+    }
 
-      
-
-     navigate(`/search-tourguides/search-results?${queryParams}`);
+    navigate(`/search-tourguides/search-results?${queryParams}`);
   };
 
   const handleThemeChange = async (event) => {
@@ -110,12 +105,13 @@ function SearchTourguidesPage() {
     setSelectedTheme(newTheme);
 
     try {
-  
-      const res = await axios.get(`http://localhost:8000/api/guides?theme=${newTheme}`);
-      console.log(res.data)
+      const res = await axios.get(
+        `http://localhost:8000/api/guides?theme=${newTheme}`,
+      );
+      console.log(res.data);
       setSelectedGuides(res.data);
-  
-      const handleSearchClick = async() => {
+
+      const handleSearchClick = async () => {
         const queryParams = new URLSearchParams({
           startDate: startDate ? startDate.toISOString().split("T")[0] : "",
           endDate: endDate ? endDate.toISOString().split("T")[0] : "",
@@ -123,68 +119,68 @@ function SearchTourguidesPage() {
           // childCount,
           theme: selectedTheme,
         }).toString();
-    
+
         try {
-      
-          const res = await axios.get(`http://localhost:8000/api/guides?theme=${selectedTheme}`);
-          console.log(res)
+          const res = await axios.get(
+            `http://localhost:8000/api/guides?theme=${selectedTheme}`,
+          );
+          console.log(res);
           setSelectedGuides(res.data);
-          navigate(`/search-tourguides/search-results?${queryParams}`)
+          navigate(`/search-tourguides/search-results?${queryParams}`);
           // ,{
           //   state: {guides:res}
           // };
-          
-          } catch (error) {
-            console.error("❌ 無法獲取導遊:", error.response?.data || error.message);
-          }
-    
-          
-    
-      
+        } catch (error) {
+          console.error(
+            "❌ 無法獲取導遊:",
+            error.response?.data || error.message,
+          );
+        }
       };
-
-      
-      } catch (error) {
-        console.error("❌ 無法獲取導遊:", error.response?.data || error.message);
-      }
-
-
+    } catch (error) {
+      console.error("❌ 無法獲取導遊:", error.response?.data || error.message);
+    }
   };
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
 
+  useEffect(() => {
+    if (user) {
+      localStorage.getItem("user", JSON.stringify(user));
+    }
+  }, [user]);
 
-
-
-
-   useEffect(() => {
-        if (user) {
-          localStorage.getItem("user", JSON.stringify(user));
-        }
-      }, [user]);
-
-      useEffect(() => {
-        const interval = setInterval(() => {
-          setIndex((prev) => (prev + 1) % SlidesData.length);
-        }, 3000); // 每3秒切換
-        return () => clearInterval(interval);
-      }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % SlidesData.length);
+    }, 3000); // 每3秒切換
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
-      <div className=" group relative m-auto h-[680px] w-full py-0 md:h-[500px] lg:h-[780px]">
-      <img
-            src="/images/background_popular_sites_cutted.png"
-            alt=""
-            className="absolute inset-0 h-[750px] w-full object-cover object-bottom "
-            style={{
-              maskImage:
-                "linear-gradient(to center, transparent 5%, black 100%))",
-              WebkitMaskImage:
-                "linear-gradient(to center, transparent 5%, black 100%",
-            }}
-            />
+      <div className="group relative m-auto h-[680px] w-full py-0 md:h-[500px] lg:h-[780px]" id="target-section">
+        <img
+          src="/images/background_popular_sites_cutted.png"
+          alt=""
+          className="absolute inset-0 h-[750px] w-full object-cover object-bottom"
+          style={{
+            maskImage:
+              "linear-gradient(to center, transparent 5%, black 100%))",
+            WebkitMaskImage:
+              "linear-gradient(to center, transparent 5%, black 100%",
+          }}
+        />
 
-        <div className="relative top-20  flex h-[700px] w-full items-center justify-center overflow-hidden wave-mask">
+        <div className="wave-mask relative top-20 flex h-[700px] w-full items-center justify-center overflow-hidden">
           <AnimatePresence>
             <motion.img
               key={index} // 每次 index 變動時，重新渲染
@@ -194,108 +190,110 @@ function SearchTourguidesPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 2 }}
-         
             />
           </AnimatePresence>
         </div>
 
-          <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[30%] lg:top-[30%]">
-            <h1 className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
-              尋找你的專屬在地導遊
-            </h1>
-            {/* Search options */}
-            <div className="mt-2 lg:mt-10">
-              <div className="my-6 flex flex-col justify-center lg:mt-10 lg:flex-row lg:space-x-8">
-                <div className="mt-10 relative w-full max-w-lg space-y-3 lg:space-y-8">
-                  {/* 日期範圍 */}
-                  <div className="mt-4 flex min-w-[400px] justify-center px-4 lg:mt-0">
-                    <Link>
-                      <button
-                        className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
-                        onClick={() =>
-                          document.getElementById("calendar_modal").showModal()
-                        }
+        <div className="absolute left-[15%] top-[20%] md:left-[25%] md:top-[15%] lg:left-[30%] lg:top-[30%]">
+          <h1 className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
+            尋找你的專屬在地導遊
+          </h1>
+          {/* Search options */}
+          <div className="mt-2 lg:mt-10">
+            <div className="my-6 flex flex-col justify-center lg:mt-10 lg:flex-row lg:space-x-8">
+              <div className="relative mt-10 w-full max-w-lg space-y-3 lg:space-y-8">
+                {/* 日期範圍 */}
+                <div className="mt-4 flex min-w-[400px] justify-center px-4 lg:mt-0">
+                  <Link>
+                    <button
+                      className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
+                      onClick={() =>
+                        document.getElementById("calendar_modal").showModal()
+                      }
+                    >
+                      <svg
+                        className="h-8 w-8"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="grey"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
-                        <svg
-                          className="h-8 w-8"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          stroke="grey"
-                          fill="none"
+                        {" "}
+                        <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                        <rect x="4" y="5" width="16" height="16" rx="2" />{" "}
+                        <line x1="16" y1="3" x2="16" y2="7" />{" "}
+                        <line x1="8" y1="3" x2="8" y2="7" />{" "}
+                        <line x1="4" y1="11" x2="20" y2="11" />{" "}
+                        <rect x="8" y="15" width="2" height="2" />
+                      </svg>
+
+                      <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
+                        {startDate && endDate ? (
+                          <p className="flex flex-col justify-center text-primary-700">
+                            <span className="text-base">
+                              {startDate.toLocaleDateString()} 出發
+                            </span>
+
+                            <span className="text-base">
+                              {endDate.toLocaleDateString()} 離開
+                            </span>
+                          </p>
+                        ) : (
+                          <p className="text-gray-400">日期範圍</p>
+                        )}
+                      </span>
+                      <svg
+                        className="h-8 text-red-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="grey"
+                      >
+                        <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                        >
-                          {" "}
-                          <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                          <rect x="4" y="5" width="16" height="16" rx="2" />{" "}
-                          <line x1="16" y1="3" x2="16" y2="7" />{" "}
-                          <line x1="8" y1="3" x2="8" y2="7" />{" "}
-                          <line x1="4" y1="11" x2="20" y2="11" />{" "}
-                          <rect x="8" y="15" width="2" height="2" />
-                        </svg>
-
-                        <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
-                          {startDate && endDate ? (
-                            <p className="flex flex-col justify-center text-primary-700">
-                              <span className="text-base">
-                                {startDate.toLocaleDateString()} 出發
-                              </span>
-
-                              <span className="text-base">
-                                {endDate.toLocaleDateString()} 離開
-                              </span>
-                            </p>
-                          ) : (
-                            <p className="text-gray-400">日期範圍</p>
-                          )}
-                        </span>
-                        <svg
-                          className="h-8 text-red-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="grey"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1"
-                            d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                          />
-                        </svg>
-                      </button>
-                    </Link>
-                  </div>
-
-                  <dialog
-                    id="calendar_modal"
-                    className="modal modal-bottom sm:modal-middle"
-                  >
-                    <div className="modal-box bg-white">
-                      <h3 className="text-lg font-bold text-primary-700">
-                        {" "}
-                        請選擇日期範圍
-                      </h3>
-                      <div className="flex justify-center py-4">
-                        <DatePicker
-                          className=""
-                          locale={zhTW}
-                          selected={startDate}
-                          onChange={(update) => {
-                            setDateRange(update);
-                          }}
-                          startDate={startDate}
-                          endDate={endDate}
-                          selectsRange
-                          monthsShown={2}
-                          inline
-                          calendarClassName="flex gap-6 bg-primary-50 rounded-lg  border-none"
+                          strokeWidth="1"
+                          d="M8 9l4-4 4 4m0 6l-4 4-4-4"
                         />
-                      </div>
+                      </svg>
+                    </button>
+                  </Link>
+                </div>
 
-                      {/* 已選日期顯示 */}
-                      <div className="text-center">
+                <dialog
+                  id="calendar_modal"
+                  className="modal modal-bottom sm:modal-middle"
+                >
+                  <div className="modal-box bg-white">
+                    <h3 className="text-lg font-bold text-primary-700">
+                      {" "}
+                      請選擇日期範圍
+                    </h3>
+                    <div className="flex justify-center py-4">
+                      <DatePicker
+                        className=""
+                        locale={zhTW}
+                        selected={startDate}
+                        onChange={(update) => {
+                          setDateRange(update);
+                        }}
+                        startDate={startDate}
+                        endDate={endDate}
+                        selectsRange
+                        monthsShown={2}
+                        inline
+                        calendarClassName="flex gap-6 bg-primary-50 rounded-lg  border-none"
+                        minDate={
+                          new Date(new Date().setDate(new Date().getDate() + 2))
+                        } // 限制三天後才可選擇
+                      />
+                    </div>
+
+                    {/* 已選日期顯示 */}
+                    {/* <div className="text-center">
                         {startDate && endDate ? (
                           <p className="text-grey-600">
                             選擇的日期範圍：
@@ -307,18 +305,41 @@ function SearchTourguidesPage() {
                         ) : (
                           <p className="text-gray-400">請選擇開始和結束日期</p>
                         )}
-                      </div>
-                      <div className="modal-action">
-                        <form method="dialog">
-                          <button className="btn">確認</button>
-                        </form>
-                      </div>
+                      </div> */}
+
+                    <div className="text-center">
+                      {startDate && endDate ? (
+                        <p className="text-grey-600">
+                          選擇的日期範圍：
+                          <span className="font-bold text-primary-600">
+                            {startDate.toLocaleDateString("zh-TW", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}{" "}
+                            -{" "}
+                            {endDate.toLocaleDateString("zh-TW", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </span>
+                        </p>
+                      ) : (
+                        <p className="text-gray-400">請選擇開始和結束日期</p>
+                      )}
                     </div>
-                  </dialog>
+                    <div className="modal-action">
+                      <form method="dialog">
+                        <button className="btn">確認</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
 
-                  {/* 人數選擇 */}
+                {/* 人數選擇 */}
 
-                  {/* <div className="mt-4 flex justify-center px-4 lg:mt-0">
+                {/* <div className="mt-4 flex justify-center px-4 lg:mt-0">
                     <Link>
                       <button
                         className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
@@ -371,7 +392,7 @@ function SearchTourguidesPage() {
                     </Link>
                   </div> */}
 
-                  {/* <dialog
+                {/* <dialog
                     id="touristNum_modal"
                     className="modal modal-bottom sm:modal-middle"
                   >
@@ -434,146 +455,145 @@ function SearchTourguidesPage() {
                     </div>
                   </dialog> */}
 
-                  {/* 行程主題 */}
+                {/* 行程主題 */}
 
-                  <div className="mt-4 flex justify-center px-4 lg:mt-0">
-                    <Link>
-                      <button
-                        className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
-                        onClick={() =>
-                          document.getElementById("theme_modal").showModal()
-                        }
+                <div className="mt-4 flex justify-center px-4 lg:mt-0">
+                  <Link>
+                    <button
+                      className="flex w-[28vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
+                      onClick={() =>
+                        document.getElementById("theme_modal").showModal()
+                      }
+                    >
+                      <svg
+                        className="inline-block h-8"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="grey"
                       >
-                        <svg
-                          className="inline-block h-8"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="grey"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
+                        />
+                      </svg>
+                      <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
+                        {selectedTheme ? (
+                          <p className="text-gray-400">
+                            <span className="text-[20px]">{selectedTheme}</span>
+                          </p>
+                        ) : (
+                          <p className="text-gray-400"></p>
+                        )}
+                      </span>
+                      <svg
+                        className="h-8 w-8"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="grey"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1"
+                          d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                        />
+                      </svg>
+                    </button>
+                  </Link>
+                </div>
+
+                <dialog
+                  id="theme_modal"
+                  className="modal fixed top-[30vh]  rounded-lg bg-white p-6 max-w-sm h-[50vh] m-auto" 
+                >
+                  <div className="grid grid-cols-2 rounded-lg bg-white p-10">
+                    <h2 className="col-span-2 mb-4 text-lg font-bold text-primary-600">
+                      選擇行程主題
+                    </h2>
+
+                    {/* 選擇主題的選項 */}
+
+                    {[
+                      "法式美食",
+                      "浪漫蜜月行",
+                      "親子家庭遊",
+                      "時尚購物",
+                      "歷史建築",
+                      "藝術博物館",
+                      "文哲學巡禮",
+                      "自然風光",
+                    ].map((theme, index) => (
+                      <div key={index} className="form-control">
+                        <label className="label flex cursor-pointer items-center space-x-2">
+                          <input
+                            type="radio"
+                            name="theme-radio"
+                            className="radio checked:bg-primary-500"
+                            value={theme}
+                            checked={selectedTheme === theme}
+                            onChange={handleThemeChange}
                           />
-                        </svg>
-                        <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
-                          {selectedTheme ? (
-                            <p className="text-gray-400">
-                              <span className="text-[20px]">{selectedTheme}</span>
-                            </p>
-                          ) : (
-                            <p className="text-gray-400">行程主題</p>
-                          )}
-                        </span>
-                        <svg
-                          className="h-8 w-8"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="grey"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1"
-                            d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                          />
-                        </svg>
-                      </button>
-                    </Link>
-                  </div>
-
-                  <dialog
-                    id="theme_modal"
-                    className="modal modal-bottom sm:modal-middle"
-                  >
-                    <div className="grid grid-cols-2 rounded-lg bg-white p-10">
-                      <h2 className="col-span-2 mb-4 text-lg font-bold text-primary-600">
-                        選擇行程主題
-                      </h2>
-
-                      {/* 選擇主題的選項 */}
-
-                      {[
-                        "法式美食",
-                        "浪漫蜜月行",
-                        "親子家庭遊",
-                        "時尚購物",
-                        "歷史建築",
-                        "藝術博物館",
-                        "文哲學巡禮",
-                        "自然風光",
-                      ].map((theme, index) => (
-                        <div key={index} className="form-control">
-                          <label className="label flex cursor-pointer items-center space-x-2">
-                            <input
-                              type="radio"
-                              name="theme-radio"
-                              className="radio checked:bg-primary-500"
-                              value={theme}
-                              checked={selectedTheme === theme}
-                              onChange={handleThemeChange}
-                            />
-                            <span className="label-text w-full text-left">
-                              {theme}
-                            </span>
-                          </label>
-                        </div>
-                      ))}
-
-                      <div className="modal-action">
-                        <form method="dialog">
-                          <div className="mx-auto flex gap-4">
-                            <button
-                              type="button"
-                              className="btn btn-outline"
-                              onClick={() => setSelectedTheme("")}
-                            >
-                              取消
-                            </button>
-
-                            <button className="btn bg-primary-200 text-primary-600">
-                              確認
-                            </button>
-                          </div>
-                        </form>
+                          <span className="label-text w-full text-left">
+                            {theme}
+                          </span>
+                        </label>
                       </div>
-                    </div>
-                  </dialog>
-                </div>
-              </div>
-            </div>
+                    ))}
 
-            {/* Search Button */}
-            <div className="mt-2 lg:mt-8">
-              {/* <Link to="/search-tourguides/search-results"> */}
-              <button
-                className="absolute left-[25%] flex min-w-[50%] rounded-3xl bg-primary-500 py-3 lg:bottom-[-15%] lg:left-[32%] lg:min-w-[40%]"
-                onClick={handleSearchClick}
-              >
-                <div className="relative flex-grow">
-                  <span className="pr-2 text-[13px] font-bold text-white lg:pr-4 lg:text-xl">
-                    立即搜尋
-                  </span>
-                  <svg
-                    className="absolute right-3 top-1 inline-block h-6 w-6 pl-1 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1"
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </div>
-              </button>
-              {/* </Link> */}
+                  </div>
+                    <div className="modal-action text-center">
+                      <form method="dialog" className="inline-block">
+                        <div className="flex gap-4 justify-center">
+                          <button
+                            type="button"
+                            className="btn btn-outline"
+                            onClick={() => setSelectedTheme("")}
+                          >
+                            取消
+                          </button>
+
+                          <button className="btn bg-primary-200 text-primary-600">
+                            確認
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                </dialog>
+              </div>
             </div>
           </div>
 
+          {/* Search Button */}
+          <div className="mt-2 lg:mt-8">
+            {/* <Link to="/search-tourguides/search-results"> */}
+            <button
+              className="absolute left-[25%] flex min-w-[50%] rounded-3xl bg-primary-500 py-3 lg:bottom-[-15%] lg:left-[32%] lg:min-w-[40%]"
+              onClick={handleSearchClick}
+            >
+              <div className="relative flex-grow">
+                <span className="pr-2 text-[13px] font-bold text-white lg:pr-4 lg:text-xl">
+                  立即搜尋
+                </span>
+                <svg
+                  className="absolute right-3 top-1 inline-block h-6 w-6 pl-1 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+            </button>
+            {/* </Link> */}
+          </div>
+        </div>
       </div>
 
       <div className="my-4 flex justify-center space-x-2 hover:cursor-pointer lg:my-10">
@@ -595,9 +615,12 @@ function SearchTourguidesPage() {
       <div className="flex items-center justify-center">
         <div className="m-auto mb-[5%] max-w-[1296px]">
           <ul className="lg: grid gap-6 md:grid-cols-2 md:gap-20 lg:grid-cols-3 xl:flex xl:justify-between">
-            <li className="flex h-full max-w-[240px] flex-col items-center justify-center"    data-aos="zoom-out"
-                data-aos-offset="100"
-                data-aos-easing="ease-in-sine">
+            <li
+              className="flex h-full max-w-[240px] flex-col items-center justify-center"
+              data-aos="zoom-out"
+              data-aos-offset="100"
+              data-aos-easing="ease-in-sine"
+            >
               <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 100%私人導覽
               </p>
@@ -610,9 +633,12 @@ function SearchTourguidesPage() {
                 享受完全專屬於您的私人導遊體驗，不會與其他遊客分享導遊。
               </p>
             </li>
-            <li className="flex h-full max-w-[240px] flex-col items-center justify-center" data-aos="zoom-out"
-                data-aos-offset="100"
-                data-aos-easing="ease-in-sine">
+            <li
+              className="flex h-full max-w-[240px] flex-col items-center justify-center"
+              data-aos="zoom-out"
+              data-aos-offset="100"
+              data-aos-easing="ease-in-sine"
+            >
               <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 客製化行程
               </p>
@@ -625,9 +651,12 @@ function SearchTourguidesPage() {
                 根據您的興趣和需求，設計出 完全符合您個人偏好的獨特行程
               </p>
             </li>
-            <li className="flex h-full max-w-[240px] flex-col items-center justify-center" data-aos="zoom-out"
-                data-aos-offset="100"
-                data-aos-easing="ease-in-sine">
+            <li
+              className="flex h-full max-w-[240px] flex-col items-center justify-center"
+              data-aos="zoom-out"
+              data-aos-offset="100"
+              data-aos-easing="ease-in-sine"
+            >
               <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 獲取當地視角
               </p>
@@ -640,9 +669,12 @@ function SearchTourguidesPage() {
                 透過我們的專家帶領，發掘旅遊指南中找不到的熱點
               </p>
             </li>
-            <li className="flex h-full max-w-[240px] flex-col items-center justify-center" data-aos="zoom-out"
-                data-aos-offset="100"
-                data-aos-easing="ease-in-sine">
+            <li
+              className="flex h-full max-w-[240px] flex-col items-center justify-center"
+              data-aos="zoom-out"
+              data-aos-offset="100"
+              data-aos-easing="ease-in-sine"
+            >
               <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 彈性取消政策
               </p>

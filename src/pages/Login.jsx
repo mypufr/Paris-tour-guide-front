@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -92,9 +92,19 @@ function Login() {
   };
   
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
+
   return (
     <>
-      <div className="relative mx-auto my-10 flex h-[80vh] w-full max-w-md items-center justify-center md:static md:h-auto md:max-w-5xl md:flex-row md:gap-5">
+      <div className="relative mx-auto my-10 flex h-[80vh] w-full max-w-md items-center justify-center md:static md:h-auto md:max-w-5xl md:flex-row md:gap-5" id="target-section">
         <div className="absolute inset-0 -z-10 h-full w-full md:top-[5rem] lg:top-[8rem]">
           <img
             src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHx8fA%3D%3D"
@@ -172,7 +182,7 @@ function Login() {
             <Link to="/sign-up" className="text-primary-600 hover:underline">
             <button
               type="submit"
-              className="w-full rounded-md bg-secondary-600 py-2 text-white transition hover:bg-primary-700"
+              className="w-full rounded-md bg-secondary-400 py-2 text-white transition hover:bg-primary-700"
             >
                註冊會員
             </button>

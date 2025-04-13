@@ -208,26 +208,25 @@ function TravelInfoPage() {
 
   return (
     <>
-      <button className="border border-t-cyan-600" onClick={getTourguideInfo}>
+
+<div className="w-full">
+  <img src="https://i.pinimg.com/originals/35/a0/d9/35a0d99126faaca0d33305bd1a86ee20.jpg" alt="under-construction" className="m-auto"/>
+  </div>
+
+
+
+      {/* <button className="border border-t-cyan-600" onClick={getTourguideInfo}>
         取得所有導遊資料
-      </button>
+      </button> */}
 
-      <br />
-      <br />
-      <br />
-
-      <button className="border border-t-cyan-600" onClick={getCommentaries}>
+      {/* <button className="border border-t-cyan-600" onClick={getCommentaries}>
         取得評論資料
-      </button>
-      <br />
-      <br />
-      <br />
+      </button> */}
 
-      {commentary}
+      {/* {commentary} */}
 
-      <br />
-      <br />
-      <div>
+
+      {/* <div>
         <input
           type="text"
           placeholder="輸入導遊 ID"
@@ -241,26 +240,22 @@ function TravelInfoPage() {
         >
           取得單筆導遊資料
         </button>
-      </div>
+      </div> */}
 
-      <button className="border border-t-cyan-600" onClick={getTrips}>
+      {/* <button className="border border-t-cyan-600" onClick={getTrips}>
         取得trips
-      </button>
-      <br />
-      <br />
-      <br />
+      </button> */}
 
-      <button className="border border-t-cyan-600" onClick={getTours}>
+
+      {/* <button className="border border-t-cyan-600" onClick={getTours}>
         取得tours
-      </button>
+      </button> */}
 
-      <br />
-      <br />
-      <br />
 
-      <button className="border border-t-cyan-600" onClick={getSites}>
+
+      {/* <button className="border border-t-cyan-600" onClick={getSites}>
         取得sites
-      </button>
+      </button> */}
 
       {/* <button className="border border-t-cyan-600" onClick={getComments}>
         get all comments
@@ -340,7 +335,7 @@ function TravelInfoPage() {
         <p>No items in the list</p>
       )} */}
 
-      <div className="m-auto my-1">
+      {/* <div className="m-auto my-1">
         <div className="mt-8">
         {tourguideInfo && Array.isArray(tourguideInfo) && tourguideInfo.length > 0 ? (
           tourguideInfo.map((item, index) => (
@@ -359,7 +354,7 @@ function TravelInfoPage() {
           <p>⏳ 資料載入中...</p>
         )}
       </div>
-      </div>
+      </div> */}
     </>
   );
 }

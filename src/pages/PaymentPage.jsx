@@ -146,14 +146,14 @@ function PaymentPage() {
         {/* subNavbar */}
 
         <div className="m-auto my-10 flex max-w-[80%] justify-center gap-20 py-10">
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
-            <p className="text-xl text-secondary-500">Step 1 : 確認訂單</p>
+          <button className="max-w-60 rounded-2xl border border-primary-300 px-10 py-2">
+            <p className="text-xl text-primary-300">Step 1 : 確認訂單</p>
           </button>
-          <button className="max-w-60 rounded-2xl border border-secondary-300 bg-secondary-300 px-10 py-2">
+          <button className="max-w-60 rounded-2xl border border-primary-300 bg-primary-300 px-10 py-2">
             <p className="text-xl text-white">Step 2 : 付款資料</p>
           </button>
-          <button className="max-w-60 rounded-2xl border border-secondary-300 px-10 py-2">
-            <p className="text-xl text-secondary-500">Step 3 : 完成預約</p>
+          <button className="max-w-60 rounded-2xl border border-primary-300 px-10 py-2">
+            <p className="text-xl text-primary-300">Step 3 : 完成預約</p>
           </button>
         </div>
 
@@ -175,7 +175,7 @@ function PaymentPage() {
           />
         </div>
 
-        <div className="m-auto my-10 flex max-w-[90%] justify-center space-x-8 py-10">
+        <div className="m-auto my-4 flex max-w-[90%] justify-center space-x-8 py-10">
           {/* left: Payment  */}
 
           <div className="flex min-w-[46%] flex-col border p-10">
@@ -305,71 +305,6 @@ function PaymentPage() {
 
             <div className="m-auto">
               <div className="my-10">
-                {/* <button
-                  className="flex min-w-60 justify-center space-x-20 rounded-3xl bg-primary-700 px-2 py-2 text-white"
-                  onClick={() => handleConfirmOrderClick(id)}
-                >
-                  <p className="text-xl">確認刷卡</p>
-                </button> */}
-
-                {/* <Button
-                  onClick={handleOpen}
-                  className="flex min-w-40 justify-center rounded-3xl bg-primary-700 px-2 py-2 text-sm text-white"
-                >
-                  確認刷卡
-                </Button>
-                <Dialog open={open} handler={handleOpen} className="w-1/3 px-2">
-                  <DialogHeader className=""></DialogHeader>
-                  <DialogBody className="text-xl">交易成功，謝謝您的預約!</DialogBody>
-                  <DialogFooter>
-                    <Button
-                      variant="text"
-                      color="red"
-                      onClick={handleOpen}
-                      className="btn btn-outline m-1"
-                    >
-                      <span>預約其他行程</span>
-                    </Button>
-                    <Button
-       
-                      className="btn bg-primary-700 text-primary-700 text-white"
-                      onClick={() => handleConfirmOrderClick(id)}
-                    >
-                      <span>查看訂單紀錄</span>
-                    </Button>
-                  </DialogFooter>
-                </Dialog> */}
-
-                {/* Open the modal using document.getElementById('ID').showModal() method */}
-                {/* <button
-                  className="flex min-w-40 justify-center rounded-3xl bg-primary-700 px-2 py-2 text-lg text-white"
-                  onClick={() =>
-                    document.getElementById("payment_modal").showModal()
-                  }
-                >
-                  確定付款
-                </button>
-                <dialog
-                  id="payment_modal"
-                  className="modal modal-bottom sm:modal-middle"
-                >
-                  <div className="modal-box space-y-2">
-                    <h3 className="text-lg font-bold">交易成功，謝謝您的預約!</h3>
-                    <p className="py-4 text-lg font-normal"></p>
-                    <div className="modal-action">
-                      <form method="dialog" className="flex gap-4">
-            
-                        <Button
-                          className="btn bg-primary-700 text-primary-700 text-white"
-                          onClick={() => handleConfirmOrderClick(id)}
-                        >
-                          <span>查看訂單紀錄</span>
-                        </Button>
-                      </form>
-                    </div>
-                  </div>
-                </dialog> */}
-
                 <button
                   className="flex min-w-40 justify-center rounded-3xl bg-primary-700 px-2 py-2 text-lg text-white"
                   onClick={handleConfirmPayment}
@@ -419,9 +354,9 @@ function PaymentPage() {
           {/* right: Order info */}
           <div className="flex flex-col">
             {/* 1st order */}
-            <div className="bg-background-2 p-4">
+            <div className="bg-primary-100 p-4">
               <div className="flex max-w-full flex-col">
-                <h3 className="py-2 text-start text-lg text-secondary-500">
+                <h3 className="py-2 text-start text-lg text-gray-500">
                   所有訂單
                 </h3>
                 {/* 按鈕 - 開啟私人體驗行程訂單 Modal */}
@@ -441,6 +376,7 @@ function PaymentPage() {
                     >
                       查看訂單
                     </button>
+              
 
                     {/* 私人行程訂單 Modal */}
                     {isPrivateOrderOpen && (
@@ -602,7 +538,7 @@ function PaymentPage() {
             </div>
             <div className="my-20 items-center space-y-4">
               <button
-                className="m-auto flex min-w-60 justify-center space-x-20 rounded-xl border border-secondary-600 bg-transparent px-2 py-2 text-secondary-600"
+                className="m-auto flex min-w-40 justify-center space-x-20 rounded-xl border border-grey-400 bg-transparent mx-10 text-gray-400 font-normal"
                 onClick={() => handleClearCartClick(id)}
               >
                 <p className="text-lg">取消訂單</p>
