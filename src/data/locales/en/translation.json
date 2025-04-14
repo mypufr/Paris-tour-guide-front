@@ -1,5 +1,10 @@
 
 {
+  "logo_website_intro":"Find & Book Local Guides in Paris",
+  "about_us":"About us",
+  "contact_us":"Contact",
+  "copyright":"© 2025 Paris mon guide. All rights reserved.",
+
   "tour_guide": "Tour Guide",
   "book_trip": "Trip Planner",
   "site_info": "Top Attractions",
@@ -49,7 +54,7 @@
   },
     "popular_guides": "Popular Guides",
     "popular_trips": "Popular Trips",
-    "book_guide_and_trip": "Book a guide and sign up for a trip",
+    "book_guide_and_trip": "How to make bookings ? ",
     "book_guides": "Book Guides",
 
     "guidesSteps": {

@@ -11,7 +11,11 @@ function About() {
 
   return (
     <>
-      <div className="h-full text-center text-3xl font-bold text-white">
+
+<div className="w-full">
+  <img src="https://i.pinimg.com/originals/35/a0/d9/35a0d99126faaca0d33305bd1a86ee20.jpg" alt="under-construction" className="m-auto"/>
+  </div>
+      {/* <div className="h-full text-center text-3xl font-bold text-white">
         <div className="mb-8 mt-[80px] flex justify-center space-x-4 hover:cursor-pointer">
           <img
             src="images/vector_title.png"
@@ -80,7 +84,7 @@ function About() {
 
 
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

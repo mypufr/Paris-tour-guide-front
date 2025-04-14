@@ -1,4 +1,10 @@
 {
+
+  "logo_website_intro":"Guides touristiques à Paris",
+  "about_us":"A propos de nous",
+  "contact_us":"Contact",
+"copyright":"© 2025 Paris, mon guide. Tous droits réservés.",
+
   "title": "Trouvez votre guide local",
   "dateRange": "Dates",
   "departure": "Départ le {{date}}",
@@ -33,7 +39,7 @@
     "line4": "Un voyage en harmonie avec votre cœur vous attend en silence."
   },
   "section_title": {
-    "search_by_area": "Rechercher un guide par quartier"
+    "search_by_area": "Rechercher votre guide par Arrondissement"
   },
 
   "search_guide_by_area": {
@@ -41,7 +47,7 @@
   },
    "popular_guides": "Guides Populaires",
    "popular_trips": "Voyages Populaires",
-   "book_guide_and_trip": "Réservez un guide et inscrivez-vous à une excursion",
+   "book_guide_and_trip": "Comment ça marche ?",
    "book_guides": "Réserver un guide",
 
    "guidesSteps": {

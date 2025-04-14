@@ -1,13 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "../utils/i18n";
+import { useTranslation } from "react-i18next";
+
 function Footer() {
+
+    const {t} = useTranslation();
   return (
     <>
       {/* footer */}
       <footer className="bottom-0 w-full">
         <div className="relative">
-          {/* 背景圖片 */}
+
           <div className="hidden lg:block">
             <img
               src="/images/footer_background.png"
@@ -16,7 +21,7 @@ function Footer() {
             />
           </div>
           <div className="relative -top-1 h-[380px] bg-primary-600 xl:h-[420px]">
-            {/* 右側圖片 - 在小螢幕隱藏 */}
+     
             <div className="absolute bottom-[150px] right-[400px] hidden md:right-16 md:top-20 md:block lg:top-1 lg:right-[15vw] xl:-top-[20vh] ">
               
          
@@ -28,13 +33,12 @@ function Footer() {
               />
             </div>
 
-            {/* Footer 文字部分 */}
             <div className="absolute left-8 top-10 min-[400px]:left-10 md:left-[10%] md:top-[20%] lg:left-[20%] lg:top-[10%]">
               
          
               
               <ul className="space-y-6 text-base text-grey-100">
-                {/* 標誌 */}
+        
                 <li className="flex">
                   <Link to="/" className="inline-flex cursor-pointer">
                     <div className="">
@@ -54,24 +58,24 @@ function Footer() {
                         </h1>
                       </div>
                       <p className="text-[14px] font-normal leading-[1.5] tracking-1.5 text-white">
-                        在地導遊媒合平台
+                      {t("logo_website_intro")}
                       </p>
                     </div>
                   </Link>
                 </li>
 
-                {/* 導覽連結 */}
+           
                 <li className="flex space-x-6">
                   <Link to="/about">
-                    <span className="text-[16px] text-gray-300">關於我們</span>
+                    <span className="text-[16px] text-gray-300">{t("about_us")}</span>
                   </Link>
 
                   <Link to="#">
-                    <span className="text-[16px] text-gray-300">聯絡我們</span>
+                    <span className="text-[16px] text-gray-300">{t("contact_us")}</span>
                   </Link>
                 </li>
 
-                {/* 聯繫資訊 */}
+    
                 <li>
                   <Link to="tel:+37653421" className="flex items-center">
                     <img
@@ -97,7 +101,7 @@ function Footer() {
                   </Link>
                 </li>
 
-                {/* 社群連結 */}
+
                 <li className="flex space-x-4">
                   <Link to="/">
                     <img
@@ -125,10 +129,10 @@ function Footer() {
             </div>
           </div>
 
-          {/* 版權聲明 */}
+   
           <div className="hidden 2xl:block 2xl:absolute 2xl:bottom-[2vh] 2xl:right-[30vh] translate-x-1/2 transform z-20">
             <p className="text-center lg:text-sm xl:text-base text-grey-100">
-              © 2025 樂遊巴黎版權所有
+            {t("copyright")}
             </p>
           </div>
         </div>

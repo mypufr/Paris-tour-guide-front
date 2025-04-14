@@ -60,7 +60,7 @@ function Header() {
     }
   };
 
-  // 取得訂單數量
+
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
@@ -75,7 +75,7 @@ function Header() {
   useEffect(() => {
     fetchOrders();
 
-    // **監聽訂單更新事件**
+
     const handleOrderUpdate = () => {
       fetchOrders();
     };
@@ -106,7 +106,7 @@ function Header() {
                 </span>
               </h1>
               <p className="text-[14px] leading-[1.5] tracking-1.5 text-blue-50">
-                在地導遊媒合平台
+              {t("logo_website_intro")}
               </p>
             </div>
           </NavLink>
@@ -115,25 +115,25 @@ function Header() {
           <ul className="hidden lg:flex lg:items-center lg:justify-between lg:space-x-16">
             <li className="text-base leading-[22.4px] text-grey-950">
               <NavLink to="/search-tourguides" className={linkClass}>
-                {/* 隨行導遊趣 */}
+
                 {t("tour_guide")}
               </NavLink>
             </li>
             <li className="text-base leading-[22.4px] text-grey-950">
               <NavLink to="/book-trips" className={linkClass}>
-                {/* 行程搶先報 */}
+
                 {t("book_trip")}
               </NavLink>
             </li>
             <li className="text-base leading-[22.4px] text-grey-950">
               <NavLink to="/sites-info" className={linkClass}>
-                {/* 推薦景點 */}
+
                 {t("site_info")}
               </NavLink>
             </li>
             <li className="text-base leading-[22.4px] text-grey-950">
               <NavLink to="/travel-info" className={linkClass}>
-                {/* 旅行指南 */}
+
                 {t("travel_info")}
               </NavLink>
             </li>
@@ -146,17 +146,10 @@ function Header() {
                     className="text-primary-600 hover:font-bold hover:shadow-md"
                   >
                     <p>
-                      {/* {user.username}的會員中心 */}
                       <p>{t("member_center", { username: user.username })}</p>
                     </p>
                   </Link>
                 </li>
-
-                {/* <li>
-                  <Link to={`/${user.username}/bookings`}>
-                    <ImCart className="h-6 w-6 text-primary-600 transition-transform duration-500 ease-in-out hover:scale-150" />
-                  </Link>
-                </li> */}
 
                 <li className="relative">
                   <Link to={`/${user.username}/bookings`}>
@@ -174,7 +167,7 @@ function Header() {
                     onClick={handleLogout}
                     className="rounded-2xl bg-secondary-400 px-4 py-1 text-white hover:font-bold"
                   >
-                    {/* 登出 */}
+      
                     {t("logout")}
                   </button>
                 </li>
@@ -186,7 +179,7 @@ function Header() {
                     to="/login"
                     className="my-2 inline-block px-5 text-base text-white"
                   >
-                    {/* 登入 / 註冊 */}
+     
                     {t("login_register")}
                   </Link>
                 </button>
@@ -230,7 +223,7 @@ function Header() {
                     onClick={toggleMenu}
                   >
                     <p className="text-base text-gray-950 hover:font-bold hover:text-primary-600">
-                      {/* 隨行導遊趣 */}
+          
                       {t("tour_guide")}
                     </p>
                   </Link>
@@ -242,7 +235,7 @@ function Header() {
                     onClick={toggleMenu}
                   >
                     <p className="text-base text-gray-950 hover:font-bold hover:text-primary-600">
-                      {/* 行程搶先報 */}
+        
                       {t("book_trip")}
                     </p>
                   </Link>
@@ -254,7 +247,7 @@ function Header() {
                     onClick={toggleMenu}
                   >
                     <p className="text-base text-gray-950 hover:font-bold hover:text-primary-600">
-                      {/* 推薦景點 */}
+       
                       {t("site_info")}
                     </p>
                   </Link>
@@ -266,7 +259,7 @@ function Header() {
                     onClick={toggleMenu}
                   >
                     <p className="text-base text-gray-950 hover:font-bold hover:text-primary-700">
-                      {/* 旅行指南 */}
+      
                       {t("travel_info")}
                     </p>
                   </Link>
@@ -284,13 +277,7 @@ function Header() {
                       </Link>
                     </li>
 
-                    {/* <li>
-                      <Link
-                        to={`/search-tourguides/tourguide-profile/${user.id}/private-trips/confirm-order`}
-                      >
-                        <ImCart className="h-6 w-6 text-primary-600 transition-transform duration-500 ease-in-out hover:scale-150" />
-                      </Link>
-                    </li> */}
+      
 
                     <li>
                       <Link to={`/${user.username}/bookings`}>
@@ -302,7 +289,7 @@ function Header() {
                         onClick={handleLogout}
                         className="rounded-2xl bg-secondary-400 px-4 py-1 text-white hover:font-bold"
                       >
-                        {/* 登出 */}
+       
                         {t("logout")}
                       </button>
                     </li>

@@ -15,8 +15,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
@@ -817,8 +815,6 @@ export default function HomePage() {
 
             <area
               shape="poly"
-              // coords="582,399,580,409,578,414,574,421,572,430,568,437,564,449,557,452,549,451,543,455,536,459,533,466,527,470,520,476,512,479,505,484,504,492,513,494,520,498,527,501,535,502,541,506,549,507,555,514,562,516,570,518,576,521,582,522,588,526,595,523,598,513,602,500,607,492,610,479,614,471,618,462,620,453,622,445,625,435,622,426,614,418,606,412,598,406,590,403"
-
               coords="631,439,628,447,628,454,626,462,621,473,618,481,614,490,611,499,609,510,604,518,600,525,609,528,617,532,625,533,633,538,639,542,646,540,654,541,660,542,668,541,679,541,687,539,694,537,702,533,706,525,709,517,714,510,714,501,717,493,717,482,638,437"
               href="#"
               onClick={(event) => handleDistrictClick(event, 5)}
@@ -1063,7 +1059,7 @@ export default function HomePage() {
 
         <div className={`mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16 ${i18n.language === "中文" ? "lg:left-[51rem]" : ""} ${i18n.language === "en" ? "lg:left-[46rem]" : ""} ${i18n.language === "fr" ? "lg:left-[43rem]" : ""}`}
         
-        // "mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16"
+
                
         >
           <div className="flex justify-center space-x-4 hover:cursor-pointer">
@@ -1112,24 +1108,6 @@ export default function HomePage() {
                   />
                 </div>
               ))}
-
-              {/* {TripsData.map((data, index) => (
-                <div key={index} className="p-4 md:p-0">
-                  <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
-                    <TripCard
-                      tripName={data.tourName}
-                      imageUrl={data.imgUrl}
-                      description={data.description}
-                      date={data.date}
-                      site1={data.site1}
-                      site2={data.site2}
-                      site3={data.site3}
-                      site4={data.site4}
-                      site5={data.site5}
-                    />
-                  </div>
-                </div>
-              ))} */}
             </Slider>
 
             <button
