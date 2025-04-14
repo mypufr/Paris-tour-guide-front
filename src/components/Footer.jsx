@@ -128,7 +128,7 @@ function Footer() {
           {/* 版權聲明 */}
           <div className="hidden 2xl:block 2xl:absolute 2xl:bottom-[2vh] 2xl:right-[30vh] translate-x-1/2 transform z-20">
             <p className="text-center lg:text-sm xl:text-base text-grey-100">
-              © 2024 樂遊巴黎版權所有
+              © 2025 樂遊巴黎版權所有
             </p>
           </div>
         </div>

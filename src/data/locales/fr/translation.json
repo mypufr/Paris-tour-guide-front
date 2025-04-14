@@ -11,5 +11,76 @@
   "travel_info": "Guide de voyage",
   "logout": "Se déconnecter",
   "login_register": "Connexion / Inscription",
-  "member_center": "Espace membre de {{username}}"
+  "member_center": "Espace membre de {{username}}",
+
+  "trip_theme": 
+  {
+    "frenchCuisine": "Cuisine Française",
+    "romanticHoneymoon": "Voyage de Noces Romantique",
+    "familyTrip": "Voyage en Famille",
+    "shopping": "Shopping",
+    "historicSites": "Architecture Historique",
+    "artMuseum": "Musée d'Art",
+    "culturalTour": "Circuit Culturel",
+    "natureView": "Paysages Naturels"
+  },
+
+  "homepage_introduction": {
+    "heading": "Trouvez votre voyage parfait à Paris",
+    "line1": "Flânez doucement dans les ruelles de Paris.",
+    "line2": "Que vous soyez attiré par le battement de l'histoire, le parfum de la gastronomie ou la profondeur de l'art,",
+    "line3": "nous avons sélectionné le voyage qui correspond à votre âme.",
+    "line4": "Un voyage en harmonie avec votre cœur vous attend en silence."
+  },
+  "section_title": {
+    "search_by_area": "Rechercher un guide par quartier"
+  },
+
+  "search_guide_by_area": {
+    "book_private_tour": "Guides du {{district}}e arrondissement"
+  },
+   "popular_guides": "Guides Populaires",
+   "popular_trips": "Voyages Populaires",
+   "book_guide_and_trip": "Réservez un guide et inscrivez-vous à une excursion",
+   "book_guides": "Réserver un guide",
+
+   "guidesSteps": {
+    "step1": {
+      "title": "Étape 1 : Parcourir les profils des guides",
+      "description": "Explorez les profils des guides sur la plateforme, découvrez leurs qualifications, domaines d'expertise et visionnez leurs vidéos de présentation. Choisissez l'expert local qui vous convient le mieux."
+    },
+    "step2": {
+      "title": "Étape 2 : Contacter le guide",
+      "description": "Connectez-vous, puis contactez le guide de votre choix pour discuter en détail de vos besoins, préférences et attentes afin d'assurer un service personnalisé."
+    },
+    "step3": {
+      "title": "Étape 3 : Commencez votre voyage",
+      "description": "Une fois tout confirmé, préparez vos bagages et partez pour un inoubliable voyage à Paris accompagné d’un guide professionnel."
+    }
+  },
+   "book_trips": "Inscription aux excursions",
+
+   "groupSteps": {
+    "step1": {
+      "title": "Étape 1 : Parcourir les propositions de circuits",
+      "description": "Découvrez sur notre plateforme une variété de circuits soigneusement élaborés, des aventures culturelles aux escapades gastronomiques. Il y en a forcément un qui vous fera vibrer."
+    },
+    "step2": {
+      "title": "Étape 2 : Inscrivez-vous à un circuit",
+      "description": "Une fois le circuit idéal trouvé, connectez-vous pour réserver votre place. Vous pouvez également échanger avec les autres participants et partager votre enthousiasme."
+    },
+    "step3": {
+      "title": "Étape 3 : Notification de confirmation de groupe",
+      "description": "Dès que le groupe est formé, vous recevrez une notification avec les informations sur le lieu et l’heure de rendez-vous."
+    },
+    "step4": {
+      "title": "Étape 4 : Commencez votre voyage",
+      "description": "Une fois tout confirmé, préparez vos valises pour vivre une aventure inoubliable à Paris avec un guide professionnel."
+    }
+  },
+  "button": {
+    "book_guides": "Réserver un guide",
+    "book_trips": "S'inscrire à une visite"
+  }
+  
 }

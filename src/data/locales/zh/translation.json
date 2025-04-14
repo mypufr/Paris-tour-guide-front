@@ -19,6 +19,82 @@
   "travel_info": "旅行指南",
   "logout": "登出",
   "login_register": "登入 / 註冊",
-  "member_center": "{{username}}的會員中心"
+  "member_center": "{{username}}的會員中心",
+
+  "trip_theme":
+   {
+    "frenchCuisine": "法式美食",
+    "romanticHoneymoon": "浪漫蜜月行",
+    "familyTrip": "親子家庭遊",
+    "shopping": "時尚購物",
+    "historicSites": "歷史建築",
+    "artMuseum": "藝術博物館",
+    "culturalTour": "文哲學巡禮",
+    "natureView": "自然風光"
+  },
+
+  "homepage_introduction": {
+    "heading": "尋找你的完美巴黎旅程",
+    "line1": "輕盈漫步在巴黎的街巷。",
+    "line2": "無論你心繫歷史的脈動、美食的馨香，還是藝術的深邃，",
+    "line3": "我們都為你精選了最契合靈魂的旅程。",
+    "line4": "一段符合你心之所向的旅程，正在靜靜等待與你邂逅。"
+  },
+
+  "section_title": {
+    "search_by_area": "分區搜尋專屬導遊"
+  },
+
+  "search_guide_by_area": {
+    "book_private_tour": "與{{district}}區導遊預定私人遊覽"
+  },
+
+ "popular_guides": "熱門導遊",
+  "popular_trips": "熱門旅程",
+  "book_guide_and_trip": "預約導遊和報名行程",
+  "book_guides": "預約導遊",
+
+  "guidesSteps": {
+    "step1": {
+      "title": "Step 1 瀏覽導遊資歷與專長",
+      "description": "在平台上探索各種導遊的個人檔案，了解他們的資歷、專長領域，並觀看他們的自我介紹影片。挑選最適合你需求的在地專家。"
+    },
+    "step2": {
+      "title": "Step 2 與導遊聯絡",
+      "description": "登入會員後，通過私訊與選定的導遊聯絡，詳細溝通你的旅行需求、預期時間和特別喜好，確保導遊能為你提供量身定制的服務。"
+    },
+    "step3": {
+      "title": "Step 3 開啟旅程",
+      "description": "一切確認後，準備好你的行囊，迎接一段由專業導遊帶領的難忘巴黎旅程吧！"
+    }
+  },
+
+  "book_trips": "報名行程",
+
+  "groupSteps": {
+    "step1": {
+      "title": "Step 1 瀏覽行程提案",
+      "description": "在平台上瀏覽各種精心策劃的行程提案，從文化探險到美食之旅，總有一個行程能讓你心動不已。"
+    },
+    "step2": {
+      "title": "Step 2 報名行程",
+      "description": "選定心儀的行程後，立即登入會員報名，確保你的名額。你還可以和其他參與者交流，分享期待與興奮。"
+    },
+    "step3": {
+      "title": "Step 3 開團確認通知",
+      "description": "一旦成團成功，你將收到開團通知，並可進一步掌握集合地點與時間等詳細資訊。"
+    },
+    "step4": {
+      "title": "Step 4 開啟旅程",
+      "description": "一切確認後，準備好你的行囊，迎接一段由專業導遊帶領的難忘巴黎旅程吧！"
+    }
+  },
+
+  "button": {
+    "book_guides": "我要預約導遊",
+    "book_trips": "馬上報名行程"
+  }
+
+  
 
 }

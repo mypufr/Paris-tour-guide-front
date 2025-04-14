@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import AOS from "aos";
+import "../utils/i18n";
+import { useTranslation } from "react-i18next";
+
 import "aos/dist/aos.css";
 import "./homepage.css";
 
@@ -23,54 +26,31 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { TfiHandPointRight } from "react-icons/tfi";
 
 import data from "../data/data.json";
-import DistrictsData from "../data/districts.json";
-import {
-  District1,
-  District2,
-  District3,
-  District4,
-  District5,
-  District6,
-  District7,
-  District8,
-  District9,
-  District10,
-  District11,
-  District12,
-  District13,
-  District14,
-  District15,
-  District16,
-  District17,
-  District18,
-  District19,
-  District20,
-} from "../data/districtData.js";
-import TripsData from "../data/trips.json";
+
 import SlidesData from "../data/slides.json";
 
-// import component
-
 import Card from "../components/Card";
-import TourCard from "../components/tourCard.jsx";
 import TripCard from "../components/TripCard";
 import TourguideList from "../components/TourguideList";
-import { settings3 } from "../components/helpers/sliderSettings.jsx";
 import GuideButton from "../components/GuideButton";
 
 export default function HomePage() {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
 
-  const [searchQuery, setSearchQuery] = useState(""); // 存放使用者輸入的關鍵字
-  const [tours, setTours] = useState([]); // 存放所有行程資料
-  const [filteredTours, setFilteredTours] = useState([]); // 存放篩選後的行程
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const [tours, setTours] = useState([]); 
+  const [filteredTours, setFilteredTours] = useState([]); 
 
   const [postObject, setPostObject] = useState(null);
   const [postComment, setPostComment] = useState(null);
   const [postProfile, setPostProfile] = useState(null);
 
   const [popularTourguidesList, setPopularTourguidesList] = useState([]);
+
+
+  const { t } = useTranslation();
+  const { i18n } = useTranslation();
 
   const handleCardClick = (id) => {
     navigate(`/search-tourguides/tourguide-profile/${id}#target-section`);
@@ -178,17 +158,6 @@ export default function HomePage() {
     // },
     // navigation: true,
   };
-
-  const themes = [
-    "法式美食",
-    "浪漫蜜月行",
-    "親子家庭遊",
-    "時尚購物",
-    "歷史建築",
-    "藝術博物館",
-    "文哲學巡禮",
-    "自然風光",
-  ];
 
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   const [popupPosition, setPopupPosition] = useState({
@@ -497,17 +466,16 @@ export default function HomePage() {
     getRecommendedGuides(district);
   };
 
-  // 根據區域呼叫後端 API
   const getRecommendedGuides = async (district) => {
     try {
       const res = await axios.get(
         `http://localhost:8000/api/district/${district}`,
       );
-      console.log("推薦導遊：", res.data);
+
       setRecommendedGuides(res.data);
     } catch (error) {
       console.error(
-        "取得推薦導遊失敗：",
+        "Failure：",
         error.response?.data || error.message,
       );
     }
@@ -547,7 +515,6 @@ export default function HomePage() {
     getToursByKeyWord();
   }, []);
 
-  // 取得所有行程
   useEffect(() => {
     const fetchTours = async () => {
       try {
@@ -555,14 +522,14 @@ export default function HomePage() {
         console.log(res.data);
         setTours(res.data || []);
       } catch (error) {
-        console.error("❌ 無法獲取行程資料:", error);
+        console.error("❌ Cannot get trip informations:", error);
       }
     };
 
     fetchTours();
   }, []);
 
-  // 監聽搜尋輸入並篩選行程
+
   useEffect(() => {
     if (!searchQuery) {
       setFilteredTours(tours); // 若無輸入則顯示所有行程
@@ -590,67 +557,52 @@ export default function HomePage() {
       <ul className="container hidden items-center justify-between text-base leading-[22.4px] text-grey-400 lg:flex lg:px-4 lg:py-2 xl:w-10/12 xl:justify-evenly xl:py-7">
         <li className="lg:border-r-1 xl:border-r-1 lg:border-grey-100 lg:pr-6 xl:border xl:border-y-0 xl:border-l-0 xl:px-8 xl:pr-8">
           <Link to="/" className="text-base">
-            <span>法式美食</span>
+            <span>{t("trip_theme.frenchCuisine")}</span>
           </Link>
         </li>
         <li className="border-x-1 lg:border-y-1 border border-y-0 border-r-0 border-grey-100 lg:px-6 xl:border-0 xl:px-0">
           <Link to="/">
-            <span>浪漫蜜月行</span>
+            <span>{t("trip_theme.romanticHoneymoon")}</span>
           </Link>
         </li>
         <li className="border-x-1 lg:border-y-1 xl:border-r-1 xl:border-l-1 border border-y-0 border-r-0 border-grey-100 lg:px-6 xl:border xl:border-y-0 xl:px-8">
           <Link to="/">
-            <span>親子家庭遊</span>
+            <span>{t("trip_theme.familyTrip")}</span>
           </Link>
         </li>
         <li className="border-x-1 lg:border-y-1 border border-y-0 border-r-0 border-grey-100 lg:px-6 xl:border-0 xl:px-0">
           <Link to="/">
-            <span>時尚購物</span>
+            <span>{t("trip_theme.shopping")}</span>
           </Link>
         </li>
         <li className="border-x-1 lg:border-y-1 xl:border-r-1 xl:border-l-1 border border-y-0 border-r-0 border-grey-100 lg:px-6 xl:border xl:border-y-0 xl:px-8">
           <Link to="/">
-            <span>歷史建築</span>
+            <span>{t("trip_theme.historicSites")}</span>
           </Link>
         </li>
         <li className="border-x-1 lg:border-y-1 border border-y-0 border-r-0 border-grey-100 lg:px-6 xl:border-0 xl:px-0">
           <Link to="/">
-            <span>藝術博物館</span>
+            <span>{t("trip_theme.artMuseum")}</span>
           </Link>
         </li>
         <li className="border-x-1 lg:border-y-1 xl:border-r-1 xl:border-l-1 border border-y-0 border-r-0 border-grey-100 lg:px-6 xl:border xl:border-y-0 xl:px-8">
           <Link to="/">
-            <span>文哲學巡禮</span>
+            <span>{t("trip_theme.culturalTour")}</span>
           </Link>
         </li>
         <li className="border-x-1 lg:border-y-1 border border-y-0 border-r-0 border-grey-100 pr-0 lg:px-6 xl:border-0 xl:px-0">
           <Link to="/">
-            <span>自然風光</span>
+            <span>{t("trip_theme.natureView")}</span>
           </Link>
         </li>
       </ul>
-
-      {/* <ul className="container hidden items-center justify-between text-base leading-[22.4px] text-grey-400 lg:flex lg:px-4 lg:py-2 xl:w-10/12 xl:justify-evenly xl:py-7">
-  {themes.map((theme, index) => (
-    <li
-      key={index}
-      className={`border-x-1 lg:border-y-1 border border-y-0 border-r-0 border-grey-100 lg:px-6 xl:border-0 xl:px-0
-        ${index % 2 === 0 ? "xl:border-r-1 xl:border-l-1 xl:border xl:border-y-0 xl:px-8" : ""}
-      `}
-    >
-      <Link to="/">
-        <span>{theme}</span>
-      </Link>
-    </li>
-  ))}
-</ul>; */}
 
       {/* banner: Slides show */}
       <div className="relative overflow-hidden">
         <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
           <AnimatePresence>
             <motion.img
-              key={index} // 每次 index 變動時，重新渲染
+              key={index} 
               src={SlidesData[index].imgUrl}
               className="absolute h-full w-full rounded-lg object-cover"
               initial={{ opacity: 0 }}
@@ -664,22 +616,22 @@ export default function HomePage() {
         <div className="absolute left-[15vw] top-[17%] z-10 w-full md:top-[10%] xl:top-[15%] 2xl:left-[18%] 2xl:top-[17%] min-[1920px]:top-[20%]">
           <div className="flex-col text-start">
             <p className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
-              尋找你的完美巴黎旅程
+            <p>{t("homepage_introduction.heading")}</p>
             </p>
 
             <p className="text-shadow hidden font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-6 md:text-lg 2xl:pt-20 2xl:text-2xl">
-              輕盈漫步在巴黎的街巷。
+            {t("homepage_introduction.line1")}
             </p>
             <div>
               <p className="text-shadow hidden font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-2 md:text-lg lg:pt-4 2xl:pt-10 2xl:text-2xl">
-                無論你心繫歷史的脈動、美食的馨香，還是藝術的深邃，
+              {t("homepage_introduction.line2")}
               </p>
               <p className="text-shadow hidden font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-0 md:text-lg 2xl:text-2xl">
-                我們都為你精選了最契合靈魂的旅程。
+              {t("homepage_introduction.line3")}
               </p>
             </div>
             <p className="text-shadow hidden font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-2 md:text-lg lg:pt-4 2xl:pt-10 2xl:text-2xl">
-              一段符合你心之所向的旅程，正在靜靜等待與你邂逅。
+            {t("homepage_introduction.line4")}
             </p>
 
             <div className="flex items-center">
@@ -687,9 +639,9 @@ export default function HomePage() {
                 <input
                   type="text"
                   className="-left-8 m-auto rounded-lg border border-gray-300 bg-white p-[13px] pr-10 text-primary-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-[200px]:w-8/12 md:w-6/12 lg:w-5/12 lg:pr-0 xl:h-12 xl:w-6/12 2xl:w-[32.5%]"
-                  placeholder="尋找你的完美巴黎旅程"
+                  placeholder={t("homepage_introduction.heading")}
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)} // 更新關鍵字
+                  onChange={(e) => setSearchQuery(e.target.value)} 
                 />
                 <div className="active:scale-120 absolute inset-y-0 right-[26vw] top-14 flex items-center rounded-r-lg bg-primary-600 p-5 transition duration-200 hover:bg-primary-200 hover:text-gray-300 md:right-[45vw] md:top-[80%] lg:right-[58vw] lg:top-0 lg:p-3 xl:right-[50vw] 2xl:top-10 min-[1536px]:right-[64vw] min-[1920px]:right-[67vw]">
                   <svg
@@ -709,28 +661,28 @@ export default function HomePage() {
             </div>
             <div className="absolute -left-4 mt-16 grid grid-cols-4 grid-rows-2 gap-x-2 gap-y-2 min-[390px]:left-0 md:left-0 md:mt-4 md:w-8/12 lg:-left-3 lg:w-5/12 lg:gap-y-[1px] xl:left-0 xl:mt-0 xl:flex xl:w-6/12 xl:justify-between xl:space-x-0 min-[1920px]:w-[37.5%]">
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-                法式美食
+              {t("trip_theme.frenchCuisine")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-                浪漫蜜月行
+              {t("trip_theme.romanticHoneymoon")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-                親子家庭遊
+              {t("trip_theme.familyTrip")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-                時尚購物
+              {t("trip_theme.shopping")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-                歷史建築
+              {t("trip_theme.historicSites")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-                藝術博物館
+              {t("trip_theme.artMuseum")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-                文哲學巡禮
+              {t("trip_theme.culturalTour")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-                自然風光
+              {t("trip_theme.natureView")}
               </button>
             </div>
           </div>
@@ -744,7 +696,7 @@ export default function HomePage() {
           className="inline-block h-[40px]"
         />
         <h3 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
-          分區搜尋專屬導遊
+        {t("section_title.search_by_area")}
         </h3>
         <img
           src="https://i.imgur.com/zoB5vaQ.png"
@@ -783,7 +735,7 @@ export default function HomePage() {
                   alt=""
                   className="inline-block"
                 />
-                <span>與{selectedDistrict}區導遊預定私人遊覽</span>
+     <span>{t("search_guide_by_area.book_private_tour", { district: selectedDistrict })}</span>
               </h3>
 
               <div>
@@ -1031,7 +983,7 @@ export default function HomePage() {
             className="inline-block h-[40px]"
           />
           <h2 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
-            熱門導遊
+          {t("popular_guides")}
           </h2>
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
@@ -1076,11 +1028,11 @@ export default function HomePage() {
               <SlArrowLeft />
             </button>
 
-            {/* 放置 pagination */}
+ 
             <div className="pagination-container z-10 text-xl font-bold text-primary-600">
               <span>{currentSlide}</span> /{" "}
               <span className="text-grey-950">{data.length}</span>
-              {/* 可使用 Pagination 元件或根據 Slider 狀態自訂 */}
+    
             </div>
 
             <button
@@ -1109,7 +1061,11 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16">
+        <div className={`mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16 ${i18n.language === "中文" ? "lg:left-[51rem]" : ""} ${i18n.language === "en" ? "lg:left-[46rem]" : ""} ${i18n.language === "fr" ? "lg:left-[43rem]" : ""}`}
+        
+        // "mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16"
+               
+        >
           <div className="flex justify-center space-x-4 hover:cursor-pointer">
             <img
               src="https://i.imgur.com/zoB5vaQ.png"
@@ -1117,7 +1073,7 @@ export default function HomePage() {
               className="inline-block h-[40px]"
             />
             <h4 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
-              熱門旅程
+            {t("popular_trips")}
             </h4>
             <img
               src="https://i.imgur.com/zoB5vaQ.png"
@@ -1196,7 +1152,7 @@ export default function HomePage() {
             className="inline-blockh h-[40px]"
           />
           <h5 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
-            預約導遊和報名行程
+          <span>{t("book_guide_and_trip")}</span>
           </h5>
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
@@ -1209,7 +1165,7 @@ export default function HomePage() {
           <div className="mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border md:border-grey-200 lg:min-h-[1000px] lg:max-w-[34%]">
             <div className="border-1 mb-3 rounded-2xl border border-grey-200 sm:border-0">
               <span className="block rounded-t-2xl bg-primary-300 py-4 text-center text-2xl font-bold text-white lg:py-10">
-                預約導遊
+        {t("book_guides")}
               </span>
 
               <div className="flex-1 p-2 lg:mt-10">
@@ -1228,10 +1184,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                        Step 1 瀏覽導遊資歷與專長
+                      <p>{t("guidesSteps.step1.title")}</p>
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                        在平台上探索各種導遊的個人檔案，了解他們的資歷、專長領域，並觀看他們的自我介紹影片。挑選最適合你需求的在地專家。
+                      <p>{t("guidesSteps.step1.description")}</p>
                       </p>
                     </div>
                   </div>
@@ -1250,10 +1206,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                        Step 2 與導遊聯絡
+                      <p>{t("guidesSteps.step2.title")}</p>
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                        登入會員後，通過私訊與選定的導遊聯絡，詳細溝通你的旅行需求、預期時間和特別喜好，確保導遊能為你提供量身定制的服務。
+                      <p>{t("guidesSteps.step2.description")}</p>
                       </p>
                     </div>
                   </div>
@@ -1272,10 +1228,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                        Step 3 開啟旅程
+                      <p>{t("guidesSteps.step3.title")}</p>
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                        一切確認後，準備好你的行囊，迎接一段由專業導遊帶領的難忘巴黎旅程吧！
+                      <p>{t("guidesSteps.step3.description")}</p>
                       </p>
                     </div>
                   </div>
@@ -1286,7 +1242,7 @@ export default function HomePage() {
             <div className="mb-4 mt-auto flex justify-center pb-10">
               <GuideButton
                 to="/search-tourguides#target-section"
-                label="我要預約導遊"
+                label={t("button.book_guides")}
               />
             </div>
           </div>
@@ -1294,7 +1250,7 @@ export default function HomePage() {
           <div className="mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border md:border-grey-200 lg:min-h-[1000px] lg:max-w-[34%]">
             <div className="border-1 mb-3 rounded-2xl border border-grey-200 sm:border-0">
               <span className="block rounded-t-2xl bg-secondary-300 py-4 text-center text-2xl font-bold text-white lg:py-10">
-                報名行程
+              {t("book_trips")}
               </span>
 
               <div className="flex-1 p-2 lg:mt-10">
@@ -1313,10 +1269,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                        Step 1 瀏覽行程提案
+                      {t("groupSteps.step1.title")}
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                        在平台上瀏覽各種精心策劃的行程提案，從文化探險到美食之旅，總有一個行程能讓你心動不已。
+                      {t("groupSteps.step1.description")}
                       </p>
                     </div>
                   </div>
@@ -1335,10 +1291,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                        Step 2 報名行程
+                      {t("groupSteps.step2.title")}
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                        選定心儀的行程後，立即登入會員報名，確保你的名額。你還可以和其他參與者交流，分享期待與興奮。
+                      {t("groupSteps.step2.description")}
                       </p>
                     </div>
                   </div>
@@ -1357,10 +1313,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                        Step 3 開團確認通知
+                      {t("groupSteps.step3.title")}
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                        選定心儀的行程後，立即登入會員報名，確保你的名額。你還可以和其他參與者交流，分享期待與興奮。
+                      {t("groupSteps.step3.description")}
                       </p>
                     </div>
                   </div>
@@ -1379,10 +1335,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                        Step 4 開啟旅程
+                      {t("groupSteps.step4.title")}
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                        一切確認後，準備好你的行囊，迎接一段由專業導遊帶領的難忘巴黎旅程吧！
+                      {t("groupSteps.step4.description")}
                       </p>
                     </div>
                   </div>
@@ -1394,7 +1350,7 @@ export default function HomePage() {
                 to="/book-trips#target-section"
                 color="bg-secondary-400"
                 hoverColor="hover:bg-secondary-300"
-                label="馬上報名行程"
+                label={t("button.book_trips")}
               />
             </div>
           </div>

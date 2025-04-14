@@ -171,7 +171,7 @@ function SearchTourguidesPage() {
         <div className="wave-mask relative top-20 flex h-[700px] w-full items-center justify-center overflow-hidden">
           <AnimatePresence>
             <motion.img
-              key={index} // 每次 index 變動時，重新渲染
+              key={index} 
               src={SlidesData[index].imgUrl}
               className="absolute h-full w-full rounded-lg object-cover"
               initial={{ opacity: 0 }}

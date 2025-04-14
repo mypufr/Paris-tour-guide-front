@@ -33,37 +33,23 @@ import store from "./store/store.jsx";
 
 import Cursor from "../context/cursor.jsx";
 
-import "./utils/i18n.js"
+import "./utils/i18n.js";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 
 import LanguageSelectorModal from "./components/languages/LanguageSelectorModal";
 import LanguageDropdown from "./components/languages/LanguageDropdown";
 
-
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
 export default function App() {
-  const { t } = useTranslation();
-
   return (
     <UserContextProvider>
       <Provider store={store}>
         <Cursor />
         <div className="flex min-h-screen flex-col">
-          {/* <div>
-            <h1>{t("welcomeMessage")}</h1>
-          
-            <button onClick={() => i18n.changeLanguage("zh")}>中文</button>
-
-<button onClick={() => i18n.changeLanguage("fr")}>Français</button>
-
-          
-          </div> */}
-
-<LanguageSelectorModal />
-
+          <LanguageSelectorModal />
 
           <BrowserRouter>
             <Header />

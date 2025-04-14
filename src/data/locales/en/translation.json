@@ -20,5 +20,75 @@
   "selectTheme": "Select a trip theme",
   "confirm": "Confirm",
   "cancel": "Cancel",
-  "selectedDateRange": "Selected date range: {{start}} - {{end}}"
+  "selectedDateRange": "Selected date range: {{start}} - {{end}}",
+
+  "trip_theme": {
+    "frenchCuisine": "French Cuisine",
+    "romanticHoneymoon": "Romantic Honeymoon",
+    "familyTrip": "Family Trip",
+    "shopping": "Shopping",
+    "historicSites": "Historic Architecture",
+    "artMuseum": "Art Museum",
+    "culturalTour": "Cultural Tour",
+    "natureView": "Nature & Scenery"
+  },
+
+  "homepage_introduction": {
+    "heading": "Discover Your Perfect Paris Journey",
+    "line1": "Take a light stroll through the streets of Paris.",
+    "line2": "Whether you're drawn to the pulse of history, the aroma of fine cuisine, or the depth of art,",
+    "line3": "we’ve curated journeys that resonate with your soul.",
+    "line4": "A journey aligned with your heart is quietly waiting to meet you."
+  },
+  "section_title": {
+    "search_by_area": "Search for guides by area"
+  },
+
+  "search_guide_by_area": {
+    "book_private_tour": "Book a private guide in {{district}} district"
+  },
+    "popular_guides": "Popular Guides",
+    "popular_trips": "Popular Trips",
+    "book_guide_and_trip": "Book a guide and sign up for a trip",
+    "book_guides": "Book Guides",
+
+    "guidesSteps": {
+      "step1": {
+        "title": "Step 1 : Browse Guides’ Qualifications and Expertise",
+        "description": "Explore a variety of tour guide profiles on the platform, learn about their qualifications, specialties, and watch their self-introduction videos. Pick the local expert that suits your needs best."
+      },
+      "step2": {
+        "title": "Step 2 : Contact Your Guide",
+        "description": "After logging in, message your selected guide to discuss your travel needs, preferred dates, and special interests in detail to ensure a customized experience."
+      },
+      "step3": {
+        "title": "Step 3 : Start Your Journey",
+        "description": "Once everything is confirmed, pack your bags and get ready for an unforgettable Paris journey guided by a professional."
+      }
+    },
+       "book_trips": "Book Trips",
+       "groupSteps": {
+        "step1": {
+          "title": "Step 1: Browse Itinerary Proposals",
+          "description": "Explore a variety of carefully crafted itineraries on our platform—from cultural adventures to culinary tours, there's one to spark your wanderlust."
+        },
+        "step2": {
+          "title": "Step 2: Sign Up for a Tour",
+          "description": "Once you've found your favorite tour, log in to register and secure your spot. You can also connect with other participants to share your excitement."
+        },
+        "step3": {
+          "title": "Step 3: Group Confirmation Notification",
+          "description": "When the group tour is confirmed, you’ll receive a notification along with detailed info about meeting points and times."
+        },
+        "step4": {
+          "title": "Step 4: Start Your Journey",
+          "description": "Once everything is confirmed, pack your bags and get ready for an unforgettable Paris journey led by a professional guide."
+        }
+      },
+      "button": {
+        "book_guides": "Book a guide",
+        "book_trips": "Join a Tour"
+      }
+
+
 }
