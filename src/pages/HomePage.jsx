@@ -467,7 +467,9 @@ export default function HomePage() {
   const getRecommendedGuides = async (district) => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/district/${district}`,
+        `${import.meta.env.VITE_API_BASE_URL}/district/${district}`,{
+          withCredentials: true, 
+        }
       );
 
       setRecommendedGuides(res.data);
@@ -482,7 +484,9 @@ export default function HomePage() {
   const getPopularTourguidesList = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/popular-tourguides",
+        `${import.meta.env.VITE_API_BASE_URL}/popular-tourguides`,{
+          withCredentials: true, 
+        }
       );
       setPopularTourguidesList(res.data);
     } catch (error) {
@@ -492,7 +496,9 @@ export default function HomePage() {
 
   const getToursByKeyWord = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/tours");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tours`, {
+        withCredentials: true, 
+      });
       setTours(res.data || []); // 確保 `tours` 是陣列
       setFilteredTours(res.data);
     } catch (error) {
@@ -516,7 +522,9 @@ export default function HomePage() {
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/tours");
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tours`,{
+          withCredentials: true, 
+        });
         console.log(res.data);
         setTours(res.data || []);
       } catch (error) {

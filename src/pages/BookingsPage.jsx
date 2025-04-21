@@ -87,7 +87,9 @@ function BookingsPage() {
   const getPrivateOrdersData = async (userName = user.username) => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/${user.username}/private-orders`,
+        `${import.meta.env.VITE_API_URL}/${user.username}/private-orders`, {
+          withCredentials: true,
+        }
       );
       console.log(res.data);
       setOrderData(res.data);
