@@ -40,7 +40,9 @@ import i18n from "i18next";
 import LanguageSelectorModal from "./components/languages/LanguageSelectorModal";
 import LanguageDropdown from "./components/languages/LanguageDropdown";
 
-axios.defaults.baseURL = "http://localhost:8000";
+// axios.defaults.baseURL = "http://localhost:8000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.withCredentials = true;
 
 export default function App() {
