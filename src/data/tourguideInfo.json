@@ -1,6 +1,7 @@
 [
   {
     "id": "1",
+
     "name": "Jean Dupont",
     "profile": "在巴黎生活十年，擁有超過八年的導覽經驗，熱愛這座城市的文化與歷史。希望透過細緻的導覽，讓每位旅客深入體驗巴黎的獨特魅力。無論是漫步於塞納河畔、欣賞羅浮宮的藝術珍寶，或是探索隱藏在街巷中的特色咖啡館，都能帶來難忘的回憶。擅長根據旅客的興趣規劃行程，無論是藝術、歷史、建築或美食，都能提供深入且生動的解說。致力於讓每位遊客都能感受巴黎的獨特氛圍，留下美好回憶。",
     "themes": ["歷史建築", "藝術博物館", "文哲學巡禮"],
@@ -42,63 +43,62 @@
         "date": "2024-9-23",
         "comment": "導覽內容非常豐富，讓我更深入了解巴黎歷史！"
       },
-      
-        {
-          "user": "David Zhang",
-          "rating": 4,
-          "date": "2024-09-25",
-          "comment": "導遊知識豐富，但時間如果能再長一點就更好了！"
-        },
-        {
-          "user": "Sophie Chen",
-          "rating": 5,
-          "date": "2024-09-26",
-          "comment": "這次的導覽讓我對巴黎有了全新的認識，非常值得！"
-        },
-        {
-          "user": "Tom Lee",
-          "rating": 5,
-          "date": "2024-09-27",
-          "comment": "導遊很風趣，行程安排得剛剛好，不會太趕！"
-        },
-        {
-          "user": "Alice Johnson",
-          "rating": 4,
-          "date": "2024-09-28",
-          "comment": "內容很棒，但希望能多一點互動時間。"
-        },
-        {
-          "user": "Kevin Wu",
-          "rating": 5,
-          "date": "2024-09-29",
-          "comment": "行程規劃很周到，對於巴黎的歷史與文化講解非常深入！"
-        },
-        {
-          "user": "Rachel Kim",
-          "rating": 5,
-          "date": "2024-09-30",
-          "comment": "這是我在巴黎最棒的一次導覽體驗，真的很推薦！"
-        },
-        {
-          "user": "Michael Brown",
-          "rating": 4,
-          "date": "2024-10-01",
-          "comment": "導遊很專業，但希望能提供一些當地小吃的推薦！"
-        },
-        {
-          "user": "Olivia Davis",
-          "rating": 5,
-          "date": "2024-10-02",
-          "comment": "太棒了！導遊讓我們體驗了許多不一樣的巴黎風情！"
-        },
-        {
-          "user": "Daniel Garcia",
-          "rating": 5,
-          "date": "2024-10-03",
-          "comment": "很棒的導覽行程，導遊的解說深入淺出，非常值得！"
-        }
-      ]
-    
+
+      {
+        "user": "David Zhang",
+        "rating": 4,
+        "date": "2024-09-25",
+        "comment": "導遊知識豐富，但時間如果能再長一點就更好了！"
+      },
+      {
+        "user": "Sophie Chen",
+        "rating": 5,
+        "date": "2024-09-26",
+        "comment": "這次的導覽讓我對巴黎有了全新的認識，非常值得！"
+      },
+      {
+        "user": "Tom Lee",
+        "rating": 5,
+        "date": "2024-09-27",
+        "comment": "導遊很風趣，行程安排得剛剛好，不會太趕！"
+      },
+      {
+        "user": "Alice Johnson",
+        "rating": 4,
+        "date": "2024-09-28",
+        "comment": "內容很棒，但希望能多一點互動時間。"
+      },
+      {
+        "user": "Kevin Wu",
+        "rating": 5,
+        "date": "2024-09-29",
+        "comment": "行程規劃很周到，對於巴黎的歷史與文化講解非常深入！"
+      },
+      {
+        "user": "Rachel Kim",
+        "rating": 5,
+        "date": "2024-09-30",
+        "comment": "這是我在巴黎最棒的一次導覽體驗，真的很推薦！"
+      },
+      {
+        "user": "Michael Brown",
+        "rating": 4,
+        "date": "2024-10-01",
+        "comment": "導遊很專業，但希望能提供一些當地小吃的推薦！"
+      },
+      {
+        "user": "Olivia Davis",
+        "rating": 5,
+        "date": "2024-10-02",
+        "comment": "太棒了！導遊讓我們體驗了許多不一樣的巴黎風情！"
+      },
+      {
+        "user": "Daniel Garcia",
+        "rating": 5,
+        "date": "2024-10-03",
+        "comment": "很棒的導覽行程，導遊的解說深入淺出，非常值得！"
+      }
+    ]
   },
   {
     "id": "2",
@@ -492,8 +492,8 @@
         "comment": "完美的攝影行程，導遊提供了很多有用的建議！"
       }
     ],
-    "price_adult":15,
-    "price_child":11
+    "price_adult": 15,
+    "price_child": 11
   },
   {
     "id": "6",
@@ -532,11 +532,11 @@
         "comment": "行程安排不錯，但時間有點緊湊。"
       }
     ],
-    "imgUrl":"dafasdf",
+    "imgUrl": "dafasdf",
     "price_adult": 20,
     "price_child": 15
-
-  },{
+  },
+  {
     "id": "7",
     "name": "Sophie Laurent",
     "profile": "Sophie specializes in culinary tours around Paris, highlighting the best patisseries, cafes, and local bistros. Her tours are a treat for food lovers.",
@@ -573,10 +573,11 @@
         "comment": "很喜歡，但希望時間可以再長一點。"
       }
     ],
-    "imgUrl":"dafasdf",
+    "imgUrl": "dafasdf",
     "price_adult": 25,
     "price_child": 18
-  }, {
+  },
+  {
     "id": "8",
     "name": "Julien Moreau",
     "profile": "Julien offers dynamic tours through the historic parts of Paris, mixing history with modern cultural insights. His energy makes the tours engaging.",
@@ -613,10 +614,11 @@
         "comment": "導覽內容豐富，但有點走馬看花。"
       }
     ],
-    "imgUrl":"dafasdf",
+    "imgUrl": "dafasdf",
     "price_adult": 18,
     "price_child": 14
-  },{
+  },
+  {
     "id": "9",
     "name": "Isabelle Dubois",
     "profile": "Isabelle is known for her romantic tours of Paris. She specializes in showing the most charming spots in the city, perfect for couples.",
@@ -653,10 +655,11 @@
         "comment": "每個景點都充滿故事，非常適合情侶出遊。"
       }
     ],
-    "imgUrl":"dafasdf",
+    "imgUrl": "dafasdf",
     "price_adult": 22,
     "price_child": 16
-  }, {
+  },
+  {
     "id": "10",
     "name": "Antoine Lefevre",
     "profile": "Antoine offers a unique blend of art and history tours. His deep knowledge of Paris’s cultural heritage makes his tours enriching and fun.",
@@ -693,216 +696,215 @@
         "comment": "非常推薦！他的解說讓我大開眼界。"
       }
     ],
-    "imgUrl":"dafasdf",
+    "imgUrl": "dafasdf",
     "price_adult": 19,
     "price_child": 15
-  }, 
-  {"id": "11",
-  "name": "Camille Bernard",
-  "profile": "Camille specializes in fashion and design tours, taking visitors through Paris’s most stylish districts and historical ateliers.",
-  "themes": ["時尚設計", "文化探索"],
-  "languages": ["法語", "英語"],
-  "districts": ["4", "5"],
-  "trips": [
-    {
-      "id": 114,
-      "title": "巴黎時尚漫步",
-      "description": "走訪巴黎的時尚地標和設計工作室。"
-    }
-  ],
-  "sites": [
-    { "id": 221, "name": "香榭麗舍大道" },
-    { "id": 222, "name": "瑪黑區" }
-  ],
-  "available_slots": [
-    { "date": "2025-04-25", "time": "14:00-16:00" },
-    { "date": "2025-04-26", "time": "15:00-17:00" },
-    { "date": "2025-04-27", "time": "13:00-15:00" }
-  ],
-  "commentaries": [
-    {
-      "user": "Luc Morel",
-      "rating": 5,
-      "date": "2024-09-25",
-      "comment": "Camille 的時尚導覽充滿靈感，太有品味了！"
-    },
-    {
-      "user": "Marina Petit",
-      "rating": 4,
-      "date": "2024-09-27",
-      "comment": "內容豐富，但人數太多稍微有點擁擠。"
-    }
-  ],
-  "imgUrl":"dafasdf",
-  "price_adult": 23,
-  "price_child": 18
-},
-{
-  "id":"12",
-  "name": "Mathieu Dubois",
-  "profile": "Mathieu brings a deep passion for architecture and urban design to his tours, offering detailed insights into Paris’s iconic buildings.",
-  "themes": ["建築巡禮", "城市探索"],
-  "languages": ["法語", "英語"],
-  "districts": ["8", "9"],
-  "trips": [
-    {
-      "id": 115,
-      "title": "巴黎建築探索",
-      "description": "探訪巴黎經典與現代建築的魅力。"
-    }
-  ],
-  "sites": [
-    { "id": 223, "name": "巴黎植物園" },
-    { "id": 224, "name": "布洛涅森林" }
-  ],
-  "available_slots": [
-    { "date": "2025-05-01", "time": "10:00-12:00" },
-    { "date": "2025-05-02", "time": "11:00-13:00" },
-    { "date": "2025-05-03", "time": "09:00-11:00" }
-  ],
-  "commentaries": [
-    {
-      "user": "Alice Bernard",
-      "rating": 4,
-      "date": "2024-09-30",
-      "comment": "Mathieu 的介紹非常詳盡，但節奏略慢。"
-    },
-    {
-      "user": "Pierre Laurent",
-      "rating": 5,
-      "date": "2024-10-01",
-      "comment": "非常喜歡這趟建築之旅，每個細節都很精彩！"
-    }
-  ],
-  "imgUrl":"dafasdf",
-  "price_adult": 21,
-  "price_child": 17
-},{
-  "id": "13",
-  "name": "Elodie Renault",
-  "profile": "Elodie offers immersive tours that focus on Paris’s hidden gems and local secrets, giving visitors an authentic experience away from the usual tourist spots.",
-  "themes": ["隱藏秘境", "地方風情"],
-  "languages": ["法語", "英語"],
-  "districts": ["10", "11"],
-  "trips": [
-    {
-      "id": 116,
-      "title": "巴黎秘密之旅",
-      "description": "發掘巴黎不為人知的角落與故事。"
-    }
-  ],
-  "sites": [
-    { "id": 225, "name": "地下墓穴" },
-    { "id": 226, "name": "瑪黑區" }
-  ],
-  "available_slots": [
-    { "date": "2025-05-05", "time": "13:00-15:00" },
-    { "date": "2025-05-06", "time": "14:00-16:00" },
-    { "date": "2025-05-07", "time": "15:00-17:00" }
-  ],
-  "commentaries": [
-    {
-      "user": "Lucas Martin",
-      "rating": 5,
-      "date": "2024-10-05",
-      "comment": "Elodie 帶我們深入了解了巴黎的真實面貌，非常值得一遊！"
-    },
-    {
-      "user": "Amelie Dupont",
-      "rating": 4,
-      "date": "2024-10-06",
-      "comment": "體驗感很好，但行程有點緊湊。"
-    }
-  ],
-  "imgUrl":"dafasdf",
-  "price_adult": 24,
-  "price_child": 20
-},
-{
-  "id": "14",
-  "name": "Victor Morel",
-  "profile": "Victor specializes in eco-friendly and sustainable tours of Paris, focusing on green spaces and eco-innovative projects in the city.",
-  "themes": ["生態導覽", "綠色旅遊"],
-  "languages": ["法語", "英語"],
-  "districts": ["12", "13"],
-  "trips": [
-    {
-      "id": 117,
-      "title": "巴黎綠色之旅",
-      "description": "探索巴黎的公園與環保項目，了解城市的可持續發展。"
-    }
-  ],
-  "sites": [
-    { "id": 227, "name": "塞納河畔" },
-    { "id": 228, "name": "布洛涅森林" }
-  ],
-  "available_slots": [
-    { "date": "2025-05-10", "time": "08:00-10:00" },
-    { "date": "2025-05-11", "time": "09:00-11:00" },
-    { "date": "2025-05-12", "time": "10:00-12:00" }
-  ],
-  "commentaries": [
-    {
-      "user": "Chloe Laurent",
-      "rating": 5,
-      "date": "2024-10-10",
-      "comment": "非常獨特的生態旅程，讓我對巴黎有了全新的認識！"
-    },
-    {
-      "user": "Marc Dubois",
-      "rating": 4,
-      "date": "2024-10-11",
-      "comment": "行程很有深度，但部分地點的交通有些不便。"
-    }
-  ],
-  "imgUrl":"dafasdf",
-  "price_adult": 20,
-  "price_child": 16
-},{
-  "id": "15",
-  "name": "Lucie Caron",
-  "profile": "Lucie offers energetic city tours that combine historical landmarks with modern urban experiences, making every tour vibrant and engaging.",
-  "themes": ["城市探索", "歷史與現代"],
-  "languages": ["法語", "英語"],
-  "districts": ["14", "15"],
-  "trips": [
-    {
-      "id": 118,
-      "title": "巴黎城市漫步",
-      "description": "穿梭於巴黎街頭，感受城市活力與歷史韻味。"
-    }
-  ],
-  "sites": [
-    { "id": 229, "name": "羅浮宮" },
-    { "id": 230, "name": "埃菲爾鐵塔" }
-  ],
-  "available_slots": [
-    { "date": "2025-05-15", "time": "09:00-11:00" },
-    { "date": "2025-05-16", "time": "10:00-12:00" },
-    { "date": "2025-05-17", "time": "11:00-13:00" }
-  ],
-  "commentaries": [
-    {
-      "user": "Sophie Martin",
-      "rating": 5,
-      "date": "2024-10-15",
-      "comment": "Lucie的導覽充滿活力，令人難忘！"
-    },
-    {
-      "user": "Henri Dubois",
-      "rating": 4,
-      "date": "2024-10-16",
-      "comment": "整個行程節奏感很好，但少了點驚喜。"
-    }
-  ],
-  "imgUrl":"dafasdf",
-  "price_adult": 17,
-  "price_child": 13
-},
-
-
-
-
+  },
+  {
+    "id": "11",
+    "name": "Camille Bernard",
+    "profile": "Camille specializes in fashion and design tours, taking visitors through Paris’s most stylish districts and historical ateliers.",
+    "themes": ["時尚設計", "文化探索"],
+    "languages": ["法語", "英語"],
+    "districts": ["4", "5"],
+    "trips": [
+      {
+        "id": 114,
+        "title": "巴黎時尚漫步",
+        "description": "走訪巴黎的時尚地標和設計工作室。"
+      }
+    ],
+    "sites": [
+      { "id": 221, "name": "香榭麗舍大道" },
+      { "id": 222, "name": "瑪黑區" }
+    ],
+    "available_slots": [
+      { "date": "2025-04-25", "time": "14:00-16:00" },
+      { "date": "2025-04-26", "time": "15:00-17:00" },
+      { "date": "2025-04-27", "time": "13:00-15:00" }
+    ],
+    "commentaries": [
+      {
+        "user": "Luc Morel",
+        "rating": 5,
+        "date": "2024-09-25",
+        "comment": "Camille 的時尚導覽充滿靈感，太有品味了！"
+      },
+      {
+        "user": "Marina Petit",
+        "rating": 4,
+        "date": "2024-09-27",
+        "comment": "內容豐富，但人數太多稍微有點擁擠。"
+      }
+    ],
+    "imgUrl": "dafasdf",
+    "price_adult": 23,
+    "price_child": 18
+  },
+  {
+    "id": "12",
+    "name": "Mathieu Dubois",
+    "profile": "Mathieu brings a deep passion for architecture and urban design to his tours, offering detailed insights into Paris’s iconic buildings.",
+    "themes": ["建築巡禮", "城市探索"],
+    "languages": ["法語", "英語"],
+    "districts": ["8", "9"],
+    "trips": [
+      {
+        "id": 115,
+        "title": "巴黎建築探索",
+        "description": "探訪巴黎經典與現代建築的魅力。"
+      }
+    ],
+    "sites": [
+      { "id": 223, "name": "巴黎植物園" },
+      { "id": 224, "name": "布洛涅森林" }
+    ],
+    "available_slots": [
+      { "date": "2025-05-01", "time": "10:00-12:00" },
+      { "date": "2025-05-02", "time": "11:00-13:00" },
+      { "date": "2025-05-03", "time": "09:00-11:00" }
+    ],
+    "commentaries": [
+      {
+        "user": "Alice Bernard",
+        "rating": 4,
+        "date": "2024-09-30",
+        "comment": "Mathieu 的介紹非常詳盡，但節奏略慢。"
+      },
+      {
+        "user": "Pierre Laurent",
+        "rating": 5,
+        "date": "2024-10-01",
+        "comment": "非常喜歡這趟建築之旅，每個細節都很精彩！"
+      }
+    ],
+    "imgUrl": "dafasdf",
+    "price_adult": 21,
+    "price_child": 17
+  },
+  {
+    "id": "13",
+    "name": "Elodie Renault",
+    "profile": "Elodie offers immersive tours that focus on Paris’s hidden gems and local secrets, giving visitors an authentic experience away from the usual tourist spots.",
+    "themes": ["隱藏秘境", "地方風情"],
+    "languages": ["法語", "英語"],
+    "districts": ["10", "11"],
+    "trips": [
+      {
+        "id": 116,
+        "title": "巴黎秘密之旅",
+        "description": "發掘巴黎不為人知的角落與故事。"
+      }
+    ],
+    "sites": [
+      { "id": 225, "name": "地下墓穴" },
+      { "id": 226, "name": "瑪黑區" }
+    ],
+    "available_slots": [
+      { "date": "2025-05-05", "time": "13:00-15:00" },
+      { "date": "2025-05-06", "time": "14:00-16:00" },
+      { "date": "2025-05-07", "time": "15:00-17:00" }
+    ],
+    "commentaries": [
+      {
+        "user": "Lucas Martin",
+        "rating": 5,
+        "date": "2024-10-05",
+        "comment": "Elodie 帶我們深入了解了巴黎的真實面貌，非常值得一遊！"
+      },
+      {
+        "user": "Amelie Dupont",
+        "rating": 4,
+        "date": "2024-10-06",
+        "comment": "體驗感很好，但行程有點緊湊。"
+      }
+    ],
+    "imgUrl": "dafasdf",
+    "price_adult": 24,
+    "price_child": 20
+  },
+  {
+    "id": "14",
+    "name": "Victor Morel",
+    "profile": "Victor specializes in eco-friendly and sustainable tours of Paris, focusing on green spaces and eco-innovative projects in the city.",
+    "themes": ["生態導覽", "綠色旅遊"],
+    "languages": ["法語", "英語"],
+    "districts": ["12", "13"],
+    "trips": [
+      {
+        "id": 117,
+        "title": "巴黎綠色之旅",
+        "description": "探索巴黎的公園與環保項目，了解城市的可持續發展。"
+      }
+    ],
+    "sites": [
+      { "id": 227, "name": "塞納河畔" },
+      { "id": 228, "name": "布洛涅森林" }
+    ],
+    "available_slots": [
+      { "date": "2025-05-10", "time": "08:00-10:00" },
+      { "date": "2025-05-11", "time": "09:00-11:00" },
+      { "date": "2025-05-12", "time": "10:00-12:00" }
+    ],
+    "commentaries": [
+      {
+        "user": "Chloe Laurent",
+        "rating": 5,
+        "date": "2024-10-10",
+        "comment": "非常獨特的生態旅程，讓我對巴黎有了全新的認識！"
+      },
+      {
+        "user": "Marc Dubois",
+        "rating": 4,
+        "date": "2024-10-11",
+        "comment": "行程很有深度，但部分地點的交通有些不便。"
+      }
+    ],
+    "imgUrl": "dafasdf",
+    "price_adult": 20,
+    "price_child": 16
+  },
+  {
+    "id": "15",
+    "name": "Lucie Caron",
+    "profile": "Lucie offers energetic city tours that combine historical landmarks with modern urban experiences, making every tour vibrant and engaging.",
+    "themes": ["城市探索", "歷史與現代"],
+    "languages": ["法語", "英語"],
+    "districts": ["14", "15"],
+    "trips": [
+      {
+        "id": 118,
+        "title": "巴黎城市漫步",
+        "description": "穿梭於巴黎街頭，感受城市活力與歷史韻味。"
+      }
+    ],
+    "sites": [
+      { "id": 229, "name": "羅浮宮" },
+      { "id": 230, "name": "埃菲爾鐵塔" }
+    ],
+    "available_slots": [
+      { "date": "2025-05-15", "time": "09:00-11:00" },
+      { "date": "2025-05-16", "time": "10:00-12:00" },
+      { "date": "2025-05-17", "time": "11:00-13:00" }
+    ],
+    "commentaries": [
+      {
+        "user": "Sophie Martin",
+        "rating": 5,
+        "date": "2024-10-15",
+        "comment": "Lucie的導覽充滿活力，令人難忘！"
+      },
+      {
+        "user": "Henri Dubois",
+        "rating": 4,
+        "date": "2024-10-16",
+        "comment": "整個行程節奏感很好，但少了點驚喜。"
+      }
+    ],
+    "imgUrl": "dafasdf",
+    "price_adult": 17,
+    "price_child": 13
+  },
 
   {
     "id": "16",
@@ -941,10 +943,10 @@
         "comment": "行程安排得很好，只是有點趕。"
       }
     ],
-    "imgUrl":"https://i.imgur.com/js4LuRP.png",
+    "imgUrl": "https://i.imgur.com/js4LuRP.png",
     "price_adult": 18,
     "price_child": 14,
-    "isPopular":true
+    "isPopular": true
   },
   {
     "id": "17",
@@ -985,7 +987,7 @@
     ],
     "price_adult": 22,
     "price_child": 16,
-    "isPopular":true
+    "isPopular": true
   },
   {
     "id": "18",
@@ -1024,10 +1026,10 @@
         "comment": "很有情調，但行程略顯單調。"
       }
     ],
-    "imgUrl":"https://images.unsplash.com/36/xIsiRLngSRWN02yA2BbK_submission-photo-7.jpg?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
+    "imgUrl": "https://images.unsplash.com/36/xIsiRLngSRWN02yA2BbK_submission-photo-7.jpg?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
     "price_adult": 20,
     "price_child": 15,
-    "isPopular":true
+    "isPopular": true
   },
   {
     "id": "19",
@@ -1066,10 +1068,10 @@
         "comment": "幽默感滿分，但時間有點不足。"
       }
     ],
-    "imgUrl":"https://images.unsplash.com/photo-1467010234262-77bada75a47d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
+    "imgUrl": "https://images.unsplash.com/photo-1467010234262-77bada75a47d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
     "price_adult": 19,
     "price_child": 15,
-    "isPopular":true
+    "isPopular": true
   },
   {
     "id": "20",
@@ -1108,10 +1110,10 @@
         "comment": "非常有品味，但價格略高。"
       }
     ],
-    "imgUrl":"https://images.unsplash.com/photo-1519713880332-91cfe19a59dd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjN8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
+    "imgUrl": "https://images.unsplash.com/photo-1519713880332-91cfe19a59dd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjN8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
     "price_adult": 23,
     "price_child": 18,
-    "isPopular":true
+    "isPopular": true
   },
   {
     "id": "21",
@@ -1150,10 +1152,10 @@
         "comment": "內容豐富但行程稍微緊湊。"
       }
     ],
-    "imgUrl":"https://s3-alpha-sig.figma.com/img/6d6c/acb5/838cc88c6ba75256a8ff91d8dc903601?Expires=1742169600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Lw2O3WniKFWqt1tAtqZZ1zL1Pt19mP-xDM5TLX-74viWzIy4JmXFHAYf4IUMShnf53pEXDSZw6oORUVOa86gI88PpVoQlReVJdWKlTA9jjjzdHkoE1V6OjpIpNzMLi3c0MdWJ-ameJaWvByCvM-dpbHcwtG08DuQsJcNh6-GpDd-xi5u7dNuhhNi3Lw~BzYmik7mT-kdAsVkhSy5W06dtLdcfhxI9gA8B68jDVO6zXduKEhq3egXIXt~ZNUSXHWGjn1R3nDYDMQib6HN03NQ57byhDjK6JMBu-Ewj-2xQnySKxFGRxVNV75fKie1uaDssUb~I~EeXMbRBpkc7q4qwg__",
+    "imgUrl": "https://s3-alpha-sig.figma.com/img/6d6c/acb5/838cc88c6ba75256a8ff91d8dc903601?Expires=1742169600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Lw2O3WniKFWqt1tAtqZZ1zL1Pt19mP-xDM5TLX-74viWzIy4JmXFHAYf4IUMShnf53pEXDSZw6oORUVOa86gI88PpVoQlReVJdWKlTA9jjjzdHkoE1V6OjpIpNzMLi3c0MdWJ-ameJaWvByCvM-dpbHcwtG08DuQsJcNh6-GpDd-xi5u7dNuhhNi3Lw~BzYmik7mT-kdAsVkhSy5W06dtLdcfhxI9gA8B68jDVO6zXduKEhq3egXIXt~ZNUSXHWGjn1R3nDYDMQib6HN03NQ57byhDjK6JMBu-Ewj-2xQnySKxFGRxVNV75fKie1uaDssUb~I~EeXMbRBpkc7q4qwg__",
     "price_adult": 20,
     "price_child": 16,
-    "isPopular":true
+    "isPopular": true
   },
   {
     "id": "22",
@@ -1192,10 +1194,10 @@
         "comment": "行程豐富，但部分安排略顯混亂。"
       }
     ],
-    "imgUrl":"https://s3-alpha-sig.figma.com/img/311f/d5c4/35800cd76f8beae06a2362d1f3c50c48?Expires=1742169600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=N9nW6ba8VfIYzRKe9AerddzeQZgrhkP9nJO2VycXAW2Iuhnkjrp1piHBD~vrBdBXC4g7-h-OrLhsyDG3OaXRU8z5bfbRMDZHIQByvEybfzXUp8ccTU-uPZh4cbo0NGCoHTWBNNOhU4bH9YZO0hf85j9rzZqnCcsvEtVLPx~13E3jxDvz1vPa2s9n0d~c672e5rEBvhGEx2qDfEu0Av0cgLqS4SqeJ43TGNfxDRivfiikoiuXyTG-uKmkQqN-WMEDiG2hCNOq2TziHvWlQ-4-6Trgc2Byh4kVmTvewPuj8KXqFsTk5aS27ez8NvGA7N-h9iYc1SXJtaqB2rkt0KKOuA__",
+    "imgUrl": "https://s3-alpha-sig.figma.com/img/311f/d5c4/35800cd76f8beae06a2362d1f3c50c48?Expires=1742169600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=N9nW6ba8VfIYzRKe9AerddzeQZgrhkP9nJO2VycXAW2Iuhnkjrp1piHBD~vrBdBXC4g7-h-OrLhsyDG3OaXRU8z5bfbRMDZHIQByvEybfzXUp8ccTU-uPZh4cbo0NGCoHTWBNNOhU4bH9YZO0hf85j9rzZqnCcsvEtVLPx~13E3jxDvz1vPa2s9n0d~c672e5rEBvhGEx2qDfEu0Av0cgLqS4SqeJ43TGNfxDRivfiikoiuXyTG-uKmkQqN-WMEDiG2hCNOq2TziHvWlQ-4-6Trgc2Byh4kVmTvewPuj8KXqFsTk5aS27ez8NvGA7N-h9iYc1SXJtaqB2rkt0KKOuA__",
     "price_adult": 18,
     "price_child": 14,
-    "isPopular":true
+    "isPopular": true
   },
   {
     "id": "23",
@@ -1234,10 +1236,10 @@
         "comment": "很有深度，但建議縮短行程時間。"
       }
     ],
-    "imgUrl":"https://i.imgur.com/eLrtRo5.png",
+    "imgUrl": "https://i.imgur.com/eLrtRo5.png",
     "price_adult": 21,
     "price_child": 17,
-    "isPopular":true
+    "isPopular": true
   },
   {
     "id": "24",
@@ -1276,52 +1278,87 @@
         "comment": "很有啟發性，但行程稍嫌倉促。"
       }
     ],
-    "imgUrl":"https://i.imgur.com/F4xy7GQ.png",
+    "imgUrl": "https://i.imgur.com/F4xy7GQ.png",
     "price_adult": 24,
     "price_child": 20,
-    "isPopular":true
+    "isPopular": true
   },
   {
     "id": "25",
-    "name": "雷諾瓦",
-    "profile": "Maxime 以其幽默與風趣著稱，帶領遊客探索巴黎的街頭藝術與流行文化，讓整個旅程充滿活力。",
-    "themes": ["流行文化", "街頭藝術", "休閒漫步"],
-    "languages": ["法語", "英語"],
+    "translations": {
+      "zh": {
+        "name": "雷諾瓦",
+        "profile": "Maxime 以其幽默與風趣著稱，帶領遊客探索巴黎的街頭藝術與流行文化，讓整個旅程充滿活力。",
+        "themes": ["流行文化", "街頭藝術", "休閒漫步"],
+        "languages": ["法語", "英語"]
+      },
+
+    "en": {
+  "name": "Renoir",
+  "profile": "Maxime is known for his humor and wit, leading visitors to explore Paris’s street art and pop culture, making the journey lively and engaging.",
+  "themes": ["Pop Culture", "Street Art", "Leisure Walk"],
+  "languages": ["French", "English"]
+}
+,
+"fr": {
+  "name": "Renoir",
+  "profile": "Maxime est connu pour son humour et son esprit, guidant les visiteurs à la découverte du street art et de la culture pop parisienne, rendant la visite vivante et captivante.",
+  "themes": ["Culture Pop", "Art de Rue", "Balade Détente"],
+  "languages": ["Français", "Anglais"]
+}
+
+    },
+
     "districts": ["20", "21"],
     "trips": [
       {
         "id": 128,
-        "title": "巴黎街頭文化之旅",
-        "description": "體驗巴黎街頭藝術與年輕文化的脈動。"
-      }
-    ],
-    "sites": [
-      { "id": 249, "name": "街頭塗鴉區" },
-      { "id": 250, "name": "巴黎市集" }
-    ],
-    "available_slots": [
-      { "date": "2025-07-15", "time": "12:00-14:00" },
-      { "date": "2025-07-16", "time": "13:00-15:00" },
-      { "date": "2025-07-17", "time": "11:00-13:00" }
-    ],
-    "commentaries": [
-      {
-        "user": "Chantal Martin",
-        "rating": 5,
-        "date": "2024-11-15",
-        "comment": "Maxime 帶我們體驗了巴黎最前衛的街頭文化，超級有趣！"
-      },
-      {
-        "user": "Pierre Dubois",
-        "rating": 4,
-        "date": "2024-11-16",
-        "comment": "行程安排得很好，但價格稍高。"
-      }
-    ],
-    "imgUrl":"https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-    "price_adult": 22,
-    "price_child": 18,
-    "isPopular":true
+        "title": 
+        {
+"zh": "巴黎街頭文化之旅",
+"en": "Parisian street culture",
+"fr": "tour curturell dans les rues parisiennes"
+},
+
+"description": {
+
+"zh":"體驗巴黎街頭藝術與年輕文化的脈動。",
+
+"en":"Experience the Vibrancy of Street Art and Youth Culture in Paris",
+"fr":"Vivez l'énergie du street art et de la culture jeune à Paris"
+}
+
+
+        }
+
+      ],
+  "sites": [
+    { "id": 249, "name": "街頭塗鴉區" },
+    { "id": 250, "name": "巴黎市集" }
+  ],
+  "available_slots": [
+    { "date": "2025-07-15", "time": "12:00-14:00" },
+    { "date": "2025-07-16", "time": "13:00-15:00" },
+    { "date": "2025-07-17", "time": "11:00-13:00" }
+  ],
+  "commentaries": [
+    {
+      "user": "Chantal Martin",
+      "rating": 5,
+      "date": "2024-11-15",
+      "comment": "Maxime 帶我們體驗了巴黎最前衛的街頭文化，超級有趣！"
+    },
+    {
+      "user": "Pierre Dubois",
+      "rating": 4,
+      "date": "2024-11-16",
+      "comment": "行程安排得很好，但價格稍高。"
+    }
+  ],
+  "imgUrl": "https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
+  "price_adult": 22,
+  "price_child": 18,
+  "isPopular": true
   }
 
 ]

@@ -101,7 +101,7 @@ function Header() {
             <div className="flex flex-col justify-around">
               <h1 className="text-[20px] font-bold leading-6 text-secondary-600">
                 樂遊巴黎
-                <span className="ps-2 text-[20px] font-bold text-primary-600">
+                <span className="text-[16px] sm:ps-2 sm:text-[20px] font-bold text-primary-600">
                   Paris, mon guide
                 </span>
               </h1>
@@ -213,7 +213,7 @@ function Header() {
               </div>
               <ul
                 tabIndex={0}
-                className="menu dropdown-content menu-sm absolute right-[-10px] z-[500] mt-3 w-52 max-w-[40vw] rounded-box bg-white p-2 shadow"
+                className="menu dropdown-content menu-sm absolute right-[60px] z-[500] mt-3 w-52 max-w-[80vw] rounded-box bg-white p-2 shadow"
               >
                 <li>
                   {" "}
@@ -297,12 +297,11 @@ function Header() {
                 ) : (
                   <li className="">
                     <button className="flex w-full items-center bg-primary-600 px-2 py-2 pl-4 text-base text-white">
-                      <BsPersonCircle />
+                      <BsPersonCircle className="h-6 w-6"/>
                       <Link
                         to="/login"
                         className="inline-block px-5 text-base text-white"
                       >
-                        註冊/登入
                         {t("login_register")}
                       </Link>
                     </button>

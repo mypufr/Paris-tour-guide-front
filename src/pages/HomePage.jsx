@@ -23,7 +23,7 @@ import "swiper/css/navigation";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { TfiHandPointRight } from "react-icons/tfi";
 
-import data from "../data/data.json";
+// import data from "../data/data.json";
 
 import SlidesData from "../data/slides.json";
 
@@ -649,7 +649,7 @@ export default function HomePage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)} 
                 />
-                <div className="active:scale-120 absolute inset-y-0 right-[26vw] top-14 flex items-center rounded-r-lg bg-primary-600 p-5 transition duration-200 hover:bg-primary-200 hover:text-gray-300 md:right-[45vw] md:top-[80%] lg:right-[58vw] lg:top-0 lg:p-3 xl:right-[50vw] 2xl:top-10 min-[1536px]:right-[64vw] min-[1920px]:right-[67vw]">
+                <div className="text-sm h-13 active:scale-120 absolute inset-y-0 right-[26vw] top-[5.5rem] flex items-center rounded-r-lg bg-primary-600 p-5 transition duration-200 hover:bg-primary-200 hover:text-gray-300 md:right-[45vw] md:top-[80%] lg:right-[58vw] lg:top-0 lg:p-3 xl:right-[50vw] 2xl:top-10 min-[1536px]:right-[64vw] min-[1920px]:right-[67vw]">
                   <svg
                     className="active:scale-120 h-4 w-4 text-white transition duration-200 hover:bg-primary-200 hover:text-gray-600 lg:h-5 lg:w-5"
                     fill="currentColor"
@@ -665,7 +665,13 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="absolute -left-4 mt-16 grid grid-cols-4 grid-rows-2 gap-x-2 gap-y-2 min-[390px]:left-0 md:left-0 md:mt-4 md:w-8/12 lg:-left-3 lg:w-5/12 lg:gap-y-[1px] xl:left-0 xl:mt-0 xl:flex xl:w-6/12 xl:justify-between xl:space-x-0 min-[1920px]:w-[37.5%]">
+            <div className="
+            
+     absolute left-10 mt-4 space-y-3 w-[10rem]  lg:mt-16 md:grid md:grid-cols-4 md:grid-rows-2 md:gap-x-2 md:gap-y-2 min-[390px]:left-0 md:left-0 md:mt-4 md:w-8/12 lg:-left-3 lg:w-5/12 lg:gap-y-[1px] xl:left-0 xl:mt-0 xl:flex xl:w-6/12 xl:justify-between xl:space-x-0 min-[1920px]:w-[37.5%]
+            "
+            >
+             
+             
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
               {t("trip_theme.frenchCuisine")}
               </button>
@@ -695,19 +701,19 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="mt-10 flex justify-center space-x-4 hover:cursor-pointer 2xl:mt-[80px]">
+      <div className="mt-10 flex justify-center 2xl:space-x-4 hover:cursor-pointer 2xl:mt-[80px]">
         <img
           src="https://i.imgur.com/zoB5vaQ.png"
           alt=""
-          className="inline-block h-[40px]"
+          className="inline-block h-[40px] p-1"
         />
-        <h3 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
+        <h3 className="text-xl font-bold 2xl:leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
         {t("section_title.search_by_area")}
         </h3>
         <img
           src="https://i.imgur.com/zoB5vaQ.png"
           alt=""
-          className="inline-block h-[40px]"
+          className="inline-block h-[40px] p-1"
         />
       </div>
 
@@ -980,19 +986,19 @@ export default function HomePage() {
 
       {/* slides show: popular tourist guides */}
       <div className="mt-10">
-        <div className="flex justify-center space-x-4 hover:cursor-pointer">
+        <div className="flex justify-center 2xl:space-x-4 hover:cursor-pointer">
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
             alt=""
-            className="inline-block h-[40px]"
+            className="inline-block h-[40px] p-1"
           />
-          <h2 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
+          <h2 className="text-2xl font-bold 2xl:leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
           {t("popular_guides")}
           </h2>
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
             alt=""
-            className="inline-block h-[40px]"
+            className="inline-block h-[40px] p-1"
           />
         </div>
       </div>
@@ -1000,7 +1006,6 @@ export default function HomePage() {
         onClick={() => sliderRef.current.slickPrev()}
         className="hover:text-primary-400 z-10 p-2 text-grey-950"
       >
-        <SlArrowLeft />
       </button>
       <div className="m-auto mb-20 max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
         <div>
@@ -1024,7 +1029,7 @@ export default function HomePage() {
               </div>
             ))}
           </Slider>
-          <div className="flex items-center justify-center space-x-8 2xl:mt-6">
+          <div className="mt-6 flex items-center justify-center space-x-8 2xl:mt-6">
             <button
               onClick={() => sliderRef.current.slickPrev()}
               className="hover:text-primary-400 z-10 p-2 text-grey-950"
@@ -1035,7 +1040,7 @@ export default function HomePage() {
  
             <div className="pagination-container z-10 text-xl font-bold text-primary-600">
               <span>{currentSlide}</span> /{" "}
-              <span className="text-grey-950">{data.length}</span>
+              <span className="text-grey-950">{popularTourguidesList.length}</span>
     
             </div>
 
@@ -1065,24 +1070,24 @@ export default function HomePage() {
           />
         </div>
 
-        <div className={`mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16 ${i18n.language === "中文" ? "lg:left-[51rem]" : ""} ${i18n.language === "en" ? "lg:left-[46rem]" : ""} ${i18n.language === "fr" ? "lg:left-[43rem]" : ""}`}
+        <div className={`mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16 ${i18n.language === "中文" ? "lg:left-[51rem]" : ""} ${i18n.language === "en" ? "lg:left-[46rem]" : ""} ${i18n.language === "fr" ? "lg:left-[50rem]" : ""}`}
         
 
                
         >
-          <div className="flex justify-center space-x-4 hover:cursor-pointer">
+          <div className="pt-[8rem] flex justify-center 2xl:space-x-4 hover:cursor-pointer lg:pt-0">
             <img
               src="https://i.imgur.com/zoB5vaQ.png"
               alt=""
-              className="inline-block h-[40px]"
+              className="inline-block h-[40px] p-1"
             />
-            <h4 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
-            {t("popular_trips")}
+            <h4 className="text-2xl font-bold 2xl:leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
+            {t("top_trips")}
             </h4>
             <img
               src="https://i.imgur.com/zoB5vaQ.png"
               alt=""
-              className="inline-block h-[40px]"
+              className="inline-block h-[40px] p-1"
             />
           </div>
         </div>
@@ -1131,19 +1136,19 @@ export default function HomePage() {
       {/* 預約導遊和報名行程 */}
 
       <div className="mb-12">
-        <div className="mb-8 mt-[80px] flex justify-center space-x-4 hover:cursor-pointer">
+        <div className="mb-8 mt-[80px] flex justify-center 2xl:space-x-4 hover:cursor-pointer">
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
             alt=""
-            className="inline-blockh h-[40px]"
+            className="inline-blockh h-[40px] p-1"
           />
-          <h5 className="text-3xl font-bold leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
+          <h5 className="text-2xl font-bold 2xl:leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
           <span>{t("book_guide_and_trip")}</span>
           </h5>
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
             alt=""
-            className="inline-block h-[40px]"
+            className="inline-block h-[40px] p-1"
           />
         </div>
 

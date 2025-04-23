@@ -1,0 +1,1172 @@
+[
+  {
+    "_id": { "$oid": "67bb35ef599f2b4d73830949" },
+    "id": "1",
+    "name": {
+      "zh": "李文雅",
+      "en": "Wenya Li",
+      "fr": "Wenya Li"
+    },
+    "profile": {
+      "zh": "在巴黎生活十年，擁有超過八年的導覽經驗，熱愛這座城市的文化與歷史。希望透過細緻的導覽，讓每位旅客深入體驗巴黎的獨特魅力。無論是漫步於塞納河畔、欣賞羅浮宮的藝術珍寶，或是探索隱藏在街巷中的特色咖啡館，都能帶來難忘的回憶。擅長根據旅客的興趣規劃行程，無論是藝術、歷史、建築或美食，都能提供深入且生動的解說。致力於讓每位遊客都能感受巴黎的獨特氛圍，留下美好回憶。",
+      "en": "Having lived in Paris for ten years and with over eight years of guiding experience, Wenya is passionate about the culture and history of the city. Through her detailed tours, she hopes every traveler can deeply experience the unique charm of Paris. Whether strolling along the Seine, admiring masterpieces at the Louvre, or exploring hidden cafés in the alleys, she ensures unforgettable memories. She is skilled at tailoring itineraries based on guests' interests—whether art, history, architecture, or cuisine—providing in-depth and lively explanations. Her goal is to let every visitor feel the unique atmosphere of Paris and leave with wonderful memories.",
+      "fr": "Après dix ans de vie à Paris et plus de huit ans d'expérience en tant que guide, Wenya est passionnée par la culture et l'histoire de cette ville. À travers ses visites détaillées, elle espère que chaque voyageur pourra découvrir le charme unique de Paris. Que ce soit en flânant le long de la Seine, en admirant les chefs-d'œuvre du Louvre ou en explorant les cafés cachés dans les ruelles, elle promet des souvenirs inoubliables. Elle excelle dans l'adaptation des itinéraires selon les intérêts des visiteurs—que ce soit l'art, l'histoire, l'architecture ou la gastronomie—en offrant des explications approfondies et vivantes. Son objectif est de faire ressentir l'atmosphère unique de Paris à chaque visiteur et de leur laisser des souvenirs mémorables."
+    },
+    "themes": {
+      "zh": ["歷史建築", "藝術博物館", "文哲學巡禮"],
+      "en": [
+        "Historical Architecture",
+        "Art Museums",
+        "Philosophical and Literary Tours"
+      ],
+      "fr": [
+        "Architecture historique",
+        "Musées d'art",
+        "Parcours philosophique et littéraire"
+      ]
+    },
+    "languages": {
+      "zh": ["法語", "英語"],
+      "en": ["French", "English"],
+      "fr": ["Français", "Anglais"]
+    },
+    "districts": ["1", "2", "3"],
+    "trips": [
+      {
+        "id": 101,
+        "title": {
+          "zh": "羅浮宮深度導覽",
+          "en": "In-Depth Louvre Tour",
+          "fr": "Visite Approfondie du Louvre"
+        },
+        "description": {
+          "zh": "帶您細細品味世界頂級藝術珍品",
+          "en": "Experience the finest masterpieces of world-class art in detail.",
+          "fr": "Découvrez en détail les chefs-d'œuvre artistiques de renommée mondiale."
+        }
+      },
+      {
+        "id": 102,
+        "title": {
+          "zh": "巴黎建築藝術之旅",
+          "en": "Paris Architectural Art Tour",
+          "fr": "Visite de l'Art Architectural de Paris"
+        },
+        "description": {
+          "zh": "探索巴黎經典與現代建築風格",
+          "en": "Explore the classic and modern architectural styles of Paris.",
+          "fr": "Explorez les styles architecturaux classiques et modernes de Paris."
+        }
+      }
+    ],
+    "sites": [
+      {
+        "id": { "$numberInt": "201" },
+        "name": {
+          "zh": "羅浮宮",
+          "en": "Louvre Museum",
+          "fr": "Musée du Louvre"
+        }
+      },
+      {
+        "id": { "$numberInt": "202" },
+        "name": {
+          "zh": "聖母院",
+          "en": "Notre-Dame Cathedral",
+          "fr": "Cathédrale Notre-Dame"
+        }
+      }
+    ],
+    "available_slots": [
+      {
+        "date": "2025-03-17",
+        "time": [
+          "09:00-11:00",
+          "11:00-13:00",
+          "13:00-15:00",
+          "15:00-17:00",
+          "17:00-19:00",
+          "19:00-21:00"
+        ]
+      },
+      {
+        "date": "2025-03-18",
+        "time": [
+          "09:00-11:00",
+          "11:00-13:00",
+          "13:00-15:00",
+          "15:00-17:00",
+          "17:00-19:00",
+          "19:00-21:00"
+        ]
+      },
+      {
+        "date": "2025-03-19",
+        "time": [
+          "09:00-11:00",
+          "11:00-13:00",
+          "13:00-15:00",
+          "15:00-17:00",
+          "17:00-19:00",
+          "19:00-21:00"
+        ]
+      },
+      {
+        "date": "2025-03-20",
+        "time": [
+          "09:00-11:00",
+          "11:00-13:00",
+          "13:00-15:00",
+          "15:00-17:00",
+          "17:00-19:00"
+        ]
+      },
+      {
+        "date": "2025-03-21",
+        "time": [
+          "09:00-11:00",
+          "11:00-13:00",
+          "13:00-15:00",
+          "15:00-17:00",
+          "17:00-19:00",
+          "19:00-21:00"
+        ]
+      },
+      {
+        "date": "2025-03-22",
+        "time": [
+          "09:00-11:00",
+          "11:00-13:00",
+          "13:00-15:00",
+          "15:00-17:00",
+          "17:00-19:00",
+          "19:00-21:00"
+        ]
+      },
+      {
+        "date": "2025-03-23",
+        "time": [
+          "09:00-11:00",
+          "11:00-13:00",
+          "13:00-15:00",
+          "15:00-17:00",
+          "17:00-19:00"
+        ]
+      },
+      {
+        "date": "2025-03-24",
+        "time": [
+          "09:00-11:00",
+          "11:00-13:00",
+          "13:00-15:00",
+          "15:00-17:00",
+          "17:00-19:00"
+        ]
+      },
+      {
+        "date": "2025-03-25",
+        "time": ["13:00-15:00", "15:00-17:00", "17:00-19:00", "19:00-21:00"]
+      },
+      {
+        "date": "2025-03-26",
+        "time": ["09:00-11:00", "11:00-13:00", "13:00-15:00", "15:00-17:00"]
+      }
+    ],
+    "commentaries": [
+      {
+        "user": "Emily Carter",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-23",
+        "comment": {
+          "zh": "導覽內容非常豐富，讓我更深入了解巴黎歷史！",
+          "en": "The tour was very rich and gave me a deeper understanding of Parisian history!",
+          "fr": "La visite était très riche et m'a permis de mieux comprendre l'histoire de Paris !"
+        }
+      },
+      {
+        "user": "David Zhang",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-09-25",
+        "comment": {
+          "zh": "導遊知識豐富，但時間如果能再長一點就更好了！",
+          "en": "The guide was knowledgeable, but it would have been even better if the tour were longer!",
+          "fr": "Le guide était très compétent, mais la visite aurait été encore meilleure si elle avait duré plus longtemps !"
+        }
+      },
+      {
+        "user": "Sophie Chen",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-26",
+        "comment": {
+          "zh": "這次的導覽讓我對巴黎有了全新的認識，非常值得！",
+          "en": "This tour gave me a whole new perspective on Paris, truly worth it!",
+          "fr": "Cette visite m'a donné une toute nouvelle perspective de Paris, ça en vaut vraiment la peine !"
+        }
+      },
+      {
+        "user": "Tom Lee",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-27",
+        "comment": {
+          "zh": "導遊很風趣，行程安排得剛剛好，不會太趕！超級推薦!",
+          "en": "The guide was very humorous, and the itinerary was perfectly paced! Highly recommended!",
+          "fr": "Le guide était très drôle et l'itinéraire parfaitement rythmé ! Fortement recommandé !"
+        }
+      },
+      {
+        "user": "Alice Johnson",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-09-28",
+        "comment": {
+          "zh": "導覽內容很棒，但希望能多一點互動時間讓我們問問題。",
+          "en": "The content was excellent, but I wish there were more time for interaction and questions.",
+          "fr": "Le contenu de la visite était excellent, mais j'aurais aimé plus de temps pour interagir et poser des questions."
+        }
+      },
+      {
+        "user": "Kevin Wu",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-29",
+        "comment": {
+          "zh": "行程規劃很周到，對於巴黎的歷史與文化講解非常深入！",
+          "en": "The itinerary was well planned, and the explanation of Parisian history and culture was very thorough!",
+          "fr": "L'itinéraire était bien planifié et les explications sur l'histoire et la culture parisiennes étaient très approfondies !"
+        }
+      },
+      {
+        "user": "Rachel Kim",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-30",
+        "comment": {
+          "zh": "這是我在巴黎最棒的一次導覽體驗，真的很推薦！",
+          "en": "This was the best tour experience I've had in Paris, highly recommended!",
+          "fr": "C'était la meilleure expérience de visite que j'ai eue à Paris, je recommande vivement !"
+        }
+      },
+      {
+        "user": "Michael Brown",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-10-01",
+        "comment": {
+          "zh": "導遊很專業，但希望能提供一些當地小吃的推薦！",
+          "en": "The guide was very professional, but I would have appreciated some local snack recommendations!",
+          "fr": "Le guide était très professionnel, mais j'aurais aimé quelques recommandations de spécialités locales !"
+        }
+      },
+      {
+        "user": "Olivia Davis",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-10-02",
+        "comment": {
+          "zh": "太棒了！導遊讓我們體驗了許多不一樣的巴黎風情！",
+          "en": "Amazing! The guide showed us so many different sides of Paris!",
+          "fr": "Incroyable ! Le guide nous a fait découvrir de nombreux aspects différents de Paris !"
+        }
+      },
+      {
+        "user": "Daniel Garcia",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-10-03",
+        "comment": {
+          "zh": "很棒的導覽行程，導遊的解說深入淺出，非常值得！",
+          "en": "A wonderful tour with clear and insightful explanations, totally worth it!",
+          "fr": "Une visite magnifique avec des explications claires et instructives, ça en vaut totalement la peine !"
+        }
+      }
+    ],
+    "imgUrl": "https://i.imgur.com/I2OIADT.png",
+    "price_adult": { "$numberInt": "15" },
+    "price_child": { "$numberInt": "12" }
+  },
+  {
+    "_id": { "$oid": "67bb52dc819e396b9c50daa9" },
+    "id": "2",
+
+    "name": {
+      "zh": "李志明",
+      "en": "Zhiming Li",
+      "fr": "Zhiming Li"
+    },
+    "profile": {
+      "zh": "我已經在巴黎生活了七年，並且有超過五年的導遊經驗。我對巴黎的熱愛源於她豐富的歷史、迷人的文化以及多姿多彩的生活方式。",
+      "en": "I have been living in Paris for seven years and have over five years of experience as a tour guide. My love for Paris comes from its rich history, charming culture, and vibrant lifestyle.",
+      "fr": "Je vis à Paris depuis sept ans et j'ai plus de cinq ans d'expérience en tant que guide touristique. Mon amour pour Paris vient de sa riche histoire, sa culture charmante et son style de vie vibrant."
+    },
+    "themes": [
+      {
+        "zh": "法式美食",
+        "en": "French Gastronomy",
+        "fr": "Gastronomie française"
+      },
+      {
+        "zh": "時尚購物",
+        "en": "Fashion and Shopping",
+        "fr": "Mode et shopping"
+      },
+      {
+        "zh": "自然風光",
+        "en": "Natural Scenery",
+        "fr": "Paysages naturels"
+      }
+    ],
+    "languages": [
+      {
+        "zh": "法語",
+        "en": "French",
+        "fr": "Français"
+      },
+      {
+        "zh": "中文",
+        "en": "Chinese",
+        "fr": "Chinois"
+      }
+    ],
+
+    "districts": ["4", "5", "6"],
+    "trips": [
+      {
+        "id": 103,
+        "title": {
+          "zh": "巴黎米其林餐廳體驗",
+          "en": "Paris Michelin Restaurant Experience",
+          "fr": "Expérience gastronomique Michelin à Paris"
+        },
+        "description": {
+          "zh": "品嚐法國高端美食",
+          "en": "Savor France's finest haute cuisine",
+          "fr": "Savourez la haute cuisine française"
+        }
+      },
+      {
+        "id": 104,
+        "title": {
+          "zh": "時尚購物精品導覽",
+          "en": "Fashion Shopping Tour",
+          "fr": "Visite guidée shopping de la mode"
+        },
+        "description": {
+          "zh": "帶您逛遍巴黎最具代表性的時尚地標",
+          "en": "Explore Paris' most iconic fashion landmarks",
+          "fr": "Explorez les lieux emblématiques de la mode à Paris"
+        }
+      }
+    ],
+    "sites": [
+      {
+        "id": 203,
+        "name": {
+          "zh": "拉法葉百貨",
+          "en": "Galeries Lafayette",
+          "fr": "Galeries Lafayette"
+        }
+      },
+      {
+        "id": 204,
+        "name": {
+          "zh": "瑪黑區特色咖啡館",
+          "en": "Specialty Cafés in Le Marais",
+          "fr": "Cafés spécialisés du Marais"
+        }
+      }
+    ],
+    "available_slots": [{ "date": "2025-03-12", "time": "14:00-16:00" }],
+    "commentaries": [
+      {
+        "user": "王小美",
+        "rating": 5,
+        "date": "2024-10-05",
+        "comment": {
+          "zh": "美食推薦超讚，帶我們吃了很多當地人愛的店！",
+          "en": "Amazing food recommendations! We visited many places loved by locals!",
+          "fr": "Recommandations culinaires incroyables ! Nous avons découvert de nombreux endroits appréciés des locaux !"
+        }
+      },
+      {
+        "user": "張大成",
+        "rating": 4,
+        "date": "2024-09-28",
+        "comment": {
+          "zh": "餐廳選擇很棒，但希望可以多停留一點時間品嚐美食。",
+          "en": "Great choice of restaurants, but I wish we had more time to enjoy the food.",
+          "fr": "Excellente sélection de restaurants, mais j'aurais aimé avoir plus de temps pour savourer les plats."
+        }
+      },
+      {
+        "user": "李欣怡",
+        "rating": 5,
+        "date": "2024-10-12",
+        "comment": {
+          "zh": "這趟美食之旅太棒了！法式甜點真的超級好吃！",
+          "en": "This food tour was amazing! The French desserts were absolutely delicious!",
+          "fr": "Cette visite gastronomique était incroyable ! Les desserts français étaient absolument délicieux !"
+        }
+      },
+      {
+        "user": "陳建豪",
+        "rating": 5,
+        "date": "2024-09-30",
+        "comment": {
+          "zh": "導遊介紹得非常詳細，每道菜的故事都很有趣！",
+          "en": "The guide's explanations were very detailed, and every dish had an interesting story!",
+          "fr": "Les explications du guide étaient très détaillées et chaque plat avait son histoire fascinante !"
+        }
+      },
+      {
+        "user": "劉雅涵",
+        "rating": 4,
+        "date": "2024-10-03",
+        "comment": {
+          "zh": "很喜歡這次行程，但某些餐廳需要排隊，有點久。",
+          "en": "Loved the tour, but some restaurants had long waiting times.",
+          "fr": "J'ai adoré la visite, mais certains restaurants avaient des files d'attente assez longues."
+        }
+      },
+      {
+        "user": "黃志明",
+        "rating": 5,
+        "date": "2024-10-08",
+        "comment": {
+          "zh": "完全是為吃貨準備的行程，吃到好多隱藏版美食！",
+          "en": "A perfect tour for foodies! We discovered so many hidden culinary gems!",
+          "fr": "Une visite parfaite pour les gourmands ! Nous avons découvert de nombreuses pépites culinaires cachées !"
+        }
+      },
+      {
+        "user": "周采薇",
+        "rating": 5,
+        "date": "2024-09-25",
+        "comment": {
+          "zh": "氣氛超棒，導遊帶我們去了真正的巴黎美食天堂！",
+          "en": "Fantastic atmosphere! The guide led us to real food paradises in Paris!",
+          "fr": "Ambiance fantastique ! Le guide nous a emmenés dans de véritables paradis culinaires parisiens !"
+        }
+      },
+      {
+        "user": "鄭宇翔",
+        "rating": 4,
+        "date": "2024-10-01",
+        "comment": {
+          "zh": "美食選擇很有特色，但如果能加點飲品推薦就更好了！",
+          "en": "The food selections were very unique, but it would have been even better with drink recommendations!",
+          "fr": "Les choix de plats étaient très originaux, mais quelques recommandations de boissons auraient été un plus !"
+        }
+      },
+      {
+        "user": "林冠廷",
+        "rating": 5,
+        "date": "2024-10-07",
+        "comment": {
+          "zh": "從開胃菜到甜點，每一道都讓人驚艷！超值行程！",
+          "en": "From appetizers to desserts, every dish was amazing! Totally worth it!",
+          "fr": "Des entrées aux desserts, chaque plat était époustouflant ! Une visite qui vaut vraiment le coup !"
+        }
+      },
+      {
+        "user": "徐嘉玲",
+        "rating": 5,
+        "date": "2024-09-29",
+        "comment": {
+          "zh": "導遊很專業，還幫我們點了當地人才知道的隱藏菜單！",
+          "en": "The guide was very professional and even helped us order secret menu items known only to locals!",
+          "fr": "Le guide était très professionnel et nous a aidés à commander des plats secrets connus seulement des locaux !"
+        }
+      }
+    ],
+    "imgUrl": "https://i.imgur.com/8WVO0C7.png",
+    "price_adult": { "$numberInt": "13" },
+    "price_child": { "$numberInt": "10" }
+  },
+  {
+    "_id": { "$oid": "67c9b4af7866b20d885994a1" },
+    "id": "3",
+    "name": {
+      "zh": "王大明",
+      "en": "Wang Daming",
+      "fr": "Wang Daming"
+    },
+    "profile": {
+      "zh": "我是巴黎的在地導遊，專精於巴黎的夜生活與音樂文化。我已在這座城市生活了十二年，對於這裡的酒吧、爵士樂吧、地下音樂場景以及歷史悠久的劇院如數家珍。過去六年來，我帶領無數旅客探索巴黎的夜間魅力，從熱鬧的瑪黑區酒吧到塞納河畔的隱藏爵士俱樂部，讓旅客感受這座城市的靈魂與節奏。無論你是喜歡電子音樂、現場演奏，還是想體驗地道的法式小酒館，我都能為你打造獨一無二的夜晚行程，帶你走進最具氛圍的巴黎夜生活。",
+      "en": "I am a local guide in Paris specializing in the city's nightlife and music culture. Having lived here for twelve years, I know the city's bars, jazz clubs, underground music scenes, and historic theaters like the back of my hand. Over the past six years, I have led countless travelers to explore the nocturnal charm of Paris, from the lively bars of Le Marais to hidden jazz clubs along the Seine. Whether you love electronic music, live performances, or wish to experience authentic French bistros, I can create a unique night tour for you, immersing you in the true atmosphere of Parisian nightlife.",
+      "fr": "Je suis un guide local à Paris, spécialisé dans la vie nocturne et la culture musicale de la ville. Je vis ici depuis douze ans et je connais les bars, clubs de jazz, scènes musicales underground et théâtres historiques comme ma poche. Depuis six ans, j'ai guidé d'innombrables voyageurs à la découverte du charme nocturne de Paris, des bars animés du Marais aux clubs de jazz cachés le long de la Seine. Que vous aimiez la musique électronique, les concerts en direct ou que vous souhaitiez découvrir les authentiques bistrots français, je peux vous créer une soirée unique et vous plonger dans l'ambiance vibrante de la nuit parisienne."
+    },
+    "themes": {
+      "zh": ["時尚購物", "法式美食", "浪漫蜜月行"],
+      "en": ["Fashion Shopping", "French Cuisine", "Romantic Honeymoon Trips"],
+      "fr": [
+        "Shopping de mode",
+        "Cuisine française",
+        "Voyages de noces romantiques"
+      ]
+    },
+    "languages": {
+      "zh": ["法語", "英語", "國語"],
+      "en": ["French", "English", "Mandarin Chinese"],
+      "fr": ["Français", "Anglais", "Chinois mandarin"]
+    },
+    "districts": ["7", "8", "9"],
+    "trips": [
+      {
+        "id": { "$numberInt": "105" },
+        "title": {
+          "en": "Classic Jazz Bar Night in Paris",
+          "fr": "Soirée Jazz Classique dans les Bars de Paris",
+          "zh": "巴黎經典爵士酒吧之夜"
+        },
+        "description": {
+          "en": "Explore the most iconic jazz live venues in Paris.",
+          "fr": "Explorez les lieux de jazz les plus emblématiques de Paris.",
+          "zh": "探索巴黎最具代表性的爵士樂現場"
+        }
+      },
+      {
+        "id": { "$numberInt": "106" },
+        "title": {
+          "en": "Underground Bars and Hidden Cocktail Hotels",
+          "fr": "Bars Souterrains et Hôtels à Cocktails Cachés",
+          "zh": "地下酒吧與隱藏雞尾酒店"
+        },
+        "description": {
+          "en": "Discover Paris's most mysterious hidden bars.",
+          "fr": "Découvrez les bars cachés les plus mystérieux de Paris.",
+          "zh": "發掘巴黎最神秘的隱藏酒吧"
+        }
+      }
+    ],
+    "sites": [
+      {
+        "id": { "$numberInt": "205" },
+        "name": {
+          "en": "Moulin Rouge",
+          "fr": "Moulin Rouge",
+          "zh": "紅磨坊"
+        }
+      },
+      {
+        "id": { "$numberInt": "206" },
+        "name": {
+          "en": "Paris Underground Hidden Bar",
+          "fr": "Bar Caché Souterrain de Paris",
+          "zh": "巴黎地下隱藏酒吧"
+        }
+      }
+    ],
+    "available_slots": [
+      { "date": "2025-03-15", "time": "21:00-23:00" },
+      { "date": "2025-03-16", "time": "18:00-20:00" },
+      { "date": "2025-03-17", "time": "19:30-21:30" },
+      { "date": "2025-03-18", "time": "20:00-22:00" },
+      { "date": "2025-03-19", "time": "17:00-19:00" },
+      { "date": "2025-03-20", "time": "21:00-23:00" },
+      { "date": "2025-03-21", "time": "16:00-18:00" },
+      { "date": "2025-03-22", "time": "22:00-00:00" },
+      { "date": "2025-03-23", "time": "15:00-17:00" },
+      { "date": "2025-03-24", "time": "19:00-21:00" },
+      { "date": "2025-03-25", "time": "20:30-22:30" }
+    ],
+    "commentaries": [
+      {
+        "user": "Lucas Martin",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-28",
+        "comment": {
+          "en": "Highly recommend the nightlife itinerary, the atmosphere is amazing!",
+          "fr": "Fortement recommandé l'itinéraire de la vie nocturne, l'atmosphère est incroyable!",
+          "zh": "夜生活行程超級推薦，氣氛超棒！"
+        }
+      },
+      {
+        "user": "Lucas Martin",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-28",
+        "comment": {
+          "en": "Highly recommend the nightlife itinerary, the atmosphere is amazing!",
+          "fr": "Fortement recommandé l'itinéraire de la vie nocturne, l'atmosphère est incroyable!",
+          "zh": "夜生活行程超級推薦，氣氛超棒！"
+        }
+      },
+      {
+        "user": "Sophie Dupont",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-10-02",
+        "comment": {
+          "en": "The itinerary was well planned, but I wish it could have been longer.",
+          "fr": "L'itinéraire était bien planifié, mais j'aurais aimé qu'il dure plus longtemps.",
+          "zh": "行程安排得很好，但希望時間可以更長一點。"
+        }
+      },
+      {
+        "user": "Emma Bernard",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-10-10",
+        "comment": {
+          "en": "The guide was very professional and took us to some very special places!",
+          "fr": "Le guide était très professionnel et nous a emmenés dans des endroits très spéciaux!",
+          "zh": "導遊非常專業，帶我們去了一些很特別的地方！"
+        }
+      },
+      {
+        "user": "Alexandre Petit",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-10-15",
+        "comment": {
+          "en": "Had a unique night experience, totally worth it!",
+          "fr": "J'ai vécu une expérience de nuit unique, ça en valait vraiment la peine!",
+          "zh": "體驗了一場獨特的夜晚，非常值得！"
+        }
+      },
+      {
+        "user": "Chloé Laurent",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-10-20",
+        "comment": {
+          "en": "Overall great, but some places were a bit crowded.",
+          "fr": "Dans l'ensemble, c'était génial, mais certains endroits étaient un peu bondés.",
+          "zh": "整體很棒，但某些地方人有點多。"
+        }
+      },
+      {
+        "user": "Julien Moreau",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-10-25",
+        "comment": {
+          "en": "Loved this trip, would definitely join again!",
+          "fr": "J'ai adoré ce voyage, je m'inscrirais certainement à nouveau!",
+          "zh": "超級喜歡這次行程，絕對會再參加！"
+        }
+      },
+      {
+        "user": "Camille Girard",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-11-01",
+        "comment": {
+          "en": "Paris' nights are so beautiful, thanks to the guide for the wonderful arrangements!",
+          "fr": "Les nuits de Paris sont magnifiques, merci au guide pour les arrangements parfaits!",
+          "zh": "巴黎的夜晚太美了，感謝導遊的精心安排！"
+        }
+      },
+      {
+        "user": "Nicolas Lefevre",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-11-05",
+        "comment": {
+          "en": "Recommended for people who like music and bar culture, super cool!",
+          "fr": "Recommandé pour les amateurs de musique et de culture de bars, super sympa!",
+          "zh": "推薦給喜歡音樂和酒吧文化的人，超讚！"
+        }
+      },
+      {
+        "user": "Léa Fontaine",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-11-10",
+        "comment": {
+          "en": "Not only had fun, but also learned a lot about the local culture.",
+          "fr": "Non seulement j'ai passé un bon moment, mais j'ai aussi appris beaucoup sur la culture locale.",
+          "zh": "不僅玩得開心，還學到了很多當地文化。"
+        }
+      },
+      {
+        "user": "Thomas Renault",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-11-15",
+        "comment": {
+          "en": "The itinerary was perfect, the guide was very patient, highly recommend!",
+          "fr": "L'itinéraire était parfait, le guide était très patient, je recommande vivement!",
+          "zh": "行程規劃完美，導遊很有耐心，強烈推薦！"
+        }
+      }
+    ],
+    "imgUrl": "https://i.imgur.com/jXVbxOq.png",
+    "price_adult": { "$numberInt": "16" },
+    "price_child": { "$numberInt": "12" }
+  },
+  {
+    "_id": { "$oid": "67c9b4eb7866b20d885994a2" },
+    "id": "4",
+    "name": {
+      "en": "Marie Leclerc",
+      "fr": "Marie Leclerc",
+      "zh": "瑪麗·勒克雷"
+    },
+    "profile": {
+      "en": "I am a guide passionate about art and culture, specializing in taking art enthusiasts deep into the galleries and museums of Paris. This city is filled with countless art treasures, from the world-famous Louvre to the modern and iconic Centre Pompidou. Each place hides a touching story. Not only will I introduce you to the history and background of famous masterpieces, but I will also take you to independent galleries hidden in the alleys, where you can discover the amazing creations of emerging artists. Whether you are a lover of classical art or curious about contemporary art, I can tailor an itinerary based on your interests, making every step in Paris filled with surprises and inspiration.",
+      "fr": "Je suis une guide passionnée par l'art et la culture, spécialisée dans l'accompagnement des amateurs d'art à travers les galeries et musées de Paris. Cette ville regorge de trésors artistiques, du célèbre Louvre au moderne et emblématique Centre Pompidou. Chaque lieu cache une histoire émouvante. Non seulement je vous présenterai l'histoire et le contexte des chefs-d'œuvre célèbres, mais je vous emmènerai aussi dans des galeries indépendantes cachées dans les ruelles, pour découvrir les créations étonnantes des artistes émergents. Que vous soyez amateur d'art classique ou curieux de l'art contemporain, je peux personnaliser un itinéraire selon vos intérêts, afin que chaque pas à Paris soit rempli de surprises et d'inspiration.",
+      "zh": "我是一名熱愛藝術與文化的導遊，專門帶領藝術迷深入探索巴黎的畫廊與博物館。這座城市擁有無數藝術瑰寶，從世界知名的羅浮宮到現代感十足的龐畢度中心，每一處都蘊藏著動人故事。我不僅會為你介紹名家巨作的歷史與背景，還會帶你走訪隱藏在巷弄中的獨立藝廊，發掘新銳藝術家的精彩創作。無論你是古典藝術的愛好者，還是對當代藝術充滿好奇，我都能根據你的興趣規劃專屬行程，讓你在巴黎的每一步都充滿驚喜與靈感。"
+    },
+    "themes": {
+      "en": [
+        "Historical Architecture",
+        "Art Museums",
+        "Literature and Philosophy Tours"
+      ],
+      "fr": [
+        "Architecture Historique",
+        "Musées d'Art",
+        "Tournées Littéraires et Philosophiques"
+      ],
+      "zh": ["歷史建築", "藝術博物館", "文哲學巡禮"]
+    },
+    "languages": {
+      "en": ["French", "English", "Mandarin"],
+      "fr": ["Français", "Anglais", "Mandarin"],
+      "zh": ["法語", "英語", "國語"]
+    },
+    "districts": ["10", "11", "12"],
+    "trips": [
+      {
+        "id": { "$numberInt": "107" },
+        "title": {
+          "en": "Contemporary Art Exploration in Paris",
+          "fr": "Exploration de l'Art Contemporain à Paris",
+          "zh": "巴黎當代藝術探索"
+        },
+        "description": {
+          "en": "Visit the most influential modern art museums in Paris.",
+          "fr": "Visitez les musées d'art moderne les plus influents de Paris.",
+          "zh": "拜訪巴黎最具影響力的現代藝術館"
+        }
+      }
+    ],
+    "sites": [
+      {
+        "id": { "$numberInt": "207" },
+        "name": {
+          "en": "Centre Pompidou",
+          "fr": "Centre Pompidou",
+          "zh": "龐畢度中心"
+        }
+      },
+      {
+        "id": { "$numberInt": "208" },
+        "name": {
+          "en": "Musée d'Orsay",
+          "fr": "Musée d'Orsay",
+          "zh": "奧賽美術館"
+        }
+      }
+    ],
+    "available_slots": [
+      { "date": "2025-03-18", "time": "13:00-15:00" },
+      { "date": "2025-03-19", "time": ["09:00-11:00", "13:00-15:00"] },
+      { "time": "10:00-12:00" },
+      { "date": "2025-03-20", "time": "14:30-16:30" },
+      { "date": "2025-03-21", "time": "09:00-11:00" },
+      { "date": "2025-03-22", "time": "17:00-19:00" },
+      { "date": "2025-03-23", "time": "11:00-13:00" },
+      { "date": "2025-03-24", "time": "15:30-17:30" },
+      { "date": "2025-03-25", "time": "08:00-10:00" },
+      { "date": "2025-03-26", "time": "19:00-21:00" },
+      { "date": "2025-03-27", "time": "12:00-14:00" }
+    ],
+    "commentaries": [
+      {
+        "user": {
+          "en": "Anna Fischer",
+          "fr": "Anna Fischer",
+          "zh": "安娜·費舍爾"
+        },
+        "rating": { "$numberInt": "4" },
+        "date": "2024-10-03",
+        "comment": {
+          "en": "The tour content was very deep, I learned a lot!",
+          "fr": "Le contenu de la visite était très profond, j'ai beaucoup appris !",
+          "zh": "導覽內容非常有深度，學到了很多！"
+        }
+      },
+      {
+        "user": {
+          "en": "Lucas Martin",
+          "fr": "Lucas Martin",
+          "zh": "盧卡斯·馬丁"
+        },
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-28",
+        "comment": {
+          "en": "Highly recommend the nightlife tour, the atmosphere was amazing!",
+          "fr": "Je recommande vivement la visite de la vie nocturne, l'atmosphère était incroyable !",
+          "zh": "夜生活行程超級推薦，氣氛超棒！"
+        }
+      },
+      {
+        "user": {
+          "en": "Sophie Dupont",
+          "fr": "Sophie Dupont",
+          "zh": "索菲·杜邦"
+        },
+        "rating": { "$numberInt": "4" },
+        "date": "2024-10-02",
+        "comment": {
+          "en": "The itinerary was well planned, but I wish it could have been longer.",
+          "fr": "L'itinéraire était bien planifié, mais j'aurais aimé qu'il dure plus longtemps.",
+          "zh": "行程安排得很好，但希望時間可以更長一點。"
+        }
+      },
+      {
+        "user": {
+          "en": "Emma Bernard",
+          "fr": "Emma Bernard",
+          "zh": "艾瑪·伯納德"
+        },
+        "rating": { "$numberInt": "5" },
+        "date": "2024-10-10",
+        "comment": {
+          "en": "The guide was very professional and took us to some very special places!",
+          "fr": "Le guide était très professionnel et nous a emmenés dans des endroits très spéciaux !",
+          "zh": "導遊非常專業，帶我們去了一些很特別的地方！"
+        }
+      },
+      {
+        "user": {
+          "en": "Alexandre Petit",
+          "fr": "Alexandre Petit",
+          "zh": "亞歷山大·佩蒂"
+        },
+        "rating": { "$numberInt": "5" },
+        "date": "2024-10-15",
+        "comment": {
+          "en": "It was a unique experience, totally worth it!",
+          "fr": "C'était une expérience unique, totalement vaut le coup !",
+          "zh": "體驗了一場獨特的夜晚，非常值得！"
+        }
+      },
+      {
+        "user": {
+          "en": "Chloé Laurent",
+          "fr": "Chloé Laurent",
+          "zh": "克洛伊·洛朗"
+        },
+        "rating": { "$numberInt": "4" },
+        "date": "2024-10-20",
+        "comment": {
+          "en": "Overall great, but some places were a bit crowded.",
+          "fr": "Dans l'ensemble, c'était super, mais certains endroits étaient un peu bondés.",
+          "zh": "整體很棒，但某些地方人有點多。"
+        }
+      },
+      {
+        "user": {
+          "en": "Julien Moreau",
+          "fr": "Julien Moreau",
+          "zh": "朱利安·莫羅"
+        },
+        "rating": { "$numberInt": "5" },
+        "date": "2024-10-25",
+        "comment": {
+          "en": "I really enjoyed the trip, I will definitely join again!",
+          "fr": "J'ai vraiment apprécié le voyage, je participerai certainement à nouveau !",
+          "zh": "超級喜歡這次行程，絕對會再參加！"
+        }
+      },
+      {
+        "user": {
+          "en": "Camille Girard",
+          "fr": "Camille Girard",
+          "zh": "卡蜜兒·吉拉爾"
+        },
+        "rating": { "$numberInt": "5" },
+        "date": "2024-11-01",
+        "comment": {
+          "en": "Paris at night is beautiful, thanks to the guide for the thoughtful arrangements!",
+          "fr": "Paris la nuit est magnifique, merci au guide pour les arrangements réfléchis !",
+          "zh": "巴黎的夜晚太美了，感謝導遊的精心安排！"
+        }
+      },
+      {
+        "user": {
+          "en": "Nicolas Lefevre",
+          "fr": "Nicolas Lefevre",
+          "zh": "尼古拉·勒費夫"
+        },
+        "rating": { "$numberInt": "4" },
+        "date": "2024-11-05",
+        "comment": {
+          "en": "Highly recommended for those who love music and bar culture, super awesome!",
+          "fr": "Fortement recommandé pour ceux qui aiment la musique et la culture des bars, super génial !",
+          "zh": "推薦給喜歡音樂和酒吧文化的人，超讚！"
+        }
+      },
+      {
+        "user": {
+          "en": "Léa Fontaine",
+          "fr": "Léa Fontaine",
+          "zh": "莉亞·方丹"
+        },
+        "rating": { "$numberInt": "5" },
+        "date": "2024-11-10",
+        "comment": {
+          "en": "Not only did I have fun, but I also learned a lot about the local culture.",
+          "fr": "Non seulement je me suis amusé, mais j'ai aussi beaucoup appris sur la culture locale.",
+          "zh": "不僅玩得開心，還學到了很多當地文化。"
+        }
+      },
+      {
+        "user": {
+          "en": "Thomas Renault",
+          "fr": "Thomas Renault",
+          "zh": "托馬斯·雷諾"
+        },
+        "rating": { "$numberInt": "5" },
+        "date": "2024-11-15",
+        "comment": {
+          "en": "Perfectly planned itinerary, the guide was very patient, highly recommended!",
+          "fr": "Itinéraire parfaitement planifié, le guide était très patient, fortement recommandé !",
+          "zh": "行程規劃完美，導遊很有耐心，強烈推薦！"
+        }
+      }
+    ],
+    "imgUrl": "https://i.imgur.com/tJQbtK1.png",
+    "price_adult": { "$numberInt": "15" },
+    "price_child": { "$numberInt": "10" }
+  },
+  {
+    "_id": { "$oid": "67c9b5047866b20d885994a3" },
+    "id": "5",
+    "name": {
+      "en": "Chen Xiao Pai",
+      "fr": "Chen Xiao Pai",
+      "zh": "陳小拍"
+    },
+    "profile": {
+      "en": "As a photography enthusiast, I am passionate about guiding visitors to explore the most charming corners of Paris, capturing the unique light and atmosphere of this city. Whether it’s the Seine River at dawn, the Eiffel Tower at sunset, or the dazzling Champs-Élysées at night, every moment is worth documenting. I am familiar with the best shooting angles and times and can plan a personalized photography itinerary based on your photography style and needs. Whether it's street photography, architectural aesthetics, or documentary portraits, I can help you discover the most poetic perspectives and make your Paris trip unforgettable with lasting images and memories.",
+      "fr": "En tant qu'amateur de photographie, je suis passionné par la conduite des visiteurs à explorer les coins les plus charmants de Paris, capturant la lumière et l'atmosphère uniques de cette ville. Que ce soit au bord de la Seine au matin, à la Tour Eiffel au coucher du soleil ou sur les Champs-Élysées illuminés la nuit, chaque instant mérite d'être immortalisé. Je connais les meilleurs angles de prise de vue et les meilleurs moments, et je peux planifier un itinéraire de photographie personnalisé en fonction de votre style et de vos besoins. Que ce soit la photographie de rue, l'esthétique architecturale ou le portrait documentaire, je peux vous aider à découvrir les perspectives les plus poétiques et rendre votre voyage à Paris inoubliable avec des images et des souvenirs durables.",
+      "zh": "作為一名攝影愛好者，我熱衷於帶領遊客探索巴黎最迷人的角落，捕捉這座城市的獨特光影與氛圍。無論是清晨的塞納河畔、黃昏時分的艾菲爾鐵塔，還是夜幕下燈火輝煌的香榭麗舍大道，每一個瞬間都值得被記錄。我熟悉最佳的拍攝角度與時間，能夠根據你的攝影風格與需求，規劃專屬於你的攝影行程。不論是街頭攝影、建築美學，還是人文紀實，我都能帶你發掘最富詩意的視角，讓你的巴黎之行留下難忘的影像與回憶。"
+    },
+    "themes": {
+      "en": ["Nature Scenery", "Family Tours", "Romantic Honeymoon"],
+      "fr": [
+        "Paysages Naturels",
+        "Excursions Familiales",
+        "Lune de Miel Romantique"
+      ],
+      "zh": ["自然風光", "親子家庭遊", "浪漫蜜月行"]
+    },
+    "languages": {
+      "en": ["French", "English"],
+      "fr": ["Français", "Anglais"],
+      "zh": ["法語", "英語"]
+    },
+    "districts": ["13", "14", "15"],
+    "trips": [
+      {
+        "id": { "$numberInt": "108" },
+        "title": {
+          "en": "Paris Sunrise Photography Tour",
+          "fr": "Tour de Photographie au Lever du Soleil à Paris"
+        },
+        "description": {
+          "en": "Take photos of the most beautiful sunrise landscapes in Paris.",
+          "fr": "Prenez des photos des paysages les plus magnifiques au lever du soleil à Paris."
+        }
+      }
+    ],
+    "sites": [
+      {
+        "id": { "$numberInt": "209" },
+        "name": {
+          "en": "Eiffel Tower",
+          "fr": "Tour Eiffel"
+        }
+      },
+      {
+        "id": { "$numberInt": "210" },
+        "name": {
+          "en": "Sacré-Cœur Basilica",
+          "fr": "Basilique du Sacré-Cœur"
+        }
+      }
+    ],
+    "available_slots": [
+      { "date": "2025-03-20", "time": "06:00-08:00" },
+      { "date": "2025-03-21", "time": "07:00-09:00" },
+      { "date": "2025-03-22", "time": "08:30-10:30" },
+      { "date": "2025-03-23", "time": "09:00-11:00" },
+      { "date": "2025-03-24", "time": "10:00-12:00" },
+      { "date": "2025-03-25", "time": "06:30-08:30" },
+      { "date": "2025-03-26", "time": "07:15-09:15" },
+      { "date": "2025-03-27", "time": "08:00-10:00" },
+      { "date": "2025-03-28", "time": "09:30-11:30" },
+      { "date": "2025-03-29", "time": "10:45-12:45" },
+      { "date": "2025-03-30", "time": "06:00-08:00" }
+    ],
+    "commentaries": [
+      {
+        "user": "Marco Rossi",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-08-03",
+        "comment": {
+          "en": "The photography tour was amazing, I captured many stunning views!",
+          "fr": "La visite guidée photo était incroyable, j'ai capturé de nombreuses vues magnifiques !"
+        }
+      },
+      {
+        "user": "Sophie Dubois",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-08-05",
+        "comment": {
+          "en": "The guide was very professional and helped us find the best photography angles!",
+          "fr": "Le guide était très professionnel et nous a aidés à trouver les meilleurs angles pour la photographie !"
+        }
+      },
+      {
+        "user": "James Walker",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-08-10",
+        "comment": {
+          "en": "I learned a lot of photography tips, and the itinerary was great!",
+          "fr": "J'ai appris beaucoup d'astuces de photographie, et l'itinéraire était super !"
+        }
+      },
+      {
+        "user": "Luca Moretti",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-08-12",
+        "comment": {
+          "en": "A perfect guided tour, I captured many postcard-worthy views!",
+          "fr": "Une visite guidée parfaite, j'ai capturé de nombreuses vues dignes de cartes postales !"
+        }
+      },
+      {
+        "user": "Hannah Schmidt",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-08-15",
+        "comment": {
+          "en": "The night photography tour was absolutely worth it, so beautiful!",
+          "fr": "La visite photographique de nuit en valait vraiment la peine, c'était tellement beau !"
+        }
+      },
+      {
+        "user": "Chen Wei",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-08-18",
+        "comment": {
+          "en": "The itinerary was great, but I wish the time was a bit longer!",
+          "fr": "L'itinéraire était super, mais j'aurais aimé que la durée soit un peu plus longue !"
+        }
+      },
+      {
+        "user": "Isabella Fernández",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-08-21",
+        "comment": {
+          "en": "The best Paris photography tour, highly recommend it to photography lovers!",
+          "fr": "La meilleure visite photographique de Paris, je la recommande vivement aux passionnés de photographie !"
+        }
+      },
+      {
+        "user": "Daniel Kowalski",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-08-25",
+        "comment": {
+          "en": "The guide was very patient and taught us how to compose shots, excellent experience!",
+          "fr": "Le guide était très patient et nous a appris à composer des prises de vue, une expérience excellente !"
+        }
+      },
+      {
+        "user": "Emily Johnson",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-08-28",
+        "comment": {
+          "en": "The location choices were great, but it was a bit crowded that day, slightly affecting the shooting experience.",
+          "fr": "Les choix de lieux étaient excellents, mais il y avait un peu trop de monde ce jour-là, ce qui a légèrement affecté l'expérience de prise de vue."
+        }
+      },
+      {
+        "user": "Ryota Tanaka",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-08-30",
+        "comment": {
+          "en": "The tour was relaxing and fun, I captured many cinematic photos!",
+          "fr": "La visite était détendue et amusante, j'ai capturé beaucoup de photos cinématographiques !"
+        }
+      },
+      {
+        "user": "Olivia Müller",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-02",
+        "comment": {
+          "en": "A perfect photography tour, the guide gave many useful suggestions!",
+          "fr": "Une visite photographique parfaite, le guide a donné de nombreux conseils utiles !"
+        }
+      }
+    ],
+    "imgUrl": "https://i.imgur.com/jQcWVBc.png",
+    "price_adult": { "$numberInt": "15" },
+    "price_child": { "$numberInt": "11" }
+  },
+  {
+    "_id": { "$oid": "67c9ec1379d49671e8503637" },
+    "id": "6",
+
+    "name": "王淑芬",
+    "profile": {
+      "en": "Claire has been a passionate tour guide in Paris for over 7 years, offering unique insights into the city's art and history. Her attention to detail makes every tour unforgettable.",
+      "fr": "Claire est guide touristique passionnée à Paris depuis plus de 7 ans, offrant des aperçus uniques sur l'art et l'histoire de la ville. Son souci du détail rend chaque visite inoubliable."
+    },
+    "themes": {
+      "en": ["Art Museums", "Historical Buildings", "Family Tours"],
+      "fr": ["Musées d'Art", "Bâtiments Historiques", "Visites en Famille"]
+    },
+    "languages": {
+      "en": ["French", "English"],
+      "fr": ["Français", "Anglais"]
+    },
+
+    "districts": ["16", "17", "18"],
+    "trips": [
+      {
+        "id": { "$numberInt": "109" },
+        "title": {
+          "en": "Paris Art Tour",
+          "fr": "Visite d'Art à Paris"
+        },
+        "description": {
+          "en": "Delve into the most famous art museums and street art of Paris.",
+          "fr": "Plongez dans les musées d'art les plus célèbres et l'art de rue de Paris."
+        }
+      }
+    ],
+    "sites": [
+      {
+        "id": { "$numberInt": "211" },
+        "name": {
+          "en": "Musée d'Orsay",
+          "fr": "Musée d'Orsay"
+        }
+      },
+      {
+        "id": { "$numberInt": "212" },
+        "name": {
+          "en": "Centre Pompidou",
+          "fr": "Centre Pompidou"
+        }
+      }
+    ],
+    "available_slots": [
+      { "date": "2025-04-01", "time": "10:00-12:00" },
+      { "date": "2025-04-02", "time": "14:00-16:00" },
+      { "date": "2025-04-03", "time": "09:00-11:00" }
+    ],
+    "commentaries": [
+      {
+        "user": "Julien Dupont",
+        "rating": { "$numberInt": "5" },
+        "date": "2024-09-01",
+        "comment": {
+          "en": "Claire was very professional and took us to many hidden artistic spots!",
+          "fr": "Claire était très professionnelle et nous a emmenés dans de nombreux coins artistiques cachés !"
+        }
+      },
+      {
+        "user": "Marie Curie",
+        "rating": { "$numberInt": "4" },
+        "date": "2024-09-03",
+        "comment": {
+          "en": "The itinerary was good, but the timing was a bit tight.",
+          "fr": "L'itinéraire était bon, mais le timing était un peu serré."
+        }
+      }
+    ],
+    "imgUrl": "https://i.imgur.com/MBb5iuY.png",
+    "price_adult": { "$numberInt": "20" },
+    "price_child": { "$numberInt": "15" }
+  }
+]

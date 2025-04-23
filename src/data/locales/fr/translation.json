@@ -46,8 +46,8 @@
     "book_private_tour": "Guides du {{district}}e arrondissement"
   },
    "popular_guides": "Guides Populaires",
-   "popular_trips": "Voyages Populaires",
-   "book_guide_and_trip": "Comment ça marche ?",
+   "top_trips": "Voyages Top",
+   "book_guide_and_trip": "Comment ça marche",
    "book_guides": "Réserver un guide",
 
    "guidesSteps": {

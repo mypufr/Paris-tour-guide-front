@@ -53,8 +53,8 @@
     "book_private_tour": "Book a private guide in {{district}} district"
   },
     "popular_guides": "Popular Guides",
-    "popular_trips": "Popular Trips",
-    "book_guide_and_trip": "How to make bookings ? ",
+    "top_trips": "Top Trips",
+    "book_guide_and_trip": "How to make bookings",
     "book_guides": "Book Guides",
 
     "guidesSteps": {

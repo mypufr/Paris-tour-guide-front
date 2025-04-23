@@ -1,73 +1,73 @@
-[
-  {
-    "id": 1,
-    "name": "Chloé Chang",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "19/08/2024",
-    "commentaryText": "導遊深入淺出的講解讓我更好理解畢加索的創作背景，還發現了作品中的隱藏細節，讓旅程充滿啟發！"
-  },
-  {
-    "id": 2,
-    "name": "陳思儒",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "02/07/2024",
-    "commentaryText": "導遊對畢加索的作品非常了解，充滿熱情的講解讓我們欣賞了作品的深層意義，這次博物館之行非常值得！"
-  },
-  {
-    "id": 3,
-    "name": "Fanny Hsu",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "19/06/2024",
-    "commentaryText": "導遊對法國歷史建築的深刻了解，以及她充滿感染力的講解，讓我們的巴黎之行變得更加難忘，強烈推薦！"
-  },
-  {
-    "id": 4,
-    "name": "Sophia Liu",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "25/05/2024",
-    "commentaryText": "導遊的專業和豐富知識讓我對巴黎的歷史和文化有了更深的認識，這次旅行不僅充實，還讓人回味無窮！"
-  },
-  {
-    "id": 5,
-    "name": "Jacky Wang",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "12/05/2024",
-    "commentaryText": "導遊知識淵博且充滿熱情，從巴黎的歷史到當代藝術，她的講解讓我們深入理解每個景點的歷史和故事。"
-  },
-  {
-    "id": 6,
-    "name": "Yvonne Tsai",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "03/05/2024",
-    "commentaryText": "這次導覽非常充實，導遊的專業知識和生動的互動讓整個行程既有趣又富有教育意義，景點講解充滿細節！"
-  },
-  {
-    "id": 7,
-    "name": "Michael Huang",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "21/04/2024",
-    "commentaryText": "導遊的講解讓我們更深入了解巴黎的藝術和歷史，她介紹了著名景點外的隱藏寶藏，這真的是一次難忘的旅程！"
-  },
-  {
-    "id": 8,
-    "name": "Emily Wu",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "10/04/2024",
-    "commentaryText": "我之前對巴黎歷史了解不多，但這次的導覽讓我大開眼界，導遊細心且熱情，解說充滿故事，這次行程非常有意義！"
-  },
-  {
-    "id": 9,
-    "name": "David Lin",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "30/03/2024",
-    "commentaryText": "導遊的講解充滿細節，讓我對巴黎的文化和歷史有了全新的理解。她的深入解說讓整趟旅程更加精彩難忘！"
-  },
-  {
-    "id": 10,
-    "name": "Jessica Chen",
-    "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
-    "date": "15/03/2024",
-    "commentaryText": "導遊讓我們深入了解每個景點背後的故事，她的講解充滿活力且知識豐富，這次行程真的是精彩而難忘！"
-  }
-]
+// [
+//   {
+//     "id": 1,
+//     "name": "Chloé Chang",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "19/08/2024",
+//     "commentaryText": "導遊深入淺出的講解讓我更好理解畢加索的創作背景，還發現了作品中的隱藏細節，讓旅程充滿啟發！"
+//   },
+//   {
+//     "id": 2,
+//     "name": "陳思儒",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "02/07/2024",
+//     "commentaryText": "導遊對畢加索的作品非常了解，充滿熱情的講解讓我們欣賞了作品的深層意義，這次博物館之行非常值得！"
+//   },
+//   {
+//     "id": 3,
+//     "name": "Fanny Hsu",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "19/06/2024",
+//     "commentaryText": "導遊對法國歷史建築的深刻了解，以及她充滿感染力的講解，讓我們的巴黎之行變得更加難忘，強烈推薦！"
+//   },
+//   {
+//     "id": 4,
+//     "name": "Sophia Liu",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "25/05/2024",
+//     "commentaryText": "導遊的專業和豐富知識讓我對巴黎的歷史和文化有了更深的認識，這次旅行不僅充實，還讓人回味無窮！"
+//   },
+//   {
+//     "id": 5,
+//     "name": "Jacky Wang",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "12/05/2024",
+//     "commentaryText": "導遊知識淵博且充滿熱情，從巴黎的歷史到當代藝術，她的講解讓我們深入理解每個景點的歷史和故事。"
+//   },
+//   {
+//     "id": 6,
+//     "name": "Yvonne Tsai",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "03/05/2024",
+//     "commentaryText": "這次導覽非常充實，導遊的專業知識和生動的互動讓整個行程既有趣又富有教育意義，景點講解充滿細節！"
+//   },
+//   {
+//     "id": 7,
+//     "name": "Michael Huang",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "21/04/2024",
+//     "commentaryText": "導遊的講解讓我們更深入了解巴黎的藝術和歷史，她介紹了著名景點外的隱藏寶藏，這真的是一次難忘的旅程！"
+//   },
+//   {
+//     "id": 8,
+//     "name": "Emily Wu",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "10/04/2024",
+//     "commentaryText": "我之前對巴黎歷史了解不多，但這次的導覽讓我大開眼界，導遊細心且熱情，解說充滿故事，這次行程非常有意義！"
+//   },
+//   {
+//     "id": 9,
+//     "name": "David Lin",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "30/03/2024",
+//     "commentaryText": "導遊的講解充滿細節，讓我對巴黎的文化和歷史有了全新的理解。她的深入解說讓整趟旅程更加精彩難忘！"
+//   },
+//   {
+//     "id": 10,
+//     "name": "Jessica Chen",
+//     "userImg": "https://i.imgur.com/j8e0Q9m.jpeg",
+//     "date": "15/03/2024",
+//     "commentaryText": "導遊讓我們深入了解每個景點背後的故事，她的講解充滿活力且知識豐富，這次行程真的是精彩而難忘！"
+//   }
+// ]
 

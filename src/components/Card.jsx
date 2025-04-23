@@ -26,9 +26,13 @@ const Card = ({ id, imgSrc, title, price, themes }) => {
         <h6 className="text-base md:text-lg font-bold text-gray-700 p-2">{title}</h6>
         {/* 僅在中型以上螢幕顯示價格 */}
         <span className="hidden sm:block text-sm md:text-base font-semibold text-gray-600">
-          {price} € / 小時
+          {price} € / hour
         </span>
       </div>
+
+
+
+      
       <div className="flex justify-between gap-1">
         {themes?.map((theme, index) => (
           <span
@@ -39,6 +43,10 @@ const Card = ({ id, imgSrc, title, price, themes }) => {
           </span>
         ))}
       </div>
+
+
+
+      
     </div>
   </Link>
 </div>
@@ -46,5 +54,6 @@ const Card = ({ id, imgSrc, title, price, themes }) => {
 
   );
 };
+
 
 export default Card;

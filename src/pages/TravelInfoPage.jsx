@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 import Card from "../components/Card";
@@ -10,6 +11,9 @@ import { settings4 } from "../components/helpers/sliderSettings";
 
 
 function TravelInfoPage() {
+
+  const { t, i18n } = useTranslation();
+
   const [input, setInput] = useState("");
   const [todoList, setTodoList] = useState([]);
   const [comments, setComments] = useState([]);
@@ -17,6 +21,7 @@ function TravelInfoPage() {
 
   const [tourguideId, setTourguideId] = useState("");
   const [tourguideInfo, setTourguideInfo] = useState([]);
+    const [popularTourguidesList, setPopularTourguidesList] = useState([]);
 
     const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
@@ -161,6 +166,21 @@ function TravelInfoPage() {
     }
   };
 
+
+  const getPopularTourguidesList = async () => {
+    try {
+      const res = await axios.get(
+        "http://lcoalhost:8000/popular-tourguides",{
+          withCredentials: true, 
+        }
+      );
+      console.log(res.data);
+      setPopularTourguidesList(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const getTrips = async () => {
     try {
       const res = await axios.get("http://localhost:8000/api/trips");
@@ -213,10 +233,24 @@ function TravelInfoPage() {
   <img src="https://i.pinimg.com/originals/35/a0/d9/35a0d99126faaca0d33305bd1a86ee20.jpg" alt="under-construction" className="m-auto"/>
   </div>
 
-
+      {/* 切換語言按鈕 */}
+      {/* <div className="flex justify-center my-4 gap-2">
+        <button onClick={() => i18n.changeLanguage('zh')} className="border p-2">中文</button>
+        <button onClick={() => i18n.changeLanguage('en')} className="border p-2">English</button>
+        <button onClick={() => i18n.changeLanguage('fr')} className="border p-2">Français</button>
+      </div> */}
 
       {/* <button className="border border-t-cyan-600" onClick={getTourguideInfo}>
         取得所有導遊資料
+      </button> */}
+
+{/* <br />
+<br />
+<br /> */}
+
+
+      {/* <button className="border border-t-cyan-600" onClick={getPopularTourguidesList }>
+        取得熱門導遊資料
       </button> */}
 
       {/* <button className="border border-t-cyan-600" onClick={getCommentaries}>
@@ -259,9 +293,9 @@ function TravelInfoPage() {
 
       {/* <button className="border border-t-cyan-600" onClick={getComments}>
         get all comments
-      </button>
+      </button> */}
 
-      <div>
+      {/* <div>
         {comments.length > 0 &&
           comments.map((comment, index) => {
             return (
@@ -270,53 +304,53 @@ function TravelInfoPage() {
               </li>
             );
           })}
-      </div>
-      <br />
+      </div> */}
+      {/* <br /> */}
 
-      <button className="border border-t-cyan-600" onClick={postComments}>
+      {/* <button className="border border-t-cyan-600" onClick={postComments}>
         post comments
-      </button>
+      </button> */}
 
-      <div>
+      {/* <div>
         {comments.length > 1 && (
           <p className="bg-gray-500 text-white">
             {comments[comments.length - 1].text}
           </p>
         )}
-      </div>
+      </div> */}
+
+      {/* <br />
 
       <br />
-
       <br />
-      <br />
-      <hr />
+      <hr /> */}
 
-      <button
+      {/* <button
         className="border border-t-cyan-600"
         // onClick={() => updateComments()}
       >
         update comments
-      </button>
+      </button> */}
+      {/* <br />
       <br />
       <br />
-      <br />
-      <hr />
-      <input
+      <hr /> */}
+      {/* <input
         type="text"
         className="border-spacing-2 border"
         value={input}
         onChange={handleOnChange}
         placeholder="請輸入代辦事項"
-      />
-      <button
+      /> */}
+      {/* <button
         type="button"
         className="border-spacing-2 border text-green-600"
         onClick={handleButtonClick}
       >
         儲存待辦
-      </button>
+      </button> */}
 
-      {todoList && todoList.length > 0 ? (
+      {/* {todoList && todoList.length > 0 ? (
         <ul>
           {todoList.map((item, index) => (
             <li key={index}>
@@ -342,11 +376,15 @@ function TravelInfoPage() {
             <Card key={index} 
             id={item.id} 
             imgSrc={item.imgUrl} 
-            title={item.name} 
+            title={item.name?.[i18n.language] || item.name?.zh} 
             price={item.price_adult} 
-            themes={item.themes} 
+            themes={
+              Array.isArray(item.themes?.[i18n.language])
+                ? item.themes[i18n.language]
+                : [item.themes?.[i18n.language] || item.themes?.zh]
+            }
             
-            onClick={()=> handleCardClick(item.id)} className="cursor-pointer"
+            onClick={()=> handleCardClick(item.id)} className="cursor-pointer p-4"
             
             />
           ))
@@ -354,7 +392,7 @@ function TravelInfoPage() {
           <p>⏳ 資料載入中...</p>
         )}
       </div>
-      </div> */}
+      </div>  */}
     </>
   );
 }
