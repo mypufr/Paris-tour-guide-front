@@ -10,8 +10,8 @@ function Footer() {
   return (
     <>
       {/* footer */}
-      <footer className="bottom-0 w-full bg-primary-600">
-        <div className="relative">
+      <footer className="bottom-0 w-full ">
+        <div className="relative ">
 
           <div className="hidden lg:block">
             <img
@@ -20,6 +20,10 @@ function Footer() {
               className="w-full"
             />
           </div>
+
+
+          <div className="bg-primary-600">
+
           <div className="relative -top-1 min-h-[380px] bg-primary-600 xl:min-h-[420px]">
      
             <div className="absolute bottom-[150px] right-[400px] hidden md:right-16 md:top-20 md:block lg:top-1 lg:right-[15vw] xl:-top-[20vh] ">
@@ -127,6 +131,8 @@ function Footer() {
                 </li>
               </ul>
             </div>
+          </div>
+
           </div>
 
    

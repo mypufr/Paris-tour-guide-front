@@ -36,16 +36,15 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
 
-  const [searchQuery, setSearchQuery] = useState(""); 
-  const [tours, setTours] = useState([]); 
-  const [filteredTours, setFilteredTours] = useState([]); 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [tours, setTours] = useState([]);
+  const [filteredTours, setFilteredTours] = useState([]);
 
   const [postObject, setPostObject] = useState(null);
   const [postComment, setPostComment] = useState(null);
   const [postProfile, setPostProfile] = useState(null);
 
   const [popularTourguidesList, setPopularTourguidesList] = useState([]);
-
 
   const { t } = useTranslation();
   const { i18n } = useTranslation();
@@ -467,26 +466,25 @@ export default function HomePage() {
   const getRecommendedGuides = async (district) => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}/district/${district}`,{
-          withCredentials: true, 
-        }
+        `${import.meta.env.VITE_API_BASE_URL}/district/${district}`,
+        {
+          withCredentials: true,
+        },
       );
 
       setRecommendedGuides(res.data);
     } catch (error) {
-      console.error(
-        "Failure：",
-        error.response?.data || error.message,
-      );
+      console.error("Failure：", error.response?.data || error.message);
     }
   };
 
   const getPopularTourguidesList = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}/popular-tourguides`,{
-          withCredentials: true, 
-        }
+        `${import.meta.env.VITE_API_BASE_URL}/popular-tourguides`,
+        {
+          withCredentials: true,
+        },
       );
       setPopularTourguidesList(res.data);
     } catch (error) {
@@ -496,9 +494,12 @@ export default function HomePage() {
 
   const getToursByKeyWord = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tours`, {
-        withCredentials: true, 
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/tours`,
+        {
+          withCredentials: true,
+        },
+      );
       setTours(res.data || []); // 確保 `tours` 是陣列
       setFilteredTours(res.data);
     } catch (error) {
@@ -522,9 +523,12 @@ export default function HomePage() {
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tours`,{
-          withCredentials: true, 
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/tours`,
+          {
+            withCredentials: true,
+          },
+        );
         console.log(res.data);
         setTours(res.data || []);
       } catch (error) {
@@ -534,7 +538,6 @@ export default function HomePage() {
 
     fetchTours();
   }, []);
-
 
   useEffect(() => {
     if (!searchQuery) {
@@ -608,9 +611,9 @@ export default function HomePage() {
         <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
           <AnimatePresence>
             <motion.img
-              key={index} 
+              key={index}
               src={SlidesData[index].imgUrl}
-              className="absolute h-full w-full rounded-lg object-cover"
+              className="absolute h-full w-full object-cover"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -619,37 +622,40 @@ export default function HomePage() {
           </AnimatePresence>
         </div>
 
-        <div className="absolute left-[15vw] top-[17%] z-10 w-full md:top-[10%] xl:top-[15%] 2xl:left-[18%] 2xl:top-[17%] min-[1920px]:top-[20%]">
+        <div className="absolute left-[10vw] top-[17%] z-10 w-full md:top-[10%] xl:top-[15%] 2xl:left-[18%] 2xl:top-[17%] min-[1920px]:top-[20%]">
           <div className="flex-col text-start">
-            <p className="noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]">
-            <p>{t("homepage_introduction.heading")}</p>
+            <p className="-noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow max-w-[85vw] text-xl leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl md:text-[40px] 2xl:text-[64px]">
+              {t("homepage_introduction.heading")}
             </p>
 
-            <p className="text-shadow hidden font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-6 md:text-lg 2xl:pt-20 2xl:text-2xl">
-            {t("homepage_introduction.line1")}
+            <p className="text-shadow hidden max-w-[85vw] font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-6 md:text-lg 2xl:pt-20 2xl:text-2xl">
+              {t("homepage_introduction.line1")}
             </p>
             <div>
-              <p className="text-shadow hidden font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-2 md:text-lg lg:pt-4 2xl:pt-10 2xl:text-2xl">
-              {t("homepage_introduction.line2")}
+              <p className="text-shadow hidden max-w-[85vw] font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-2 md:text-lg lg:pt-4 2xl:pt-10 2xl:text-2xl">
+                {t("homepage_introduction.line2")}
               </p>
-              <p className="text-shadow hidden font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-0 md:text-lg 2xl:text-2xl">
-              {t("homepage_introduction.line3")}
+              <p className="text-shadow hidden max-w-[85vw] font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-0 md:text-lg 2xl:text-2xl">
+                {t("homepage_introduction.line3")}
               </p>
             </div>
-            <p className="text-shadow hidden font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-2 md:text-lg lg:pt-4 2xl:pt-10 2xl:text-2xl">
-            {t("homepage_introduction.line4")}
+            <p className="text-shadow hidden max-w-[85vw] font-bold tracking-4 text-white shadow-black drop-shadow-2xl md:block md:pt-2 md:text-lg lg:pt-4 2xl:pt-10 2xl:text-2xl">
+              {t("homepage_introduction.line4")}
             </p>
 
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <div className="mt-6 w-full lg:relative lg:mt-5 2xl:pt-10">
                 <input
                   type="text"
                   className="-left-8 m-auto rounded-lg border border-gray-300 bg-white p-[13px] pr-10 text-primary-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-[200px]:w-8/12 md:w-6/12 lg:w-5/12 lg:pr-0 xl:h-12 xl:w-6/12 2xl:w-[32.5%]"
+                  
+                  
+                  
                   placeholder={t("homepage_introduction.heading")}
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)} 
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <div className="text-sm h-13 active:scale-120 absolute inset-y-0 right-[26vw] top-[5.5rem] flex items-center rounded-r-lg bg-primary-600 p-5 transition duration-200 hover:bg-primary-200 hover:text-gray-300 md:right-[45vw] md:top-[80%] lg:right-[58vw] lg:top-0 lg:p-3 xl:right-[50vw] 2xl:top-10 min-[1536px]:right-[64vw] min-[1920px]:right-[67vw]">
+                <div className="h-13 active:scale-120 absolute inset-y-0 right-[26vw] top-[4.5rem] flex items-center rounded-r-lg bg-primary-600 p-6 text-sm transition duration-200 hover:bg-primary-200 hover:text-gray-300 min-[386px]:top-[-10rem] md:right-[45vw] md:top-[80%] lg:right-[58vw] lg:top-0 lg:p-3 xl:right-[50vw] 2xl:top-10 min-[1536px]:right-[64vw] min-[1920px]:right-[67vw]">
                   <svg
                     className="active:scale-120 h-4 w-4 text-white transition duration-200 hover:bg-primary-200 hover:text-gray-600 lg:h-5 lg:w-5"
                     fill="currentColor"
@@ -664,51 +670,72 @@ export default function HomePage() {
                   </svg>
                 </div>
               </div>
+            </div> */}
+
+            <div className="mt-6 w-full flex-col items-center gap-2 md:flex-row md:gap-0 md:relative lg:mt-5 2xl:pt-10">
+              <input
+                type="text"
+                className="w-10/12 rounded-lg border border-gray-300 bg-white p-[13px] pr-10 text-primary-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-6/12 lg:w-5/12 xl:h-12 xl:w-6/12 2xl:w-[32.5%]"
+                placeholder={t("homepage_introduction.heading")}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button
+                onClick={() =>
+                  navigate(`/search?query=${encodeURIComponent(searchQuery)}`)
+                }
+                className="absolute left-[30%] mt-3 flex max-w-[4rem] items-center justify-center rounded-lg bg-primary-600 px-5 py-3 text-sm text-white transition duration-200 hover:bg-primary-200 hover:text-gray-300 min-[375px]:flex md:ml-3 md:mt-0 md:top-0 md:left-[50%] md:h-[3.2rem] lg:left-[42%] 2xl:left-[33.5%] 2xl:top-[40%]"
+              >
+                <svg
+                  className="h-4 w-4 lg:h-5 lg:w-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707a1 1 0 001.414-1.414l-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+                </svg>
+              </button>
             </div>
-            <div className="
+
+            <div className="absolute left-10 mt-20 w-[10rem] space-y-3 min-[390px]:left-20 md:left-0 sm:grid sm:grid-cols-2 md:mt-4  md:w-8/12 md:grid-cols-4 md:grid-rows-2 md:gap-x-2 md:gap-y-2 lg:-left-3 lg:mt-16 lg:w-5/12 lg:gap-y-[1px] xl:left-0 xl:mt-0 xl:flex xl:w-6/12 xl:justify-between xl:space-x-0 min-[1920px]:w-[37.5%]">
+
             
-     absolute left-10 mt-4 space-y-3 w-[10rem]  lg:mt-16 md:grid md:grid-cols-4 md:grid-rows-2 md:gap-x-2 md:gap-y-2 min-[390px]:left-0 md:left-0 md:mt-4 md:w-8/12 lg:-left-3 lg:w-5/12 lg:gap-y-[1px] xl:left-0 xl:mt-0 xl:flex xl:w-6/12 xl:justify-between xl:space-x-0 min-[1920px]:w-[37.5%]
-            "
-            >
-             
-             
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-              {t("trip_theme.frenchCuisine")}
+              <button className="lg:text-shadow-light  w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
+                {t("trip_theme.frenchCuisine")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-              {t("trip_theme.romanticHoneymoon")}
+                {t("trip_theme.romanticHoneymoon")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-              {t("trip_theme.familyTrip")}
+                {t("trip_theme.familyTrip")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-              {t("trip_theme.shopping")}
+                {t("trip_theme.shopping")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-              {t("trip_theme.historicSites")}
+                {t("trip_theme.historicSites")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-              {t("trip_theme.artMuseum")}
+                {t("trip_theme.artMuseum")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-              {t("trip_theme.culturalTour")}
+                {t("trip_theme.culturalTour")}
               </button>
               <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
-              {t("trip_theme.natureView")}
+                {t("trip_theme.natureView")}
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-10 flex justify-center 2xl:space-x-4 hover:cursor-pointer 2xl:mt-[80px]">
+      <div className="mt-10 flex justify-center hover:cursor-pointer 2xl:mt-[80px] 2xl:space-x-4">
         <img
           src="https://i.imgur.com/zoB5vaQ.png"
           alt=""
           className="inline-block h-[40px] p-1"
         />
-        <h3 className="text-xl font-bold 2xl:leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
-        {t("section_title.search_by_area")}
+        <h3 className="text-xl font-bold tracking-4 text-primary-600 2xl:text-[40px] 2xl:leading-[3rem]">
+          {t("section_title.search_by_area")}
         </h3>
         <img
           src="https://i.imgur.com/zoB5vaQ.png"
@@ -747,7 +774,11 @@ export default function HomePage() {
                   alt=""
                   className="inline-block"
                 />
-     <span>{t("search_guide_by_area.book_private_tour", { district: selectedDistrict })}</span>
+                <span>
+                  {t("search_guide_by_area.book_private_tour", {
+                    district: selectedDistrict,
+                  })}
+                </span>
               </h3>
 
               <div>
@@ -986,14 +1017,14 @@ export default function HomePage() {
 
       {/* slides show: popular tourist guides */}
       <div className="mt-10">
-        <div className="flex justify-center 2xl:space-x-4 hover:cursor-pointer">
+        <div className="flex justify-center hover:cursor-pointer 2xl:space-x-4">
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
             alt=""
             className="inline-block h-[40px] p-1"
           />
-          <h2 className="text-2xl font-bold 2xl:leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
-          {t("popular_guides")}
+          <h2 className="text-2xl font-bold tracking-4 text-primary-600 2xl:text-[40px] 2xl:leading-[3rem]">
+            {t("popular_guides")}
           </h2>
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
@@ -1005,8 +1036,7 @@ export default function HomePage() {
       <button
         onClick={() => sliderRef.current.slickPrev()}
         className="hover:text-primary-400 z-10 p-2 text-grey-950"
-      >
-      </button>
+      ></button>
       <div className="m-auto mb-20 max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
         <div>
           <Slider {...settings1} arrows={false} ref={sliderRef}>
@@ -1037,11 +1067,11 @@ export default function HomePage() {
               <SlArrowLeft />
             </button>
 
- 
             <div className="pagination-container z-10 text-xl font-bold text-primary-600">
               <span>{currentSlide}</span> /{" "}
-              <span className="text-grey-950">{popularTourguidesList.length}</span>
-    
+              <span className="text-grey-950">
+                {popularTourguidesList.length}
+              </span>
             </div>
 
             <button
@@ -1070,19 +1100,17 @@ export default function HomePage() {
           />
         </div>
 
-        <div className={`mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16 ${i18n.language === "中文" ? "lg:left-[51rem]" : ""} ${i18n.language === "en" ? "lg:left-[46rem]" : ""} ${i18n.language === "fr" ? "lg:left-[50rem]" : ""}`}
-        
-
-               
+        <div
+          className={`mt-8 lg:absolute lg:left-[43%] lg:top-[20%] lg:mt-16 ${i18n.language === "中文" ? "lg:left-[51rem]" : ""} ${i18n.language === "en" ? "lg:left-[46rem]" : ""} ${i18n.language === "fr" ? "lg:left-[50rem]" : ""}`}
         >
-          <div className="pt-[8rem] flex justify-center 2xl:space-x-4 hover:cursor-pointer lg:pt-0">
+          <div className="flex justify-center pt-[8rem] hover:cursor-pointer lg:pt-0 2xl:space-x-4">
             <img
               src="https://i.imgur.com/zoB5vaQ.png"
               alt=""
               className="inline-block h-[40px] p-1"
             />
-            <h4 className="text-2xl font-bold 2xl:leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
-            {t("top_trips")}
+            <h4 className="text-2xl font-bold tracking-4 text-primary-600 2xl:text-[40px] 2xl:leading-[3rem]">
+              {t("top_trips")}
             </h4>
             <img
               src="https://i.imgur.com/zoB5vaQ.png"
@@ -1136,14 +1164,14 @@ export default function HomePage() {
       {/* 預約導遊和報名行程 */}
 
       <div className="mb-12">
-        <div className="mb-8 mt-[80px] flex justify-center 2xl:space-x-4 hover:cursor-pointer">
+        <div className="mb-8 mt-[80px] flex justify-center hover:cursor-pointer 2xl:space-x-4">
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
             alt=""
             className="inline-blockh h-[40px] p-1"
           />
-          <h5 className="text-2xl font-bold 2xl:leading-[3rem] tracking-4 text-primary-600 2xl:text-[40px]">
-          <span>{t("book_guide_and_trip")}</span>
+          <h5 className="text-2xl font-bold tracking-4 text-primary-600 2xl:text-[40px] 2xl:leading-[3rem]">
+            <span>{t("book_guide_and_trip")}</span>
           </h5>
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
@@ -1156,7 +1184,7 @@ export default function HomePage() {
           <div className="mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border md:border-grey-200 lg:min-h-[1000px] lg:max-w-[34%]">
             <div className="border-1 mb-3 rounded-2xl border border-grey-200 sm:border-0">
               <span className="block rounded-t-2xl bg-primary-300 py-4 text-center text-2xl font-bold text-white lg:py-10">
-        {t("book_guides")}
+                {t("book_guides")}
               </span>
 
               <div className="flex-1 p-2 lg:mt-10">
@@ -1175,10 +1203,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                      <p>{t("guidesSteps.step1.title")}</p>
+                        <p>{t("guidesSteps.step1.title")}</p>
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                      <p>{t("guidesSteps.step1.description")}</p>
+                        <p>{t("guidesSteps.step1.description")}</p>
                       </p>
                     </div>
                   </div>
@@ -1197,10 +1225,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                      <p>{t("guidesSteps.step2.title")}</p>
+                        <p>{t("guidesSteps.step2.title")}</p>
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                      <p>{t("guidesSteps.step2.description")}</p>
+                        <p>{t("guidesSteps.step2.description")}</p>
                       </p>
                     </div>
                   </div>
@@ -1219,10 +1247,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                      <p>{t("guidesSteps.step3.title")}</p>
+                        <p>{t("guidesSteps.step3.title")}</p>
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                      <p>{t("guidesSteps.step3.description")}</p>
+                        <p>{t("guidesSteps.step3.description")}</p>
                       </p>
                     </div>
                   </div>
@@ -1241,7 +1269,7 @@ export default function HomePage() {
           <div className="mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border md:border-grey-200 lg:min-h-[1000px] lg:max-w-[34%]">
             <div className="border-1 mb-3 rounded-2xl border border-grey-200 sm:border-0">
               <span className="block rounded-t-2xl bg-secondary-300 py-4 text-center text-2xl font-bold text-white lg:py-10">
-              {t("book_trips")}
+                {t("book_trips")}
               </span>
 
               <div className="flex-1 p-2 lg:mt-10">
@@ -1260,10 +1288,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                      {t("groupSteps.step1.title")}
+                        {t("groupSteps.step1.title")}
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                      {t("groupSteps.step1.description")}
+                        {t("groupSteps.step1.description")}
                       </p>
                     </div>
                   </div>
@@ -1282,10 +1310,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                      {t("groupSteps.step2.title")}
+                        {t("groupSteps.step2.title")}
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                      {t("groupSteps.step2.description")}
+                        {t("groupSteps.step2.description")}
                       </p>
                     </div>
                   </div>
@@ -1304,10 +1332,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                      {t("groupSteps.step3.title")}
+                        {t("groupSteps.step3.title")}
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                      {t("groupSteps.step3.description")}
+                        {t("groupSteps.step3.description")}
                       </p>
                     </div>
                   </div>
@@ -1326,10 +1354,10 @@ export default function HomePage() {
                       data-aos-easing="ease-in-sine"
                     >
                       <p className="text-[14px] font-bold tracking-4 text-grey-950 lg:text-xl">
-                      {t("groupSteps.step4.title")}
+                        {t("groupSteps.step4.title")}
                       </p>
                       <p className="text-[12px] leading-[19.6px] tracking-1.5 text-grey-400 lg:text-[14px]">
-                      {t("groupSteps.step4.description")}
+                        {t("groupSteps.step4.description")}
                       </p>
                     </div>
                   </div>
