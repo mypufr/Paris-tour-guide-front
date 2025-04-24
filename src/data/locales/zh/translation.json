@@ -10,7 +10,7 @@
   "welcomeMessage": "歡迎來到我們的網站！",
   "login": "登入",
   "title": "尋找你的專屬在地導遊",
-  "dateRange": "日期範圍",
+  "dateRange": "日期",
   "departure": "{{date}} 出發",
   "return": "{{date}} 離開",
    "search": "搜尋",

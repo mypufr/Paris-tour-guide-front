@@ -56,7 +56,7 @@ function Footer() {
                       <div>
                         <h1 className="text-[20px] font-bold leading-6 text-secondary-600">
                           樂遊巴黎
-                          <span className="ps-2 text-primary-100">
+                          <span className="max-[320px]:text-[14px] ps-2 text-primary-100">
                             Paris, mon guide
                           </span>
                         </h1>

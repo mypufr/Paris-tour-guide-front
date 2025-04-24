@@ -35,7 +35,7 @@ function SearchTourguidesPage() {
   const [adultCount, setAdultCount] = useState(0);
   const [childCount, setChildCount] = useState(0);
 
-  const [selectedTheme, setSelectedTheme] = useState("行程主題");
+  const [selectedTheme, setSelectedTheme] = useState("Theme");
   const [selectedGuides, setSelectedGuides] = useState([]);
 
 
@@ -153,7 +153,7 @@ function SearchTourguidesPage() {
   return (
     <>
       <div
-        className="group relative m-auto h-[680px] w-full py-0 md:h-[500px] lg:h-[780px]"
+        className="group relative m-auto sm:h-[680px] w-full py-0 md:h-[500px] lg:h-[780px]"
         id="target-section"
       >
         <img
@@ -185,6 +185,7 @@ function SearchTourguidesPage() {
         <div
           className={`absolute left-[15%] top-[20%] max-w-[70vw] md:left-[25%] md:top-[15%] lg:top-[30%] ${i18n.language === "fr" ? "lg:left-[35rem]" : ""} ${i18n.language === "en" ? "lg:left-[30rem]" : ""} ${i18n.language === "中文" ? "lg:left-[40rem]" : ""} `}
         >
+          
           <h1
             className={`noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl min-[200px]:text-2xl md:text-[40px] 2xl:text-[64px]`}
           >
@@ -195,16 +196,17 @@ function SearchTourguidesPage() {
           <div className="mt-2 lg:mt-10">
             <div className="my-6 flex flex-col justify-center lg:mt-10 lg:flex-row lg:space-x-8">
               <div className="relative mt-10 w-full max-w-lg space-y-3 lg:space-y-8">
-                <div className="mt-4 flex min-w-[400px] justify-center px-4 lg:mt-0">
+                <div className="mt-4 flex  justify-center px-4 lg:mt-0 ">
                   <Link>
                     <button
-                      className="flex w-[19vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
+                      className="
+                      flex w-[25vw] sm:w-full xl:w-[19vw]  lg:items-center justify-center xl:justify-around items-center rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
                       onClick={() =>
                         document.getElementById("calendar_modal").showModal()
                       }
                     >
                       <svg
-                        className="h-8 w-8"
+                        className="hidden md:block h-8 w-8"
                         width="24"
                         height="24"
                         viewBox="0 0 24 24"
@@ -235,11 +237,11 @@ function SearchTourguidesPage() {
                             </span>
                           </p>
                         ) : (
-                          <p className="text-gray-400">{t("dateRange")}</p>
+                          <p className="text-base text-gray-400 whitespace-nowrap">{t("dateRange")}</p>
                         )}
                       </span>
                       <svg
-                        className="h-8 text-red-500"
+                        className="hidden md:block h-8 w-8 text-red-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="grey"
@@ -315,22 +317,16 @@ function SearchTourguidesPage() {
                   </div>
                 </dialog>
 
-
-
-       
-
-
-
                 <div className="mt-4 flex justify-center px-4 lg:mt-0">
                   <Link>
                     <button
-                      className="flex w-[19vw] items-center justify-between rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
+                      className="flex w-[25vw] sm:w-full xl:w-[19vw]  items-center justify-center xl:justify-around rounded-lg border border-gray-300 bg-white p-1 lg:space-x-20 lg:px-1 lg:py-4"
                       onClick={() =>
                         document.getElementById("theme_modal").showModal()
                       }
                     >
                       <svg
-                        className="inline-block h-8"
+                        className="hidden md:block h-7 w-8"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="grey"
@@ -344,10 +340,10 @@ function SearchTourguidesPage() {
                       </svg>
                       <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
                         {selectedTheme ? (
-                          <p className="text-gray-400">
-                            <span className="text-[20px]">
-                              {/* {selectedTheme} */}
-                              {t("search")}
+                          <p className="text-gray-400 ">
+                            <span className="text-base">
+                              {selectedTheme}
+                              {/* {t("search")} */}
                             </span>
                           </p>
                         ) : (
@@ -355,7 +351,7 @@ function SearchTourguidesPage() {
                         )}
                       </span>
                       <svg
-                        className="h-8 w-8"
+                        className="hidden md:block h-8 w-8"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="grey"
@@ -443,7 +439,7 @@ function SearchTourguidesPage() {
                   {t("quickSearch")}
                 </span>
                 <svg
-                  className="absolute right-3 top-1 inline-block h-6 w-6 pl-1 text-white"
+                  className="max-[320px]:hidden absolute right-3 top-1 sm:inline-block h-6 w-6 pl-1 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -462,7 +458,9 @@ function SearchTourguidesPage() {
         </div>
       </div>
 
-      <div className="my-4 flex justify-center space-x-2 hover:cursor-pointer lg:my-10">
+<div className="my-[7rem] md:pt-[12rem] lg:pt-[0rem]">
+
+<div className="my-4 flex justify-center space-x-2 hover:cursor-pointer lg:my-10">
         <img
           src="https://i.imgur.com/zoB5vaQ.png"
           alt=""
@@ -479,13 +477,15 @@ function SearchTourguidesPage() {
       </div>
 
       <div className="flex items-center justify-center">
-        <div className="m-auto mb-[5%] max-w-[1296px]">
+        <div className="m-auto mb-[5%]  max-w-[1296px]">
           <ul className="lg: grid gap-6 md:grid-cols-2 md:gap-20 lg:grid-cols-3 xl:flex xl:justify-between">
             <li
               className="flex h-full max-w-[240px] flex-col items-center justify-center"
+
               data-aos="zoom-out"
               data-aos-offset="100"
               data-aos-easing="ease-in-sine"
+
             >
               <p className="py-5 text-xl font-bold tracking-4 text-grey-950 lg:text-2xl">
                 100%私人導覽
@@ -556,6 +556,10 @@ function SearchTourguidesPage() {
           </ul>
         </div>
       </div>
+
+</div>
+
+  
     </>
   );
 }
