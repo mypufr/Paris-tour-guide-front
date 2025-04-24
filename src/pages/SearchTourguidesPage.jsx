@@ -233,7 +233,7 @@ function SearchTourguidesPage() {
                             </span>
 
                             <span className="text-base">
-                             | {endDate.toLocaleDateString()} 
+                             - {endDate.toLocaleDateString()} 
                             </span>
                           </div>
                         ) : (

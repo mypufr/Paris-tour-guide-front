@@ -133,7 +133,7 @@ function SearchResultsPage() {
               <button
                 key={index}
                 className="mt-2 flex w-full max-w-[200px] justify-center rounded-2xl bg-primary-100 py-2 transition-colors duration-200 hover:bg-grey-200 active:border active:border-secondary-200 active:bg-transparent md:w-[8vw]"
-                onClick={() => handleThemeClick(theme)}
+                onClick={() => handleSelectThemeClick(theme)}
               >
                 <img
                   src="images/BsHandIndex.svg"
