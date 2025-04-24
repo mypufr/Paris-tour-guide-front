@@ -88,7 +88,7 @@ function Footer() {
                       className="inline-block h-6 w-6"
                     />
                     <p className="ml-3 inline-block text-gray-300">
-                      03-7653421
+                      01-23456789
                     </p>
                   </Link>
                 </li>

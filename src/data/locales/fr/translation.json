@@ -21,14 +21,14 @@
 
   "trip_theme": 
   {
-    "frenchCuisine": "Cuisine Française",
-    "romanticHoneymoon": "Voyage de Noces",
-    "familyTrip": "Voyage en Famille",
+    "frenchCuisine": "Cuisine française",
+    "romanticHoneymoon": "Voyage de noces",
+    "familyTrip": "Voyage en famille",
     "shopping": "Shopping",
-    "historicSites": "Architecture Historique",
+    "historicSites": "Architecture historique",
     "artMuseum": "Musée d'Art",
-    "culturalTour": "Circuit Culturel",
-    "natureView": "Paysages Naturels"
+    "culturalTour": "Circuit culturel",
+    "natureView": "Paysages naturels"
   },
 
   "homepage_introduction": {
@@ -46,7 +46,7 @@
     "book_private_tour": "Guides du {{district}}e arrondissement"
   },
    "popular_guides": "Guides Populaires",
-   "top_trips": "Voyages Top",
+   "top_trips": "Top Voyages",
    "book_guide_and_trip": "Comment ça marche",
    "book_guides": "Réserver un guide",
 

@@ -622,9 +622,9 @@ export default function HomePage() {
           </AnimatePresence>
         </div>
 
-        <div className="absolute left-[10vw] top-[17%] z-10 w-full md:top-[10%] xl:top-[15%] 2xl:left-[18%] 2xl:top-[17%] min-[1920px]:top-[20%]">
+        <div className="absolute left-[10vw] top-[17%] z-10 w-full md:top-[10%] xl:top-[15%] 2xl:left-[18%] 2xl:top-[17%] min-[1920px]:top-[13%]">
           <div className="flex-col text-start">
-            <p className="-noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow max-w-[85vw] text-xl leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl md:text-[40px] 2xl:text-[64px]">
+            <p className="-noto-sans-tc-bold-mobile md:noto-sans-tc-bold text-shadow max-w-[85vw] text-xl leading-[1.2] tracking-4 text-white shadow-black drop-shadow-2xl md:text-[40px] 2xl:text-[64px] font-extrabold">
               {t("homepage_introduction.heading")}
             </p>
 
@@ -643,36 +643,7 @@ export default function HomePage() {
               {t("homepage_introduction.line4")}
             </p>
 
-            {/* <div className="flex items-center">
-              <div className="mt-6 w-full lg:relative lg:mt-5 2xl:pt-10">
-                <input
-                  type="text"
-                  className="-left-8 m-auto rounded-lg border border-gray-300 bg-white p-[13px] pr-10 text-primary-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-[200px]:w-8/12 md:w-6/12 lg:w-5/12 lg:pr-0 xl:h-12 xl:w-6/12 2xl:w-[32.5%]"
-                  
-                  
-                  
-                  placeholder={t("homepage_introduction.heading")}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <div className="h-13 active:scale-120 absolute inset-y-0 right-[26vw] top-[4.5rem] flex items-center rounded-r-lg bg-primary-600 p-6 text-sm transition duration-200 hover:bg-primary-200 hover:text-gray-300 min-[386px]:top-[-10rem] md:right-[45vw] md:top-[80%] lg:right-[58vw] lg:top-0 lg:p-3 xl:right-[50vw] 2xl:top-10 min-[1536px]:right-[64vw] min-[1920px]:right-[67vw]">
-                  <svg
-                    className="active:scale-120 h-4 w-4 text-white transition duration-200 hover:bg-primary-200 hover:text-gray-600 lg:h-5 lg:w-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    onClick={() =>
-                      navigate(
-                        `/search?query=${encodeURIComponent(searchQuery)}`,
-                      )
-                    }
-                  >
-                    <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707a1 1 0 001.414-1.414l-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
-                  </svg>
-                </div>
-              </div>
-            </div> */}
-
-            <div className="mt-6 w-full flex-col items-center gap-2 md:flex-row md:gap-0 md:relative lg:mt-5 2xl:pt-10">
+            <div className="mt-6 w-full flex-col items-center gap-2 md:relative md:flex-row md:gap-0 lg:mt-3 2xl:mt-10">
               <input
                 type="text"
                 className="w-10/12 rounded-lg border border-gray-300 bg-white p-[13px] pr-10 text-primary-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-6/12 lg:w-5/12 xl:h-12 xl:w-6/12 2xl:w-[32.5%]"
@@ -684,7 +655,7 @@ export default function HomePage() {
                 onClick={() =>
                   navigate(`/search?query=${encodeURIComponent(searchQuery)}`)
                 }
-                className="absolute left-[30%] mt-3 flex max-w-[4rem] items-center justify-center rounded-lg bg-primary-600 px-5 py-3 text-sm text-white transition duration-200 hover:bg-primary-200 hover:text-gray-300 min-[375px]:flex md:ml-3 md:mt-0 md:top-0 md:left-[50%] md:h-[3.2rem] lg:left-[42%] 2xl:left-[33.5%] 2xl:top-[40%]"
+                className="absolute left-[30%] mt-3 flex max-w-[4rem] items-center justify-center rounded-lg bg-primary-600 px-5 py-3 text-sm text-white transition duration-200 hover:bg-primary-200 hover:text-gray-300 min-[375px]:flex md:left-[50%] md:top-0 md:ml-3 md:mt-0 md:h-[3rem] lg:left-[42%] xl:left-[50%] 2xl:left-[32.5%] 2xl:top-[0%]"
               >
                 <svg
                   className="h-4 w-4 lg:h-5 lg:w-5"
@@ -696,31 +667,29 @@ export default function HomePage() {
               </button>
             </div>
 
-            <div className="absolute left-10 mt-20 w-[10rem] space-y-3 min-[390px]:left-20 md:left-0 sm:grid sm:grid-cols-2 md:mt-4  md:w-8/12 md:grid-cols-4 md:grid-rows-2 md:gap-x-2 md:gap-y-2 lg:-left-3 lg:mt-16 lg:w-5/12 lg:gap-y-[1px] xl:left-0 xl:mt-0 xl:flex xl:w-6/12 xl:justify-between xl:space-x-0 min-[1920px]:w-[37.5%]">
-
-            
-              <button className="lg:text-shadow-light  w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
+            <div className="absolute left-12 mt-20 w-[10rem] items-baseline space-y-3 min-[390px]:left-20 md:m-auto md:mt-4 md:grid md:w-[60%] md:grid-cols-2 md:gap-x-2 md:gap-y-2 lg:-left-3 lg:mt-16 lg:w-5/12 lg:gap-y-[1px] xl:left-0 xl:mt-0 xl:flex xl:w-6/12 xl:justify-between xl:space-x-0">
+              <button className="lg:text-shadow-light max-h-12 w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-6 xl:mx-0 xl:whitespace-nowrap">
                 {t("trip_theme.frenchCuisine")}
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light max-h-12 w-full rounded-xl bg-background-2 p-1 px-2 text-[13px] lg:mx-1 lg:mt-6 xl:mx-0 xl:whitespace-nowrap">
                 {t("trip_theme.romanticHoneymoon")}
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light max-h-12 w-full rounded-xl bg-background-2 p-1 px-2 text-[13px] lg:mx-1 lg:mt-6 xl:mx-0 xl:whitespace-nowrap">
                 {t("trip_theme.familyTrip")}
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light max-h-12 w-full rounded-xl bg-background-2 p-1 px-2 text-[13px] lg:mx-1 lg:mt-6 xl:mx-0 xl:whitespace-nowrap">
                 {t("trip_theme.shopping")}
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light max-h-12 w-full rounded-xl bg-background-2 p-1 px-2 text-[13px] lg:mx-1 lg:mt-6 xl:mx-0 xl:whitespace-nowrap">
                 {t("trip_theme.historicSites")}
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light max-h-12 w-full rounded-xl bg-background-2 p-1 px-2 text-[13px] lg:mx-1 lg:mt-6 xl:mx-0 xl:whitespace-nowrap">
                 {t("trip_theme.artMuseum")}
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light max-h-12 w-full rounded-xl bg-background-2 p-1 px-2 text-[13px] lg:mx-1 lg:mt-6 xl:mx-0 xl:whitespace-nowrap">
                 {t("trip_theme.culturalTour")}
               </button>
-              <button className="lg:text-shadow-light w-full rounded-xl bg-background-2 p-1 text-[13px] lg:mx-1 lg:mt-4 xl:mx-0">
+              <button className="lg:text-shadow-light max-h-12 w-full rounded-xl bg-background-2 p-1 px-2 text-[13px] lg:mx-1 lg:mt-6 xl:mx-0 xl:whitespace-nowrap">
                 {t("trip_theme.natureView")}
               </button>
             </div>
@@ -728,13 +697,13 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="mt-10 flex justify-center hover:cursor-pointer 2xl:mt-[80px] 2xl:space-x-4">
+      <div className="mt-10 flex items-center justify-center hover:cursor-pointer 2xl:mt-[80px] 2xl:space-x-4">
         <img
           src="https://i.imgur.com/zoB5vaQ.png"
           alt=""
           className="inline-block h-[40px] p-1"
         />
-        <h3 className="text-xl font-bold tracking-4 text-primary-600 2xl:text-[40px] 2xl:leading-[3rem]">
+        <h3 className="text-[13px] font-bold tracking-4 text-primary-600 max-[320px]:text-[8px] md:text-xl 2xl:text-[40px] 2xl:leading-[3rem]">
           {t("section_title.search_by_area")}
         </h3>
         <img
@@ -1164,7 +1133,7 @@ export default function HomePage() {
       {/* 預約導遊和報名行程 */}
 
       <div className="mb-12">
-        <div className="mb-8 mt-[80px] flex justify-center hover:cursor-pointer 2xl:space-x-4">
+        <div className="lg:mb-8 mt-[2rem] lg:mt-[80px] flex justify-center hover:cursor-pointer 2xl:space-x-4">
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
             alt=""
@@ -1266,7 +1235,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border md:border-grey-200 lg:min-h-[1000px] lg:max-w-[34%]">
+          <div className="md:mt-10 flex max-w-[90%] flex-col rounded-2xl border-0 md:border md:border-grey-200 lg:min-h-[1000px] lg:max-w-[34%]">
             <div className="border-1 mb-3 rounded-2xl border border-grey-200 sm:border-0">
               <span className="block rounded-t-2xl bg-secondary-300 py-4 text-center text-2xl font-bold text-white lg:py-10">
                 {t("book_trips")}
@@ -1364,7 +1333,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="mb-4 mt-auto flex justify-center pb-10">
+            <div className="md:mb-4 mt-auto flex justify-center pb-10">
               <GuideButton
                 to="/book-trips#target-section"
                 color="bg-secondary-400"
