@@ -227,15 +227,15 @@ function SearchTourguidesPage() {
 
                       <span className="text-base text-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-xl lg:font-bold">
                         {startDate && endDate ? (
-                          <p className="flex flex-col justify-center text-primary-700">
+                          <div className="flex flex-col justify-center text-primary-700">
                             <span className="text-base">
-                              {startDate.toLocaleDateString()} 出發
+                            {startDate.toLocaleDateString()}
                             </span>
 
                             <span className="text-base">
-                              {endDate.toLocaleDateString()} 離開
+                             | {endDate.toLocaleDateString()} 
                             </span>
-                          </p>
+                          </div>
                         ) : (
                           <p className="text-base text-gray-400 whitespace-nowrap">{t("dateRange")}</p>
                         )}
