@@ -1137,7 +1137,7 @@ export default function HomePage() {
           <img
             src="https://i.imgur.com/zoB5vaQ.png"
             alt=""
-            className="inline-blockh h-[40px] p-1"
+            className="inline-block h-[40px] p-1"
           />
           <h5 className="text-2xl font-bold tracking-4 text-primary-600 2xl:text-[40px] 2xl:leading-[3rem]">
             <span>{t("book_guide_and_trip")}</span>

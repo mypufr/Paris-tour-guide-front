@@ -11,15 +11,11 @@ import {
 } from "../store/reducers/orderSlice.jsx";
 
 import data from "../data/data.json";
-// import TripsData from "../data/trips.json";
-// import SingleTripData from "../data/singleSite.json";
-// import CommentaryData from "../data/commentaries.json";
-
-// import TripCard from "../components/TripCard";
 import SiteCard from "../components/SiteCard";
 import CommentaryList from "../components/CommentaryList";
 import Card from "../components/Card";
 import TourCard from "../components/tourCard";
+import ResponsiveTabs from "../components/ReponsiveTabs.jsx";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -38,15 +34,12 @@ import { DayPicker } from "react-day-picker";
 import DatePicker from "react-datepicker";
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import TourguideList from "../components/TourguideList";
 
 import { zhTW } from "date-fns/locale";
-// import { settings5 } from "../components/helpers/sliderSettings";
-// import { settings3 } from "../components/helpers/sliderSettings";
-// import { settings4 } from "../components/helpers/sliderSettings";
+
 
 function TourguideProfilePage() {
-
-
   const { user, setUser } = useContext(UserContext);
 
   const [toursSlidesLength, setToursSlidesLength] = useState(0);
@@ -59,7 +52,6 @@ function TourguideProfilePage() {
 
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-
 
   const [commentary, setCommentary] = useState("");
   const [tourguideInfo, setTourguideInfo] = useState("");
@@ -83,6 +75,8 @@ function TourguideProfilePage() {
   const [senderName, setSenderName] = useState("");
 
   const [message, setMessage] = useState("");
+
+  const [popularTourguidesList, setPopularTourguidesList] = useState([]);
 
   const settings1 = {
     dots: true,
@@ -142,8 +136,13 @@ function TourguideProfilePage() {
     beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex + 1),
   };
 
-  const targetRef = useRef(null); // 1. 建立 useRef 來指向目標元素
+  const targetRef = useRef(null); 
   const sliderRef = useRef(null);
+
+  const messageModalRef = useRef(null);
+  const successModalRef = useRef(null);
+  const loginModalRef = useRef(null);
+
   const secondSliderRef = useRef(null);
   const { id } = useParams();
 
@@ -330,13 +329,25 @@ function TourguideProfilePage() {
     }
   };
 
+  const getPopularTourguidesList = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8000/api/popular-tourguides`,
+        {
+          withCredentials: true,
+        },
+      );
+      setPopularTourguidesList(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const filteredSlots = date
     ? availableSlots.filter(
         (slot) => slot.date === date.toISOString().split("T")[0],
       )
     : [];
-
-
 
   const handleSelectTime = (time, slot) => {
     setSelectedTime(time);
@@ -352,8 +363,6 @@ function TourguideProfilePage() {
     }
     setSelectedDate(slot.date);
     setSelectedSlot(time);
-
-  
   };
 
   const increaseAdultCount = () => {
@@ -390,11 +399,10 @@ function TourguideProfilePage() {
     if (hash) {
       const element = document.querySelector(hash);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, []);
-
 
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Animation duration can be adjusted here
@@ -416,27 +424,26 @@ function TourguideProfilePage() {
     if (storedUser && storedUser._id) {
       setUser(storedUser);
     }
+    getPopularTourguidesList();
   }, []);
 
   return (
     <>
-      <div className="flex max-h-[640px] justify-center py-[2vh] text-3xl font-bold text-grey-950" id="target-section">
-        <div className="w-full bg-primary-50 py-11">
-          <div className="mx-auto w-3/4">
-            <div className="flex justify-evenly">
-              {/* Tourguide profile */}
-              <div className="">
-                {/* title */}
-                <div
-                  className="mb-[60px] flex items-center justify-center space-x-2 hover:cursor-pointer"
-              
-                >
+      <div
+        className="flex  max-h-[640px] justify-center py-[2vh] text-3xl font-bold text-grey-950"
+        id="target-section"
+      >
+        <div className="w-full bg-primary-50 py-4 md:py-11 ">
+          <div className="mx-auto w-full md:w-3/4">
+            <div className="flex flex-col justify-center gap-6 md:flex-row md:justify-evenly">
+              <div className="w-full md:w-auto">
+                <div className="sm:mb-[60px] flex items-center justify-center space-x-2 hover:cursor-pointer">
                   <img
                     src="/images/vector_title.png"
                     alt=""
                     className="inline-block h-[30px]"
                   />
-                  <h2 className="text-[28px] font-bold text-primary-600">
+                  <h2 className="text-[24px] font-bold text-primary-600 md:text-[28px]">
                     你的專屬導遊 : {tourguideInfoById.name}
                   </h2>
                   <img
@@ -446,15 +453,15 @@ function TourguideProfilePage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-[2vw] px-11">
-                  <div className="col-span-1">
+                <div className="grid grid-cols-1 gap-[2vw] px-4 md:grid-cols-2 md:px-11">
+                  <div className="col-span-1 flex justify-center">
                     <img
                       src={tourguideInfoById.imgUrl}
                       alt=""
-                      className="object-center-30 inline-block max-h-[421px] w-full rounded-xl object-cover"
+                      className="object-center-30 inline-block h-[40vh] max-h-[421px] sm:w-full rounded-xl object-cover"
                     />
                   </div>
-                  <div className="col-span-1 flex flex-col justify-around">
+                  <div className="col-span-1 flex flex-col items-center md:justify-around gap-2">
                     <div className="flex space-x-2">
                       {tourguideInfoById?.themes?.length > 0 && (
                         <span className="text-xl text-[#324561]">
@@ -507,14 +514,14 @@ function TourguideProfilePage() {
                       ))}
                     </div>
 
-                    <div className="flex flex-col">
+                    <div className="flex items-center sm:flex-col gap-2">
                       <span className="text-xl text-primary-800">大人 </span>
                       <span className="text-base text-grey-650">
                         {tourguideInfoById.price_adult}€ /小時
                       </span>
                     </div>
 
-                    <div className="flex flex-col">
+                    <div className="flex items-center sm:flex-col gap-2 ">
                       <span className="text-xl text-primary-800">兒童 </span>
                       <span className="text-base text-grey-650">
                         {" "}
@@ -523,7 +530,7 @@ function TourguideProfilePage() {
                     </div>
 
                     <button
-                      className="mt-2 flex w-3/4 justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-primary-200 hover:text-grey-500 active:border active:border-gray-500"
+                      className="hover:text-grey-500 mt-14 sm:mt-2 flex w-3/4 justify-center rounded-2xl bg-primary-600 px-[15%] py-3 transition-colors duration-200 hover:bg-primary-200 active:border active:border-gray-500"
                       onClick={() => handleEditMessageClick()}
                     >
                       <img
@@ -548,98 +555,51 @@ function TourguideProfilePage() {
                         </h3>
 
                         <p className="text-end text-base font-normal text-grey-950">
-                          {" "}
                           <span className="text-xl font-bold text-red-400">
-                            *{" "}
+                            *
                           </span>
-                          為必填
+                          為必填{" "}
                         </p>
                         <form
                           onSubmit={(e) => {
-                            e.preventDefault(); // 防止頁面刷新
+                            e.preventDefault();
                             handleSendMessageClick();
                           }}
                         >
-
-
                           <div className="flex flex-col gap-4 p-4">
-                            {/* <label className="input input-bordered flex items-center gap-2">
-                            <span className="text-red-400 text-xl font-bold">*</span>
-                              姓名
-                              <input
-                                type="text"
-                                className="grow"
-                                placeholder="請輸入您的姓名"
-                                value={senderName}
-                                onChange={(e) => setSenderName(e.target.value)}
-                                required
-                              />
-                 
-                            </label>
-                            <label className="input input-bordered flex items-center gap-2">
-                            <span className="text-red-400 text-xl font-bold">*</span>
-                              電子郵件信箱
-                              <input
-                                type="email"
-                                className="grow"
-                                placeholder="請輸入您的電子郵件信箱"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                              />
-                         
-                            </label> */}
-
-                            <div className="flex justify-between gap-4">
-                              {/* <label className="form-control w-full max-w-xs">
-                    <div className="label">
-                      <span className="label-text">姓名</span>
-                      <span className="label-text-alt text-primary-600">
-                        必填
-                      </span>
-                    </div>
-                    <input
-                      type="text"
-                      placeholder=""
-                      className="input input-bordered w-full max-w-xs"
-                    />
-                    <div className="label"></div>
-                  </label> */}
-                              <label className="form-control w-full max-w-xs">
-                                <div className="label">
-                                  <span className="label-text">姓名</span>
-                                  <span className="label-text-alt text-primary-600">
-                                    必填
-                                  </span>
-                                </div>
+                            <div className="">
+                              <label className="input input-bordered flex items-center gap-2">
+                                <span className="text-xl font-bold text-red-400">
+                                  *
+                                </span>
+                                姓名
                                 <input
                                   type="text"
-                                  placeholder=""
-                                  className="input input-bordered w-full max-w-xs"
+                                  placeholder="請輸入您的姓名"
+                                  className="grow"
                                   value={senderName}
                                   onChange={(e) =>
                                     setSenderName(e.target.value)
                                   }
+                                  required
                                 />
                               </label>
-                              <label className="form-control w-full max-w-xs">
-                                <div className="label">
-                                  <span className="label-text">
-                                    電子郵件信箱
-                                  </span>
-                                  <span className="label-text-alt text-primary-600">
-                                    必填
-                                  </span>
-                                </div>
+                              <label className="input input-bordered flex items-center gap-2">
+                                <span className="text-xl font-bold text-red-400">
+                                  *
+                                </span>
+                                電子郵件信箱
                                 <input
-                                  type="text"
-                                  className="input input-bordered w-full max-w-xs"
+                                  type="email"
+                                  className="grow"
+                                  placeholder="請輸入您的電子郵件信箱"
                                   value={email}
                                   onChange={(e) => setEmail(e.target.value)}
+                                  required
                                 />
                               </label>
                             </div>
-                            {/* 留言內容 */}
+
                             <span className="label-text-alt text-end text-primary-600">
                               必填
                             </span>
@@ -653,8 +613,6 @@ function TourguideProfilePage() {
                           </div>
 
                           <div className="modal-action">
-                            {/* 取消按鈕 */}
-
                             <button
                               className="btn btn-outline border-primary-200 text-primary-700"
                               onClick={handleCloseModal}
@@ -662,7 +620,6 @@ function TourguideProfilePage() {
                               取消
                             </button>
 
-                            {/* 送出按鈕 */}
                             <button type="submit" className="btn btn-primary">
                               送出
                             </button>
@@ -671,31 +628,29 @@ function TourguideProfilePage() {
                       </div>
                     </dialog>
 
-                                {/* alertLogin_modal */}
-                                <dialog
-                              id="alertLogin_modal"
-                              className="modal modal-bottom sm:modal-middle"
+                    <dialog
+                      id="alertLogin_modal"
+                      className="modal modal-bottom sm:modal-middle"
+                    >
+                      <div className="modal-box space-y-2">
+                        <h3 className="text-lg font-bold">請先登入!</h3>
+                        <p className="py-4 text-lg font-normal"></p>
+                        <div className="modal-action">
+                          <form method="dialog" className="flex gap-4">
+                            <button
+                              className="btn bg-primary-700 text-primary-700 text-white"
+                              onClick={() => navigate("/login")}
                             >
-                              <div className="modal-box space-y-2">
-                                <h3 className="text-lg font-bold">請先登入!</h3>
-                                <p className="py-4 text-lg font-normal"></p>
-                                <div className="modal-action">
-                                  <form method="dialog" className="flex gap-4">
-                                    <button
-                                      className="btn bg-primary-700 text-primary-700 text-white"
-                                      onClick={() => navigate("/login")}
-                                    >
-                                      <span>登入</span>
-                                    </button>
-                                    <button className="btn btn-outline text-secondary-600">
-                                      <span>取消</span>
-                                    </button>
-                                  </form>
-                                </div>
-                              </div>
-                            </dialog>
+                              <span>登入</span>
+                            </button>
+                            <button className="btn btn-outline text-secondary-600">
+                              <span>取消</span>
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </dialog>
 
-                    {/* sendMessageSuccess_modal */}
                     <dialog
                       id="sendMessageSuccess_modal"
                       className="modal modal-bottom sm:modal-middle"
@@ -705,10 +660,7 @@ function TourguideProfilePage() {
                         <p className="py-4 text-lg font-normal"></p>
                         <div className="modal-action">
                           <form method="dialog" className="flex gap-4">
-                            <button
-                              className="btn bg-primary-700 text-primary-700 text-white"
-                              // onClick={() => navigate("/")}
-                            >
+                            <button className="btn bg-primary-700 text-primary-700 text-white">
                               <span>查看所有留言</span>
                             </button>
                             <button className="btn btn-outline text-secondary-600">
@@ -734,11 +686,13 @@ function TourguideProfilePage() {
           </div>
         </div>
       </div>
-
+{/* 
+<ResponsiveTabs /> */}
+  
       {/* tab */}
       <div className="flex pt-20">
-        <div className="mx-auto w-3/4 px-8 sm:px-4">
-          <div className="sm:w-full">
+        <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
+          <div className="w-full">
             {/* Tab 列表 */}
             <div
               role="tablist"
@@ -825,7 +779,7 @@ function TourguideProfilePage() {
                           </div>
 
                           <div className="h-[35vh] overflow-y-scroll p-1 scrollbar scrollbar-track-primary-100 scrollbar-thumb-primary-500">
-                            <p className="bg-white text-xl px-2">
+                            <p className="bg-white px-2 text-xl">
                               {" "}
                               {tourguideInfoById.profile}
                             </p>
@@ -894,24 +848,24 @@ function TourguideProfilePage() {
                           } // 確保時區不變
                         /> */}
                         <DayPicker
-  className="react-day-picker rounded-xl border border-primary-200 bg-white p-6 shadow-lg"
-  numberOfMonths={1}
-  classNames={{
-    day: "items-center justify-center text-lg hover:bg-gray-200 rounded-full",
-  }}
-  mode="single"
-  selected={date}
-  onSelect={(d) => setDate(new Date(d.setHours(12, 0, 0, 0)))} // 確保時區不變
-  minDate={
-    new Date(new Date().setDate(new Date().getDate() + 2))
-  } // 限制三天後才可選擇
-/>
+                          className="react-day-picker rounded-xl border border-primary-200 bg-white p-6 shadow-lg"
+                          numberOfMonths={1}
+                          classNames={{
+                            day: "items-center justify-center text-lg hover:bg-gray-200 rounded-full",
+                          }}
+                          mode="single"
+                          selected={date}
+                          onSelect={(d) =>
+                            setDate(new Date(d.setHours(12, 0, 0, 0)))
+                          } // 確保時區不變
+                          minDate={
+                            new Date(
+                              new Date().setDate(new Date().getDate() + 2),
+                            )
+                          } // 限制三天後才可選擇
+                        />
                       </div>
                     </div>
-
-
-
-
 
                     {/* 顯示可用時段 */}
                     <ul className="col-span-1 mt-2">
@@ -1155,7 +1109,12 @@ function TourguideProfilePage() {
                           data-aos-offset="300"
                           data-aos-easing="ease-in-sine"
                         >
-                          <Slider {...settings1} arrows={false} ref={sliderRef} className="">
+                          <Slider
+                            {...settings1}
+                            arrows={false}
+                            ref={sliderRef}
+                            className=""
+                          >
                             {tours.map((tour, index) => (
                               <div key={index}>
                                 <TourCard
@@ -1176,9 +1135,8 @@ function TourguideProfilePage() {
                   case "private":
                     return (
                       <div className="flex" ref={targetRef} id="target-section">
-               
-                        <div className="w-full mt-10">
-                          <div className="flex w-[38vw] col-span-1 flex-col items-center justify-center space-y-8 border border-grey-200 p-10">
+                        <div className="mt-10 w-full">
+                          <div className="col-span-1 flex w-[38vw] flex-col items-center justify-center space-y-8 border border-grey-200 p-10">
                             <p className="text-xl">
                               除了團體行程，我們的導遊提供靈活的私人行程，採用時薪制計費，讓您可以根據自己的需求與時間安排，預訂專屬的導覽服務。
                             </p>
@@ -1259,31 +1217,32 @@ function TourguideProfilePage() {
                               className="modal modal-bottom mx-auto h-[80vh] w-1/2 bg-white sm:modal-middle"
                             >
                               <div
-                                className="bg-white text-xl font-bold text-primary-300 grid grid-cols-2"
+                                className="grid grid-cols-2 bg-white text-xl font-bold text-primary-300"
                                 style={{ anchorName: "--rdp" }}
                               >
-                        
-                              <div className="flex">
-                                <div
-                                  popover="auto"
-                                  id="rdp-popover"
-                                  className="dropdown"
-                                  style={{ positionAnchor: "--rdp" }}
-                                >
-                                  <DayPicker
-                                    className="react-day-picker rounded-xl border border-primary-200 bg-white p-4 shadow-lg"
-                                    numberOfMonths={1}
-                                    classNames={{
-                                      day: "items-center justify-center text-lg hover:bg-gray-200 rounded-full",
-                                    }}
-                                    mode="single"
-                                    selected={date}
-                                    onSelect={(d) =>
-                                      setDate(new Date(d.setHours(12, 0, 0, 0)))
-                                    } // 確保時區不變
-                                  />
+                                <div className="flex">
+                                  <div
+                                    popover="auto"
+                                    id="rdp-popover"
+                                    className="dropdown"
+                                    style={{ positionAnchor: "--rdp" }}
+                                  >
+                                    <DayPicker
+                                      className="react-day-picker rounded-xl border border-primary-200 bg-white p-4 shadow-lg"
+                                      numberOfMonths={1}
+                                      classNames={{
+                                        day: "items-center justify-center text-lg hover:bg-gray-200 rounded-full",
+                                      }}
+                                      mode="single"
+                                      selected={date}
+                                      onSelect={(d) =>
+                                        setDate(
+                                          new Date(d.setHours(12, 0, 0, 0)),
+                                        )
+                                      } // 確保時區不變
+                                    />
+                                  </div>
                                 </div>
-                              </div>
                                 <ul className="">
                                   {filteredSlots.length > 0 ? (
                                     filteredSlots.map((slot, index) => (
@@ -1307,7 +1266,7 @@ function TourguideProfilePage() {
                                                   )
                                                 }
                                               >
-                                                 {timeSlot}
+                                                {timeSlot}
                                               </button>
                                             ),
                                           )}
@@ -1324,10 +1283,7 @@ function TourguideProfilePage() {
                                 </ul>
                               </div>
 
-<div>
-
-
-</div>
+                              <div></div>
 
                               {/* 已選日期顯示 */}
                               <div className="text-center">
@@ -1601,7 +1557,7 @@ function TourguideProfilePage() {
                               </div>
 
                               <button
-                                className="flex w-full justify-center space-x-20 rounded-lg border border-secondary-300 bg-secondary-400 px-4 py-4 text-white transition-colors duration-200 hover:bg-secondary-200  active:border-secondary-200"
+                                className="flex w-full justify-center space-x-20 rounded-lg border border-secondary-300 bg-secondary-400 px-4 py-4 text-white transition-colors duration-200 hover:bg-secondary-200 active:border-secondary-200"
                                 onClick={() =>
                                   handlePrivateTripsClick(tourguideInfoById.id)
                                 }
@@ -1748,10 +1704,7 @@ function TourguideProfilePage() {
       {/* service: Grid rwd */}
       <div className="">
         <div className="my-[80px] bg-[url('https://i.imgur.com/mydRBqI.png')] bg-cover bg-center py-20">
-          <div
-            className="mb-[60px] flex items-center justify-center space-x-2 hover:cursor-pointer"
-     
-          >
+          <div className="mb-[60px] flex items-center justify-center space-x-2 hover:cursor-pointer">
             <img
               src="/images/vector_title.png"
               alt=""
@@ -1770,36 +1723,37 @@ function TourguideProfilePage() {
               {/* ul */}
 
               <div className="grid grid-cols-1 gap-10 space-y-[1%] sm:grid-cols-2 lg:grid-cols-4">
-          
-                  <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
-                        data-aos="zoom-in"
-                        data-aos-offset="300"
-                        data-aos-easing="ease-in-sine">
-                    <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
-                      行程規畫建議
-                    </p>
+                <div
+                  className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
+                  data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
+                >
+                  <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
+                    行程規畫建議
+                  </p>
 
-                    <img src="/images/organize-trips.png" alt="" />
-                    <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
-                      針對個人或小團體的專屬導覽行程,根據客戶需求量身定制
-                    </p>
-                  </div>
-           
-          
-                  <div className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
-                     data-aos="zoom-in"
-                     data-aos-offset="300"
-                     data-aos-easing="ease-in-sine">
-                    <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
-                      語言翻譯
-                    </p>
+                  <img src="/images/organize-trips.png" alt="" />
+                  <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
+                    針對個人或小團體的專屬導覽行程,根據客戶需求量身定制
+                  </p>
+                </div>
 
-                    <img src="/images/photographer.png" alt="" />
-                    <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
-                      提供雙語或多語導覽,並在必要時進行語言翻譯,幫助遊客與當地人交流
-                    </p>
-                  </div>
-              
+                <div
+                  className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
+                  data-aos="zoom-in"
+                  data-aos-offset="300"
+                  data-aos-easing="ease-in-sine"
+                >
+                  <p className="py-5 text-[16px] font-bold tracking-4 text-gray-500">
+                    語言翻譯
+                  </p>
+
+                  <img src="/images/photographer.png" alt="" />
+                  <p className="mt-2 text-justify text-[14px] tracking-1.5 text-grey-400">
+                    提供雙語或多語導覽,並在必要時進行語言翻譯,幫助遊客與當地人交流
+                  </p>
+                </div>
 
                 <div
                   className="flex flex-col items-center justify-between rounded-lg border border-transparent bg-white p-5 text-center shadow-md"
@@ -1916,8 +1870,8 @@ function TourguideProfilePage() {
           alt=""
           className="inline-block h-[30px]"
         />
-        <h2 className="text-[28px] font-bold text-primary-600">
-          還有下面9位導遊，等你隨時預約!
+        <h2 className="text-md font-bold tracking-4 text-primary-600 2xl:text-[40px] 2xl:leading-[3rem]">
+          還有下面{popularTourguidesList.length}位導遊，等你隨時預約!
         </h2>
         <img
           src="/images/vector_title.png"
@@ -1926,27 +1880,56 @@ function TourguideProfilePage() {
         />
       </div>
 
-      <div className="m-auto my-4 w-3/4">
-        <div className="">
-          <Slider ref={secondSliderRef} {...settings5}>
-            {data.map((data, index) => (
-              <div key={index} onClick={() => handleCardClick(data.id)}>
-                <div className="transform space-x-0 transition-transform duration-300 hover:scale-105">
+      <div className="my- m-auto w-3/4">
+        <div className="m-auto mb-20 max-w-full min-[425px]:max-w-[95%] min-[768px]:max-w-[85%] lg:max-w-[67.5%]">
+          <div>
+            <Slider {...settings1} arrows={false} ref={sliderRef}>
+              {popularTourguidesList.map((item, index) => (
+                <div
+                  key={index}
+                  // onClick={() => handleCardClick(item.id)}
+                  className=""
+                >
                   <Card
-                    imgSrc={data.img}
-                    title={data.name}
-                    price={data.price}
-                    specialities1={data.speciality1}
-                    specialities2={data.speciality2}
-                    specialities3={data.speciality3}
+                    key={index}
+                    id={item.id}
+                    imgSrc={item.imgUrl}
+                    title={item.name}
+                    price={item.price_adult}
+                    themes={item.themes}
+                    // onClick={() => handleCardClick(item.id)}
+                    className="cursor-pointer"
                   />
                 </div>
+              ))}
+            </Slider>
+            <div className="mt-6 flex items-center justify-center space-x-8 2xl:mt-6">
+              <button
+                onClick={() => sliderRef.current.slickPrev()}
+                className="hover:text-primary-400 z-10 p-2 text-grey-950"
+              >
+                <SlArrowLeft />
+              </button>
+
+              <div className="pagination-container z-10 text-xl font-bold text-primary-600">
+                <span>{currentSlide}</span> /{" "}
+                <span className="text-grey-950">
+                  {popularTourguidesList.length}
+                </span>
               </div>
-            ))}
-          </Slider>
+
+              <button
+                onClick={() => sliderRef.current.slickNext()}
+                className="hover:text-primary-400 z-10 text-grey-950"
+              >
+                <SlArrowRight />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="flex items-center justify-center space-x-8 2xl:mb-[8rem]">
+
+      {/* <div className="flex items-center justify-center space-x-8 2xl:mb-[8rem]">
         <button
           onClick={() => secondSliderRef.current.slickPrev()}
           className="hover:text-primary-400 p-2 text-grey-950"
@@ -1966,7 +1949,7 @@ function TourguideProfilePage() {
         >
           <SlArrowRight />
         </button>
-      </div>
+      </div> */}
     </>
   );
 }
