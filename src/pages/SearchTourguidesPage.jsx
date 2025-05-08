@@ -75,7 +75,7 @@ function SearchTourguidesPage() {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/guides?theme=${selectedTheme}`,
+        `${import.meta.env.VITE_API_BASE_URL}/guides?theme=${selectedTheme}`,
       );
       console.log(res);
       setSelectedGuides(res.data);
@@ -92,7 +92,7 @@ function SearchTourguidesPage() {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/guides?theme=${newTheme}`,
+        `${import.meta.env.VITE_API_BASE_URL}/guides?theme=${newTheme}`,
       );
       console.log(res.data);
       setSelectedGuides(res.data);
@@ -106,7 +106,7 @@ function SearchTourguidesPage() {
 
         try {
           const res = await axios.get(
-            `http://localhost:8000/api/guides?theme=${selectedTheme}`,
+            `${import.meta.env.VITE_API_BASE_URL}/guides?theme=${selectedTheme}`,
           );
           console.log(res);
           setSelectedGuides(res.data);

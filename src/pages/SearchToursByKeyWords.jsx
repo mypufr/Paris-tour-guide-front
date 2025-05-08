@@ -21,7 +21,7 @@ const SearchToursByKeyWords = () => {
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/tours");
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tours`);
         setTours(res.data || []);
       } catch (error) {
         console.error("❌ 無法獲取行程資料:", error);

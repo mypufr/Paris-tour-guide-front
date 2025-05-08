@@ -91,7 +91,7 @@ function EditProfile() {
     if (!user || !user.username) return; // 避免 user 為 null 時執行
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/${user.username}/private-orders`,
+        `${import.meta.env.VITE_API_BASE_URL}/${user.username}/private-orders`,
       );
       console.log(res.data);
 

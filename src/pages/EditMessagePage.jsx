@@ -22,7 +22,7 @@ function EditMessagePage() {
   const getTourguideInfoById = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/tourguideInfo/${id}`,
+        `${import.meta.env.VITE_API_BASE_URL}/tourguideInfo/${id}`,
       );
       // console.log(res.data);
       setTourguideInfoById(res.data);

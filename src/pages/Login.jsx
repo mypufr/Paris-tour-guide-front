@@ -66,7 +66,7 @@ function Login() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/login",
+        `${import.meta.env.VITE_API_BASE_URL}/login`,
         account,
         { withCredentials: true }
       );

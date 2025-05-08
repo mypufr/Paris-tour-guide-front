@@ -174,7 +174,7 @@ function TourguideProfilePage() {
     try {
       console.log(message, tourguideInfoById._id);
       const res = await axios.post(
-        "http://localhost:8000/api/messages",
+        `${import.meta.env.VITE_API_BASE_URL}/messages`,
         {
           tourguideName: tourguideInfoById.name,
           email: email,
@@ -269,7 +269,7 @@ function TourguideProfilePage() {
 
   const getCommentaries = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/commentaries");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/commentaries`);
       // console.log(res.data);
     } catch (error) {
       console.error("Error fetching tour guides:", error);
@@ -278,7 +278,7 @@ function TourguideProfilePage() {
 
   const getTourguideInfo = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/tourguideInfo");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tourguideInfo`);
       // console.log(res.data);
       setTourguideInfo(res.data.data);
     } catch (error) {
@@ -291,7 +291,7 @@ function TourguideProfilePage() {
   const getTourguideInfoById = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/tourguideInfo/${id}`,
+        `${import.meta.env.VITE_API_BASE_URL}/tourguideInfo/${id}`,
       );
       // console.log(res.data);
       setTourguideInfoById(res.data);
@@ -305,7 +305,7 @@ function TourguideProfilePage() {
 
   const getTours = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/tours");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tours`);
       console.log(res.data); // array
       setTours(res.data);
 
@@ -320,7 +320,7 @@ function TourguideProfilePage() {
 
   const getSites = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/sites");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/sites`);
       // console.log(res.data);
       setSites(res.data);
       setSitesSlidesLength(res.data.length);
@@ -332,7 +332,7 @@ function TourguideProfilePage() {
   const getPopularTourguidesList = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/popular-tourguides`,
+        `${import.meta.env.VITE_API_BASE_URL}/popular-tourguides`,
         {
           withCredentials: true,
         },

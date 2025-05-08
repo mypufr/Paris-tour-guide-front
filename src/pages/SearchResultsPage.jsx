@@ -44,7 +44,7 @@ function SearchResultsPage() {
   const getSelectedGuides = async (theme) => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/guides?theme=${theme}`
+        `${import.meta.env.VITE_API_BASE_URL}/guides?theme=${theme}`
       );
       setSelectedGuides(res.data);
     } catch (error) {

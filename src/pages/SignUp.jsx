@@ -28,7 +28,7 @@ function SignUp() {
     e.preventDefault();
     try {
       const signupRes = await axios.post(
-        "http://localhost:8000/api/register",
+        `${import.meta.env.VITE_API_BASE_URL}/register`,
         account,
       );
       console.log(signupRes);

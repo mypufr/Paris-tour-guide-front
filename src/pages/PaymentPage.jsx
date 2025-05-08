@@ -67,7 +67,7 @@ function PaymentPage() {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/${user.username}/private-orders`,
+        `${import.meta.env.VITE_API_BASE_URL}/${user.username}/private-orders`,
         {
           privateOrders: privateOrders,
         },
@@ -95,7 +95,7 @@ function PaymentPage() {
   const handleConfirmOrderClick = async (userName = user.username) => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/${user.username}/private-orders`,
+        `${import.meta.env.VITE_API_BASE_URL}/${user.username}/private-orders`,
         {
           privateOrders: privateOrders,
         },
