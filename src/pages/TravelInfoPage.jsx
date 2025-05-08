@@ -113,7 +113,7 @@ function TravelInfoPage() {
 
   const getTourguides = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/tourguides");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tourguides`);
       console.log(res.data);
     } catch (error) {
       console.error("Error fetching tour guides:", error);
@@ -122,7 +122,7 @@ function TravelInfoPage() {
 
   const getCommentaries = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/commentaries");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/commentaries`);
       console.log(res.data);
       setCommentary(res.data[0].commentaryText);
     } catch (error) {

@@ -48,7 +48,7 @@ function Header() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:8000/api/logout",
+        `${import.meta.env.VITE_API_BASE_URL}/logout`,
         {},
         { withCredentials: true },
       );
@@ -64,7 +64,7 @@ function Header() {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/${user.username}/private-orders`,
+        `${import.meta.env.VITE_API_BASE_URL}/${user.username}/private-orders`,
       );
       setOrderCount(res.data.length);
     } catch (error) {

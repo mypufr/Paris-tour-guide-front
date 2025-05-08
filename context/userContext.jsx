@@ -31,7 +31,7 @@ export function UserContextProvider({ children }) {
 
   const getUserProfile = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/profile", {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/profile`, {
         withCredentials: true,
       });
       const userData = res.data;

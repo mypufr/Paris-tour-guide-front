@@ -34,7 +34,7 @@ function SearchResultsPage() {
 
   const getTourguideInfo = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/tourguideInfo`);
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tourguideInfo`);
       setSelectedGuides(res.data.data);
     } catch (error) {
       console.error("Error fetching tour guides:", error);
